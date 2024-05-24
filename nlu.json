@@ -1,95 +1,681 @@
 {
-    "project": {
-        "id": "zb-cailapub",
-        "name": "zb-cailapub",
-        "folder": "/platform"
+  "project" : {
+    "id" : "anisad-1000156082-ySh",
+    "name" : "anisad-1000156082-ySh",
+    "folder" : "/platform"
+  },
+  "settings" : {
+    "language" : "en",
+    "spellingCorrection" : false,
+    "classificationAlgorithm" : "sts",
+    "timezone" : "Europe/Moscow",
+    "extendedSettings" : {
+      "allowedPatterns" : [ ],
+      "useShared" : false
     },
-    "settings": {
-        "language": "en",
-        "spellingCorrection": false,
-        "classificationAlgorithm": "sts",
-        "validation": {
-            "phraseValidationEnabled": true,
-            "answerValidationEnabled": true,
-            "phraseValidationThreshold": 0.5,
-            "answerValidationThreshold": 0.8
-        },
-        "timezone": "Europe/Moscow",
-        "extendedSettings": {
-            "useShared": false
-        }
+    "shared" : false,
+    "validation" : {
+      "phraseValidationEnabled" : true,
+      "answerValidationEnabled" : true,
+      "phraseValidationThreshold" : 0.5,
+      "answerValidationThreshold" : 0.8
+    }
+  },
+  "intents" : [ {
+    "path" : "/bye",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "bye"
+    }, {
+      "text" : "ty"
+    }, {
+      "text" : "tnx"
+    }, {
+      "text" : "Thank you"
+    }, {
+      "text" : "Goodbye"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
     },
-    "intents": [
-        {
-            "path": "/bye",
-            "description": null,
-            "answer": null,
-            "customData": null,
-            "enabled": true,
-            "phrases": [
-                {
-                    "text": "bye",
-                    "entities": null
-                }
-            ],
-            "patterns": null,
-            "slots": null
-        },
-        {
-            "path": "/hello",
-            "description": null,
-            "answer": null,
-            "customData": null,
-            "enabled": true,
-            "phrases": [
-                {
-                    "text": "hello",
-                    "entities": null
-                }
-            ],
-            "patterns": null,
-            "slots": null
-        }
-    ],
-    "entities": [],
-    "enabledSystemEntities": [
-        "duckling.number",
-        "duckling.time",
-        "duckling.duration",
-        "duckling.phone-number",
-        "duckling.email",
-        "duckling.url"
-    ],
-    "systemEntities": [
-        {
-            "name": "duckling.number",
-            "version": "v2",
-            "enabled": true
-        },
-        {
-            "name": "duckling.time",
-            "version": "v2",
-            "enabled": true
-        },
-        {
-            "name": "duckling.duration",
-            "version": "v2",
-            "enabled": true
-        },
-        {
-            "name": "duckling.phone-number",
-            "version": "v2",
-            "enabled": true
-        },
-        {
-            "name": "duckling.email",
-            "version": "v2",
-            "enabled": true
-        },
-        {
-            "name": "duckling.url",
-            "version": "v2",
-            "enabled": true
-        }
-    ]
+    "patterns" : [ ],
+    "priority" : 0
+  }, {
+    "path" : "/hello",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "hello"
+    }, {
+      "text" : "what can you do"
+    }, {
+      "text" : "hi"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ ],
+    "priority" : 0
+  }, {
+    "path" : "/buy_or_rent",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "i want rent"
+    }, {
+      "text" : "buy house"
+    }, {
+      "text" : "i want buy apartment"
+    }, {
+      "text" : "nicosia"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "buy_or_rent",
+      "entity" : "buy_or_rent",
+      "required" : true,
+      "prompts" : [ ]
+    }, {
+      "name" : "location",
+      "entity" : "location",
+      "required" : true,
+      "prompts" : [ ]
+    }, {
+      "name" : "country",
+      "entity" : "country",
+      "required" : true,
+      "prompts" : [ ]
+    }, {
+      "name" : "types_of_estate",
+      "entity" : "types_of_estate",
+      "required" : true,
+      "prompts" : [ ],
+      "array" : false
+    } ],
+    "priority" : 0
+  } ],
+  "entities" : [ {
+    "entity" : {
+      "name" : "bedroom",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "bedroom", "bedrooms" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "furniture",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "fully", "full" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "partly", "part" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with furniture", "include furniture", "have furniture", "furniture" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "no furniture", "without furniture", "exclude furniture" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "repair",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "balcony",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "without balcony", "no balcony", "exclude balcony" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with balcony", "include balcony", "balcony", "have balcony" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "parking",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "conditioner_colder",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with conditioner", "with air system", "conditioner", "air system", "include conditioner", "include air system", "have conditioner", "have air system", "having air system", "having conditioner" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without conditioner", "without air system", "no conditioner", "no air system", "exclude conditioner", "exclude air system" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructure_benefits",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "buy_or_rent",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "Buy", "Purchase", "Obtain", "Procure" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lease", "Take", "Rent" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "location",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "Paphos", "pafos", "paphos" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Agros", "agros" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bellapais", "bellapais" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Limassol", "limassol" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ayia Napa", "ayia napa", "Ayia napa", "ayia Napa" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Dhekelia", "dhekelia" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Akrotiri", "akrotiri" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Agia Marina", "agia marina", "Agia marina", "agia Marina" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Agios Sozomenos", "agios sozomenos", "Agios sozomenos", "agios Sozomenos" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Arminou", "arminou" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nicosia" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "kitchen",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "include kitchen", "have kitchen", "having kitchen", "with kitchen", "kitchen" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without kitchen", "no kitchen", "exclude kitchen" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "electricity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with electricity", "include electricity", "have electricity", "electricity" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without electricity", "no electricity", "exclude electricity" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "natural_gas",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "without gas", "no gas", "exclude gas" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with gas", "have gas", "include gas", "having gas", "gas" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "heater",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with heater", "including heater", "having heater", "have heater", "include heater", "heater" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "electric" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "liquid fuel" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without heater", "no heater", "exclude heater" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "central" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "gas" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "water_heater",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "television",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "types_of_estate",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "house" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "plot" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "commerce" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "apartment" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "house_condition",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "alarm",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "progress_condition",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "internet",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with internet", "include internet", "have internet", "having internet" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without internet", "no internet", "exclude internet", "internet" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "to",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  }, {
+    "entity" : {
+      "name" : "country",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "cyprus", "Cyprus" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "from",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ ]
+  } ],
+  "enabledSystemEntities" : [ "duckling.number", "duckling.amount-of-money", "duckling.interval" ],
+  "spellerDictionary" : [ ],
+  "systemEntities" : [ {
+    "name" : "duckling.number",
+    "version" : "v2",
+    "enabled" : true
+  }, {
+    "name" : "duckling.ordinal",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.amount-of-money",
+    "version" : "v2",
+    "enabled" : true
+  }, {
+    "name" : "duckling.distance",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.quantity",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.temperature",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.volume",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.time",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.date",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.time-of-day",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.duration",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.phone-number",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.email",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.url",
+    "version" : "v2",
+    "enabled" : false
+  }, {
+    "name" : "duckling.interval",
+    "version" : "v2",
+    "enabled" : true
+  } ],
+  "faq" : [ ],
+  "skills" : [ ]
 }

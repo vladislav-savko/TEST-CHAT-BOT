@@ -1,0 +1,1 @@
+export const API__LINK = "https://anisad.com";
