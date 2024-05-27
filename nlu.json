@@ -69,7 +69,13 @@
     }, {
       "text" : "i want buy apartment"
     }, {
-      "text" : "nicosia"
+      "text" : "rent house"
+    }, {
+      "text" : "rent apartment"
+    }, {
+      "text" : "buy plot"
+    }, {
+      "text" : "rent plot"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -78,24 +84,41 @@
     "slots" : [ {
       "name" : "buy_or_rent",
       "entity" : "buy_or_rent",
-      "required" : true,
+      "required" : false,
       "prompts" : [ ]
     }, {
       "name" : "location",
       "entity" : "location",
-      "required" : true,
-      "prompts" : [ ]
+      "required" : false,
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "country",
       "entity" : "country",
-      "required" : true,
+      "required" : false,
       "prompts" : [ ]
     }, {
       "name" : "types_of_estate",
       "entity" : "types_of_estate",
-      "required" : true,
+      "required" : false,
       "prompts" : [ ],
       "array" : false
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/location",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "location",
+      "entity" : "location",
+      "required" : true,
+      "prompts" : [ ]
     } ],
     "priority" : 0
   } ],
@@ -135,19 +158,19 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "fully", "full" ],
-      "value" : ""
+      "value" : "{\n  \"furniture\": \"FULLY\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "partly", "part" ],
-      "value" : ""
+      "value" : "{\n  \"furniture\": \"PARTLY\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with furniture", "include furniture", "have furniture", "furniture" ],
-      "value" : ""
+      "value" : "{\n  \"furniture\": \n    \"FULLY\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "no furniture", "without furniture", "exclude furniture" ],
-      "value" : ""
+      "value" : "{\n  \"furniture\": \"NO\"\n}"
     } ]
   }, {
     "entity" : {
@@ -181,11 +204,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "without balcony", "no balcony", "exclude balcony" ],
-      "value" : ""
+      "value" : "{\n \"balcony\" : null\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with balcony", "include balcony", "balcony", "have balcony" ],
-      "value" : ""
+      "value" : "{\n \"balcony\" : true\n}"
     } ]
   }, {
     "entity" : {
@@ -201,7 +224,15 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with parking ", "contains parking" ],
+      "value" : "{\n \"parking\" : true\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without parking", "no parking" ],
+      "value" : "{\n \"parking\" : null\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "conditioner_colder",
@@ -219,11 +250,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "with conditioner", "with air system", "conditioner", "air system", "include conditioner", "include air system", "have conditioner", "have air system", "having air system", "having conditioner" ],
-      "value" : ""
+      "value" : "{\n  \"airConditioning\": [\n    \"EVERYWHERE\",\n    \"ONLY_BEDROOMS\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "without conditioner", "without air system", "no conditioner", "no air system", "exclude conditioner", "exclude air system" ],
-      "value" : ""
+      "value" : "{\n  \"airConditioning\": [\n    \"NO\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -257,11 +288,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "Buy", "Purchase", "Obtain", "Procure" ],
-      "value" : ""
+      "value" : "{\n    \"constBuyRent\" : \"SALE\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "Lease", "Take", "Rent" ],
-      "value" : ""
+      "value" : "{\n   \"constBuyRent\" : \"RENT\"\n}"
     } ]
   }, {
     "entity" : {
@@ -317,10 +348,6 @@
       "type" : "synonyms",
       "rule" : [ "Arminou", "arminou" ],
       "value" : ""
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "Nicosia" ],
-      "value" : ""
     } ]
   }, {
     "entity" : {
@@ -339,11 +366,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "include kitchen", "have kitchen", "having kitchen", "with kitchen", "kitchen" ],
-      "value" : ""
+      "value" : "{\n  \"kitchen\" : true\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "without kitchen", "no kitchen", "exclude kitchen" ],
-      "value" : ""
+      "value" : "{\n  \"kitchen\" : null\n}"
     } ]
   }, {
     "entity" : {
@@ -362,11 +389,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "with electricity", "include electricity", "have electricity", "electricity" ],
-      "value" : ""
+      "value" : "{\n  \"electro\": true\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "without electricity", "no electricity", "exclude electricity" ],
-      "value" : ""
+      "value" : "{\n  \"electro\": null\n}"
     } ]
   }, {
     "entity" : {
@@ -385,11 +412,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "without gas", "no gas", "exclude gas" ],
-      "value" : ""
+      "value" : "{\n  \"gas\" : false\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with gas", "have gas", "include gas", "having gas", "gas" ],
-      "value" : ""
+      "value" : "{\n  \"gas\" : true\n}"
     } ]
   }, {
     "entity" : {
@@ -459,7 +486,15 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "with televison", "contain television", "contain TV", "with TV" ],
+      "value" : "{\n \"TV\" :true\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without TV", "no TV" ],
+      "value" : "{\n  \"TV\" : null\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "types_of_estate",
@@ -477,19 +512,23 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "house" ],
-      "value" : ""
+      "value" : "{\n  \"estate\":  [\"DETACHED_HOUSE\" , \"SEMIDETACHED_HOUSE\"]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "plot" ],
-      "value" : ""
+      "value" : "{\n   \"estate\": [\"COMMERCIAL_PLOT\" ,  \"RESIDENTIAL_PLOT\" , \"AGRICULTURE_PLOT\"]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "commerce" ],
-      "value" : ""
+      "value" : "{\n  \"estate\": [\"OFFICE\" , \"HOTEL\" , \"MANUFACTURING\", \"RETAIL_SPACE\", \"PUBLIC_CATERING_FACILITY\", \"WAREHOUSE\", \"CAR_PARKING\"]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "apartment" ],
-      "value" : ""
+      "value" : "{\n  \"estate\": [\"APARTMENT\"]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "villa", "Villa", "vila", "Vila" ],
+      "value" : "{\n    \"estate': [\"VILLA\"]\n}"
     } ]
   }, {
     "entity" : {
@@ -522,8 +561,12 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ ],
-      "value" : ""
+      "rule" : [ "without alarm system", "no alarm " ],
+      "value" : "{\n \"alarm\" : null\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with alarm system", "with alarm" ],
+      "value" : "{\n  \"alarm\" : true\n}"
     } ]
   }, {
     "entity" : {
@@ -557,11 +600,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "with internet", "include internet", "have internet", "having internet" ],
-      "value" : ""
+      "value" : "{\n  \"internet\" : [ \"WIFI\", \"CABLE\", \"MOBILE\"] \n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "without internet", "no internet", "exclude internet", "internet" ],
-      "value" : ""
+      "value" : "{\n  \"internet\" : [ \"NO\"]\n}"
     } ]
   }, {
     "entity" : {

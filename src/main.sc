@@ -29,11 +29,11 @@ theme: /
         intent!: /buy_or_rent
         scriptEs6:
             if ($parseTree._buy_or_rent) {
-              $session.data.listingType = $parseTree._buy_or_rent.toUpperCase();
+                $session.data.listingType = $parseTree._buy_or_rent.constBuyRent;
             }
             
             if ($parseTree._types_of_estate) {
-              $session.data.propertyTypes = [$parseTree._types_of_estate.toUpperCase()];
+              $session.data.propertyTypes = $parseTree._types_of_estate.estate;
             }
             
             
@@ -46,17 +46,47 @@ theme: /
                 }).catch(function (errC) {
                     $reactions.answer("Что-то сервер барахлит.1");
                 });
+                
+            } else {
+                $reactions.transition("./Location");
+                return;
             }
             
-            await api.getListing($session.data).then(function (resL) {
-                if (resL) {
-                     $reactions.answer(resL.data.listings[0].title);
-                }
-            }).catch(function (errL) {
-                $reactions.answer(JSON.stringify($session.data));
-                $reactions.answer("Что-то сервер барахлит.2");
-            });
             
+            
+        state: Location
+            scriptEs6:
+               $reactions.answer(`Okay, in which city do you want to ${$session.data.listingType.toLowerCase()} an ${$session.data.propertyTypes}?`);
+               
+            state: GetLocation
+                q: * @location *
+                scriptEs6:
+                    if ($parseTree._location) {
+                        const city = $parseTree._location;
+                        await api.getCityInfo(city).then(function (resC) {
+                            if (resC) {
+                                $session.data.cityId = resC.data[0].cityId;
+                            }
+                        }).catch(function (errC) {
+                            $reactions.answer("Что-то сервер барахлит.1");
+                        });
+                    } else {
+                        $reactions.transition("/BuyOrRent/Location");
+                        return;
+                    }
+                    
+                    await api.getListing($session.data).then(function (resL) {
+                        if (resL) {
+                            $reactions.answer(resL.data.listings[0].title);
+                            $response.replies.push({
+                                "type": "image",
+                                "imageUrl": resL.data.listings[0].photos[0],
+                            });
+                        }
+                    }).catch(function (errL) {
+                        $reactions.answer("Sorry");
+                    });
+               
     state: Bye
         intent!: /bye
         random:

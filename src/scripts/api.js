@@ -65,3 +65,21 @@ export function deepEqual(obj1, obj2) {
 
   return true;
 }
+
+
+function addImageToChat(imageUrl) {
+        // Create a new div for the message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+
+        // Create a new img element
+        const img = document.createElement('img');
+        img.src = imageUrl;
+        img.alt = 'Chat Image';
+
+        // Append the img element to the message div
+        messageDiv.appendChild(img);
+
+        // Append the message div to the chat container
+        document.getElementById('chat-container').appendChild(messageDiv);
+    }
