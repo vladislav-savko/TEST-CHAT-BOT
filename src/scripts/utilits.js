@@ -1,4 +1,5 @@
 import api from "./api.js";
+import { API__LINK } from "./config.js";
 
 function session() {
   $session.data = {
@@ -57,6 +58,7 @@ const initSession = () => {
 };
 
 const getCityInfo = async (city) => {
+  $session.data.skip;
   try {
     const resC = await api.getCitiesInfo(city);
     if (resC) {
@@ -69,6 +71,10 @@ const getCityInfo = async (city) => {
     );
     return false;
   }
+};
+
+const linkToBrowserPage = (data) => {
+  return `${API__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
 };
 
 const getListings = async (sessionData) => {
@@ -93,19 +99,23 @@ const getListings = async (sessionData) => {
 - Bedrooms: ${listingData.bedrooms}
 - Furnishings: *${listingData.furnishing}*
 - Balcony: ${listingData.balcony ? "+" : "-"}
-- Bathrooms: ${listingData.bathrooms}`,
+- Bathrooms: ${listingData.bathrooms}
+[Show in browser](${linkToBrowserPage(listing)})`,
           }
         );
       });
+      return true;
     } else {
       $reactions.answer(
         "There are no listings for your request. Would you like to try a different city?"
       );
+      return false;
     }
   } catch (error) {
     $reactions.answer(
       "*Listings* Something's broken, please try again later. Sorry"
     );
+    return false;
   }
 };
 

@@ -111,14 +111,23 @@ theme: /
 
     state: DisplayResults
         scriptEs6:
-            await util.getListings($session.data);
-            $reactions.answer("If you want to see results in another city, just say 'Show me listings in *city*'.");
+            const getListingSuccessfully = await util.getListings($session.data);
+            if (getListingSuccessfully) {
+                $reactions.answer("Here are some listings based on your request. If you want to see more results, just say 'Show more listings' or to see results in another city, say 'Show me listings in *city*'.");
+            } else {
+                $reactions.answer("There are no more listings available based on your request. If you want to see results in another city, just say 'Show me listings in *city*'.");
+            }
+
+        state: ShowMore
+            q: * (show more listings|more listings|next listings|show more) *
+            scriptEs6:
+                $session.data.skip += 3;
+                $reactions.transition("/DisplayResults");
 
         state: ReplaceLocation
             q: * @location *
             scriptEs6:
-                const getCitySuccessfully = await util.getCityInfo($parseTree._location);
-                
+                const getCitySuccessfully = await getCityInfo($parseTree._location);
                 if (getCitySuccessfully) $reactions.transition("/DisplayResults");
 
     state: Bye
