@@ -16,7 +16,7 @@ export const instance = axios.create({
   "Content-type": "application/json",
 });
 
-const getCityInfo = async (city) => {
+const getCitiesInfo = async (city) => {
   const take = 1;
 
   const { data } = await instance.get(ENDPOINT.get__cities, {
@@ -37,6 +37,6 @@ const getListing = async (info) => {
 };
 
 export default {
-  getCityInfo,
+  getCitiesInfo,
   getListing,
 };

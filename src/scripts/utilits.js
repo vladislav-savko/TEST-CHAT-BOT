@@ -1,7 +1,9 @@
-function sessionInit() {
+import api from "./api.js";
+
+function session() {
   $session.data = {
     skip: 0,
-    take: 5,
+    take: 3,
     propertyTypes: ["APARTMENT"],
     listingType: "RENT",
     sort: "NEWEST",
@@ -48,6 +50,76 @@ function sessionInit() {
   };
 }
 
+const initSession = () => {
+  if (!$session.data) {
+    session();
+  }
+};
+
+const getCityInfo = async (city) => {
+  try {
+    const resC = await api.getCitiesInfo(city);
+    if (resC) {
+      $session.data.cityId = resC.data[0].cityId;
+      return true;
+    }
+  } catch (error) {
+    $reactions.answer(
+      "*City* Something's broken, please try again later. Sorry"
+    );
+    return false;
+  }
+};
+
+const getListings = async (sessionData) => {
+  try {
+    sessionData.take = 3;
+    const res = await api.getListing(sessionData);
+    if (res && res.data.listings.length > 0) {
+      res.data.listings.map((listing) => {
+        const listingData =
+          listing.listingType === "SALE"
+            ? listing.apartmentSale
+            : listing.apartmentRent;
+        $response.replies.push(
+          {
+            type: "image",
+            imageUrl: listing.photos[0],
+          },
+          {
+            type: "text",
+            text: `**${listing.title}**
+- Floor area: *${listingData.floorArea}m²*
+- Bedrooms: ${listingData.bedrooms}
+- Furnishings: *${listingData.furnishing}*
+- Balcony: ${listingData.balcony ? "+" : "-"}
+- Bathrooms: ${listingData.bathrooms}`,
+          }
+        );
+      });
+    } else {
+      $reactions.answer(
+        "There are no listings for your request. Would you like to try a different city?"
+      );
+    }
+  } catch (error) {
+    $reactions.answer(
+      "*Listings* Something's broken, please try again later. Sorry"
+    );
+  }
+};
+
+const confirmAction = (listingType, estateType) => {
+  const action =
+    listingType.toLowerCase() === "sale" ? "buy" : listingType.toLowerCase();
+  $reactions.answer(
+    `You chose to ${action} ${estateType.toLowerCase()}. Is that correct?`
+  );
+};
+
 export default {
-  sessionInit,
+  initSession,
+  getCityInfo,
+  getListings,
+  confirmAction,
 };

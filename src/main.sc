@@ -7,7 +7,7 @@ require: scripts/api.js
 
 require: scripts/utilits.js
     type = scriptEs6
-    name = utulits
+    name = util
 
 theme: /
 
@@ -15,9 +15,7 @@ theme: /
         q!: $regex</start>
         intent!: /hello
         scriptEs6:
-            if (!$session.data) {
-                utulits.sessionInit();
-            }
+            util.initSession();
             
         random:
             a: Hello! I am your real estate assistant. Are you looking to rent or buy a property?
@@ -33,42 +31,25 @@ theme: /
                 $session.data.listingType = $parseTree._buy_or_rent.constBuyRent;
             }
 
-            if ($parseTree._types_of_estate == undefined) {
+            if (!$parseTree._types_of_estate) {
                 $reactions.transition("/BuyOrRent/PropertyType");
                 return;
             } else {
                 $session.data.propertyTypes = $parseTree._types_of_estate.estate;
             }
             
-
             if ($parseTree._location) {
-                const city = $parseTree._location;
-                await api.getCityInfo(city).then(function (resC) {
-                    if (resC) {
-                        $session.data.cityId = resC.data[0].cityId;
-                    }
-                }).catch(function (errC) {
-                    $reactions.answer("Что-то сервер барахлит.");
-                });
+                await util.getCityInfo($parseTree._location);
             } else {
                 $reactions.transition("./Location");
                 return;
             }
             
-            if ($parseTree._bedroom) {
-                $reactions.transition("/Bedroom");
-            } else {
-                $reactions.transition("/Bedroom");
-            }
             $reactions.transition("./ConfirmBuyOrRent");
 
         state: ConfirmBuyOrRent
             scriptEs6:
-                if ($session.data.listingType.toLowerCase() == "sale") {
-                    $reactions.answer(`You chose to buy ${$parseTree._types_of_estate.word.toLowerCase()}. Is that correct?`);
-                } else {
-                    $reactions.answer(`You chose to ${$session.data.listingType.toLowerCase()} ${$parseTree._types_of_estate.word.toLowerCase()}. Is that correct?`);
-                }
+                util.confirmAction($session.data.listingType, $parseTree._types_of_estate.word);
                 
             state: GetConfirmation
                 q: * (yes|correct|+) *
@@ -94,11 +75,7 @@ theme: /
 
         state: CityConfirmation
             scriptEs6:
-                if ($session.data.listingType.toLowerCase() == "sale") {
-                    $reactions.answer(`Great! You want to buy ${$parseTree._types_of_estate.word.toLowerCase()}. Is that correct?`);
-                } else {
-                    $reactions.answer(`Great! You want to ${$session.data.listingType.toLowerCase()}  ${$parseTree._types_of_estate.word.toLowerCase()}. Is that correct?`);
-                }
+                util.confirmAction($session.data.listingType, $parseTree._types_of_estate.word);
                 
             state: GetCityConfirmation
                 q: * (yes|correct|+) *
@@ -110,31 +87,21 @@ theme: /
 
         state: Location
             scriptEs6:
-                if ($session.data.listingType.toLowerCase() == "sale") {
-                    $reactions.answer(`Okay, in which city do you want to buy ${$parseTree._types_of_estate.word.toLowerCase()}?`);
-                } else {
-                    $reactions.answer(`Okay, in which city do you want to ${$session.data.listingType.toLowerCase()} ${$parseTree._types_of_estate.word.toLowerCase()}?`);
-                }
+                const action = $session.data.listingType.toLowerCase() === "sale" ? "buy" : $session.data.listingType.toLowerCase();
+                $reactions.answer(`Okay, in which city do you want to ${action} ${$parseTree._types_of_estate.word.toLowerCase()}?`);
                 
             state: GetLocation
                 q: * @location *
                 scriptEs6:
                     if ($parseTree._location) {
-                        const city = $parseTree._location;
-                        await api.getCityInfo(city).then(function (resC) {
-                            if (resC) {
-                                $session.data.cityId = resC.data[0].cityId;
-                            }
-                        }).catch(function (errC) {
-                            $reactions.answer("Что-то сервер барахлит.");
-                        });
+                        await util.getCityInfo($parseTree._location);
                     } else {
                         $reactions.transition("/BuyOrRent/Location");
                         return;
                     }
   
                     $reactions.transition("/DisplayResults");
-                    
+
     state: Bedroom
         intent!: /bedroom
         scriptEs6:
@@ -144,36 +111,15 @@ theme: /
 
     state: DisplayResults
         scriptEs6:
-            await api.getListing($session.data).then(function (resL) {
-                if (resL && resL.data.listings.length > 0) {
-                    $reactions.answer(resL.data.listings[0].title);
-                    $response.replies.push({
-                        "type": "image",
-                        "imageUrl": resL.data.listings[0].photos[0],
-                    });
-                } else {
-                    $reactions.answer("There are no listings for your request. Would you like to try a different city?");
-                }
-            }).catch(function (errL) {
-                $reactions.answer("Sorry, something went wrong.");
-            });
-            
+            await util.getListings($session.data);
             $reactions.answer("If you want to see results in another city, just say 'Show me listings in *city*'.");
 
         state: ReplaceLocation
             q: * @location *
             scriptEs6:
-                const city = $parseTree._location;
-                await api.getCityInfo(city).then(function (resC) {
-                    if (resC) {
-                        $session.data.cityId = resC.data[0].cityId;
-                        $reactions.transition("/DisplayResults");
-                    }
-                }).catch(function (errC) {
-                    $reactions.answer("Что-то сервер барахлит.");
-                });
+                const getCitySuccessfully = await util.getCityInfo($parseTree._location);
                 
-
+                if (getCitySuccessfully) $reactions.transition("/DisplayResults");
 
     state: Bye
         intent!: /bye
