@@ -121,6 +121,99 @@
       "prompts" : [ ]
     } ],
     "priority" : 0
+  }, {
+    "path" : "/allFeatures",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "alarm",
+      "entity" : "alarm",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "balcony",
+      "entity" : "balcony",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "conditioner_colder",
+      "entity" : "conditioner_colder",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "electricity",
+      "entity" : "electricity",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "heater",
+      "entity" : "heater",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "furniture",
+      "entity" : "furniture",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "kitchen",
+      "entity" : "kitchen",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "television",
+      "entity" : "television",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "internet",
+      "entity" : "internet",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "natural_gas",
+      "entity" : "natural_gas",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "parking",
+      "entity" : "parking",
+      "required" : false,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/bedroom",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "4 bedrooms"
+    }, {
+      "text" : "bedroom"
+    }, {
+      "text" : "bedrooms"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "bedroom",
+      "entity" : "bedroom",
+      "required" : true,
+      "prompts" : [ ]
+    }, {
+      "name" : "Number",
+      "entity" : "duckling.number",
+      "required" : true,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
   } ],
   "entities" : [ {
     "entity" : {
@@ -132,7 +225,7 @@
       "noSpelling" : true,
       "noMorph" : false,
       "phoneticSearch" : false,
-      "fuzzySearch" : false,
+      "fuzzySearch" : true,
       "client" : false,
       "hidden" : false
     },
@@ -348,6 +441,10 @@
       "type" : "synonyms",
       "rule" : [ "Arminou", "arminou" ],
       "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nicosia" ],
+      "value" : ""
     } ]
   }, {
     "entity" : {
@@ -512,23 +609,23 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "house" ],
-      "value" : "{\n  \"estate\":  [\"DETACHED_HOUSE\" , \"SEMIDETACHED_HOUSE\"]\n}"
+      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"SEMIDETACHED_HOUSE\"\n  ],\n\"word\" : \"House\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "plot" ],
-      "value" : "{\n   \"estate\": [\"COMMERCIAL_PLOT\" ,  \"RESIDENTIAL_PLOT\" , \"AGRICULTURE_PLOT\"]\n}"
+      "value" : "{\n  \"estate\": [\n    \"COMMERCIAL_PLOT\",\n    \"RESIDENTIAL_PLOT\",\n    \"AGRICULTURE_PLOT\"\n  ],\n\"word\" : \"plot\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "commerce" ],
-      "value" : "{\n  \"estate\": [\"OFFICE\" , \"HOTEL\" , \"MANUFACTURING\", \"RETAIL_SPACE\", \"PUBLIC_CATERING_FACILITY\", \"WAREHOUSE\", \"CAR_PARKING\"]\n}"
+      "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n\"word\" : \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "apartment" ],
-      "value" : "{\n  \"estate\": [\"APARTMENT\"]\n}"
+      "value" : "{\n  \"estate\": [\n    \"APARTMENT\"\n  ],\n\"word\" : \"Apartment\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "villa", "Villa", "vila", "Vila" ],
-      "value" : "{\n    \"estate': [\"VILLA\"]\n}"
+      "value" : "{\n    \"estate': [\"VILLA\"],\n    \"word\" : \"Villa\"\n}"
     } ]
   }, {
     "entity" : {
