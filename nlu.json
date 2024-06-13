@@ -60,30 +60,64 @@
     "priority" : 0
   }, {
     "path" : "/buy_or_rent",
-    "enabled" : true,
+    "enabled" : false,
     "shared" : false,
     "phrases" : [ {
-      "text" : "i want rent"
+      "text" : "find a house"
     }, {
-      "text" : "buy house"
+      "text" : "buy an apartment"
     }, {
-      "text" : "i want buy apartment"
+      "text" : "rent a house"
     }, {
-      "text" : "rent house"
+      "text" : "buy land"
     }, {
-      "text" : "rent apartment"
+      "text" : "rent a condo"
     }, {
-      "text" : "buy plot"
+      "text" : "buy a flat"
     }, {
-      "text" : "rent plot"
+      "text" : "lease a house"
+    }, {
+      "text" : "looking for a flat"
+    }, {
+      "text" : "find a home to buy"
+    }, {
+      "text" : "purchase a house"
+    }, {
+      "text" : "find rental homes"
+    }, {
+      "text" : "rent a flat"
+    }, {
+      "text" : "buy a townhouse"
+    }, {
+      "text" : "rent a cottage"
+    }, {
+      "text" : "buy property"
+    }, {
+      "text" : "searching for apartments"
+    }, {
+      "text" : "want to buy land"
+    }, {
+      "text" : "looking to rent"
+    }, {
+      "text" : "find a place to rent"
+    }, {
+      "text" : "buy an estate"
+    }, {
+      "text" : "rent property"
+    }, {
+      "text" : "find houses for rent"
+    }, {
+      "text" : "purchase an apartment"
+    }, {
+      "text" : "rent a studio"
     } ],
     "classificationRules" : {
       "refs" : [ ]
     },
     "patterns" : [ ],
     "slots" : [ {
-      "name" : "buy_or_rent",
-      "entity" : "buy_or_rent",
+      "name" : "listingType",
+      "entity" : "listingType",
       "required" : false,
       "prompts" : [ ]
     }, {
@@ -98,8 +132,8 @@
       "required" : false,
       "prompts" : [ ]
     }, {
-      "name" : "types_of_estate",
-      "entity" : "types_of_estate",
+      "name" : "propertyTypes",
+      "entity" : "propertyTypes",
       "required" : false,
       "prompts" : [ ],
       "array" : false
@@ -125,7 +159,101 @@
     "path" : "/allFeatures",
     "enabled" : true,
     "shared" : false,
-    "phrases" : [ ],
+    "phrases" : [ {
+      "text" : "parking"
+    }, {
+      "text" : "balcony"
+    }, {
+      "text" : "Show me apartments with $parseTree._balcony and $parseTree._furniture."
+    }, {
+      "text" : "I need a place that has $parseTree._internet and $parseTree._natural_gas."
+    }, {
+      "text" : "Find me a flat with $parseTree._kitchen, $parseTree._heater, and $parseTree._electricity."
+    }, {
+      "text" : "I’m looking for an apartment that includes $parseTree._television and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Do you have any listings with $parseTree._parking and $parseTree._alarm?"
+    }, {
+      "text" : "I need a rental that offers $parseTree._balcony, $parseTree._heater, and $parseTree._internet."
+    }, {
+      "text" : "Can you show me places with $parseTree._kitchen and $parseTree._parking?"
+    }, {
+      "text" : "I am interested in an apartment with $parseTree._natural_gas and $parseTree._furniture."
+    }, {
+      "text" : "Find apartments that come with $parseTree._electricity and $parseTree._television."
+    }, {
+      "text" : "Show me properties that have $parseTree._conditioner_colder and $parseTree._alarm."
+    }, {
+      "text" : "Do you have any flats with $parseTree._balcony, $parseTree._heater, and $parseTree._electricity?"
+    }, {
+      "text" : "I want to see places with $parseTree._kitchen, $parseTree._television, and $parseTree._parking."
+    }, {
+      "text" : "I need an apartment that includes $parseTree._internet and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Do you have any properties that include $parseTree._heater and $parseTree._kitchen?"
+    }, {
+      "text" : "I need to see listings with $parseTree._parking and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Find me an apartment with $parseTree._electricity, $parseTree._natural_gas, and $parseTree._internet."
+    }, {
+      "text" : "I’m looking for a property with $parseTree._television and $parseTree._heater."
+    }, {
+      "text" : "Do you have any rentals that have $parseTree._balcony and $parseTree._kitchen?"
+    }, {
+      "text" : "Show me options with $parseTree._natural_gas, $parseTree._furniture, and $parseTree._alarm."
+    }, {
+      "text" : "electricity"
+    }, {
+      "text" : "alarm"
+    }, {
+      "text" : "alarm system"
+    }, {
+      "text" : "fully furnished"
+    }, {
+      "text" : "fully furnish"
+    }, {
+      "text" : "partly furnished"
+    }, {
+      "text" : "partly furnish"
+    }, {
+      "text" : "no furniture"
+    }, {
+      "text" : "without furniture"
+    }, {
+      "text" : "@furniture"
+    }, {
+      "text" : "@alarm"
+    }, {
+      "text" : "@balcony"
+    }, {
+      "text" : "@conditioner_colder"
+    }, {
+      "text" : "@electricity"
+    }, {
+      "text" : "@heater"
+    }, {
+      "text" : "@furniture"
+    }, {
+      "text" : "@kitchen"
+    }, {
+      "text" : "@television"
+    }, {
+      "text" : "@internet"
+    }, {
+      "text" : "@natural_gas"
+    }, {
+      "text" : "@parking"
+    }, {
+      "text" : "show me options with kitchen, parking, fully furniture, and with TV"
+    }, {
+      "text" : "@progress_condition"
+    }, {
+      "text" : "@water_heater"
+    }, {
+      "text" : "@house_condition"
+    }, {
+      "text" : "@repair"
+    } ],
     "classificationRules" : {
       "refs" : [ ]
     },
@@ -185,6 +313,26 @@
       "entity" : "parking",
       "required" : false,
       "prompts" : [ ]
+    }, {
+      "name" : "progress_condition",
+      "entity" : "progress_condition",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "water_heater",
+      "entity" : "water_heater",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "house_condition",
+      "entity" : "house_condition",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "repair",
+      "entity" : "repair",
+      "required" : false,
+      "prompts" : [ ]
     } ],
     "priority" : 0
   }, {
@@ -197,6 +345,42 @@
       "text" : "bedroom"
     }, {
       "text" : "bedrooms"
+    }, {
+      "text" : "2 bedrooms"
+    }, {
+      "text" : "with 2 bedrooms"
+    }, {
+      "text" : "with 5 bedrooms"
+    }, {
+      "text" : "with 5 bedroom"
+    }, {
+      "text" : "Show me a property with @duckling.number @bedroom."
+    }, {
+      "text" : "with @duckling.number @bedroom"
+    }, {
+      "text" : "Show me an apartment with @duckling.number @bedroom."
+    }, {
+      "text" : "I am looking for an apartment with @duckling.number @bedroom."
+    }, {
+      "text" : "Find an apartment that has @duckling.number @bedroom."
+    }, {
+      "text" : "Can you find an apartment with @duckling.number @bedroom for me?"
+    }, {
+      "text" : "Show me a house with @duckling.number @bedroom."
+    }, {
+      "text" : "I need a house with @duckling.number @bedroom."
+    }, {
+      "text" : "Find a house that has @duckling.number @bedroom."
+    }, {
+      "text" : "Can you find a house with @duckling.number @bedroom for me?"
+    }, {
+      "text" : "I am looking for a property with @duckling.number @bedroom."
+    }, {
+      "text" : "Find a property that has @duckling.number @bedroom."
+    }, {
+      "text" : "Can you find a property with @duckling.number @bedroom for me?"
+    }, {
+      "text" : "@duckling.number @bedroom"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -211,6 +395,615 @@
       "name" : "Number",
       "entity" : "duckling.number",
       "required" : true,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/country",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "country",
+      "entity" : "country",
+      "required" : true,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/anisadIndex",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "show me by @duckling.number"
+    }, {
+      "text" : "index @duckling.number"
+    }, {
+      "text" : "@duckling.number suits me"
+    }, {
+      "text" : "Show me the apartment at index @duckling.number"
+    }, {
+      "text" : "I want to see the apartment listed as @duckling.number"
+    }, {
+      "text" : "Can you display the apartment with index @duckling.number?"
+    }, {
+      "text" : "Show apartment @duckling.number"
+    }, {
+      "text" : "Apartment @duckling.number suits me"
+    }, {
+      "text" : "Show me the land at index @duckling.number"
+    }, {
+      "text" : "I want to see the land listed as @duckling.number"
+    }, {
+      "text" : "Can you display the land with index @duckling.number?"
+    }, {
+      "text" : "Show land @duckling.number"
+    }, {
+      "text" : "Land @duckling.number suits me"
+    }, {
+      "text" : "Show me the building at index @duckling.number"
+    }, {
+      "text" : "I want to see the building listed as @duckling.number"
+    }, {
+      "text" : "Can you display the building with index @duckling.number?"
+    }, {
+      "text" : "Show building @duckling.number"
+    }, {
+      "text" : "Building @duckling.number suits me"
+    }, {
+      "text" : "Show me the property at index @duckling.number"
+    }, {
+      "text" : "I want to see the property listed as @duckling.number"
+    }, {
+      "text" : "Can you display the property with index @duckling.number?"
+    }, {
+      "text" : "Show property @duckling.number"
+    }, {
+      "text" : "Property @duckling.number suits me"
+    }, {
+      "text" : "Show me by @duckling.number"
+    }, {
+      "text" : "I am interested in listing @duckling.number"
+    }, {
+      "text" : "Display the property at index @duckling.number"
+    }, {
+      "text" : "Show @duckling.number"
+    }, {
+      "text" : "Listing @duckling.number suits me"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "index",
+      "entity" : "duckling.number",
+      "required" : true,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/reset",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "reset"
+    }, {
+      "text" : "restart"
+    }, {
+      "text" : "forget everything"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "priority" : 0
+  }, {
+    "path" : "/searchAll",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "@alarm"
+    }, {
+      "text" : "@balcony"
+    }, {
+      "text" : "@bedroom"
+    }, {
+      "text" : "@conditioner_colder"
+    }, {
+      "text" : "@country"
+    }, {
+      "text" : "@electricity"
+    }, {
+      "text" : "@furniture"
+    }, {
+      "text" : "@heater"
+    }, {
+      "text" : "@house_condition"
+    }, {
+      "text" : "@infrastructure_benefits"
+    }, {
+      "text" : "@internet"
+    }, {
+      "text" : "@kitchen"
+    }, {
+      "text" : "@listingType"
+    }, {
+      "text" : "@location"
+    }, {
+      "text" : "@natural_gas"
+    }, {
+      "text" : "@parking"
+    }, {
+      "text" : "@progress_condition"
+    }, {
+      "text" : "@propertyTypes"
+    }, {
+      "text" : "@repair"
+    }, {
+      "text" : "@television"
+    }, {
+      "text" : "@water_heater"
+    }, {
+      "text" : "@location @country @parking"
+    }, {
+      "text" : "@kitchen @internet @television"
+    }, {
+      "text" : "@heater @balcony @natural_gas"
+    }, {
+      "text" : "@alarm @electricity @furniture"
+    }, {
+      "text" : "@propertyTypes @location @progress_condition"
+    }, {
+      "text" : "@listingType @repair @house_condition"
+    }, {
+      "text" : "@water_heater @bedroom @infrastructure_benefits"
+    }, {
+      "text" : "@conditioner_colder @internet @parking"
+    }, {
+      "text" : "@television @natural_gas @kitchen"
+    }, {
+      "text" : "@balcony @heater @alarm"
+    }, {
+      "text" : "@location @propertyTypes @country"
+    }, {
+      "text" : "@parking @electricity @television"
+    }, {
+      "text" : "@kitchen @furniture @conditioner_colder"
+    }, {
+      "text" : "@internet @bedroom @water_heater"
+    }, {
+      "text" : "@house_condition @repair @progress_condition"
+    }, {
+      "text" : "@listingType @infrastructure_benefits @location"
+    }, {
+      "text" : "@natural_gas @television @internet"
+    }, {
+      "text" : "@heater @balcony @parking"
+    }, {
+      "text" : "@country @propertyTypes @alarm"
+    }, {
+      "text" : "@kitchen @water_heater @furniture"
+    }, {
+      "text" : "@conditioner_colder @internet @location"
+    }, {
+      "text" : "@propertyTypes @country @repair"
+    }, {
+      "text" : "@electricity @television @parking"
+    }, {
+      "text" : "@heater @natural_gas @bedroom"
+    }, {
+      "text" : "@location @infrastructure_benefits @balcony"
+    }, {
+      "text" : "@kitchen @internet @house_condition"
+    }, {
+      "text" : "@alarm @listingType @water_heater"
+    }, {
+      "text" : "@propertyTypes @conditioner_colder @country"
+    }, {
+      "text" : "@furniture @parking @internet"
+    }, {
+      "text" : "@heater @television @repair"
+    }, {
+      "text" : "@location @natural_gas @balcony"
+    }, {
+      "text" : "@electricity @kitchen @progress_condition"
+    }, {
+      "text" : "@conditioner_colder @parking @propertyTypes"
+    }, {
+      "text" : "@country @internet @television"
+    }, {
+      "text" : "@listingType @heater @alarm"
+    }, {
+      "text" : "@balcony @furniture @location"
+    }, {
+      "text" : "@kitchen @repair @infrastructure_benefits"
+    }, {
+      "text" : "@natural_gas @television @propertyTypes"
+    }, {
+      "text" : "@parking @house_condition @internet"
+    }, {
+      "text" : "@country @conditioner_colder @electricity"
+    }, {
+      "text" : "@television @location @alarm"
+    }, {
+      "text" : "@propertyTypes @kitchen @water_heater"
+    }, {
+      "text" : "@heater @internet @repair"
+    }, {
+      "text" : "@balcony @progress_condition @furniture"
+    }, {
+      "text" : "@listingType @parking @conditioner_colder"
+    }, {
+      "text" : "@country @natural_gas @television"
+    }, {
+      "text" : "@internet @electricity @heater"
+    }, {
+      "text" : "@location @kitchen @infrastructure_benefits"
+    }, {
+      "text" : "@propertyTypes @house_condition @balcony"
+    }, {
+      "text" : "@repair @furniture @television"
+    }, {
+      "text" : "@parking @conditioner_colder @listingType"
+    }, {
+      "text" : "@internet @natural_gas @location"
+    }, {
+      "text" : "@television @heater @country"
+    }, {
+      "text" : "@water_heater @kitchen @propertyTypes"
+    }, {
+      "text" : "@balcony @progress_condition @electricity"
+    }, {
+      "text" : "Show me listings with $parseTree._parking and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Are there any properties with $parseTree._heater and $parseTree._kitchen?"
+    }, {
+      "text" : "I need an apartment that includes $parseTree._internet and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Show me places with $parseTree._kitchen, $parseTree._television, and $parseTree._parking."
+    }, {
+      "text" : "Are there any flats with $parseTree._balcony, $parseTree._heater, and $parseTree._electricity?"
+    }, {
+      "text" : "I want properties that have $parseTree._conditioner_colder and $parseTree._alarm."
+    }, {
+      "text" : "Find apartments with $parseTree._electricity and $parseTree._television."
+    }, {
+      "text" : "I’m interested in an apartment with $parseTree._natural_gas and $parseTree._furniture."
+    }, {
+      "text" : "Can you show me places with $parseTree._kitchen and $parseTree._parking?"
+    }, {
+      "text" : "I need a rental that offers $parseTree._balcony, $parseTree._heater, and $parseTree._internet."
+    }, {
+      "text" : "Do you have any listings with $parseTree._parking and $parseTree._alarm?"
+    }, {
+      "text" : "I’m looking for an apartment that includes $parseTree._television and $parseTree._conditioner_colder."
+    }, {
+      "text" : "Find me a flat with $parseTree._kitchen, $parseTree._heater, and $parseTree._electricity."
+    }, {
+      "text" : "I need a place that has $parseTree._internet and $parseTree._natural_gas."
+    }, {
+      "text" : "Show me available apartments with $parseTree._conditioner_colder and $parseTree._parking."
+    }, {
+      "text" : "Are there any homes with $parseTree._heater and $parseTree._television?"
+    }, {
+      "text" : "I need a rental that includes $parseTree._internet and $parseTree._electricity."
+    }, {
+      "text" : "Do you have any properties with $parseTree._balcony, $parseTree._kitchen, and $parseTree._furniture?"
+    }, {
+      "text" : "I’m looking for listings with $parseTree._conditioner_colder and $parseTree._natural_gas."
+    }, {
+      "text" : "Find apartments that offer $parseTree._alarm and $parseTree._heater."
+    }, {
+      "text" : "Show me flats with $parseTree._parking and $parseTree._internet."
+    }, {
+      "text" : "Are there any places with $parseTree._kitchen and $parseTree._electricity?"
+    }, {
+      "text" : "I’m interested in rentals that include $parseTree._furniture and $parseTree._natural_gas."
+    }, {
+      "text" : "Can you show me homes with $parseTree._television and $parseTree._heater?"
+    }, {
+      "text" : "I need an apartment with $parseTree._balcony and $parseTree._conditioner_colder."
+    }, {
+      "text" : "search for an apartment in @location"
+    }, {
+      "text" : "purchase a home in @location"
+    }, {
+      "text" : "lease land in @country"
+    }, {
+      "text" : "purchase land in @location"
+    }, {
+      "text" : "lease an apartment in @country"
+    }, {
+      "text" : "rent a home in @location"
+    }, {
+      "text" : "seeking to buy an apartment in @country"
+    }, {
+      "text" : "purchase a house in @country"
+    }, {
+      "text" : "looking to lease in @location"
+    }, {
+      "text" : "searching for rental apartments in @country"
+    }, {
+      "text" : "search for a home in @location"
+    }, {
+      "text" : "purchase a flat in @country"
+    }, {
+      "text" : "lease a house in @location"
+    }, {
+      "text" : "searching for rental options in @country"
+    }, {
+      "text" : "looking for rental flats in @location"
+    }, {
+      "text" : "find apartment in @location"
+    }, {
+      "text" : "buy a house in @location"
+    }, {
+      "text" : "rent plot in @country"
+    }, {
+      "text" : "buy plot in @location"
+    }, {
+      "text" : "rent apartment in @country"
+    }, {
+      "text" : "rent house in @location"
+    }, {
+      "text" : "i want to buy apartment in @country"
+    }, {
+      "text" : "buy house in @country"
+    }, {
+      "text" : "i want to rent in @location"
+    }, {
+      "text" : "looking for apartments in @country"
+    }, {
+      "text" : "find house in @location"
+    }, {
+      "text" : "buy an apartment in @country"
+    }, {
+      "text" : "rent a house in @location"
+    }, {
+      "text" : "looking to rent in @country"
+    }, {
+      "text" : "searching for apartments in @location"
+    }, {
+      "text" : "search for a house"
+    }, {
+      "text" : "purchase an apartment"
+    }, {
+      "text" : "lease a house"
+    }, {
+      "text" : "purchase land"
+    }, {
+      "text" : "lease a condo"
+    }, {
+      "text" : "purchase a flat"
+    }, {
+      "text" : "rent a home"
+    }, {
+      "text" : "looking for a flat"
+    }, {
+      "text" : "search for a home to buy"
+    }, {
+      "text" : "buy a house"
+    }, {
+      "text" : "find homes for rent"
+    }, {
+      "text" : "lease a flat"
+    }, {
+      "text" : "purchase a townhouse"
+    }, {
+      "text" : "lease a cottage"
+    }, {
+      "text" : "buy real estate"
+    }, {
+      "text" : "look for apartments"
+    }, {
+      "text" : "seek to buy land"
+    }, {
+      "text" : "looking for rentals"
+    }, {
+      "text" : "search for a rental place"
+    }, {
+      "text" : "purchase an estate"
+    }, {
+      "text" : "lease property"
+    }, {
+      "text" : "find rental houses"
+    }, {
+      "text" : "buy an apartment"
+    }, {
+      "text" : "lease a studio"
+    }, {
+      "text" : "purchase a condo"
+    }, {
+      "text" : "looking for houses to rent"
+    }, {
+      "text" : "search for flats to lease"
+    }, {
+      "text" : "desire to buy a house"
+    }, {
+      "text" : "lease a duplex"
+    }, {
+      "text" : "purchase a bungalow"
+    }, {
+      "text" : "find rental properties"
+    }, {
+      "text" : "lease a villa"
+    }, {
+      "text" : "buy a rental home"
+    }, {
+      "text" : "searching for homes to buy"
+    }, {
+      "text" : "lease a loft"
+    }, {
+      "text" : "purchase a land plot"
+    }, {
+      "text" : "find apartments for rent"
+    }, {
+      "text" : "looking to buy a condo"
+    }, {
+      "text" : "lease an apartment"
+    }, {
+      "text" : "buy a home"
+    }, {
+      "text" : "looking for rental homes"
+    }, {
+      "text" : "search for a flat to buy"
+    }, {
+      "text" : "lease a property"
+    }, {
+      "text" : "purchase a place"
+    }, {
+      "text" : "desire to lease a house"
+    }, {
+      "text" : "search for land to buy"
+    }, {
+      "text" : "lease a home"
+    }, {
+      "text" : "buy real estate property"
+    }, {
+      "text" : "searching for apartments to rent"
+    }, {
+      "text" : "purchase property"
+    }, {
+      "text" : "Buying a property with @bedroom(s)"
+    }, {
+      "text" : "Seeking apartments for rent with @bedroom(s)"
+    }, {
+      "text" : "Interested in purchasing real estate with @bedroom(s)"
+    }, {
+      "text" : "Renting a home with @bedroom(s)"
+    }, {
+      "text" : "Exploring options to buy land with @bedroom(s)"
+    }, {
+      "text" : "Looking to lease a house with @bedroom"
+    }, {
+      "text" : "Interested in buying a place with @bedroom"
+    }, {
+      "text" : "Leasing out a property with @bedroom"
+    }, {
+      "text" : "Searching for a flat to purchase with @bedroom"
+    }, {
+      "text" : "Seeking rental homes with @bedroom"
+    }, {
+      "text" : "Purchasing a home with @bedroom"
+    }, {
+      "text" : "Renting an apartment with @bedroom"
+    }, {
+      "text" : "i want rent house @internet"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "alarm",
+      "entity" : "alarm",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "balcony",
+      "entity" : "balcony",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "bedroom",
+      "entity" : "bedroom",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "conditioner_colder",
+      "entity" : "conditioner_colder",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "country",
+      "entity" : "country",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "electricity",
+      "entity" : "electricity",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "furniture",
+      "entity" : "furniture",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "heater",
+      "entity" : "heater",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "house_condition",
+      "entity" : "house_condition",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "infrastructure_benefits",
+      "entity" : "infrastructure_benefits",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "internet",
+      "entity" : "internet",
+      "required" : false,
+      "prompts" : [ ],
+      "array" : true
+    }, {
+      "name" : "kitchen",
+      "entity" : "kitchen",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "listingType",
+      "entity" : "listingType",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "location",
+      "entity" : "location",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "natural_gas",
+      "entity" : "natural_gas",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "parking",
+      "entity" : "parking",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "progress_condition",
+      "entity" : "progress_condition",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "propertyTypes",
+      "entity" : "propertyTypes",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "repair",
+      "entity" : "repair",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "television",
+      "entity" : "television",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "water_heater",
+      "entity" : "water_heater",
+      "required" : false,
       "prompts" : [ ]
     } ],
     "priority" : 0
@@ -230,8 +1023,8 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "bedroom", "bedrooms" ],
+      "type" : "pattern",
+      "rule" : [ "((@duckling.interval|@duckling.number) (~bedroom|~room|br))" ],
       "value" : ""
     } ]
   }, {
@@ -249,21 +1042,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "fully", "full" ],
-      "value" : "{\n  \"furniture\": \"FULLY\"\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> @pattern_furniture" ],
+      "value" : ""
     }, {
-      "type" : "synonyms",
-      "rule" : [ "partly", "part" ],
-      "value" : "{\n  \"furniture\": \"PARTLY\"\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with furniture", "include furniture", "have furniture", "furniture" ],
-      "value" : "{\n  \"furniture\": \n    \"FULLY\"\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "no furniture", "without furniture", "exclude furniture" ],
-      "value" : "{\n  \"furniture\": \"NO\"\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> @pattern_furniture" ],
+      "value" : ""
     } ]
   }, {
     "entity" : {
@@ -279,7 +1064,39 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "own terrace", "terrace" ],
+      "value" : "{\n  \"repair\" : [\"OWN_TERRACE\"]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "big kitchen", "large kitchen" ],
+      "value" : "{\n  \"repair\": [\n    \"BIG_KITCHEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "big balcony", "large balcony" ],
+      "value" : "{\n  \"repair\": [\n    \"BIG_BALCONY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without repair", "no repair", "no features", "without features" ],
+      "value" : "{\n  \"repair\": []\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "bbq" ],
+      "value" : "{\n  \"repair\": [\n    \"BBQ\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "fireplace" ],
+      "value" : "{\n  \"repair\" : [\"FIREPLACE\"]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "panoramic windows", "panoramic", "panorama" ],
+      "value" : "{\n  \"repair\": [\n    \"PANORAMIC_WINDOWS\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "modern design", "modern" ],
+      "value" : "{\n  \"repair\": [\n    \"MODERN_DESIGN\"\n  ]\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "balcony",
@@ -296,12 +1113,12 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "without balcony", "no balcony", "exclude balcony" ],
-      "value" : "{\n \"balcony\" : null\n}"
+      "rule" : [ "without verandah", "no verandah", "exclude verandah", "without veranda", "no veranda", "exclude veranda" ],
+      "value" : "{\n  \"balcony\": []\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "with balcony", "include balcony", "balcony", "have balcony" ],
-      "value" : "{\n \"balcony\" : true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (balcony/veranda/verandah)" ],
+      "value" : "{\n  \"balcony\": [\n    true\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -318,13 +1135,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "with parking ", "contains parking" ],
-      "value" : "{\n \"parking\" : true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> parking" ],
+      "value" : "{\n  \"parking\": [true]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without parking", "no parking" ],
-      "value" : "{\n \"parking\" : null\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> parking" ],
+      "value" : "{\n  \"parking\": []\n}"
     } ]
   }, {
     "entity" : {
@@ -341,13 +1158,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "with conditioner", "with air system", "conditioner", "air system", "include conditioner", "include air system", "have conditioner", "have air system", "having air system", "having conditioner" ],
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (conditioner/air system/ air conditioning/air/climate control/AC/Cooling system/Cooler/Air cooling)" ],
       "value" : "{\n  \"airConditioning\": [\n    \"EVERYWHERE\",\n    \"ONLY_BEDROOMS\"\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without conditioner", "without air system", "no conditioner", "no air system", "exclude conditioner", "exclude air system" ],
-      "value" : "{\n  \"airConditioning\": [\n    \"NO\"\n  ]\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (conditioner/air system/ air conditioning/air/climate control/AC/Cooling system/Cooler/Air cooling)" ],
+      "value" : "{\n  \"airConditioning\": [ ]\n}"
     } ]
   }, {
     "entity" : {
@@ -366,7 +1183,7 @@
     "records" : [ ]
   }, {
     "entity" : {
-      "name" : "buy_or_rent",
+      "name" : "listingType",
       "enabled" : true,
       "shared" : false,
       "type" : "annotation",
@@ -403,48 +1220,88 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "Paphos", "pafos", "paphos" ],
-      "value" : ""
+      "rule" : [ "Nicosia", "Lefkosia" ],
+      "value" : "{\"name\":\"Nicosia\",\"alternative_name\":\"Lefkosia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Agros", "agros" ],
-      "value" : ""
+      "rule" : [ "Limassol", "Limasol" ],
+      "value" : "{\"name\":\"Limassol\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Bellapais", "bellapais" ],
-      "value" : ""
+      "rule" : [ "Larnaca" ],
+      "value" : "{\"name\":\"Larnaca\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Limassol", "limassol" ],
-      "value" : ""
+      "rule" : [ "Paphos", "Pafos" ],
+      "value" : "{\"name\":\"Paphos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Ayia Napa", "ayia napa", "Ayia napa", "ayia Napa" ],
-      "value" : ""
+      "rule" : [ "Ayia Napa", "aya napa", "ayanapa", "ayianapa" ],
+      "value" : "{\"name\":\"Ayia Napa\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Dhekelia", "dhekelia" ],
-      "value" : ""
+      "rule" : [ "Protaras" ],
+      "value" : "{\"name\":\"Protaras\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Akrotiri", "akrotiri" ],
-      "value" : ""
+      "rule" : [ "Pissouri" ],
+      "value" : "{\"name\":\"Pissouri\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Agia Marina", "agia marina", "Agia marina", "agia Marina" ],
-      "value" : ""
+      "rule" : [ "Polis" ],
+      "value" : "{\"name\":\"Polis\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Agios Sozomenos", "agios sozomenos", "Agios sozomenos", "agios Sozomenos" ],
-      "value" : ""
+      "rule" : [ "Kyrenia" ],
+      "value" : "{\"name\":\"Kyrenia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Arminou", "arminou" ],
-      "value" : ""
+      "rule" : [ "Famagusta" ],
+      "value" : "{\"name\":\"Famagusta\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Nicosia" ],
-      "value" : ""
+      "rule" : [ "Morphou", "Güzelyurt" ],
+      "value" : "{\"name\":\"Morphou\",\"alternative_name\":\"Güzelyurt\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Dali" ],
+      "value" : "{\"name\":\"Dali\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Avgorou" ],
+      "value" : "{\"name\":\"Avgorou\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Xylophagou" ],
+      "value" : "{\"name\":\"Xylophagou\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Oroklini" ],
+      "value" : "{\"name\":\"Oroklini\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ypsonas" ],
+      "value" : "{\"name\":\"Ypsonas\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Vasa Kellakiou" ],
+      "value" : "{\"name\":\"Vasa Kellakiou\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Pyrga" ],
+      "value" : "{\"name\":\"Pyrga\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Arsos" ],
+      "value" : "{\"name\":\"Arsos\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Episkopi" ],
+      "value" : "{\"name\":\"Episkopi\",\"country\":\"Cyprus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kouklia", "Kuklia", "Khouklia" ],
+      "value" : "{\n  \"name\": \"Kouklia\",\n  \"country\": \"Cyprus\"\n}"
     } ]
   }, {
     "entity" : {
@@ -461,13 +1318,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "include kitchen", "have kitchen", "having kitchen", "with kitchen", "kitchen" ],
-      "value" : "{\n  \"kitchen\" : true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> kitchen" ],
+      "value" : "{\n  \"kitchen\": [true]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without kitchen", "no kitchen", "exclude kitchen" ],
-      "value" : "{\n  \"kitchen\" : null\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> kitchen" ],
+      "value" : "{\n  \"kitchen\": []\n}"
     } ]
   }, {
     "entity" : {
@@ -484,13 +1341,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "with electricity", "include electricity", "have electricity", "electricity" ],
-      "value" : "{\n  \"electro\": true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (electricity/Electric power/Power/Electrical energy/Electrical current)" ],
+      "value" : "{\n  \"electricity\": [\n    true\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without electricity", "no electricity", "exclude electricity" ],
-      "value" : "{\n  \"electro\": null\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (electricity/Electric power/Power/Electrical energy/Electrical current)" ],
+      "value" : "{\n  \"electricity\": []\n}"
     } ]
   }, {
     "entity" : {
@@ -507,13 +1364,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "without gas", "no gas", "exclude gas" ],
-      "value" : "{\n  \"gas\" : false\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> gas" ],
+      "value" : "{\n  \"gas\": []\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "with gas", "have gas", "include gas", "having gas", "gas" ],
-      "value" : "{\n  \"gas\" : true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> gas" ],
+      "value" : "{\n  \"gas\": [true]\n}"
     } ]
   }, {
     "entity" : {
@@ -530,29 +1387,29 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "with heater", "including heater", "having heater", "have heater", "include heater", "heater" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> heater" ],
+      "value" : "{\n  \"heater\": [\n    \"CENTRAL\", \"GAS\" , \"ELECTRIC\", \"LIQUID_FUEL\"\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "electric" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> electric [(heater/heat/heating)]" ],
+      "value" : "{\n  \"heater\" : [ \"ELECTRIC\"]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "liquid fuel" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> liquid fuel" ],
+      "value" : "{\n  \"heater\": [\n    \"LIQUID_FUEL \"\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without heater", "no heater", "exclude heater" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> heater" ],
+      "value" : "{\n  \"heater\": []\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "central" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> central [(heater/heat/heating)]" ],
+      "value" : "{\n  \"heater\": [\n    \"CENTRAL\"\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "gas" ],
-      "value" : ""
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> gas [(heater/heat/heating)]" ],
+      "value" : "{\n  \"heater\" : [ \"GAS\"]\n}"
     } ]
   }, {
     "entity" : {
@@ -568,7 +1425,27 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "central water heater", "central water", "central water heat" ],
+      "value" : "{\n  \"water\" : [\"CENTRAL\"]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "boiler" ],
+      "value" : "{\n  \"water\": [\n    \"BOILER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "solar system water heater", "solar system", "solar system heater" ],
+      "value" : "{\n  \"water\": [\n    \"SOLAR_SYSTEM\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without water heater", "no water heater", "without water heating", "no water heating" ],
+      "value" : "{\n  \"water\": []\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "photovoltaic system" ],
+      "value" : "{\n  \"water\": [\n    \"PHOTOVOLTAIC_SYSTEM\"\n  ]\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "television",
@@ -584,17 +1461,17 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "with televison", "contain television", "contain TV", "with TV" ],
-      "value" : "{\n \"TV\" :true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (tv/television/tele vision)" ],
+      "value" : "{\n  \"TV\": [true]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without TV", "no TV" ],
-      "value" : "{\n  \"TV\" : null\n}"
+      "type" : "pattern",
+      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (tv/television/tele vision)" ],
+      "value" : "{\n  \"TV\": []\n}"
     } ]
   }, {
     "entity" : {
-      "name" : "types_of_estate",
+      "name" : "propertyTypes",
       "enabled" : true,
       "shared" : false,
       "type" : "annotation",
@@ -609,7 +1486,7 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "house" ],
-      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"SEMIDETACHED_HOUSE\"\n  ],\n\"word\" : \"House\"\n}"
+      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"SEMIDETACHED_HOUSE\",\n\"VILLA\"\n  ],\n  \"word\": \"House\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "plot" ],
@@ -637,11 +1514,23 @@
       "noSpelling" : true,
       "noMorph" : false,
       "phoneticSearch" : false,
-      "fuzzySearch" : false,
+      "fuzzySearch" : true,
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "needs renovation", "renovation needed", "need renovation", "renovation need" ],
+      "value" : "{\n  \"house_condition\": [\n    \"NEEDS_RENOVATION\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "well maintaned", "well maintain ", "maintaned", "maintain" ],
+      "value" : "{\n  \"house_condition\": [\n    \"WELL_MAINTAINED\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "new house", "new apartment", "new property", "new building", "new" ],
+      "value" : "{\n  \"house_condition\": [\n    \"NEW\"\n  ]\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "alarm",
@@ -658,12 +1547,12 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "without alarm system", "no alarm " ],
-      "value" : "{\n \"alarm\" : null\n}"
+      "rule" : [ "without security system", "without security", "without alarm system", "without alarm", "no security", "no security system", "no alarm system", "no alarm", "exclude security", "exclude security system", "exclude alarm system", "exclude alarm" ],
+      "value" : "{\n  \"alarm\": []\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "with alarm system", "with alarm" ],
-      "value" : "{\n  \"alarm\" : true\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (alarm/alarm system/security system/security)" ],
+      "value" : "{\n  \"alarm\": [true]\n}"
     } ]
   }, {
     "entity" : {
@@ -679,7 +1568,15 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "ready to move in" ],
+      "value" : "{\n  \"condition\": [\n    \"READY_TO_MOVE_IN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "under construction" ],
+      "value" : "{\n  \"condition\": [\n    \"UNDER_CONSTRUCTION\"\n  ]\n}"
+    } ]
   }, {
     "entity" : {
       "name" : "internet",
@@ -696,28 +1593,13 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "with internet", "include internet", "have internet", "having internet" ],
-      "value" : "{\n  \"internet\" : [ \"WIFI\", \"CABLE\", \"MOBILE\"] \n}"
+      "rule" : [ "without internet", "Without internet access", "Without internet connection", "Without internet connection", "Without web access", "No internet access", "Exclude internet access", "Exclude internet ", "without wifi", "Exclude wi-fi", "without wi-fi" ],
+      "value" : "{internet: [\n    \"NO\"\n  ]\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "without internet", "no internet", "exclude internet", "internet" ],
-      "value" : "{\n  \"internet\" : [ \"NO\"]\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> @pattern_internet" ],
+      "value" : ""
     } ]
-  }, {
-    "entity" : {
-      "name" : "to",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ ]
   }, {
     "entity" : {
       "name" : "country",
@@ -734,12 +1616,772 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "cyprus", "Cyprus" ],
-      "value" : ""
+      "rule" : [ "Afghanistan" ],
+      "value" : "{\"name\":\"Afghanistan\",\"abbreviation\":\"AFG\",\"designation\":\"AF\",\"capital\":\"Kabul\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Albania" ],
+      "value" : "{\"name\":\"Albania\",\"abbreviation\":\"ALB\",\"designation\":\"AL\",\"capital\":\"Tirana\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Algeria" ],
+      "value" : "{\"name\":\"Algeria\",\"abbreviation\":\"DZA\",\"designation\":\"DZ\",\"capital\":\"Algiers\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Andorra" ],
+      "value" : "{\"name\":\"Andorra\",\"abbreviation\":\"AND\",\"designation\":\"AD\",\"capital\":\"Andorra la Vella\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Angola" ],
+      "value" : "{\"name\":\"Angola\",\"abbreviation\":\"AGO\",\"designation\":\"AO\",\"capital\":\"Luanda\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Antigua and Barbuda" ],
+      "value" : "{\"name\":\"Antigua and Barbuda\",\"abbreviation\":\"ATG\",\"designation\":\"AG\",\"capital\":\"Saint John's\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Argentina" ],
+      "value" : "{\"name\":\"Argentina\",\"abbreviation\":\"ARG\",\"designation\":\"AR\",\"capital\":\"Buenos Aires\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Armenia" ],
+      "value" : "{\"name\":\"Armenia\",\"abbreviation\":\"ARM\",\"designation\":\"AM\",\"capital\":\"Yerevan\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Australia" ],
+      "value" : "{\"name\":\"Australia\",\"abbreviation\":\"AUS\",\"designation\":\"AU\",\"capital\":\"Canberra\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Austria" ],
+      "value" : "{\"name\":\"Austria\",\"abbreviation\":\"AUT\",\"designation\":\"AT\",\"capital\":\"Vienna\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Azerbaijan" ],
+      "value" : "{\"name\":\"Azerbaijan\",\"abbreviation\":\"AZE\",\"designation\":\"AZ\",\"capital\":\"Baku\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bahamas" ],
+      "value" : "{\"name\":\"Bahamas\",\"abbreviation\":\"BHS\",\"designation\":\"BS\",\"capital\":\"Nassau\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bahrain" ],
+      "value" : "{\"name\":\"Bahrain\",\"abbreviation\":\"BHR\",\"designation\":\"BH\",\"capital\":\"Manama\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bangladesh" ],
+      "value" : "{\"name\":\"Bangladesh\",\"abbreviation\":\"BGD\",\"designation\":\"BD\",\"capital\":\"Dhaka\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Barbados" ],
+      "value" : "{\"name\":\"Barbados\",\"abbreviation\":\"BRB\",\"designation\":\"BB\",\"capital\":\"Bridgetown\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Belarus" ],
+      "value" : "{\"name\":\"Belarus\",\"abbreviation\":\"BLR\",\"designation\":\"BY\",\"capital\":\"Minsk\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Belgium" ],
+      "value" : "{\"name\":\"Belgium\",\"abbreviation\":\"BEL\",\"designation\":\"BE\",\"capital\":\"Brussels\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Belize" ],
+      "value" : "{\"name\":\"Belize\",\"abbreviation\":\"BLZ\",\"designation\":\"BZ\",\"capital\":\"Belmopan\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Benin" ],
+      "value" : "{\"name\":\"Benin\",\"abbreviation\":\"BEN\",\"designation\":\"BJ\",\"capital\":\"Porto-Novo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bhutan" ],
+      "value" : "{\"name\":\"Bhutan\",\"abbreviation\":\"BTN\",\"designation\":\"BT\",\"capital\":\"Thimphu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bolivia" ],
+      "value" : "{\"name\":\"Bolivia\",\"abbreviation\":\"BOL\",\"designation\":\"BO\",\"capital\":\"Sucre\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bosnia and Herzegovina" ],
+      "value" : "{\"name\":\"Bosnia and Herzegovina\",\"abbreviation\":\"BIH\",\"designation\":\"BA\",\"capital\":\"Sarajevo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Botswana" ],
+      "value" : "{\"name\":\"Botswana\",\"abbreviation\":\"BWA\",\"designation\":\"BW\",\"capital\":\"Gaborone\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Brazil" ],
+      "value" : "{\"name\":\"Brazil\",\"abbreviation\":\"BRA\",\"designation\":\"BR\",\"capital\":\"Brasilia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Brunei" ],
+      "value" : "{\"name\":\"Brunei\",\"abbreviation\":\"BRN\",\"designation\":\"BN\",\"capital\":\"Bandar Seri Begawan\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bulgaria" ],
+      "value" : "{\"name\":\"Bulgaria\",\"abbreviation\":\"BGR\",\"designation\":\"BG\",\"capital\":\"Sofia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Burkina Faso" ],
+      "value" : "{\"name\":\"Burkina Faso\",\"abbreviation\":\"BFA\",\"designation\":\"BF\",\"capital\":\"Ouagadougou\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Burundi" ],
+      "value" : "{\"name\":\"Burundi\",\"abbreviation\":\"BDI\",\"designation\":\"BI\",\"capital\":\"Gitega\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cabo Verde" ],
+      "value" : "{\"name\":\"Cabo Verde\",\"abbreviation\":\"CPV\",\"designation\":\"CV\",\"capital\":\"Praia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cambodia" ],
+      "value" : "{\"name\":\"Cambodia\",\"abbreviation\":\"KHM\",\"designation\":\"KH\",\"capital\":\"Phnom Penh\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cameroon" ],
+      "value" : "{\"name\":\"Cameroon\",\"abbreviation\":\"CMR\",\"designation\":\"CM\",\"capital\":\"YaoundÃ©\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Canada" ],
+      "value" : "{\"name\":\"Canada\",\"abbreviation\":\"CAN\",\"designation\":\"CA\",\"capital\":\"Ottawa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Central African Republic" ],
+      "value" : "{\"name\":\"Central African Republic\",\"abbreviation\":\"CAF\",\"designation\":\"CF\",\"capital\":\"Bangui\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Chad" ],
+      "value" : "{\"name\":\"Chad\",\"abbreviation\":\"TCD\",\"designation\":\"TD\",\"capital\":\"N'Djamena\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Chile" ],
+      "value" : "{\"name\":\"Chile\",\"abbreviation\":\"CHL\",\"designation\":\"CL\",\"capital\":\"Santiago\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "China" ],
+      "value" : "{\"name\":\"China\",\"abbreviation\":\"CHN\",\"designation\":\"CN\",\"capital\":\"Beijing\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Colombia" ],
+      "value" : "{\"name\":\"Colombia\",\"abbreviation\":\"COL\",\"designation\":\"CO\",\"capital\":\"BogotÃ¡\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Comoros" ],
+      "value" : "{\"name\":\"Comoros\",\"abbreviation\":\"COM\",\"designation\":\"KM\",\"capital\":\"Moroni\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Congo" ],
+      "value" : "{\"name\":\"Congo\",\"abbreviation\":\"COG\",\"designation\":\"CG\",\"capital\":\"Brazzaville\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Costa Rica" ],
+      "value" : "{\"name\":\"Costa Rica\",\"abbreviation\":\"CRI\",\"designation\":\"CR\",\"capital\":\"San JosÃ©\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Croatia" ],
+      "value" : "{\"name\":\"Croatia\",\"abbreviation\":\"HRV\",\"designation\":\"HR\",\"capital\":\"Zagreb\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cuba" ],
+      "value" : "{\"name\":\"Cuba\",\"abbreviation\":\"CUB\",\"designation\":\"CU\",\"capital\":\"Havana\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cyprus" ],
+      "value" : "{\"name\":\"Cyprus\",\"abbreviation\":\"CYP\",\"designation\":\"CY\",\"capital\":\"Nicosia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Czech Republic" ],
+      "value" : "{\"name\":\"Czech Republic\",\"abbreviation\":\"CZE\",\"designation\":\"CZ\",\"capital\":\"Prague\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Denmark" ],
+      "value" : "{\"name\":\"Denmark\",\"abbreviation\":\"DNK\",\"designation\":\"DK\",\"capital\":\"Copenhagen\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Djibouti" ],
+      "value" : "{\"name\":\"Djibouti\",\"abbreviation\":\"DJI\",\"designation\":\"DJ\",\"capital\":\"Djibouti City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Dominica" ],
+      "value" : "{\"name\":\"Dominica\",\"abbreviation\":\"DMA\",\"designation\":\"DM\",\"capital\":\"Roseau\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Dominican Republic" ],
+      "value" : "{\"name\":\"Dominican Republic\",\"abbreviation\":\"DOM\",\"designation\":\"DO\",\"capital\":\"Santo Domingo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ecuador" ],
+      "value" : "{\"name\":\"Ecuador\",\"abbreviation\":\"ECU\",\"designation\":\"EC\",\"capital\":\"Quito\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Egypt" ],
+      "value" : "{\"name\":\"Egypt\",\"abbreviation\":\"EGY\",\"designation\":\"EG\",\"capital\":\"Cairo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "El Salvador" ],
+      "value" : "{\"name\":\"El Salvador\",\"abbreviation\":\"SLV\",\"designation\":\"SV\",\"capital\":\"San Salvador\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Equatorial Guinea" ],
+      "value" : "{\"name\":\"Equatorial Guinea\",\"abbreviation\":\"GNQ\",\"designation\":\"GQ\",\"capital\":\"Malabo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Eritrea" ],
+      "value" : "{\"name\":\"Eritrea\",\"abbreviation\":\"ERI\",\"designation\":\"ER\",\"capital\":\"Asmara\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Estonia" ],
+      "value" : "{\"name\":\"Estonia\",\"abbreviation\":\"EST\",\"designation\":\"EE\",\"capital\":\"Tallinn\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Eswatini" ],
+      "value" : "{\"name\":\"Eswatini\",\"abbreviation\":\"SWZ\",\"designation\":\"SZ\",\"capital\":\"Mbabane\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ethiopia" ],
+      "value" : "{\"name\":\"Ethiopia\",\"abbreviation\":\"ETH\",\"designation\":\"ET\",\"capital\":\"Addis Ababa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Fiji" ],
+      "value" : "{\"name\":\"Fiji\",\"abbreviation\":\"FJI\",\"designation\":\"FJ\",\"capital\":\"Suva\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Finland" ],
+      "value" : "{\"name\":\"Finland\",\"abbreviation\":\"FIN\",\"designation\":\"FI\",\"capital\":\"Helsinki\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "France" ],
+      "value" : "{\"name\":\"France\",\"abbreviation\":\"FRA\",\"designation\":\"FR\",\"capital\":\"Paris\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Gabon" ],
+      "value" : "{\"name\":\"Gabon\",\"abbreviation\":\"GAB\",\"designation\":\"GA\",\"capital\":\"Libreville\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Gambia" ],
+      "value" : "{\"name\":\"Gambia\",\"abbreviation\":\"GMB\",\"designation\":\"GM\",\"capital\":\"Banjul\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Georgia" ],
+      "value" : "{\"name\":\"Georgia\",\"abbreviation\":\"GEO\",\"designation\":\"GE\",\"capital\":\"Tbilisi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Germany" ],
+      "value" : "{\"name\":\"Germany\",\"abbreviation\":\"DEU\",\"designation\":\"DE\",\"capital\":\"Berlin\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ghana" ],
+      "value" : "{\"name\":\"Ghana\",\"abbreviation\":\"GHA\",\"designation\":\"GH\",\"capital\":\"Accra\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Greece" ],
+      "value" : "{\"name\":\"Greece\",\"abbreviation\":\"GRC\",\"designation\":\"GR\",\"capital\":\"Athens\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Grenada" ],
+      "value" : "{\"name\":\"Grenada\",\"abbreviation\":\"GRD\",\"designation\":\"GD\",\"capital\":\"St. George's\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Guatemala" ],
+      "value" : "{\"name\":\"Guatemala\",\"abbreviation\":\"GTM\",\"designation\":\"GT\",\"capital\":\"Guatemala City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Guinea" ],
+      "value" : "{\"name\":\"Guinea\",\"abbreviation\":\"GIN\",\"designation\":\"GN\",\"capital\":\"Conakry\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Guinea-Bissau" ],
+      "value" : "{\"name\":\"Guinea-Bissau\",\"abbreviation\":\"GNB\",\"designation\":\"GW\",\"capital\":\"Bissau\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Guyana" ],
+      "value" : "{\"name\":\"Guyana\",\"abbreviation\":\"GUY\",\"designation\":\"GY\",\"capital\":\"Georgetown\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Haiti" ],
+      "value" : "{\"name\":\"Haiti\",\"abbreviation\":\"HTI\",\"designation\":\"HT\",\"capital\":\"Port-au-Prince\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Honduras" ],
+      "value" : "{\"name\":\"Honduras\",\"abbreviation\":\"HND\",\"designation\":\"HN\",\"capital\":\"Tegucigalpa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Hungary" ],
+      "value" : "{\"name\":\"Hungary\",\"abbreviation\":\"HUN\",\"designation\":\"HU\",\"capital\":\"Budapest\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Iceland" ],
+      "value" : "{\"name\":\"Iceland\",\"abbreviation\":\"ISL\",\"designation\":\"IS\",\"capital\":\"Reykjavik\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "India" ],
+      "value" : "{\"name\":\"India\",\"abbreviation\":\"IND\",\"designation\":\"IN\",\"capital\":\"New Delhi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Indonesia" ],
+      "value" : "{\"name\":\"Indonesia\",\"abbreviation\":\"IDN\",\"designation\":\"ID\",\"capital\":\"Jakarta\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Iran" ],
+      "value" : "{\"name\":\"Iran\",\"abbreviation\":\"IRN\",\"designation\":\"IR\",\"capital\":\"Tehran\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Iraq" ],
+      "value" : "{\"name\":\"Iraq\",\"abbreviation\":\"IRQ\",\"designation\":\"IQ\",\"capital\":\"Baghdad\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ireland" ],
+      "value" : "{\"name\":\"Ireland\",\"abbreviation\":\"IRL\",\"designation\":\"IE\",\"capital\":\"Dublin\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Israel" ],
+      "value" : "{\"name\":\"Israel\",\"abbreviation\":\"ISR\",\"designation\":\"IL\",\"capital\":\"Jerusalem\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Italy" ],
+      "value" : "{\"name\":\"Italy\",\"abbreviation\":\"ITA\",\"designation\":\"IT\",\"capital\":\"Rome\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Jamaica" ],
+      "value" : "{\"name\":\"Jamaica\",\"abbreviation\":\"JAM\",\"designation\":\"JM\",\"capital\":\"Kingston\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Japan" ],
+      "value" : "{\"name\":\"Japan\",\"abbreviation\":\"JPN\",\"designation\":\"JP\",\"capital\":\"Tokyo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Jordan" ],
+      "value" : "{\"name\":\"Jordan\",\"abbreviation\":\"JOR\",\"designation\":\"JO\",\"capital\":\"Amman\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kazakhstan" ],
+      "value" : "{\"name\":\"Kazakhstan\",\"abbreviation\":\"KAZ\",\"designation\":\"KZ\",\"capital\":\"Nur-Sultan\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kenya" ],
+      "value" : "{\"name\":\"Kenya\",\"abbreviation\":\"KEN\",\"designation\":\"KE\",\"capital\":\"Nairobi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kiribati" ],
+      "value" : "{\"name\":\"Kiribati\",\"abbreviation\":\"KIR\",\"designation\":\"KI\",\"capital\":\"Tarawa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Korea" ],
+      "value" : "{\"name\":\"Korea, Democratic People's Republic of\",\"abbreviation\":\"PRK\",\"designation\":\"KP\",\"capital\":\"Pyongyang\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Korea" ],
+      "value" : "{\"name\":\"Korea, Republic of\",\"abbreviation\":\"KOR\",\"designation\":\"KR\",\"capital\":\"Seoul\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kuwait" ],
+      "value" : "{\"name\":\"Kuwait\",\"abbreviation\":\"KWT\",\"designation\":\"KW\",\"capital\":\"Kuwait City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kyrgyzstan" ],
+      "value" : "{\"name\":\"Kyrgyzstan\",\"abbreviation\":\"KGZ\",\"designation\":\"KG\",\"capital\":\"Bishkek\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lao People's Democratic Republic" ],
+      "value" : "{\"name\":\"Lao People's Democratic Republic\",\"abbreviation\":\"LAO\",\"designation\":\"LA\",\"capital\":\"Vientiane\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Latvia" ],
+      "value" : "{\"name\":\"Latvia\",\"abbreviation\":\"LVA\",\"designation\":\"LV\",\"capital\":\"Riga\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lebanon" ],
+      "value" : "{\"name\":\"Lebanon\",\"abbreviation\":\"LBN\",\"designation\":\"LB\",\"capital\":\"Beirut\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lesotho" ],
+      "value" : "{\"name\":\"Lesotho\",\"abbreviation\":\"LSO\",\"designation\":\"LS\",\"capital\":\"Maseru\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Liberia" ],
+      "value" : "{\"name\":\"Liberia\",\"abbreviation\":\"LBR\",\"designation\":\"LR\",\"capital\":\"Monrovia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Libya" ],
+      "value" : "{\"name\":\"Libya\",\"abbreviation\":\"LBY\",\"designation\":\"LY\",\"capital\":\"Tripoli\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Liechtenstein" ],
+      "value" : "{\"name\":\"Liechtenstein\",\"abbreviation\":\"LIE\",\"designation\":\"LI\",\"capital\":\"Vaduz\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lithuania" ],
+      "value" : "{\"name\":\"Lithuania\",\"abbreviation\":\"LTU\",\"designation\":\"LT\",\"capital\":\"Vilnius\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Luxembourg" ],
+      "value" : "{\"name\":\"Luxembourg\",\"abbreviation\":\"LUX\",\"designation\":\"LU\",\"capital\":\"Luxembourg City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Madagascar" ],
+      "value" : "{\"name\":\"Madagascar\",\"abbreviation\":\"MDG\",\"designation\":\"MG\",\"capital\":\"Antananarivo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malawi" ],
+      "value" : "{\"name\":\"Malawi\",\"abbreviation\":\"MWI\",\"designation\":\"MW\",\"capital\":\"Lilongwe\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malaysia" ],
+      "value" : "{\"name\":\"Malaysia\",\"abbreviation\":\"MYS\",\"designation\":\"MY\",\"capital\":\"Kuala Lumpur\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Maldives" ],
+      "value" : "{\"name\":\"Maldives\",\"abbreviation\":\"MDV\",\"designation\":\"MV\",\"capital\":\"MalÃ©\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mali" ],
+      "value" : "{\"name\":\"Mali\",\"abbreviation\":\"MLI\",\"designation\":\"ML\",\"capital\":\"Bamako\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malta" ],
+      "value" : "{\"name\":\"Malta\",\"abbreviation\":\"MLT\",\"designation\":\"MT\",\"capital\":\"Valletta\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Marshall Islands" ],
+      "value" : "{\"name\":\"Marshall Islands\",\"abbreviation\":\"MHL\",\"designation\":\"MH\",\"capital\":\"Majuro\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mauritania" ],
+      "value" : "{\"name\":\"Mauritania\",\"abbreviation\":\"MRT\",\"designation\":\"MR\",\"capital\":\"Nouakchott\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mauritius" ],
+      "value" : "{\"name\":\"Mauritius\",\"abbreviation\":\"MUS\",\"designation\":\"MU\",\"capital\":\"Port Louis\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mexico" ],
+      "value" : "{\"name\":\"Mexico\",\"abbreviation\":\"MEX\",\"designation\":\"MX\",\"capital\":\"Mexico City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Micronesia" ],
+      "value" : "{\"name\":\"Micronesia, Federated States of\",\"abbreviation\":\"FSM\",\"designation\":\"FM\",\"capital\":\"Palikir\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Moldova" ],
+      "value" : "{\"name\":\"Moldova, Republic of\",\"abbreviation\":\"MDA\",\"designation\":\"MD\",\"capital\":\"ChiÈ™inÄƒu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Monaco" ],
+      "value" : "{\"name\":\"Monaco\",\"abbreviation\":\"MCO\",\"designation\":\"MC\",\"capital\":\"Monaco\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mongolia" ],
+      "value" : "{\"name\":\"Mongolia\",\"abbreviation\":\"MNG\",\"designation\":\"MN\",\"capital\":\"Ulaanbaatar\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Montenegro" ],
+      "value" : "{\"name\":\"Montenegro\",\"abbreviation\":\"MNE\",\"designation\":\"ME\",\"capital\":\"Podgorica\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Morocco" ],
+      "value" : "{\"name\":\"Morocco\",\"abbreviation\":\"MAR\",\"designation\":\"MA\",\"capital\":\"Rabat\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mozambique" ],
+      "value" : "{\"name\":\"Mozambique\",\"abbreviation\":\"MOZ\",\"designation\":\"MZ\",\"capital\":\"Maputo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Myanmar" ],
+      "value" : "{\"name\":\"Myanmar\",\"abbreviation\":\"MMR\",\"designation\":\"MM\",\"capital\":\"Naypyidaw\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Namibia" ],
+      "value" : "{\"name\":\"Namibia\",\"abbreviation\":\"NAM\",\"designation\":\"NA\",\"capital\":\"Windhoek\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nauru" ],
+      "value" : "{\"name\":\"Nauru\",\"abbreviation\":\"NRU\",\"designation\":\"NR\",\"capital\":\"Yaren\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nepal" ],
+      "value" : "{\"name\":\"Nepal\",\"abbreviation\":\"NPL\",\"designation\":\"NP\",\"capital\":\"Kathmandu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Netherlands" ],
+      "value" : "{\"name\":\"Netherlands\",\"abbreviation\":\"NLD\",\"designation\":\"NL\",\"capital\":\"Amsterdam\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "New Zealand" ],
+      "value" : "{\"name\":\"New Zealand\",\"abbreviation\":\"NZL\",\"designation\":\"NZ\",\"capital\":\"Wellington\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nicaragua" ],
+      "value" : "{\"name\":\"Nicaragua\",\"abbreviation\":\"NIC\",\"designation\":\"NI\",\"capital\":\"Managua\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Niger" ],
+      "value" : "{\"name\":\"Niger\",\"abbreviation\":\"NER\",\"designation\":\"NE\",\"capital\":\"Niamey\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nigeria" ],
+      "value" : "{\"name\":\"Nigeria\",\"abbreviation\":\"NGA\",\"designation\":\"NG\",\"capital\":\"Abuja\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "North Macedonia" ],
+      "value" : "{\"name\":\"North Macedonia\",\"abbreviation\":\"MKD\",\"designation\":\"MK\",\"capital\":\"Skopje\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Norway" ],
+      "value" : "{\"name\":\"Norway\",\"abbreviation\":\"NOR\",\"designation\":\"NO\",\"capital\":\"Oslo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Oman" ],
+      "value" : "{\"name\":\"Oman\",\"abbreviation\":\"OMN\",\"designation\":\"OM\",\"capital\":\"Muscat\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Pakistan" ],
+      "value" : "{\"name\":\"Pakistan\",\"abbreviation\":\"PAK\",\"designation\":\"PK\",\"capital\":\"Islamabad\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Palau" ],
+      "value" : "{\"name\":\"Palau\",\"abbreviation\":\"PLW\",\"designation\":\"PW\",\"capital\":\"Ngerulmud\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Panama" ],
+      "value" : "{\"name\":\"Panama\",\"abbreviation\":\"PAN\",\"designation\":\"PA\",\"capital\":\"Panama City\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Papua New Guinea" ],
+      "value" : "{\"name\":\"Papua New Guinea\",\"abbreviation\":\"PNG\",\"designation\":\"PG\",\"capital\":\"Port Moresby\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Paraguay" ],
+      "value" : "{\"name\":\"Paraguay\",\"abbreviation\":\"PRY\",\"designation\":\"PY\",\"capital\":\"AsunciÃ³n\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Peru" ],
+      "value" : "{\"name\":\"Peru\",\"abbreviation\":\"PER\",\"designation\":\"PE\",\"capital\":\"Lima\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Philippines" ],
+      "value" : "{\"name\":\"Philippines\",\"abbreviation\":\"PHL\",\"designation\":\"PH\",\"capital\":\"Manila\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Poland" ],
+      "value" : "{\"name\":\"Poland\",\"abbreviation\":\"POL\",\"designation\":\"PL\",\"capital\":\"Warsaw\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Portugal" ],
+      "value" : "{\"name\":\"Portugal\",\"abbreviation\":\"PRT\",\"designation\":\"PT\",\"capital\":\"Lisbon\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Qatar" ],
+      "value" : "{\"name\":\"Qatar\",\"abbreviation\":\"QAT\",\"designation\":\"QA\",\"capital\":\"Doha\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Romania" ],
+      "value" : "{\"name\":\"Romania\",\"abbreviation\":\"ROU\",\"designation\":\"RO\",\"capital\":\"Bucharest\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Russia" ],
+      "value" : "{\"name\":\"Russia\",\"abbreviation\":\"RUS\",\"designation\":\"RU\",\"capital\":\"Moscow\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Rwanda" ],
+      "value" : "{\"name\":\"Rwanda\",\"abbreviation\":\"RWA\",\"designation\":\"RW\",\"capital\":\"Kigali\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Saint Kitts and Nevis" ],
+      "value" : "{\"name\":\"Saint Kitts and Nevis\",\"abbreviation\":\"KNA\",\"designation\":\"KN\",\"capital\":\"Basseterre\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Saint Lucia" ],
+      "value" : "{\"name\":\"Saint Lucia\",\"abbreviation\":\"LCA\",\"designation\":\"LC\",\"capital\":\"Castries\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Saint Vincent and the Grenadines" ],
+      "value" : "{\"name\":\"Saint Vincent and the Grenadines\",\"abbreviation\":\"VCT\",\"designation\":\"VC\",\"capital\":\"Kingstown\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Samoa" ],
+      "value" : "{\"name\":\"Samoa\",\"abbreviation\":\"WSM\",\"designation\":\"WS\",\"capital\":\"Apia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "San Marino" ],
+      "value" : "{\"name\":\"San Marino\",\"abbreviation\":\"SMR\",\"designation\":\"SM\",\"capital\":\"San Marino\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sao Tome and Principe" ],
+      "value" : "{\"name\":\"Sao Tome and Principe\",\"abbreviation\":\"STP\",\"designation\":\"ST\",\"capital\":\"SÃ£o TomÃ©\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Saudi Arabia" ],
+      "value" : "{\"name\":\"Saudi Arabia\",\"abbreviation\":\"SAU\",\"designation\":\"SA\",\"capital\":\"Riyadh\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Senegal" ],
+      "value" : "{\"name\":\"Senegal\",\"abbreviation\":\"SEN\",\"designation\":\"SN\",\"capital\":\"Dakar\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Serbia" ],
+      "value" : "{\"name\":\"Serbia\",\"abbreviation\":\"SRB\",\"designation\":\"RS\",\"capital\":\"Belgrade\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Seychelles" ],
+      "value" : "{\"name\":\"Seychelles\",\"abbreviation\":\"SYC\",\"designation\":\"SC\",\"capital\":\"Victoria\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sierra Leone" ],
+      "value" : "{\"name\":\"Sierra Leone\",\"abbreviation\":\"SLE\",\"designation\":\"SL\",\"capital\":\"Freetown\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Singapore" ],
+      "value" : "{\"name\":\"Singapore\",\"abbreviation\":\"SGP\",\"designation\":\"SG\",\"capital\":\"Singapore\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Slovakia" ],
+      "value" : "{\"name\":\"Slovakia\",\"abbreviation\":\"SVK\",\"designation\":\"SK\",\"capital\":\"Bratislava\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Slovenia" ],
+      "value" : "{\"name\":\"Slovenia\",\"abbreviation\":\"SVN\",\"designation\":\"SI\",\"capital\":\"Ljubljana\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Solomon Islands" ],
+      "value" : "{\"name\":\"Solomon Islands\",\"abbreviation\":\"SLB\",\"designation\":\"SB\",\"capital\":\"Honiara\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Somalia" ],
+      "value" : "{\"name\":\"Somalia\",\"abbreviation\":\"SOM\",\"designation\":\"SO\",\"capital\":\"Mogadishu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "South Africa" ],
+      "value" : "{\"name\":\"South Africa\",\"abbreviation\":\"ZAF\",\"designation\":\"ZA\",\"capital\":\"Pretoria\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "South Sudan" ],
+      "value" : "{\"name\":\"South Sudan\",\"abbreviation\":\"SSD\",\"designation\":\"SS\",\"capital\":\"Juba\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Spain" ],
+      "value" : "{\"name\":\"Spain\",\"abbreviation\":\"ESP\",\"designation\":\"ES\",\"capital\":\"Madrid\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sri Lanka" ],
+      "value" : "{\"name\":\"Sri Lanka\",\"abbreviation\":\"LKA\",\"designation\":\"LK\",\"capital\":\"Colombo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sudan" ],
+      "value" : "{\"name\":\"Sudan\",\"abbreviation\":\"SDN\",\"designation\":\"SD\",\"capital\":\"Khartoum\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Suriname" ],
+      "value" : "{\"name\":\"Suriname\",\"abbreviation\":\"SUR\",\"designation\":\"SR\",\"capital\":\"Paramaribo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sweden" ],
+      "value" : "{\"name\":\"Sweden\",\"abbreviation\":\"SWE\",\"designation\":\"SE\",\"capital\":\"Stockholm\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Switzerland" ],
+      "value" : "{\"name\":\"Switzerland\",\"abbreviation\":\"CHE\",\"designation\":\"CH\",\"capital\":\"Bern\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Syrian Arab Republic" ],
+      "value" : "{\"name\":\"Syrian Arab Republic\",\"abbreviation\":\"SYR\",\"designation\":\"SY\",\"capital\":\"Damascus\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tajikistan" ],
+      "value" : "{\"name\":\"Tajikistan\",\"abbreviation\":\"TJK\",\"designation\":\"TJ\",\"capital\":\"Dushanbe\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tanzania" ],
+      "value" : "{\"name\":\"Tanzania, United Republic of\",\"abbreviation\":\"TZA\",\"designation\":\"TZ\",\"capital\":\"Dodoma\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Thailand" ],
+      "value" : "{\"name\":\"Thailand\",\"abbreviation\":\"THA\",\"designation\":\"TH\",\"capital\":\"Bangkok\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Timor-Leste" ],
+      "value" : "{\"name\":\"Timor-Leste\",\"abbreviation\":\"TLS\",\"designation\":\"TL\",\"capital\":\"Dili\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Togo" ],
+      "value" : "{\"name\":\"Togo\",\"abbreviation\":\"TGO\",\"designation\":\"TG\",\"capital\":\"LomÃ©\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tonga" ],
+      "value" : "{\"name\":\"Tonga\",\"abbreviation\":\"TON\",\"designation\":\"TO\",\"capital\":\"Nuku'alofa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Trinidad and Tobago" ],
+      "value" : "{\"name\":\"Trinidad and Tobago\",\"abbreviation\":\"TTO\",\"designation\":\"TT\",\"capital\":\"Port of Spain\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tunisia" ],
+      "value" : "{\"name\":\"Tunisia\",\"abbreviation\":\"TUN\",\"designation\":\"TN\",\"capital\":\"Tunis\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Turkey" ],
+      "value" : "{\"name\":\"Turkey\",\"abbreviation\":\"TUR\",\"designation\":\"TR\",\"capital\":\"Ankara\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Turkmenistan" ],
+      "value" : "{\"name\":\"Turkmenistan\",\"abbreviation\":\"TKM\",\"designation\":\"TM\",\"capital\":\"Ashgabat\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tuvalu" ],
+      "value" : "{\"name\":\"Tuvalu\",\"abbreviation\":\"TUV\",\"designation\":\"TV\",\"capital\":\"Funafuti\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Uganda" ],
+      "value" : "{\"name\":\"Uganda\",\"abbreviation\":\"UGA\",\"designation\":\"UG\",\"capital\":\"Kampala\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ukraine" ],
+      "value" : "{\"name\":\"Ukraine\",\"abbreviation\":\"UKR\",\"designation\":\"UA\",\"capital\":\"Kyiv\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "United Arab Emirates" ],
+      "value" : "{\"name\":\"United Arab Emirates\",\"abbreviation\":\"ARE\",\"designation\":\"AE\",\"capital\":\"Abu Dhabi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "United Kingdom" ],
+      "value" : "{\"name\":\"United Kingdom\",\"abbreviation\":\"GBR\",\"designation\":\"GB\",\"capital\":\"London\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "United States", "USA" ],
+      "value" : "{\"name\":\"United States\",\"abbreviation\":\"USA\",\"designation\":\"US\",\"capital\":\"Washington, D.C.\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Uruguay" ],
+      "value" : "{\"name\":\"Uruguay\",\"abbreviation\":\"URY\",\"designation\":\"UY\",\"capital\":\"Montevideo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Uzbekistan" ],
+      "value" : "{\"name\":\"Uzbekistan\",\"abbreviation\":\"UZB\",\"designation\":\"UZ\",\"capital\":\"Tashkent\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Vanuatu" ],
+      "value" : "{\"name\":\"Vanuatu\",\"abbreviation\":\"VUT\",\"designation\":\"VU\",\"capital\":\"Port Vila\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Venezuela" ],
+      "value" : "{\"name\":\"Venezuela\",\"abbreviation\":\"VEN\",\"designation\":\"VE\",\"capital\":\"Caracas\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Vietnam" ],
+      "value" : "{\"name\":\"Vietnam\",\"abbreviation\":\"VNM\",\"designation\":\"VN\",\"capital\":\"Hanoi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Yemen" ],
+      "value" : "{\"name\":\"Yemen\",\"abbreviation\":\"YEM\",\"designation\":\"YE\",\"capital\":\"Sana'a\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Zambia" ],
+      "value" : "{\"name\":\"Zambia\",\"abbreviation\":\"ZMB\",\"designation\":\"ZM\",\"capital\":\"Lusaka\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Zimbabwe" ],
+      "value" : "{\"name\":\"Zimbabwe\",\"abbreviation\":\"ZWE\",\"designation\":\"ZW\",\"capital\":\"Harare\"}"
     } ]
   }, {
     "entity" : {
-      "name" : "from",
+      "name" : "pattern_heater",
       "enabled" : true,
       "shared" : false,
       "type" : "annotation",
@@ -751,9 +2393,71 @@
       "client" : false,
       "hidden" : false
     },
-    "records" : [ ]
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "gas [(heater/heat/heating)]" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "pattern_internet",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "Mobile Internet", "Cellular internet", "Cellular network" ],
+      "value" : "{internet: [\n    \"MOBILE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Wi-Fi", "wifi", "Wireless internet", "Wi-Fi access", "Wi-Fi access", "Wireless network", "Wireless access" ],
+      "value" : "{internet: [\n    \"WIFI\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cable Internet", "Wired internet", "Cable broadband", "Cable network" ],
+      "value" : "{internet: [\n    \"CABLE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Internet access", "Online access", "Web access", "Internet service", "Network connection", "internet", "network" ],
+      "value" : "{internet: [\n    \"WIFI\",\n    \"CABLE\",\n    \"MOBILE\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "pattern_furniture",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "(fully/full/ful/fuly) (furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "value" : "{\n  \"furniture\": [\n    \"FULLY\"\n  ]\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "(partly/part/parted) (furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "value" : "{\n  \"furniture\": [\n    \"PARTLY\"\n  ]\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "(furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "value" : "{\n  \"furniture\": [\n    \"FULLY\"\n  ]\n}"
+    } ]
   } ],
-  "enabledSystemEntities" : [ "duckling.number", "duckling.amount-of-money", "duckling.interval" ],
+  "enabledSystemEntities" : [ "duckling.number", "duckling.interval", "duckling.amount-of-money" ],
   "spellerDictionary" : [ ],
   "systemEntities" : [ {
     "name" : "duckling.number",
@@ -763,10 +2467,6 @@
     "name" : "duckling.ordinal",
     "version" : "v2",
     "enabled" : false
-  }, {
-    "name" : "duckling.amount-of-money",
-    "version" : "v2",
-    "enabled" : true
   }, {
     "name" : "duckling.distance",
     "version" : "v2",
@@ -813,6 +2513,10 @@
     "enabled" : false
   }, {
     "name" : "duckling.interval",
+    "version" : "v2",
+    "enabled" : true
+  }, {
+    "name" : "duckling.amount-of-money",
     "version" : "v2",
     "enabled" : true
   } ],

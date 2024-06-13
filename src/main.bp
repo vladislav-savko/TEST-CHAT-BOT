@@ -19,5 +19,9 @@
     "id" : "/",
     "x" : 17,
     "y" : 12
+  }, {
+    "id" : "/SearchStart/ListingType/GetListingType",
+    "x" : 290,
+    "y" : 618
   } ]
 }

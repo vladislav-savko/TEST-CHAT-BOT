@@ -7,6 +7,10 @@ const ENDPOINT = {
   //https://anisad.com/api/cities/search?take=10&pattern=nicosia
   post__listing: "listing/search",
   //https://anisad.com/api/listing/search
+  get__listing_by_id: "listing",
+  //https://anisad.com/api/listing/6255
+  get__seller_by_id: "user/by-listing",
+  //https://anisad.com/api/user/by-listing/6255
 };
 
 export const instance = axios.create({
@@ -29,14 +33,25 @@ const getCitiesInfo = async (city) => {
 };
 
 const getListing = async (info) => {
-  const { data } = await instance.post(
-    ENDPOINT.post__listing,
-    info
-  );
+  const { data } = await instance.post(ENDPOINT.post__listing, info);
+  return data;
+};
+
+const getListingById = async (id) => {
+  const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
+  const { data } = await instance.get(URL);
+  return data;
+};
+
+const getSellerById = async (id) => {
+  const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
+  const { data } = await instance.get(URL);
   return data;
 };
 
 export default {
   getCitiesInfo,
   getListing,
+  getListingById,
+  getSellerById,
 };
