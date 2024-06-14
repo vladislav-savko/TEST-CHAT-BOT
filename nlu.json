@@ -10,7 +10,7 @@
     "classificationAlgorithm" : "sts",
     "timezone" : "Europe/Moscow",
     "extendedSettings" : {
-      "allowedPatterns" : [ ],
+      "allowedPatterns" : [ "location", "electricity", "country", "conditioner_colder", "alarm", "balcony", "bedroom", "furniture", "heater", "house_condition", "infrastructureAmenity", "infrastructureApartmentAmenity", "infrastructureCommerceAmenity", "infrastructureHouseAmenity", "infrastructurePlotAmenity", "internet", "kitchen", "listingType", "natural_gas", "parking", "progress_condition", "propertyTypes", "television", "water_heater", "pattern_water_heater", "repair", "price" ],
       "useShared" : false
     },
     "shared" : false,
@@ -152,186 +152,6 @@
       "name" : "location",
       "entity" : "location",
       "required" : true,
-      "prompts" : [ ]
-    } ],
-    "priority" : 0
-  }, {
-    "path" : "/allFeatures",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "parking"
-    }, {
-      "text" : "balcony"
-    }, {
-      "text" : "Show me apartments with $parseTree._balcony and $parseTree._furniture."
-    }, {
-      "text" : "I need a place that has $parseTree._internet and $parseTree._natural_gas."
-    }, {
-      "text" : "Find me a flat with $parseTree._kitchen, $parseTree._heater, and $parseTree._electricity."
-    }, {
-      "text" : "I’m looking for an apartment that includes $parseTree._television and $parseTree._conditioner_colder."
-    }, {
-      "text" : "Do you have any listings with $parseTree._parking and $parseTree._alarm?"
-    }, {
-      "text" : "I need a rental that offers $parseTree._balcony, $parseTree._heater, and $parseTree._internet."
-    }, {
-      "text" : "Can you show me places with $parseTree._kitchen and $parseTree._parking?"
-    }, {
-      "text" : "I am interested in an apartment with $parseTree._natural_gas and $parseTree._furniture."
-    }, {
-      "text" : "Find apartments that come with $parseTree._electricity and $parseTree._television."
-    }, {
-      "text" : "Show me properties that have $parseTree._conditioner_colder and $parseTree._alarm."
-    }, {
-      "text" : "Do you have any flats with $parseTree._balcony, $parseTree._heater, and $parseTree._electricity?"
-    }, {
-      "text" : "I want to see places with $parseTree._kitchen, $parseTree._television, and $parseTree._parking."
-    }, {
-      "text" : "I need an apartment that includes $parseTree._internet and $parseTree._conditioner_colder."
-    }, {
-      "text" : "Do you have any properties that include $parseTree._heater and $parseTree._kitchen?"
-    }, {
-      "text" : "I need to see listings with $parseTree._parking and $parseTree._conditioner_colder."
-    }, {
-      "text" : "Find me an apartment with $parseTree._electricity, $parseTree._natural_gas, and $parseTree._internet."
-    }, {
-      "text" : "I’m looking for a property with $parseTree._television and $parseTree._heater."
-    }, {
-      "text" : "Do you have any rentals that have $parseTree._balcony and $parseTree._kitchen?"
-    }, {
-      "text" : "Show me options with $parseTree._natural_gas, $parseTree._furniture, and $parseTree._alarm."
-    }, {
-      "text" : "electricity"
-    }, {
-      "text" : "alarm"
-    }, {
-      "text" : "alarm system"
-    }, {
-      "text" : "fully furnished"
-    }, {
-      "text" : "fully furnish"
-    }, {
-      "text" : "partly furnished"
-    }, {
-      "text" : "partly furnish"
-    }, {
-      "text" : "no furniture"
-    }, {
-      "text" : "without furniture"
-    }, {
-      "text" : "@furniture"
-    }, {
-      "text" : "@alarm"
-    }, {
-      "text" : "@balcony"
-    }, {
-      "text" : "@conditioner_colder"
-    }, {
-      "text" : "@electricity"
-    }, {
-      "text" : "@heater"
-    }, {
-      "text" : "@furniture"
-    }, {
-      "text" : "@kitchen"
-    }, {
-      "text" : "@television"
-    }, {
-      "text" : "@internet"
-    }, {
-      "text" : "@natural_gas"
-    }, {
-      "text" : "@parking"
-    }, {
-      "text" : "show me options with kitchen, parking, fully furniture, and with TV"
-    }, {
-      "text" : "@progress_condition"
-    }, {
-      "text" : "@water_heater"
-    }, {
-      "text" : "@house_condition"
-    }, {
-      "text" : "@repair"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "alarm",
-      "entity" : "alarm",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "balcony",
-      "entity" : "balcony",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "conditioner_colder",
-      "entity" : "conditioner_colder",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "electricity",
-      "entity" : "electricity",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "heater",
-      "entity" : "heater",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "furniture",
-      "entity" : "furniture",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "kitchen",
-      "entity" : "kitchen",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "television",
-      "entity" : "television",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "internet",
-      "entity" : "internet",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "natural_gas",
-      "entity" : "natural_gas",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "parking",
-      "entity" : "parking",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "progress_condition",
-      "entity" : "progress_condition",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "water_heater",
-      "entity" : "water_heater",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "house_condition",
-      "entity" : "house_condition",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "repair",
-      "entity" : "repair",
-      "required" : false,
       "prompts" : [ ]
     } ],
     "priority" : 0
@@ -507,398 +327,202 @@
     "enabled" : true,
     "shared" : false,
     "phrases" : [ {
-      "text" : "@alarm"
+      "text" : "I am looking for an apartment for rent."
     }, {
-      "text" : "@balcony"
+      "text" : "Can I find a villa for sale in this city?"
     }, {
-      "text" : "@bedroom"
+      "text" : "Is there any office space available for lease?"
     }, {
-      "text" : "@conditioner_colder"
+      "text" : "I want to buy a detached house."
     }, {
-      "text" : "@country"
+      "text" : "Are there any rental properties available?"
     }, {
-      "text" : "@electricity"
+      "text" : "Can I see listings for commercial plots for rent?"
     }, {
-      "text" : "@furniture"
+      "text" : "Show me the newest properties for sale."
     }, {
-      "text" : "@heater"
+      "text" : "Can I sort the listings by price, from lowest to highest?"
     }, {
-      "text" : "@house_condition"
+      "text" : "I want to see the oldest listings first."
     }, {
-      "text" : "@infrastructure_benefits"
+      "text" : "Find properties for sale between $100,000 and $500,000."
     }, {
-      "text" : "@internet"
+      "text" : "Are there any apartments for rent under $1,000 per month?"
     }, {
-      "text" : "@kitchen"
+      "text" : "Show me villas with a price range from $200,000 to $1,000,000."
     }, {
-      "text" : "@listingType"
+      "text" : "I am looking for a house with at least 3 bedrooms."
     }, {
-      "text" : "@location"
+      "text" : "Show me apartments with 2 to 4 bedrooms."
     }, {
-      "text" : "@natural_gas"
+      "text" : "Are there any properties with 1-2 bedrooms available?"
     }, {
-      "text" : "@parking"
+      "text" : "I want a property built after 2010."
     }, {
-      "text" : "@progress_condition"
+      "text" : "Show me apartments built in the last 5 years."
     }, {
-      "text" : "@propertyTypes"
+      "text" : "Can I find houses constructed between 2000 and 2020?"
     }, {
-      "text" : "@repair"
+      "text" : "Find newly built apartments."
     }, {
-      "text" : "@television"
+      "text" : "Are there any well-maintained houses for sale?"
     }, {
-      "text" : "@water_heater"
+      "text" : "Show me properties that need renovation."
     }, {
-      "text" : "@location @country @parking"
+      "text" : "I am looking for properties in New York."
     }, {
-      "text" : "@kitchen @internet @television"
+      "text" : "Are there any villas available in Los Angeles?"
     }, {
-      "text" : "@heater @balcony @natural_gas"
+      "text" : "Find commercial spaces in Chicago."
     }, {
-      "text" : "@alarm @electricity @furniture"
+      "text" : "I need a residential plot with an area between 500 and 1000 square meters."
     }, {
-      "text" : "@propertyTypes @location @progress_condition"
+      "text" : "Show me commercial plots with an area of at least 2000 square meters."
     }, {
-      "text" : "@listingType @repair @house_condition"
+      "text" : "Are there any plots available with an area smaller than 1500 square meters?"
     }, {
-      "text" : "@water_heater @bedroom @infrastructure_benefits"
+      "text" : "I am looking for properties with a density ratio between 0.5 and 1.0."
     }, {
-      "text" : "@conditioner_colder @internet @parking"
+      "text" : "Can you show me plots with a density greater than 0.8?"
     }, {
-      "text" : "@television @natural_gas @kitchen"
+      "text" : "Find residential plots with a density of less than 0.6."
     }, {
-      "text" : "@balcony @heater @alarm"
+      "text" : "I am interested in plots with a coverage ratio between 20% and 40%."
     }, {
-      "text" : "@location @propertyTypes @country"
+      "text" : "Show me properties with a maximum coverage ratio of 50%."
     }, {
-      "text" : "@parking @electricity @television"
+      "text" : "Can I find plots with a coverage ratio over 30%?"
     }, {
-      "text" : "@kitchen @furniture @conditioner_colder"
+      "text" : "I want to see houses with at least 2 floors."
     }, {
-      "text" : "@internet @bedroom @water_heater"
+      "text" : "Show me properties with no more than 3 residential floors."
     }, {
-      "text" : "@house_condition @repair @progress_condition"
+      "text" : "Are there any buildings with 1 to 2 floors available?"
     }, {
-      "text" : "@listingType @infrastructure_benefits @location"
+      "text" : "Find properties with a floor area of at least 100 square meters."
     }, {
-      "text" : "@natural_gas @television @internet"
+      "text" : "looking for apartments with a floor area between 50 and 200 square meters."
     }, {
-      "text" : "@heater @balcony @parking"
+      "text" : "Show me commercial spaces with a floor area less than 300 square meters."
     }, {
-      "text" : "@country @propertyTypes @alarm"
+      "text" : "Are there any properties with central water supply?"
     }, {
-      "text" : "@kitchen @water_heater @furniture"
+      "text" : "I am looking for houses with a well for water."
     }, {
-      "text" : "@conditioner_colder @internet @location"
+      "text" : "Show me plots with no water supply."
     }, {
-      "text" : "@propertyTypes @country @repair"
+      "text" : "Find properties with a sewage system."
     }, {
-      "text" : "@electricity @television @parking"
+      "text" : "Are there any plots without a sewage system?"
     }, {
-      "text" : "@heater @natural_gas @bedroom"
+      "text" : "Show me apartments with a built-in sewage system."
     }, {
-      "text" : "@location @infrastructure_benefits @balcony"
+      "text" : "Find properties that are ready to move in."
     }, {
-      "text" : "@kitchen @internet @house_condition"
+      "text" : "Show me houses that are under construction."
     }, {
-      "text" : "@alarm @listingType @water_heater"
+      "text" : "Are there any apartments ready for immediate move-in?"
     }, {
-      "text" : "@propertyTypes @conditioner_colder @country"
+      "text" : "Find properties that are newly renovated."
     }, {
-      "text" : "@furniture @parking @internet"
+      "text" : "Are there any houses with modern design renovations?"
     }, {
-      "text" : "@heater @television @repair"
+      "text" : "Show me apartments that do not need repair."
     }, {
-      "text" : "@location @natural_gas @balcony"
+      "text" : "I want to see properties with an alarm system."
     }, {
-      "text" : "@electricity @kitchen @progress_condition"
+      "text" : "Are there any houses without an alarm system?"
     }, {
-      "text" : "@conditioner_colder @parking @propertyTypes"
+      "text" : "Show me apartments with built-in alarm systems."
     }, {
-      "text" : "@country @internet @television"
+      "text" : "Find properties with parking available."
     }, {
-      "text" : "@listingType @heater @alarm"
+      "text" : "Are there any apartments without parking?"
     }, {
-      "text" : "@balcony @furniture @location"
+      "text" : "Show me houses with private parking."
     }, {
-      "text" : "@kitchen @repair @infrastructure_benefits"
+      "text" : "I am looking for properties with electricity."
     }, {
-      "text" : "@natural_gas @television @propertyTypes"
+      "text" : "Show me plots without electricity."
     }, {
-      "text" : "@parking @house_condition @internet"
+      "text" : "Are there any houses with electricity supply?"
     }, {
-      "text" : "@country @conditioner_colder @electricity"
+      "text" : "I want properties with WiFi."
     }, {
-      "text" : "@television @location @alarm"
+      "text" : "Show me houses with cable internet."
     }, {
-      "text" : "@propertyTypes @kitchen @water_heater"
+      "text" : "Are there any apartments without internet?"
     }, {
-      "text" : "@heater @internet @repair"
+      "text" : "I am looking for apartments near the subway."
     }, {
-      "text" : "@balcony @progress_condition @furniture"
+      "text" : "Show me houses with a beautiful view."
     }, {
-      "text" : "@listingType @parking @conditioner_colder"
+      "text" : "Are there any properties with a swimming pool?"
     }, {
-      "text" : "@country @natural_gas @television"
+      "text" : "I am looking for properties in London, UK."
     }, {
-      "text" : "@internet @electricity @heater"
+      "text" : "Show me houses available in Paris, France."
     }, {
-      "text" : "@location @kitchen @infrastructure_benefits"
+      "text" : "Are there any apartments for sale in Berlin, Germany?"
     }, {
-      "text" : "@propertyTypes @house_condition @balcony"
+      "text" : "Looking for a two-room flat in London with a view of the Thames and a basement."
     }, {
-      "text" : "@repair @furniture @television"
+      "text" : "Looking for a four-room flat in Moscow with a garden and a garage."
     }, {
-      "text" : "@parking @conditioner_colder @listingType"
+      "text" : "Looking for a studio in Barcelona with a swimming pool and a sea view."
     }, {
-      "text" : "@internet @natural_gas @location"
+      "text" : "Looking for a three-room flat in New York with a sauna and a separate entrance."
     }, {
-      "text" : "@television @heater @country"
+      "text" : "Looking for a one-room flat in Tokyo with a balcony and a view of the city."
     }, {
-      "text" : "@water_heater @kitchen @propertyTypes"
+      "text" : "Looking for a two-room flat in Rome with a parking space and a view of the Colosseum."
     }, {
-      "text" : "@balcony @progress_condition @electricity"
+      "text" : "Looking for a four-room flat in Sydney with a garden and a swimming pool."
     }, {
-      "text" : "Show me listings with $parseTree._parking and $parseTree._conditioner_colder."
+      "text" : "Looking for a studio in Amsterdam with a view of the canals and a separate entrance."
     }, {
-      "text" : "Are there any properties with $parseTree._heater and $parseTree._kitchen?"
+      "text" : "Looking for a three-room flat in Warsaw with a basement and a garage."
     }, {
-      "text" : "I need an apartment that includes $parseTree._internet and $parseTree._conditioner_colder."
+      "text" : "Looking for a one-room flat in Bangkok with a view of the river and a balcony."
     }, {
-      "text" : "Show me places with $parseTree._kitchen, $parseTree._television, and $parseTree._parking."
+      "text" : "Looking for a two-room flat in Dubai with a parking space and a view of the city."
     }, {
-      "text" : "Are there any flats with $parseTree._balcony, $parseTree._heater, and $parseTree._electricity?"
+      "text" : "Looking for a four-room flat in Prague with a garden and a swimming pool."
     }, {
-      "text" : "I want properties that have $parseTree._conditioner_colder and $parseTree._alarm."
+      "text" : "Looking for a studio in Vienna with a balcony and a view of the Danube."
     }, {
-      "text" : "Find apartments with $parseTree._electricity and $parseTree._television."
+      "text" : "I want to buy a three-room apartment in Geneva with a sauna and a view of the lake."
     }, {
-      "text" : "I’m interested in an apartment with $parseTree._natural_gas and $parseTree._furniture."
+      "text" : "I am looking for a one-room apartment in Stockholm with a basement and a separate entrance."
     }, {
-      "text" : "Can you show me places with $parseTree._kitchen and $parseTree._parking?"
+      "text" : "I need a two-room apartment in Copenhagen with a parking space and a view of the park."
     }, {
-      "text" : "I need a rental that offers $parseTree._balcony, $parseTree._heater, and $parseTree._internet."
+      "text" : "I am looking for a four-room apartment in Helsinki with a garden and a balcony."
     }, {
-      "text" : "Do you have any listings with $parseTree._parking and $parseTree._alarm?"
+      "text" : "I want to buy a studio in Madrid with a pool and a view of the city."
     }, {
-      "text" : "I’m looking for an apartment that includes $parseTree._television and $parseTree._conditioner_colder."
+      "text" : "i want rent apartment in Limassol Cyprus with WIFI, near mountains, swimming pool"
     }, {
-      "text" : "Find me a flat with $parseTree._kitchen, $parseTree._heater, and $parseTree._electricity."
+      "text" : "show me villa with swimming pool and internet"
     }, {
-      "text" : "I need a place that has $parseTree._internet and $parseTree._natural_gas."
+      "text" : "I am looking for properties without any repair."
     }, {
-      "text" : "Show me available apartments with $parseTree._conditioner_colder and $parseTree._parking."
+      "text" : "Show me houses that need no renovation."
     }, {
-      "text" : "Are there any homes with $parseTree._heater and $parseTree._television?"
+      "text" : "Are there any houses that have been newly renovated"
     }, {
-      "text" : "I need a rental that includes $parseTree._internet and $parseTree._electricity."
+      "text" : "I am looking for houses with a modern design renovation."
     }, {
-      "text" : "Do you have any properties with $parseTree._balcony, $parseTree._kitchen, and $parseTree._furniture?"
+      "text" : "Are there any properties that feature a modern renovation"
     }, {
-      "text" : "I’m looking for listings with $parseTree._conditioner_colder and $parseTree._natural_gas."
+      "text" : "show for buy in paphos"
     }, {
-      "text" : "Find apartments that offer $parseTree._alarm and $parseTree._heater."
-    }, {
-      "text" : "Show me flats with $parseTree._parking and $parseTree._internet."
-    }, {
-      "text" : "Are there any places with $parseTree._kitchen and $parseTree._electricity?"
-    }, {
-      "text" : "I’m interested in rentals that include $parseTree._furniture and $parseTree._natural_gas."
-    }, {
-      "text" : "Can you show me homes with $parseTree._television and $parseTree._heater?"
-    }, {
-      "text" : "I need an apartment with $parseTree._balcony and $parseTree._conditioner_colder."
-    }, {
-      "text" : "search for an apartment in @location"
-    }, {
-      "text" : "purchase a home in @location"
-    }, {
-      "text" : "lease land in @country"
-    }, {
-      "text" : "purchase land in @location"
-    }, {
-      "text" : "lease an apartment in @country"
-    }, {
-      "text" : "rent a home in @location"
-    }, {
-      "text" : "seeking to buy an apartment in @country"
-    }, {
-      "text" : "purchase a house in @country"
-    }, {
-      "text" : "looking to lease in @location"
-    }, {
-      "text" : "searching for rental apartments in @country"
-    }, {
-      "text" : "search for a home in @location"
-    }, {
-      "text" : "purchase a flat in @country"
-    }, {
-      "text" : "lease a house in @location"
-    }, {
-      "text" : "searching for rental options in @country"
-    }, {
-      "text" : "looking for rental flats in @location"
-    }, {
-      "text" : "find apartment in @location"
-    }, {
-      "text" : "buy a house in @location"
-    }, {
-      "text" : "rent plot in @country"
-    }, {
-      "text" : "buy plot in @location"
-    }, {
-      "text" : "rent apartment in @country"
-    }, {
-      "text" : "rent house in @location"
-    }, {
-      "text" : "i want to buy apartment in @country"
-    }, {
-      "text" : "buy house in @country"
-    }, {
-      "text" : "i want to rent in @location"
-    }, {
-      "text" : "looking for apartments in @country"
-    }, {
-      "text" : "find house in @location"
-    }, {
-      "text" : "buy an apartment in @country"
-    }, {
-      "text" : "rent a house in @location"
-    }, {
-      "text" : "looking to rent in @country"
-    }, {
-      "text" : "searching for apartments in @location"
-    }, {
-      "text" : "search for a house"
-    }, {
-      "text" : "purchase an apartment"
-    }, {
-      "text" : "lease a house"
-    }, {
-      "text" : "purchase land"
-    }, {
-      "text" : "lease a condo"
-    }, {
-      "text" : "purchase a flat"
-    }, {
-      "text" : "rent a home"
-    }, {
-      "text" : "looking for a flat"
-    }, {
-      "text" : "search for a home to buy"
-    }, {
-      "text" : "buy a house"
-    }, {
-      "text" : "find homes for rent"
-    }, {
-      "text" : "lease a flat"
-    }, {
-      "text" : "purchase a townhouse"
-    }, {
-      "text" : "lease a cottage"
-    }, {
-      "text" : "buy real estate"
-    }, {
-      "text" : "look for apartments"
-    }, {
-      "text" : "seek to buy land"
-    }, {
-      "text" : "looking for rentals"
-    }, {
-      "text" : "search for a rental place"
-    }, {
-      "text" : "purchase an estate"
-    }, {
-      "text" : "lease property"
-    }, {
-      "text" : "find rental houses"
-    }, {
-      "text" : "buy an apartment"
-    }, {
-      "text" : "lease a studio"
-    }, {
-      "text" : "purchase a condo"
-    }, {
-      "text" : "looking for houses to rent"
-    }, {
-      "text" : "search for flats to lease"
-    }, {
-      "text" : "desire to buy a house"
-    }, {
-      "text" : "lease a duplex"
-    }, {
-      "text" : "purchase a bungalow"
-    }, {
-      "text" : "find rental properties"
-    }, {
-      "text" : "lease a villa"
-    }, {
-      "text" : "buy a rental home"
-    }, {
-      "text" : "searching for homes to buy"
-    }, {
-      "text" : "lease a loft"
-    }, {
-      "text" : "purchase a land plot"
-    }, {
-      "text" : "find apartments for rent"
-    }, {
-      "text" : "looking to buy a condo"
-    }, {
-      "text" : "lease an apartment"
-    }, {
-      "text" : "buy a home"
-    }, {
-      "text" : "looking for rental homes"
-    }, {
-      "text" : "search for a flat to buy"
-    }, {
-      "text" : "lease a property"
-    }, {
-      "text" : "purchase a place"
-    }, {
-      "text" : "desire to lease a house"
-    }, {
-      "text" : "search for land to buy"
-    }, {
-      "text" : "lease a home"
-    }, {
-      "text" : "buy real estate property"
-    }, {
-      "text" : "searching for apartments to rent"
-    }, {
-      "text" : "purchase property"
-    }, {
-      "text" : "Buying a property with @bedroom(s)"
-    }, {
-      "text" : "Seeking apartments for rent with @bedroom(s)"
-    }, {
-      "text" : "Interested in purchasing real estate with @bedroom(s)"
-    }, {
-      "text" : "Renting a home with @bedroom(s)"
-    }, {
-      "text" : "Exploring options to buy land with @bedroom(s)"
-    }, {
-      "text" : "Looking to lease a house with @bedroom"
-    }, {
-      "text" : "Interested in buying a place with @bedroom"
-    }, {
-      "text" : "Leasing out a property with @bedroom"
-    }, {
-      "text" : "Searching for a flat to purchase with @bedroom"
-    }, {
-      "text" : "Seeking rental homes with @bedroom"
-    }, {
-      "text" : "Purchasing a home with @bedroom"
-    }, {
-      "text" : "Renting an apartment with @bedroom"
-    }, {
-      "text" : "i want rent house @internet"
+      "text" : "show for rent"
     } ],
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ ],
+    "patterns" : [ "{[@location] [@country]}" ],
     "slots" : [ {
       "name" : "alarm",
       "entity" : "alarm",
@@ -945,16 +569,11 @@
       "required" : false,
       "prompts" : [ ]
     }, {
-      "name" : "infrastructure_benefits",
-      "entity" : "infrastructure_benefits",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
       "name" : "internet",
       "entity" : "internet",
       "required" : false,
       "prompts" : [ ],
-      "array" : true
+      "array" : false
     }, {
       "name" : "kitchen",
       "entity" : "kitchen",
@@ -991,11 +610,6 @@
       "required" : false,
       "prompts" : [ ]
     }, {
-      "name" : "repair",
-      "entity" : "repair",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
       "name" : "television",
       "entity" : "television",
       "required" : false,
@@ -1003,6 +617,17 @@
     }, {
       "name" : "water_heater",
       "entity" : "water_heater",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "infrastructure_amenity",
+      "entity" : "infrastructure_amenity",
+      "required" : false,
+      "prompts" : [ ],
+      "array" : true
+    }, {
+      "name" : "repair",
+      "entity" : "repair",
       "required" : false,
       "prompts" : [ ]
     } ],
@@ -1018,7 +643,7 @@
       "noSpelling" : true,
       "noMorph" : false,
       "phoneticSearch" : false,
-      "fuzzySearch" : true,
+      "fuzzySearch" : false,
       "client" : false,
       "hidden" : false
     },
@@ -1043,12 +668,12 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> @pattern_furniture" ],
+      "rule" : [ "[(with/include/have/having)]  @pattern_furniture" ],
       "value" : ""
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> @pattern_furniture" ],
-      "value" : ""
+      "type" : "synonyms",
+      "rule" : [ "without furniture", "no furniture", "exclude furniture", "without furnitured", "no furnitured", "exclude furnitured", "without Furnishings", "no Furnishings", "exclude Furnishings", "without Household items", "no Household items", "exclude Household items", "without Housewares", "no Housewares", "exclude Housewares", "no full furniture", "without full furniture" ],
+      "value" : "{\n  \"furniture\": []\n}"
     } ]
   }, {
     "entity" : {
@@ -1066,36 +691,20 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "own terrace", "terrace" ],
-      "value" : "{\n  \"repair\" : [\"OWN_TERRACE\"]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "big kitchen", "large kitchen" ],
-      "value" : "{\n  \"repair\": [\n    \"BIG_KITCHEN\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "big balcony", "large balcony" ],
-      "value" : "{\n  \"repair\": [\n    \"BIG_BALCONY\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "without repair", "no repair", "no features", "without features" ],
-      "value" : "{\n  \"repair\": []\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "bbq" ],
-      "value" : "{\n  \"repair\": [\n    \"BBQ\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "fireplace" ],
-      "value" : "{\n  \"repair\" : [\"FIREPLACE\"]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "panoramic windows", "panoramic", "panorama" ],
-      "value" : "{\n  \"repair\": [\n    \"PANORAMIC_WINDOWS\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "modern design", "modern" ],
+      "rule" : [ "modern design", "modern", "contemporary finishes", "modern style remodel", "designer renovation" ],
       "value" : "{\n  \"repair\": [\n    \"MODERN_DESIGN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "new renovation", "recently renovated", "freshly remodeled", "turnkey condition" ],
+      "value" : "{\n  \"repair\": [\n    \"NEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "without repair", "no renovations", "no improvements", "no refurbishment", "as-is condition", "without renovation", "without renovation" ],
+      "value" : "{\n  \"repair\": [\n    \"NO\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with repairs", "with repair", "with renovation" ],
+      "value" : "{\n  \"repair\": [\n    \"MODERN_DESIGN\", \"NEW\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -1113,7 +722,7 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "without verandah", "no verandah", "exclude verandah", "without veranda", "no veranda", "exclude veranda" ],
+      "rule" : [ "without verandah", "no verandah", "exclude verandah", "without veranda", "no veranda", "exclude veranda", "without balcony", "no balcony", "exclude balcony" ],
       "value" : "{\n  \"balcony\": []\n}"
     }, {
       "type" : "pattern",
@@ -1139,8 +748,8 @@
       "rule" : [ "[(with/include/have/having)] $regexp<.*?> parking" ],
       "value" : "{\n  \"parking\": [true]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> parking" ],
+      "type" : "synonyms",
+      "rule" : [ "without parking", "no parking", "exclude parking", "without a parking", "without the parking", "no a parking", "no the parking", "exclude a parking", "exclude the parking" ],
       "value" : "{\n  \"parking\": []\n}"
     } ]
   }, {
@@ -1162,25 +771,10 @@
       "rule" : [ "[(with/include/have/having)] $regexp<.*?> (conditioner/air system/ air conditioning/air/climate control/AC/Cooling system/Cooler/Air cooling)" ],
       "value" : "{\n  \"airConditioning\": [\n    \"EVERYWHERE\",\n    \"ONLY_BEDROOMS\"\n  ]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (conditioner/air system/ air conditioning/air/climate control/AC/Cooling system/Cooler/Air cooling)" ],
+      "type" : "synonyms",
+      "rule" : [ "without conditioner", "no conditioner", "exclude conditioner", "without air system", "no air system", "exclude air system", "without air conditioning", "no air conditioning", "without  climate control", "no climate control", "exclude climate control", "without AC", "no AC", "exclude AC", "without Cooling system", "no Cooling system", "exclude Cooling system", "without Cooler", "no Cooler", "exclude Cooler", "without Air cooling", "no Air cooling", "exclude Air cooling", "without air", "no air", "exclude air", "exclude air conditioning" ],
       "value" : "{\n  \"airConditioning\": [ ]\n}"
     } ]
-  }, {
-    "entity" : {
-      "name" : "infrastructure_benefits",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ ]
   }, {
     "entity" : {
       "name" : "listingType",
@@ -1232,11 +826,11 @@
       "value" : "{\"name\":\"Larnaca\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Paphos", "Pafos" ],
+      "rule" : [ "Paphos", "Pafos", "pahos" ],
       "value" : "{\"name\":\"Paphos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Ayia Napa", "aya napa", "ayanapa", "ayianapa" ],
+      "rule" : [ "Ayia Napa", "aya napa", "ayanapa", "ayianapa", "Ayia Napa" ],
       "value" : "{\"name\":\"Ayia Napa\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1268,7 +862,7 @@
       "value" : "{\"name\":\"Dali\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Avgorou" ],
+      "rule" : [ "Avgorou", "Avgorou" ],
       "value" : "{\"name\":\"Avgorou\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1292,7 +886,7 @@
       "value" : "{\"name\":\"Pyrga\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Arsos" ],
+      "rule" : [ "Arsos", "Arsos" ],
       "value" : "{\"name\":\"Arsos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1319,11 +913,11 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> kitchen" ],
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (kitchen/Cooking area)" ],
       "value" : "{\n  \"kitchen\": [true]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> kitchen" ],
+      "type" : "synonyms",
+      "rule" : [ "without  kitchen", "no kitchen", "exclude kitchen", "without Cooking area", "no Cooking area", "exclude Cooking area" ],
       "value" : "{\n  \"kitchen\": []\n}"
     } ]
   }, {
@@ -1342,11 +936,11 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (electricity/Electric power/Power/Electrical energy/Electrical current)" ],
+      "rule" : [ "[(with/include/have/having/need connection)] $regexp<.*?> (electricity/Electric power/Power/Electrical energy/Electrical current)" ],
       "value" : "{\n  \"electricity\": [\n    true\n  ]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (electricity/Electric power/Power/Electrical energy/Electrical current)" ],
+      "type" : "synonyms",
+      "rule" : [ "without electricity", "no electricity", "exclude electricity", "without Electric power", "no Electric power", "exclude Electric power", "without power", "no power", "exclude power", "without Electrical energy", "no Electrical energy", "exclude Electrical energy", "without Electrical current", "no Electrical current", "exclude Electrical current" ],
       "value" : "{\n  \"electricity\": []\n}"
     } ]
   }, {
@@ -1364,12 +958,12 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> gas" ],
+      "type" : "synonyms",
+      "rule" : [ "without gas", "no gas", "exclude gas", "without natural gas", "no natural gas", "exclude natural gas" ],
       "value" : "{\n  \"gas\": []\n}"
     }, {
       "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> gas" ],
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> (natural gas/gas)" ],
       "value" : "{\n  \"gas\": [true]\n}"
     } ]
   }, {
@@ -1387,29 +981,13 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> heater" ],
-      "value" : "{\n  \"heater\": [\n    \"CENTRAL\", \"GAS\" , \"ELECTRIC\", \"LIQUID_FUEL\"\n  ]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> electric [(heater/heat/heating)]" ],
-      "value" : "{\n  \"heater\" : [ \"ELECTRIC\"]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> liquid fuel" ],
-      "value" : "{\n  \"heater\": [\n    \"LIQUID_FUEL \"\n  ]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> heater" ],
+      "type" : "synonyms",
+      "rule" : [ "without heater", "no heater", "exclude heater", "without heat", "no heat", "exclude heat", "without heating", "no heating", "exclude heating" ],
       "value" : "{\n  \"heater\": []\n}"
     }, {
       "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> central [(heater/heat/heating)]" ],
-      "value" : "{\n  \"heater\": [\n    \"CENTRAL\"\n  ]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "[(with/include/have/having)] $regexp<.*?> gas [(heater/heat/heating)]" ],
-      "value" : "{\n  \"heater\" : [ \"GAS\"]\n}"
+      "rule" : [ "[(with/include/have/having)] @pattern_heater" ],
+      "value" : ""
     } ]
   }, {
     "entity" : {
@@ -1427,24 +1005,12 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "central water heater", "central water", "central water heat" ],
-      "value" : "{\n  \"water\" : [\"CENTRAL\"]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "boiler" ],
-      "value" : "{\n  \"water\": [\n    \"BOILER\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "solar system water heater", "solar system", "solar system heater" ],
-      "value" : "{\n  \"water\": [\n    \"SOLAR_SYSTEM\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "without water heater", "no water heater", "without water heating", "no water heating" ],
+      "rule" : [ "without water heater", "no water heater", "without water heating", "no water heating", "without water heat", "no water heat", "exclude water heat", "exclude water heating", "exclude water heater" ],
       "value" : "{\n  \"water\": []\n}"
     }, {
-      "type" : "synonyms",
-      "rule" : [ "photovoltaic system" ],
-      "value" : "{\n  \"water\": [\n    \"PHOTOVOLTAIC_SYSTEM\"\n  ]\n}"
+      "type" : "pattern",
+      "rule" : [ "[(with/include/have/having)] $regexp<.*?> @pattern_water_heater" ],
+      "value" : ""
     } ]
   }, {
     "entity" : {
@@ -1465,8 +1031,8 @@
       "rule" : [ "[(with/include/have/having)] $regexp<.*?> (tv/television/tele vision)" ],
       "value" : "{\n  \"TV\": [true]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(without/no/exclude/having) $regexp<.*?> (tv/television/tele vision)" ],
+      "type" : "synonyms",
+      "rule" : [ "without tv", "no tv", "exclude tv", "without television", "no television", "exclude television", "without tele vision", "no tele vision", "exclude tele vision" ],
       "value" : "{\n  \"TV\": []\n}"
     } ]
   }, {
@@ -1494,15 +1060,43 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "commerce" ],
-      "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n\"word\" : \"Commerce\"\n}"
+      "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "apartment" ],
+      "rule" : [ "apartment", "aparment", "apartament" ],
       "value" : "{\n  \"estate\": [\n    \"APARTMENT\"\n  ],\n\"word\" : \"Apartment\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "villa", "Villa", "vila", "Vila" ],
       "value" : "{\n    \"estate': [\"VILLA\"],\n    \"word\" : \"Villa\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "retail space", "retail" ],
+      "value" : "{\n  \"estate\": [\n    \"RETAIL_SPACE\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "car parking" ],
+      "value" : "{\n  \"estate\": [\n    \"CAR_PARKING\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "manifacturing", "manufacturing", "manifactaring", "manufacture", "manufactur" ],
+      "value" : "{\n  \"estate\": [\n    \"MANUFACTURING\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "office" ],
+      "value" : "{\n  \"estate\": [\n    \"OFFICE\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "hotel" ],
+      "value" : "{\n  \"estate\": [\n    \"HOTEL\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "warehouse" ],
+      "value" : "{\n  \"estate\": [\n    \"WAREHOUSE\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "public catering facility", "public catering", "catering", "catering facility", "catering building" ],
+      "value" : "{\n  \"estate\": [\n    \"PUBLIC_CATERING_FACILITY\"\n  ],\n  \"word\": \"Commerce\"\n}"
     } ]
   }, {
     "entity" : {
@@ -1514,7 +1108,7 @@
       "noSpelling" : true,
       "noMorph" : false,
       "phoneticSearch" : false,
-      "fuzzySearch" : true,
+      "fuzzySearch" : false,
       "client" : false,
       "hidden" : false
     },
@@ -1593,7 +1187,7 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "without internet", "Without internet access", "Without internet connection", "Without internet connection", "Without web access", "No internet access", "Exclude internet access", "Exclude internet ", "without wifi", "Exclude wi-fi", "without wi-fi" ],
+      "rule" : [ "without internet", "Without internet access", "Without internet connection", "Without internet connection", "Without web access", "No internet access", "Exclude internet access", "Exclude internet ", "without wifi", "Exclude wi-fi", "without wi-fi", "no wifi", "no internet", "no wi-fi", "no web access", "no internet connection" ],
       "value" : "{internet: [\n    \"NO\"\n  ]\n}"
     }, {
       "type" : "pattern",
@@ -2394,9 +1988,25 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "gas [(heater/heat/heating)]" ],
-      "value" : ""
+      "type" : "synonyms",
+      "rule" : [ "gas heater", "gas heating", "gas heat" ],
+      "value" : "{\n  \"heater\": [\n    \"GAS\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "electric heat", "electric heater", "electric heating" ],
+      "value" : "{\n  \"heater\": [\n    \"ELECTRIC\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "liquid fuel", "fuel" ],
+      "value" : "{\n  \"heater\": [ \"LIQUID_FUEL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "heater ", "heat", "heating" ],
+      "value" : "{\n  \"heater\": [\n    \"CENTRAL\",\n    \"GAS\",\n    \"ELECTRIC\",\n    \"LIQUID_FUEL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "central heater", "central heat", "central heating" ],
+      "value" : "{\n  \"heater\": [\n    \"CENTRAL\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -2414,7 +2024,7 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "Mobile Internet", "Cellular internet", "Cellular network" ],
+      "rule" : [ "Mobile Internet", "Cellular internet", "Cellular network", "mobile network" ],
       "value" : "{internet: [\n    \"MOBILE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2444,17 +2054,401 @@
       "hidden" : false
     },
     "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "(fully/full/ful/fuly) (furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "type" : "synonyms",
+      "rule" : [ "fully furniture", "full furniture", "fully furnitured", "full furnitured", "fully Furnishings", "full Furnishings", " fully Household items", "full  Household items", "fully Housewares", "full Housewares", "fully", "full" ],
       "value" : "{\n  \"furniture\": [\n    \"FULLY\"\n  ]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(partly/part/parted) (furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "type" : "synonyms",
+      "rule" : [ "partly furniture", "part furniture", "partly furnitured", "part furnitured", "partly Furnishings", "part Furnishings", "partly Household items", "part Household items", "partly Housewares", "part Housewares", "parted furniture", "parted furnitured", "parted Furnishings", "parted Household items", "parted Housewares", "part", "parted", "partly" ],
       "value" : "{\n  \"furniture\": [\n    \"PARTLY\"\n  ]\n}"
     }, {
-      "type" : "pattern",
-      "rule" : [ "(furniture/furnitured/furnitur/funitur/Furnishings/Household items/Housewares)" ],
+      "type" : "synonyms",
+      "rule" : [ "furniture", "furnitured", "Furnishings", "Household items", "Housewares" ],
       "value" : "{\n  \"furniture\": [\n    \"FULLY\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "pattern_water_heater",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "photovoltaic system", "photovoltaic system heater", "photovoltaic system heating", "photovoltaic system heat" ],
+      "value" : "{\n  \"water\": [\n    \"PHOTOVOLTAIC_SYSTEM\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "central water heater", "central water heat", "central water" ],
+      "value" : "{\n  \"water\": [\n    \"CENTRAL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "boiler water heater", "boil water heater", "boiler water", "boiler", "boil water", "boiler heater", "boil heater", "boil" ],
+      "value" : "{\n  \"water\": [\n    \"BOILER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "solar system water heater", "solar system", "solar system water heat", "solar heater", "solar system water", "solar water", "solar ", "solar system heater" ],
+      "value" : "{\n  \"water\": [\n    \"SOLAR_SYSTEM\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "water system", "water", "water heating system", "water heat system", "water heat", "water heating", "water heater" ],
+      "value" : "{\n  \"water\": [\n    \"BOILER\",\n    \"CENTRAL\",\n    \"PHOTOVOLTAIC_SYSTEM\",\n    \"SOLAR_SYSTEM\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructureApartmentAmenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "sea view", "view on sea", "view on the sea", "view on a sea", "view sea" ],
+      "value" : "{\n  \"infra\": [\n    \"SEA_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "swimming pool", "swim pool", "pool", "swimming" ],
+      "value" : "{\n  \"infra\": [\n    \"SWIMMING_POOL\"\n  ]\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "@infrastructureHouseAmenity" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the airport", "close to airport", "close airport", "near airport", "near an airport", "near a airport", "close an airport", "close the airport", "near to airport" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "includes storage", "storage" ],
+      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with sauna", "sauna" ],
+      "value" : "{\n  \"infra\": [\n    \"SAUNA\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the slope", "close to slope", "near slope", "near a slope", "slope" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SLOPE\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "price",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "@duckling.interval" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructureAmenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "near the kindergraden", "near the kindergarten", "near the kindergarden", "near kindergarten", "near kindergarden", "near kindergraden", "close to kindergarten", "near to kindergarten", "close kindergarten" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the park", "near park", "close to park", "close park", "park" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "security" ],
+      "value" : "{\n  \"infra\": [\n    \"SECURITY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "in the center", "center", "in center" ],
+      "value" : "{\n  \"infra\": [\n    \"IN_THE_CENTER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "beatiful view", "beautiful view ", "good view", "view" ],
+      "value" : "{\n  \"infra\": [\n    \"BEAUTIFUL_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "calm district", "calm" ],
+      "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the school", "near school", "close to school", "close school", "school" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "prestige district", "prestige", "prestigious district", "prestigious" ],
+      "value" : "{\n  \"infra\": [\n    \"PRESTIGIOUS_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the sea", "near sea", "close to sea", "sea" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA \"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructurePlotAmenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "@infrastructureAmenity" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructureCommerceAmenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "separate entrance", "entrance" ],
+      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "includes storage", "storage" ],
+      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE \"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with plot" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "@infrastructureAmenity" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with basement", "basement" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructureHouseAmenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "@infrastructureAmenity" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "parking place" ],
+      "value" : "{\n  \"infra\": [\n    \"PARKING_PLACE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the subway", "close to subway", "near subway", "close subway", "close the subway", "near a subway", "not far from subway", "not too far from subway", "not far to subway", "not too far to subway" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the river", "river", "close to river" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the lake", "close to lake", "lake" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with garden", "garden" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_GARDEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with garage", "garage" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_GARAGE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "separate entrance", "entrance" ],
+      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with basement", "basement" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with plot", "include plot", "have plot" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "infrastructure_amenity",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "calm district", "calm" ],
+      "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the park", "near park", "close to park", "close park", "park" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the sea", "near sea", "close to sea", "sea", "sea view", "view on sea", "view on the sea", "view on a sea", "view sea" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA\",\n    \"SEA_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "security", "safe area" ],
+      "value" : "{\n  \"infra\": [\n    \"SECURITY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the river", "river", "close to river" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with plot", "include plot", "have plot" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "includes storage", "storage" ],
+      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE \"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the slope", "close to slope", "near slope", "near a slope", "slope" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SLOPE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with sauna", "sauna" ],
+      "value" : "{\n  \"infra\": [\n    \"SAUNA\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "beatiful view", "beautiful view ", "good view", "good view" ],
+      "value" : "{\n  \"infra\": [\n    \"BEAUTIFUL_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "in the center", "center", "in center" ],
+      "value" : "{\n  \"infra\": [\n    \"IN_THE_CENTER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the school", "near school", "close to school", "close school", "school" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "prestige district", "prestige", "prestigious district", "prestigious" ],
+      "value" : "{\n  \"infra\": [\n    \"PRESTIGIOUS_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the subway", "close to subway", "near subway", "close subway", "close the subway", "near a subway", "not far from subway", "not too far from subway", "not far to subway" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "separate entrance", "entrance" ],
+      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with basement", "basement" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with garage", "garage" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_GARAGE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with garden", "garden" ],
+      "value" : "{\n  \"infra\": [\n    \"WITH_GARDEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "separate entrance", "entrance" ],
+      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the airport", "close to airport", "close airport", "near airport", "near an airport", "near a airport", "close an airport", "close the airport", "near to airport" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "swimming pool", "swim pool", "pool", "swimming" ],
+      "value" : "{\n  \"infra\": [\n    \"SWIMMING_POOL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the kindergraden", "near the kindergarten", "near the kindergarden", "near kindergarten", "near kindergarden", "close to kindergarten", "close to kindergarten", "near to kindergarten", "close kindergarten" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the lake", "close to lake", "lake" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "parking place", "parking space" ],
+      "value" : "{\n  \"infra\": [\n    \"PARKING_PLACE\"\n  ]\n}"
     } ]
   } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.interval", "duckling.amount-of-money" ],

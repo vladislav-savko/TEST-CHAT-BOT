@@ -5,8 +5,8 @@ function session() {
   $session.data = {
     skip: 0,
     take: 3,
-    propertyTypes: ["APARTMENT"],
-    listingType: "RENT",
+    propertyTypes: [""],
+    listingType: "",
     sort: "NEWEST",
     rooms: [],
     priceFrom: null,
@@ -47,7 +47,7 @@ function session() {
     infrastructurePlotAmenity: [],
     infrastructureCommerceAmenity: [],
     withoutSold: true,
-    cityId: 1,
+    cityId: null,
   };
 
   $session.info = {
@@ -55,6 +55,8 @@ function session() {
     country: null,
     property: null,
   };
+  
+  $session.params = {};
 
   $session.version = VERSION;
 }
@@ -66,7 +68,6 @@ const initSession = () => {
 };
 
 const getCityInfo = async (city, country) => {
-  $session.data.skip = 0;
   try {
     const resC = await api.getCitiesInfo(city);
     if (resC) {
@@ -75,7 +76,7 @@ const getCityInfo = async (city, country) => {
       );
       if (filteredCities.length > 0) {
         $session.data.cityId = filteredCities[0].cityId;
-        return true;
+        return filteredCities[0];
       } else {
         $reactions.answer(
           `Sorry, no cities found in ${country}. Please try again.`
@@ -247,6 +248,20 @@ function ucFirst(str) {
   return str[0] + str.slice(1);
 }
 
+function arrayСomparison(arr1, arr2) {
+    return arr1.length === arr2.length && arr1.every(value => arr2.includes(value));
+}
+
+function copyObjectWithoutFields(source, fieldsToExclude) {
+    const result = {};
+    for (let key in source) {
+        if (!fieldsToExclude.includes(key)) {
+            result[key] = source[key];
+        }
+    }
+    return result;
+}
+
 export default {
   session,
   initSession,
@@ -257,4 +272,6 @@ export default {
   containsBedroomAndOthers,
   bedroomAndOthers,
   getListingById,
+  arrayСomparison,
+  copyObjectWithoutFields
 };
