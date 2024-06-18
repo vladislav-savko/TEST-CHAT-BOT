@@ -131,11 +131,15 @@ const processParams = async () => {
     let newParams = [];
     
     if ($session.params.location) {
-        $reactions.answer(JSON.stringify($session.info));
-        $reactions.answer(JSON.stringify($session.params));
+        //$reactions.answer("LOAP")
+        //$reactions.answer(JSON.stringify($session.info));
+        //$reactions.answer(JSON.stringify($session.params));
         if (!$session.info.location || ($session.info.location.cityNameEn !== $session.params.location.name)) {
             const location = await utl.getCityInfo($session.params.location.name, $session.params.location.country);
-            $session.info.location = location; 
+            //if (location.cityId == location.districtId) {
+           ///     delete location.cityId
+            //}
+            $session.info.location = location;
             newParams.push('Location');
         }
     } else emptyParams.push('Location'); 
@@ -177,7 +181,6 @@ const processParams = async () => {
                 $session.data.infrastructureCommerceAmenity = $session.params.infAmenity;
                 break;
         }
-        
     }
     
     return { emptyParams, newParams };
@@ -195,10 +198,10 @@ const emptyParamsResult = async (params) => {
 }
 
 const updSessionInfo = async (info, params) => {
-    $reactions.answer('UPRSESSIONINFO');
-    $reactions.answer(JSON.stringify(params));
+    //$reactions.answer('UPRSESSIONINFO');
+    //$reactions.answer(JSON.stringify(params));
     $session.data = {...info, ...params};
-    $reactions.answer(JSON.stringify($session.data));
+   // $reactions.answer(JSON.stringify($session.data));
 }
 
 export default {

@@ -31,9 +31,9 @@ theme: /
     state: Search
         intent!: /searchAll
         scriptEs6:
-            $reactions.answer(JSON.stringify($parseTree));
+            //$reactions.answer(JSON.stringify($parseTree));
             const params = await pr.getAllParamsFromTree($parseTree);
-            $reactions.answer(JSON.stringify(params));
+           // $reactions.answer(JSON.stringify(params));
             $session.params = {...$session.params, ...params};
             
             $reactions.transition("/Search/SwitchParams");
@@ -48,6 +48,28 @@ theme: /
                 
                 await pr.updSessionInfo(data, params);
                 await pr.emptyParamsResult(emptyParams);
+    state: Price
+        intent!: /price_money
+        scriptEs6:
+            if (typeof $parseTree.value === 'number') {
+                $session.data.priceTo = $parseTree.value; 
+                delete $session.data.priceFrom;
+            } else {
+                if ($parseTree.value.from) {
+                    $session.data.priceFrom = $parseTree.value.from.value;
+                    delete $session.data.priceTo;
+                }
+                if ($parseTree.value.to) {
+                   $session.data.priceTo = $parseTree.value.to.value;
+                }
+            }
+        go!: /Search
+        
+    state: Area
+        intent!: /area_field
+        scriptEs6:
+            
+        go!: /Search
 
     # state: SearchStart
     #     intent!: /buy_or_rent
@@ -159,7 +181,7 @@ theme: /
         scriptEs6:
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
-                $reactions.answer(JSON.stringify($session.data));
+                //$reactions.answer(JSON.stringify($session.data));
                 $reactions.answer("Here are some listings based on your request. If you want to see more results, just say 'Show more listings' or to see results in another city, say 'Show me listings in *city*'.");
             } else {
                 $reactions.answer("There are no more listings available based on your request. If you want to see results in another city, just say 'Show me listings in *city*'.");

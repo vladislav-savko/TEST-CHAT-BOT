@@ -75,7 +75,13 @@ const getCityInfo = async (city, country) => {
         (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
       );
       if (filteredCities.length > 0) {
-        $session.data.cityId = filteredCities[0].cityId;
+          if (filteredCities[0].districtId == filteredCities[0].cityId) {
+            $session.data.districtId = filteredCities[0].districtId;
+            delete $session.data.cityId
+          } else {
+              $session.data.cityId = filteredCities[0].cityId
+              delete $session.data.districtId
+          }
         return filteredCities[0];
       } else {
         $reactions.answer(
