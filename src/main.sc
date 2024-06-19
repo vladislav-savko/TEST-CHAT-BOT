@@ -21,6 +21,8 @@ theme: /
         scriptEs6:
             util.initSession();
             $reactions.answer(JSON.stringify($session.data));
+            //нужно удалить в проде (НАВЕРНОЕ, а может и так заебись)
+            util.session();
         random:
             a: Hello! I am your real estate assistant. Are you looking to rent or buy a property?
             a: Hi! I’m here to help you find the perfect home. Are you planning to rent or buy?
@@ -31,11 +33,10 @@ theme: /
     state: Search
         intent!: /searchAll
         scriptEs6:
-            //$reactions.answer(JSON.stringify($parseTree));
+            $reactions.answer(JSON.stringify($parseTree));
             const params = await pr.getAllParamsFromTree($parseTree);
-           // $reactions.answer(JSON.stringify(params));
+            $reactions.answer(JSON.stringify(params));
             $session.params = {...$session.params, ...params};
-            
             $reactions.transition("/Search/SwitchParams");
             
         state: SwitchParams
@@ -43,148 +44,218 @@ theme: /
                 $session.state = "SwitchSearch";
                 
                 const { emptyParams, newParams } = await pr.processParams();
-                const params = await util.copyObjectWithoutFields($session.params, ['location', 'listingType', 'propertyTypes', 'infAmenity']);
+                const params = await util.copyObjectWithoutFields($session.params, ['location', 'listingType', 'propertyTypes', 'infAmenity', 'priceFrom', 'priceTo', 'areaFrom', 'areaTo']);
                 const data = $session.data;
                 
                 await pr.updSessionInfo(data, params);
                 await pr.emptyParamsResult(emptyParams);
-    state: Price
-        intent!: /price_money
-        scriptEs6:
-            if (typeof $parseTree.value === 'number') {
-                $session.data.priceTo = $parseTree.value; 
-                delete $session.data.priceFrom;
-            } else {
-                if ($parseTree.value.from) {
-                    $session.data.priceFrom = $parseTree.value.from.value;
-                    delete $session.data.priceTo;
+                
+        state: InputLocation
+            q!: * (location/city/county) * {@location [@country]} *
+            scriptEs6:
+                if(!$parseTree._location) {
+                    $reactions.answer("In what location would you like to view the property?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
                 }
-                if ($parseTree.value.to) {
-                   $session.data.priceTo = $parseTree.value.to.value;
+                    
+            state: Get
+                q: * {@location @country} *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputBedrooms
+            q!: * bedroom* * (@duckling.interval::bedroom|@duckling.number::bedroom) *
+            scriptEs6:
+                if(!$parseTree.bedroom) {
+                    $reactions.answer("How many bedrooms do you need?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
                 }
-            }
-        go!: /Search
+                    
+            state: Get
+                q: * (@duckling.interval::bedroom|@duckling.number::bedroom) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputListingTypes
+            q!: * {Listing types [ownership]} * @listingType *
+            scriptEs6:
+                if(!$parseTree._listingType) {
+                    $reactions.answer("What type of property ownership are you interested in: buying or renting?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * @listingType *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
         
-    state: Area
-        intent!: /area_field
-        scriptEs6:
-            
-        go!: /Search
-
-    # state: SearchStart
-    #     intent!: /buy_or_rent
+        state: InputPropertyTypes
+            q!: * {Property types} * @propertyTypes *
+            scriptEs6:
+                if(!$parseTree._propertyTypes) {
+                    $reactions.answer("What type of property are you interested in: apartment, house, villa, commerce, plot?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * @propertyTypes *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputPrice
+            q!: * (budget/price/cost/costs) * (@duckling.amount-of-money::price|@duckling.interval::price) *
+            scriptEs6:
+                if(!$parseTree.price) {
+                    $reactions.answer("What budget are you looking for?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.amount-of-money::price|@duckling.interval::price) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputArea
+            q!: * area * (@duckling.interval::area|@duckling.number::area) *
+            scriptEs6:
+                if(!$parseTree.area) {
+                    $reactions.answer("What perimeter area are you interested in?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.interval::area|@duckling.number::area) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputCoverageRatio
+            q!: * {Coverage Ratio} * (@duckling.interval::coverageRatio|@duckling.number::coverageRatio) *
+            scriptEs6:
+                if(!$parseTree.coverageRatio) {
+                    $reactions.answer("What are the preferences for the development coefficient?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.interval::coverageRatio|@duckling.number::coverageRatio) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputDensity
+            q!: * Density * (@duckling.interval::density|@duckling.number::density) *
+            scriptEs6:
+                if(!$parseTree.density) {
+                    $reactions.answer("What building density do you need?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.interval::density|@duckling.number::density) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        state: InputFloorNumber
+            q!: * {Floor number} * (@duckling.interval::floorNumber|@duckling.number::floorNumber) *
+            scriptEs6:
+                if(!$parseTree.floorNumber) {
+                    $reactions.answer("On which floors would you like to find the premises?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.interval::floorNumber|@duckling.number::floorNumber) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+         state: InputResidentialFloors
+            q!: * {Residential Floors} * (@duckling.interval::residentialFloors|@duckling.number::residentialFloors) *
+            scriptEs6:
+                if(!$parseTree.residentialFloors) {
+                    $reactions.answer("On which floors should residential floors be located?");
+                } else {
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                }
+                    
+            state: Get
+                q: * (@duckling.interval::residentialFloors|@duckling.number::residentialFloors) *
+                scriptEs6:
+                    const params = await pr.getAllParamsFromTree($parseTree);
+                    $session.params = {...$session.params, ...params};
+                    $reactions.transition("/Search/SwitchParams");
+                    
+        
+    # state: Area
+    #     intent!: /area_field
     #     scriptEs6:
-    #         $reactions.answer(JSON.stringify($session.data));
-    #         if ($parseTree._listingType) 
-    #             $session.data.listingType = $parseTree._listingType.constBuyRent;
-    #         if ($parseTree._propertyTypes) {
-    #             $session.data.propertyTypes = $parseTree._propertyTypes.estate;
-    #             $session.info.property = $parseTree._propertyTypes.word;
-    #         }
-    #         if ($parseTree._country) 
-    #             $session.info.country = $parseTree._country;
-            
-    #         if ($parseTree._location) {
-    #             $session.info.city = $parseTree._location;
-    #         }
-            
-    #         $reactions.transition("/SearchStart/ConfirmSearch");
-
-        # state: ConfirmSearch
-        #     scriptEs6:
-        #         if (!$session.data.listingType) 
-        #             return $reactions.transition("/SearchStart/ListingType");
-        #         else if (!$session.data.propertyTypes) 
-        #             return $reactions.transition("/SearchStart/PropertyType");
-        #         else if (!$session.info.country) 
-        #             return $reactions.transition("/SearchStart/Country");
-        #         else if (!$session.info.city) 
-        #             return $reactions.transition("/SearchStart/Location");
-        #         else
-        #             util.confirmSearch($session.data.listingType, $session.info.property.toLowerCase(), $session.info.city.name, $session.info.country.name);
-        #             // Второй Аргумент слово (Пример: House, а не DETACHED или SEMIDETACHED HOUSE будет написано)
-        #             // 4 аргумент название страны
-                
-        #     state: Confirm
-        #         q: * (ye*|cor*|+) *
-        #         scriptEs6:
-        #             $reactions.answer('lol');
-        #             $reactions.transition("/DisplayResults");
-            
-        #     state: Deny
-        #         q: * (no|incor*|-) *
-        #         scriptEs6:
-        #             $reactions.answer('kek');
-        #             $session.data.listingType = null;
-        #             $session.data.propertyTypes = null;
-        #             $session.info.country = null;
-        #             $session.info.city = null;
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-
-        # state: PropertyType
-        #     scriptEs6:
-        #         if (!$session.data.propertyTypes) {
-        #             $reactions.answer("What type of property are you looking for?");
-        #         } else {
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-        #         }
-                
-        #     state: GetPropertyType
-        #         q: * @propertyType *
-        #         scriptEs6:
-        #             $session.data.propertyTypes = $parseTree._propertyTypes.estate;
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-                    
-        # state: ListingType
-        #     scriptEs6:
-        #         if (!$session.data.listingType) {
-        #             $reactions.answer("What type of transaction are you interested in, buying or renting?");
-        #         } else {
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-        #         }
-                
-        #     state: GetListingType
-        #         q: * @listingType *
-        #         scriptEs6:
-        #             $session.data.listingType = $parseTree._listingType.constBuyRent;
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-                    
-        # state: Country
-        #     scriptEs6:
-        #         if (!$session.info.country) {
-        #             $reactions.answer("In which country are you looking?");
-        #         } else {
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-        #         }
-                
-        #     state: GetCountry
-        #         q: * @country *
-        #         scriptEs6:
-        #             $session.info.country = $parseTree._country;
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-                    
-        # state: Location
-        #     scriptEs6:
-        #         if (!$session.info.city) {
-        #             $reactions.answer("In which city are you looking?");
-        #         } else {
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
-        #         }
-                
-        #     state: GetLocation
-        #         q: * @location *
-        #         scriptEs6:
-        #             $session.info.city = $parseTree._location;
-        #             $reactions.transition("/SearchStart/ConfirmSearch");
+    #       if (typeof $parseTree.value === 'number') {
+    #            $session.data.priceTo = $parseTree.value; 
+    #            delete $session.data.priceFrom;
+    #        } else {
+    #            if ($parseTree.value.from){
+    #                $session.data.priceFrom = $parseTree.value.from.value;
+    #                delete $session.data.priceTo;
+    #            }
+    #            if ($parseTree.value.to) {
+    #              $session.data.priceTo = $parseTree.value.to.value;
+    #            }
+    #        }
+    #     go!: /Search
 
     state: DisplayResults
         scriptEs6:
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
-                //$reactions.answer(JSON.stringify($session.data));
-                $reactions.answer("Here are some listings based on your request. If you want to see more results, just say 'Show more listings' or to see results in another city, say 'Show me listings in *city*'.");
+                $reactions.answer(JSON.stringify($session.data));
+                $reactions.answer("To see more results, just say **Show more**");
             } else {
-                $reactions.answer("There are no more listings available based on your request. If you want to see results in another city, just say 'Show me listings in *city*'.");
+                $reactions.answer("Sorry, there are no more listings available based on your request.");
             }
 
         state: ShowMore
@@ -198,7 +269,6 @@ theme: /
         scriptEs6:
             const index = $parseTree.index[0].value;
             await util.getListingById(index);
-
 
     state: Restart
         intent!: /reset

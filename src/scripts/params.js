@@ -1,32 +1,20 @@
-import utl from './utilits.js'
+import utl from './utilits.js';
 import api from "./api.js";
 
-const getBedrooms = (text) => {
-    const pattern = /\b(\d+)\b(?:\s*[-–—]\s*\b(\d+)\b|\s+to\s+\b(\d+)\b|\s+or\s+more\b|\s+or\s+less\b|\s+and\s+more\b|\s+and\s+less\b)?\s*(bedroom|room)s?\b/gi;
-    const match = pattern.exec(text);
-    
-    let from = null;
+const getFromIntervalOrNumber = (obj) => {
+    let from = 0;
     let to = null;
     
-    if (match) {
-        from = parseInt(match[1], 10);
-        to = null;
-
-        if (match[2]) {
-            to = parseInt(match[2], 10);
-        } else if (match[3]) {
-            to = parseInt(match[3], 10);
-        } else if (/or\s+more|and\s+more/i.test(match[0])) {
-            to = Infinity;
-        } else if (/or\s+less|and\s+less/i.test(match[0])) {
-            to = from;
-            from = 0;
-        }
-        
-        return {
-            from,
-            to
-        }
+    if (obj[0].value.to) {
+        to = obj[0].value.to.value;
+        from = obj[0].value.from.value;
+    } else {
+        to = obj[0].value;
+    }
+    
+    return {
+        from,
+        to
     }
 };
 
@@ -48,11 +36,48 @@ const getInfAmenity = (obj) => {
 
 const getAllParamsFromTree = async (parseTree) => {
     let filledParams = {};
+    $reactions.answer(JSON.stringify($parseTree));
     
-    if (parseTree._bedroom) {
-        const bedrooms = getBedrooms(parseTree._bedroom);
+    if (parseTree.bedroom) {
+        const bedrooms = getFromIntervalOrNumber(parseTree.bedroom);
         filledParams.bedroomsFrom = bedrooms.from;
         filledParams.bedroomsTo = bedrooms.to;
+    }
+    
+    if (parseTree.price) {
+        const price = getFromIntervalOrNumber(parseTree.price);
+        filledParams.priceFrom = price.from;
+        filledParams.priceTo = price.to;
+    }
+    
+    if (parseTree.area) {
+        const area = getFromIntervalOrNumber(parseTree.area);
+        filledParams.areaFrom = area.from;
+        filledParams.areaTo = area.to;
+    }
+    
+    if (parseTree.coverageRatio) {
+        const coverageRatio = getFromIntervalOrNumber(parseTree.coverageRatio);
+        filledParams.coverageRatioFrom = coverageRatio.from;
+        filledParams.coverageRatioTo = coverageRatio.to;
+    }
+    
+    if (parseTree.density) {
+        const density = getFromIntervalOrNumber(parseTree.density);
+        filledParams.densityFrom = density.from;
+        filledParams.densityTo = density.to;
+    }
+    
+    if (parseTree.floorNumber) {
+        const floorNumber = getFromIntervalOrNumber(parseTree.floorNumber);
+        filledParams.floorNumberFrom = floorNumber.from;
+        filledParams.floorNumberTo = floorNumber.to;
+    }
+    
+    if (parseTree.residentialFloors) {
+        const residentialFloors = getFromIntervalOrNumber(parseTree.residentialFloors);
+        filledParams.residentialFloorsFrom = residentialFloors.from;
+        filledParams.residentialFloorsTo = residentialFloors.to;
     }
     
     if (parseTree._listingType) {
@@ -111,10 +136,6 @@ const getAllParamsFromTree = async (parseTree) => {
         filledParams.location = getCity(parseTree.location);
     }
     
-    // if (parseTree.country) {
-    //     filledParams.country = getCountry(parseTree.country);
-    // }
-    
     if (parseTree._infrastructure_amenity) {
         filledParams.infAmenity = getInfAmenity(parseTree._infrastructure_amenity);
     }
@@ -131,14 +152,8 @@ const processParams = async () => {
     let newParams = [];
     
     if ($session.params.location) {
-        //$reactions.answer("LOAP")
-        //$reactions.answer(JSON.stringify($session.info));
-        //$reactions.answer(JSON.stringify($session.params));
         if (!$session.info.location || ($session.info.location.cityNameEn !== $session.params.location.name)) {
             const location = await utl.getCityInfo($session.params.location.name, $session.params.location.country);
-            //if (location.cityId == location.districtId) {
-           ///     delete location.cityId
-            //}
             $session.info.location = location;
             newParams.push('Location');
         }
@@ -158,6 +173,14 @@ const processParams = async () => {
             newParams.push('PropertyTypes');
         }
     } else emptyParams.push('PropertyTypes');
+    
+    if ($session.params.priceFrom || $session.params.priceTo) {
+        if (($session.params.priceFrom !== $session.data.priceFrom) || ($session.params.priceTo !== $session.data.priceTo)) {
+            $session.data.priceTo = $session.params.priceTo;
+            $session.data.priceFrom = $session.params.priceFrom;
+            newParams.push('Price');
+        }
+    } else emptyParams.push('Price');
     
     if ($session.params.infAmenity && !emptyParams.includes('PropertyTypes')) {
         switch ($session.data.propertyTypes[0]) {
@@ -183,25 +206,55 @@ const processParams = async () => {
         }
     }
     
+    if (($session.params.areaFrom || $session.params.areaTo) && !emptyParams.includes('PropertyTypes')) {
+        switch ($session.data.propertyTypes[0]) {
+            case "COMMERCIAL_PLOT":
+            case "RESIDENTIAL_PLOT":
+            case "AGRICULTURE_PLOT":
+                {
+                    $session.data.plotAreaFrom = $session.params.areaFrom;
+                    $session.data.plotAreaTo = $session.params.areaTo;
+                    break;
+                }
+            case "OFFICE":
+            case "HOTEL":
+            case "MANUFACTURING":
+            case "RETAIL_SPACE":
+            case "WAREHOUSE":
+            case "CAR_PARKING":
+                {
+                    $session.data.floorAreaFrom = $session.params.areaFrom;
+                    $session.data.floorAreaTo = $session.params.areaTo;
+                    break;
+                }
+        }
+    }
+    
     return { emptyParams, newParams };
 }
 
 const emptyParamsResult = async (params) => {
-    if (params.length > 0) {
-        const text = `Ok, I understand, but you still need to specify the following parameters: ${params.includes('Location') ? `\n-location` : ''}${params.includes('ListingTypes') ? `\n-buying or renting` : ''}${params.includes('PropertyTypes') ? `\n-type of property` : ''}`;
-        $reactions.answer(text);
+    const routes = {
+        'PropertyTypes': '/Search/InputPropertyTypes',
+        'Location': '/Search/InputLocation',
+        'Price': '/Search/InputPrice',
+        'ListingTypes': '/Search/InputListingTypes'
+    };
+
+    for (const param of Object.keys(routes)) {
+        if (params.includes(param)) {
+            $reactions.transition(routes[param]);
+            return;
+        }
     }
-    
+
     if (params.length === 0) {
         $reactions.transition("/DisplayResults");
     }
-}
+};
 
 const updSessionInfo = async (info, params) => {
-    //$reactions.answer('UPRSESSIONINFO');
-    //$reactions.answer(JSON.stringify(params));
     $session.data = {...info, ...params};
-   // $reactions.answer(JSON.stringify($session.data));
 }
 
 export default {

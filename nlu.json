@@ -676,6 +676,11 @@
       "entity" : "repair",
       "required" : false,
       "prompts" : [ ]
+    }, {
+      "name" : "price",
+      "entity" : "price",
+      "required" : false,
+      "prompts" : [ ]
     } ],
     "priority" : 0
   }, {
@@ -692,6 +697,12 @@
       "text" : "with the budget @duckling.interval"
     }, {
       "text" : " I’m hoping to find something @duckling.interval"
+    }, {
+      "text" : "with the price range from 200k$ to 500k$"
+    }, {
+      "text" : "the cost of the property should be @duckling.interval"
+    }, {
+      "text" : "the cost of the property should be @duckling.amount-of-money"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -739,7 +750,7 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "((@duckling.interval|@duckling.number) (~bedroom|~room|br))" ],
+      "rule" : [ "{((@duckling.interval|@duckling.number)(*room*|br))}" ],
       "value" : ""
     } ]
   }, {
@@ -2286,11 +2297,11 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "(budget/price/cost/costs)  $regexp<.*?> @duckling.amount-of-money" ],
+      "rule" : [ "{(budget/price/cost*)  $regexp<.*?> @duckling.amount-of-money}" ],
       "value" : ""
     }, {
       "type" : "pattern",
-      "rule" : [ "(budget/price/cost/costs)  $regexp<.*?> @duckling.interval" ],
+      "rule" : [ "{(budget/price/cost*)  $regexp<.*?> @duckling.interval}" ],
       "value" : ""
     } ]
   }, {
