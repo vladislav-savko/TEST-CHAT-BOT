@@ -57,6 +57,7 @@ function session() {
   };
   
   $session.params = {};
+  $session.state = null;
 
   $session.version = VERSION;
 }
@@ -144,9 +145,6 @@ const getListings = async (sessionData) => {
       });
       return true;
     } else {
-      $reactions.answer(
-        "There are no listings for your request. Would you like to try a different city?"
-      );
       return false;
     }
   } catch (error) {

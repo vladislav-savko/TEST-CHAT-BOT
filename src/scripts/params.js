@@ -5,12 +5,17 @@ const getFromIntervalOrNumber = (obj) => {
     let from = 0;
     let to = null;
     
-    if (obj[0].value.to) {
-        to = obj[0].value.to.value;
-        from = obj[0].value.from.value;
-    } else {
+    if (!obj[0].value.from) {
         to = obj[0].value;
+    } else {
+        if (!obj[0].value.to) {
+            from = obj[0].value.from.value;
+        } else {
+            from = obj[0].value.from.value;
+            to = obj[0].value.to.value;
+        }
     }
+    
     
     return {
         from,
@@ -142,6 +147,14 @@ const getAllParamsFromTree = async (parseTree) => {
     
     if (parseTree._repair) {
         filledParams.repair = parseTree._repair.repair;
+    }
+    
+    if (parseTree.progress_condition) {
+        filledParams.buildingConditions = parseTree.progress_condition[0].value.condition;
+    }
+    
+    if (parseTree.house_condition) {
+        filledParams.condition = parseTree.house_condition[0].value.house_condition;
     }
     
     return filledParams;

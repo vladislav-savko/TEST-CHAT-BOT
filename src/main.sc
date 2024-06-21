@@ -20,7 +20,7 @@ theme: /
         intent!: /hello
         scriptEs6:
             util.initSession();
-            $reactions.answer(JSON.stringify($session.data));
+            //$reactions.answer(JSON.stringify($session.data));
             //нужно удалить в проде (НАВЕРНОЕ, а может и так заебись)
             util.session();
         random:
@@ -33,11 +33,12 @@ theme: /
     state: Search
         intent!: /searchAll
         scriptEs6:
-            $reactions.answer(JSON.stringify($parseTree));
+            # $reactions.answer(JSON.stringify($parseTree));
             const params = await pr.getAllParamsFromTree($parseTree);
-            $reactions.answer(JSON.stringify(params));
+            # $reactions.answer(JSON.stringify(params));
             $session.params = {...$session.params, ...params};
             $reactions.transition("/Search/SwitchParams");
+            $session.state = "Search";
             
         state: SwitchParams
             scriptEs6:
@@ -123,7 +124,7 @@ theme: /
                     $reactions.transition("/Search/SwitchParams");
                     
         state: InputPrice
-            q!: * (budget/price/cost/costs) * (@duckling.amount-of-money::price|@duckling.interval::price) *
+            #q!: * (budget/price/cost/costs) * (@duckling.amount-of-money::price|@duckling.interval::price) *
             scriptEs6:
                 if(!$parseTree.price) {
                     $reactions.answer("What budget are you looking for?");
@@ -212,7 +213,7 @@ theme: /
                     $session.params = {...$session.params, ...params};
                     $reactions.transition("/Search/SwitchParams");
                     
-         state: InputResidentialFloors
+        state: InputResidentialFloors
             q!: * {Residential Floors} * (@duckling.interval::residentialFloors|@duckling.number::residentialFloors) *
             scriptEs6:
                 if(!$parseTree.residentialFloors) {
@@ -229,39 +230,29 @@ theme: /
                     const params = await pr.getAllParamsFromTree($parseTree);
                     $session.params = {...$session.params, ...params};
                     $reactions.transition("/Search/SwitchParams");
-                    
-        
-    # state: Area
-    #     intent!: /area_field
-    #     scriptEs6:
-    #       if (typeof $parseTree.value === 'number') {
-    #            $session.data.priceTo = $parseTree.value; 
-    #            delete $session.data.priceFrom;
-    #        } else {
-    #            if ($parseTree.value.from){
-    #                $session.data.priceFrom = $parseTree.value.from.value;
-    #                delete $session.data.priceTo;
-    #            }
-    #            if ($parseTree.value.to) {
-    #              $session.data.priceTo = $parseTree.value.to.value;
-    #            }
-    #        }
-    #     go!: /Search
 
     state: DisplayResults
         scriptEs6:
+            if ($session.state !== 'Show more') {
+                $session.data.skip = 0;
+            }
+            
+            //$reactions.answer(JSON.stringify($session.data));
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
-                $reactions.answer(JSON.stringify($session.data));
                 $reactions.answer("To see more results, just say **Show more**");
+                $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
             } else {
                 $reactions.answer("Sorry, there are no more listings available based on your request.");
             }
+            
+            $session.state = "Display";
 
         state: ShowMore
             q: * (show more listings|more listings|next listings|show more) *
             scriptEs6:
                 $session.data.skip += 3;
+                $session.state = "Show more";
                 $reactions.transition("/DisplayResults");
                 
     state: ShowByIndex

@@ -564,6 +564,16 @@
       "text" : "with @duckling.number and more bedrooms"
     }, {
       "text" : "with @duckling.number and above bedrooms"
+    }, {
+      "text" : "Hi, I'm interested in buying a property and could use some guidance. Can you help me get started with the process?"
+    }, {
+      "text" : "I'd like to view properties in Limassol. Could you help me find some options there?"
+    }, {
+      "text" : "I'm looking for @propertyTypes  in @location within a @price. Ideally, the property should be @progress_condition and @furniture. I'd prefer if @propertyType is @repair and comes with @alarm. Additionally, I'm interested in a property that has a modern @kitchen, a @balcony, and @parking space. It should have @conditioner_colder throughout the @propertyTypes, @heater, and @water_heater. @internet is essential. I would like the house to be @infrastructure_amenity. Do you have any listings that match these criteria?"
+    }, {
+      "text" : "I'm looking for @propertyTypes  in @location within a @price. Ideally, the property should be @progress_condition and @furniture."
+    }, {
+      "text" : "I'm looking for a detached house in Limassol within a budget of €300,000 to €400,000. Ideally, the property should be ready to move in and fully furnished"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -670,7 +680,7 @@
       "entity" : "infrastructure_amenity",
       "required" : false,
       "prompts" : [ ],
-      "array" : false
+      "array" : true
     }, {
       "name" : "repair",
       "entity" : "repair",
@@ -717,7 +727,7 @@
     "priority" : 0
   }, {
     "path" : "/area_field",
-    "enabled" : true,
+    "enabled" : false,
     "shared" : false,
     "phrases" : [ {
       "text" : "@area"
@@ -1200,7 +1210,7 @@
       "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "apartment", "aparment", "apartament" ],
+      "rule" : [ "apartment", "aparment", "apartament", "flat" ],
       "value" : "{\n  \"estate\": [\n    \"APARTMENT\"\n  ],\n\"word\" : \"Apartment\"\n}"
     }, {
       "type" : "synonyms",
@@ -2297,7 +2307,7 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "{(budget/price/cost*)  $regexp<.*?> @duckling.amount-of-money}" ],
+      "rule" : [ "@duckling.amount-of-money" ],
       "value" : ""
     }, {
       "type" : "pattern",
