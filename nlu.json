@@ -238,67 +238,11 @@
     "path" : "/anisadIndex",
     "enabled" : true,
     "shared" : false,
-    "phrases" : [ {
-      "text" : "show me by @duckling.number"
-    }, {
-      "text" : "index @duckling.number"
-    }, {
-      "text" : "@duckling.number suits me"
-    }, {
-      "text" : "Show me the apartment at index @duckling.number"
-    }, {
-      "text" : "I want to see the apartment listed as @duckling.number"
-    }, {
-      "text" : "Can you display the apartment with index @duckling.number?"
-    }, {
-      "text" : "Show apartment @duckling.number"
-    }, {
-      "text" : "Apartment @duckling.number suits me"
-    }, {
-      "text" : "Show me the land at index @duckling.number"
-    }, {
-      "text" : "I want to see the land listed as @duckling.number"
-    }, {
-      "text" : "Can you display the land with index @duckling.number?"
-    }, {
-      "text" : "Show land @duckling.number"
-    }, {
-      "text" : "Land @duckling.number suits me"
-    }, {
-      "text" : "Show me the building at index @duckling.number"
-    }, {
-      "text" : "I want to see the building listed as @duckling.number"
-    }, {
-      "text" : "Can you display the building with index @duckling.number?"
-    }, {
-      "text" : "Show building @duckling.number"
-    }, {
-      "text" : "Building @duckling.number suits me"
-    }, {
-      "text" : "Show me the property at index @duckling.number"
-    }, {
-      "text" : "I want to see the property listed as @duckling.number"
-    }, {
-      "text" : "Can you display the property with index @duckling.number?"
-    }, {
-      "text" : "Show property @duckling.number"
-    }, {
-      "text" : "Property @duckling.number suits me"
-    }, {
-      "text" : "Show me by @duckling.number"
-    }, {
-      "text" : "I am interested in listing @duckling.number"
-    }, {
-      "text" : "Display the property at index @duckling.number"
-    }, {
-      "text" : "Show @duckling.number"
-    }, {
-      "text" : "Listing @duckling.number suits me"
-    } ],
+    "phrases" : [ ],
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ ],
+    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by index @duckling.number", "* details [(for/by)] @duckling.number *" ],
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
@@ -574,6 +518,12 @@
       "text" : "I'm looking for @propertyTypes  in @location within a @price. Ideally, the property should be @progress_condition and @furniture."
     }, {
       "text" : "I'm looking for a detached house in Limassol within a budget of €300,000 to €400,000. Ideally, the property should be ready to move in and fully furnished"
+    }, {
+      "text" : "I am thinking of @price"
+    }, {
+      "text" : "approximately @price"
+    }, {
+      "text" : "my budget is @duckling.amount-of-money"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -695,7 +645,7 @@
     "priority" : 0
   }, {
     "path" : "/price_money",
-    "enabled" : true,
+    "enabled" : false,
     "shared" : false,
     "phrases" : [ {
       "text" : "@price"
@@ -902,7 +852,7 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "Buy", "Purchase", "Obtain", "Procure" ],
+      "rule" : [ "Buy", "Purchase", "Obtain", "Procure", "Sale" ],
       "value" : "{\n    \"constBuyRent\" : \"SALE\"\n}"
     }, {
       "type" : "synonyms",
@@ -1335,7 +1285,7 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "without internet", "Without internet access", "Without internet connection", "Without internet connection", "Without web access", "No internet access", "Exclude internet access", "Exclude internet ", "without wifi", "Exclude wi-fi", "without wi-fi", "no wifi", "no internet", "no wi-fi", "no web access", "no internet connection" ],
-      "value" : "{internet: [\n    \"NO\"\n  ]\n}"
+      "value" : "{internet: [ ]\n}"
     }, {
       "type" : "pattern",
       "rule" : [ "[(with/include/have/having)] $regexp<.*?> @pattern_internet" ],
@@ -2311,7 +2261,7 @@
       "value" : ""
     }, {
       "type" : "pattern",
-      "rule" : [ "{(budget/price/cost*)  $regexp<.*?> @duckling.interval}" ],
+      "rule" : [ "{(budget/price/cost*) $regexp<.*?> @duckling.interval}" ],
       "value" : ""
     } ]
   }, {

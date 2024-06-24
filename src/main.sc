@@ -62,7 +62,7 @@ theme: /
                     $reactions.transition("/Search/SwitchParams");
                 }
                     
-            state: Get
+            state: Get  
                 q: * {@location @country} *
                 scriptEs6:
                     const params = await pr.getAllParamsFromTree($parseTree);
@@ -135,14 +135,14 @@ theme: /
                 }
                     
             state: Get
-                q: * (@duckling.amount-of-money::price|@duckling.interval::price) *
+                q: * (@duckling.amount-of-money::price|@duckling.interval::price|@duckling.number::price) *
                 scriptEs6:
                     const params = await pr.getAllParamsFromTree($parseTree);
                     $session.params = {...$session.params, ...params};
                     $reactions.transition("/Search/SwitchParams");
                     
         state: InputArea
-            q!: * area * (@duckling.interval::area|@duckling.number::area) *
+            q!: * (area|Floor area) * (@duckling.interval::area|@duckling.number::area) *
             scriptEs6:
                 if(!$parseTree.area) {
                     $reactions.answer("What perimeter area are you interested in?");
@@ -241,10 +241,10 @@ theme: /
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
                 $reactions.answer("To see more results, just say **Show more**");
-                $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
             } else {
                 $reactions.answer("Sorry, there are no more listings available based on your request.");
             }
+            $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
             
             $session.state = "Display";
 
@@ -260,12 +260,23 @@ theme: /
         scriptEs6:
             const index = $parseTree.index[0].value;
             await util.getListingById(index);
+            
+        state: Seller
+            q: Seller Contacts
+            scriptEs6:
+                await util.getSeller();
 
     state: Restart
         intent!: /reset
         scriptEs6:
             util.session();
             $reactions.transition("/Start");
+    
+    # state: Undo
+    #     q!: ~Undo
+    #     scriptEs6:
+    #         $session.params = $session.lastParams;
+    #         $reactions.transition("/Search/SwitchParams");
             
     state: Bye
         intent!: /bye

@@ -5,6 +5,7 @@ entryPoint: main.sc
 botEngine: v2
 language: en
 
+
 nlp:
   intentNoMatchThresholds:
     phrases: 0.2

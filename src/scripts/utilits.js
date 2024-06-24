@@ -58,6 +58,9 @@ function session() {
   
   $session.params = {};
   $session.state = null;
+  $session.seller = null;
+  
+  $session.lastParams = {};
 
   $session.version = VERSION;
 }
@@ -118,6 +121,63 @@ const postJSON = (object) => {
   $reactions.answer(JSON.stringify(object));
 };
 
+// function formatListing(listingData) {
+//   const parameters = [
+//     { key: 'floorArea', label: 'Floor area', unit: 'm²', format: (value) => `*${value}m²*` },
+//     { key: 'bedrooms', label: 'Bedrooms' },
+//     { key: 'furnishing', label: 'Furnishings', format: (value) => `*${value.toLowerCase()}*` },
+//     { key: 'balcony', label: 'Balcony', format: (value) => (value ? "+" : "-") },
+//     { key: 'bathrooms', label: 'Bathrooms' }
+//   ];
+
+//   let result = parameters.reduce((acc, param) => {
+//     if (listingData[param.key] !== null && listingData[param.key] !== undefined) {
+//       const formattedValue = param.format ? param.format(listingData[param.key]) : listingData[param.key];
+//       return acc + `- ${param.label}: ${formattedValue}\n`;
+//     }
+//     return acc;
+//   }, '');
+//   return result;
+// }
+
+// function formatListingI(listingData) {
+//   const parameters = [
+//     { key: 'floorArea', label: 'Floor area', format: (value) => `*${value}m²*` },
+//     { key: 'floorNumber', label: 'Floor number' },
+//     { key: 'residentialFloors', label: 'Residential floors' },
+//     { key: 'bedrooms', label: 'Bedrooms' },
+//     { key: 'sleepingPlaces', label: 'Sleeping places' },
+//     { key: 'beds', label: 'Beds' },
+//     { key: 'furnishing', label: 'Furnishings', format: (value) => `*${value.toLowerCase()}*` },
+//     { key: 'alarmSystem', label: 'Alarm system', format: (value) => (value ? "+" : "-") },
+//     { key: 'condition', label: 'Condition', format: (value) => value.toLowerCase().replace(/_/g, ' ')},
+//     { key: 'bathrooms', label: 'Bathrooms' },
+//     { key: 'kitchen', label: 'Kitchen', format: (value) => (value ? "+" : "-") },
+//     { key: 'balcony', label: 'Balcony', format: (value) => (value ? "+" : "-") },
+//     { key: 'parking', label: 'Parking', format: (value) => (value ? "+" : "-") },
+//     { key: 'electricity', label: 'Electricity', format: (value) => (value ? "+" : "-") },
+//     { key: 'gas', label: 'Gas', format: (value) => (value ? "+" : "-") },
+//     { key: 'airConditioning', label: 'Air conditioning', format: (value) => value.toLowerCase().replace(/_/g, ' ') },
+//     { key: 'heating', label: 'Heating', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
+//     { key: 'waterHeating', label: 'Water heating',format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
+//     { key: 'television', label: 'Television' },
+//     { key: 'internet', label: 'Internet', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
+//     { key: 'infrastructureAmenity', label: 'Infrastructure amenity', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
+//     { key: 'repairAmenity', label: 'Repair amenity', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
+//     { key: 'additionalAmenity', label: 'Additional amenity', format: (value) => value.toLowerCase().replace(/_/g, ' ') }
+//   ];
+
+//   let result = parameters.reduce((acc, param) => {
+//     if (listingData[param.key] !== null && listingData[param.key] !== undefined) {
+//       const formattedValue = param.format ? param.format(listingData[param.key]) : listingData[param.key];
+//       return acc + `- ${param.label}: ${formattedValue}\n`;
+//     }
+//     return acc;
+//   }, '');
+
+//   return result;
+// }
+
 const getListings = async (sessionData) => {
   try {
     sessionData.take = 3;
@@ -125,6 +185,18 @@ const getListings = async (sessionData) => {
     if (res && res.data.listings.length > 0) {
       res.data.listings.map((listing) => {
         const listingData = getListingData(listing);
+        
+        const propertyDetails = `
+${listingData.floorArea !== null ? `- Property area: *${listingData.floorArea}m²*` : ''}
+${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms}` : ''}
+${listingData.furnishing !== null ? `- Furnishing: *${listingData.furnishing}*` : ''}
+${listingData.balcony !== null ? `- Balcony: ${listingData.balcony ? "+" : "-"}` : ''}
+${listingData.bathrooms !== null ? `- Bathrooms: ${listingData.bathrooms}` : ''}
+        `
+        .split('\n')
+        .filter(line => line.trim() !== '')
+        .join('\n');
+        
         $response.replies.push(
           {
             type: "image",
@@ -132,13 +204,9 @@ const getListings = async (sessionData) => {
           },
           {
             type: "text",
-            text: `**${listing.title}**
+            text: `**${listing.title.trim()}**
 **ID: ${listing.id}**
-- Floor area: *${listingData.floorArea}m²*
-- Bedrooms: ${listingData.bedrooms}
-- Furnishings: *${listingData.furnishing}*
-- Balcony: ${listingData.balcony ? "+" : "-"}
-- Bathrooms: ${listingData.bathrooms}
+${propertyDetails}
 [Show in browser](${linkToBrowserPage(listing)})`,
           }
         );
@@ -155,7 +223,7 @@ const getListings = async (sessionData) => {
   }
 };
 
-const printPost = (listing, seller) => {
+const printPost = (listing) => {
   const listingData = getListingData(listing);
 
   const images = listing.photos.map((image) => {
@@ -167,32 +235,58 @@ const printPost = (listing, seller) => {
 
   $response.replies.push(...images, {
     type: "text",
-    text: `**${listing.title}**
+    text: `**${listing.title.trim()}**
 **€${listing.price}**
 ${listing.description}
 
 [Show in browser](${linkToBrowserPage(listing)})
-
-${seller.firstName} ${seller.lastName}
-${seller.email}
-${seller.phoneNumber}
 `,
   });
+  
+    $response.replies.push({
+        type: "buttons",
+        buttons: [
+            {text: "Seller Contacts"},
+        ]
+    });
+};
+
+const printSellerInfo = (seller) => {
+    $response.replies.push({
+        type: "text",
+        text: `${seller.firstName} ${seller.lastName}
+${seller.email}
+${seller.phoneNumber}
+    `,
+    });
 };
 
 const getListingById = async (id) => {
-  try {
-    const listing = await api.getListingById(id);
-    const seller = await api.getSellerById(id);
-
-    if (listing && seller) {
-      printPost(listing.data, seller.data);
+    try {
+        const listing = await api.getListingById(id);
+    
+        if (listing) {
+            printPost(listing.data);
+            $session.seller = id;
+        }
+    } catch (error) {
+        $reactions.answer("Something's broken, please try again later. Sorry");
+        return false;
     }
-  } catch (error) {
-    $reactions.answer("*ID* Something's broken, please try again later. Sorry");
-    return false;
-  }
 };
+
+const getSeller = async () => {
+    try {
+        const seller = await api.getSellerById($session.seller);
+    
+        if (seller) {
+            printSellerInfo(seller.data);
+        }
+    } catch (error) {
+        $reactions.answer("Sorry, I can't get seller information.");
+        return false;
+    }
+} 
 
 const confirmAction = (listingType, estateType) => {
   const action = listingType.toLowerCase() === "sale" ? "buy" : listingType;
@@ -276,6 +370,7 @@ export default {
   containsBedroomAndOthers,
   bedroomAndOthers,
   getListingById,
+  getSeller,
   arrayСomparison,
   copyObjectWithoutFields
 };

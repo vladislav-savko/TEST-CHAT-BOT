@@ -16,7 +16,6 @@ const getFromIntervalOrNumber = (obj) => {
         }
     }
     
-    
     return {
         from,
         to
@@ -41,7 +40,7 @@ const getInfAmenity = (obj) => {
 
 const getAllParamsFromTree = async (parseTree) => {
     let filledParams = {};
-    $reactions.answer(JSON.stringify($parseTree));
+    //$reactions.answer(JSON.stringify($parseTree));
     
     if (parseTree.bedroom) {
         const bedrooms = getFromIntervalOrNumber(parseTree.bedroom);
