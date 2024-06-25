@@ -59,6 +59,7 @@ function session() {
   $session.params = {};
   $session.state = null;
   $session.seller = null;
+  $session.ids = [];
   
   $session.lastParams = {};
 
@@ -79,11 +80,11 @@ const getCityInfo = async (city, country) => {
         (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
       );
       if (filteredCities.length > 0) {
-          if (filteredCities[0].districtId == filteredCities[0].cityId) {
+          if (filteredCities[0].districtName == filteredCities[0].cityName) {
             $session.data.districtId = filteredCities[0].districtId;
             delete $session.data.cityId
           } else {
-              $session.data.cityId = filteredCities[0].cityId
+              $session.data.cityId = filteredCities[0].cityId;
               delete $session.data.districtId
           }
         return filteredCities[0];
@@ -178,21 +179,43 @@ const postJSON = (object) => {
 //   return result;
 // }
 
+function getIdsFromListings(res) {
+    if (res && res.data && Array.isArray(res.data.listings)) {
+        return res.data.listings.map(listing => listing.id);
+    } else {
+        return [];
+    }
+}
+
 const getListings = async (sessionData) => {
   try {
     sessionData.take = 3;
     const res = await api.getListing(sessionData);
     if (res && res.data.listings.length > 0) {
+      $session.ids = getIdsFromListings(res);
       res.data.listings.map((listing) => {
         const listingData = getListingData(listing);
-        
+
         const propertyDetails = `
+${listing.listingType !== null ? `${listing.listingType.toLowerCase()}` : ''} ${listing.price !== null ? `*${listing.price} €*` : ''}
+${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name}` : ''}
 ${listingData.floorArea !== null ? `- Property area: *${listingData.floorArea}m²*` : ''}
 ${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms}` : ''}
-${listingData.furnishing !== null ? `- Furnishing: *${listingData.furnishing}*` : ''}
-${listingData.balcony !== null ? `- Balcony: ${listingData.balcony ? "+" : "-"}` : ''}
-${listingData.bathrooms !== null ? `- Bathrooms: ${listingData.bathrooms}` : ''}
-        `
+${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: *${listingData.furnishing}*` : ''}
+${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"}` : ''}
+${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms}` : ''}
+${(listingData.parking !== null && $session.data.parking.length) ? `- Parking: ${listingData.parking ? "+" : "-"}` : ''}
+${(listingData.electricity !== null && $session.data.electricity.length) ? `- Electricity: ${listingData.electricity ? "+" : "-"}` : ''}
+${(listingData.television !== null && $session.data.television.length) ? `- Television: ${listingData.television ? "+" : "-"}` : ''}
+${(listingData.alarmSystem !== null && $session.data.alarmSystem.length) ? `- Alarm System: ${listingData.alarmSystem ? "+" : "-"}` : ''}
+${(listingData.gas !== null && $session.data.gas.length) ? `- Gas: ${listingData.gas ? "+" : "-"}` : ''}
+${(listingData.heating !== null && $session.data.heating.length) ? `- Heating: ${listingData.heating}` : ''}
+${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water Heating: ${listingData.waterHeating}` : ''}
+${(listingData.internet !== null && $session.data.internet.length) ? `- Internet: ${listingData.internet}` : ''}
+${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air Conditioning: *${listingData.airConditioning}*` : ''}
+${listingData.infrastructureAmenity !== null ? `- Infrastructure Amenity: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')}` : ''}
+${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair Amenity: ${listingData.repairAmenity}` : ''}
+`
         .split('\n')
         .filter(line => line.trim() !== '')
         .join('\n');

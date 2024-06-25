@@ -59,87 +59,6 @@
     "slots" : [ ],
     "priority" : 0
   }, {
-    "path" : "/buy_or_rent",
-    "enabled" : false,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "find a house"
-    }, {
-      "text" : "buy an apartment"
-    }, {
-      "text" : "rent a house"
-    }, {
-      "text" : "buy land"
-    }, {
-      "text" : "rent a condo"
-    }, {
-      "text" : "buy a flat"
-    }, {
-      "text" : "lease a house"
-    }, {
-      "text" : "looking for a flat"
-    }, {
-      "text" : "find a home to buy"
-    }, {
-      "text" : "purchase a house"
-    }, {
-      "text" : "find rental homes"
-    }, {
-      "text" : "rent a flat"
-    }, {
-      "text" : "buy a townhouse"
-    }, {
-      "text" : "rent a cottage"
-    }, {
-      "text" : "buy property"
-    }, {
-      "text" : "searching for apartments"
-    }, {
-      "text" : "want to buy land"
-    }, {
-      "text" : "looking to rent"
-    }, {
-      "text" : "find a place to rent"
-    }, {
-      "text" : "buy an estate"
-    }, {
-      "text" : "rent property"
-    }, {
-      "text" : "find houses for rent"
-    }, {
-      "text" : "purchase an apartment"
-    }, {
-      "text" : "rent a studio"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "listingType",
-      "entity" : "listingType",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "location",
-      "entity" : "location",
-      "required" : false,
-      "prompts" : [ ],
-      "array" : false
-    }, {
-      "name" : "country",
-      "entity" : "country",
-      "required" : false,
-      "prompts" : [ ]
-    }, {
-      "name" : "propertyTypes",
-      "entity" : "propertyTypes",
-      "required" : false,
-      "prompts" : [ ],
-      "array" : false
-    } ],
-    "priority" : 0
-  }, {
     "path" : "/location",
     "enabled" : true,
     "shared" : false,
@@ -242,7 +161,7 @@
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by index @duckling.number", "* details [(for/by)] @duckling.number *" ],
+    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by index @duckling.number", "* details [(for/by)] [id] @duckling.number *" ],
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
@@ -643,56 +562,6 @@
       "prompts" : [ ]
     } ],
     "priority" : 0
-  }, {
-    "path" : "/price_money",
-    "enabled" : false,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "@price"
-    }, {
-      "text" : "my budget is @duckling.amount-of-money"
-    }, {
-      "text" : "my budget @duckling.interval"
-    }, {
-      "text" : "with the budget @duckling.interval"
-    }, {
-      "text" : " I’m hoping to find something @duckling.interval"
-    }, {
-      "text" : "with the price range from 200k$ to 500k$"
-    }, {
-      "text" : "the cost of the property should be @duckling.interval"
-    }, {
-      "text" : "the cost of the property should be @duckling.amount-of-money"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "price",
-      "entity" : "price",
-      "required" : false,
-      "prompts" : [ ]
-    } ],
-    "priority" : 0
-  }, {
-    "path" : "/area_field",
-    "enabled" : false,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "@area"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "area",
-      "entity" : "area",
-      "required" : false,
-      "prompts" : [ ]
-    } ],
-    "priority" : 0
   } ],
   "entities" : [ {
     "entity" : {
@@ -931,7 +800,7 @@
       "value" : "{\"name\":\"Akrotiri\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "pegeia", "Pegeia", "Пейя" ],
+      "rule" : [ "pegeia", "Pegeia", "Пейя", "peyia" ],
       "value" : "{\"name\":\"Pegeia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",

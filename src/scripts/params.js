@@ -22,6 +22,28 @@ const getFromIntervalOrNumber = (obj) => {
     }
 };
 
+const getFromIntervalOrNumberBedrooms = (obj) => {
+    let from = 0;
+    let to = null;
+    
+    if (!obj[0].value.from) {
+        to = obj[0].value;
+        from = obj[0].value;
+    } else {
+        if (!obj[0].value.to) {
+            from = obj[0].value.from.value;
+        } else {
+            from = obj[0].value.from.value;
+            to = obj[0].value.to.value;
+        }
+    }
+    
+    return {
+        from,
+        to
+    }
+};
+
 const getCity = (obj) => {
     return obj[0].value;
 };
@@ -43,7 +65,7 @@ const getAllParamsFromTree = async (parseTree) => {
     //$reactions.answer(JSON.stringify($parseTree));
     
     if (parseTree.bedroom) {
-        const bedrooms = getFromIntervalOrNumber(parseTree.bedroom);
+        const bedrooms = getFromIntervalOrNumberBedrooms(parseTree.bedroom);
         filledParams.bedroomsFrom = bedrooms.from;
         filledParams.bedroomsTo = bedrooms.to;
     }
@@ -166,7 +188,7 @@ const processParams = async () => {
     if ($session.params.location) {
         if (!$session.info.location || ($session.info.location.cityNameEn !== $session.params.location.name)) {
             const location = await utl.getCityInfo($session.params.location.name, $session.params.location.country);
-            $session.info.location = location;
+           $session.info.location = location;
             newParams.push('Location');
         }
     } else emptyParams.push('Location'); 

@@ -259,6 +259,7 @@ theme: /
         intent!: /anisadIndex
         scriptEs6:
             const index = $parseTree.index[0].value;
+
             await util.getListingById(index);
             
         state: Seller
