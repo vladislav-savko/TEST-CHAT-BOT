@@ -122,63 +122,6 @@ const postJSON = (object) => {
   $reactions.answer(JSON.stringify(object));
 };
 
-// function formatListing(listingData) {
-//   const parameters = [
-//     { key: 'floorArea', label: 'Floor area', unit: 'm²', format: (value) => `*${value}m²*` },
-//     { key: 'bedrooms', label: 'Bedrooms' },
-//     { key: 'furnishing', label: 'Furnishings', format: (value) => `*${value.toLowerCase()}*` },
-//     { key: 'balcony', label: 'Balcony', format: (value) => (value ? "+" : "-") },
-//     { key: 'bathrooms', label: 'Bathrooms' }
-//   ];
-
-//   let result = parameters.reduce((acc, param) => {
-//     if (listingData[param.key] !== null && listingData[param.key] !== undefined) {
-//       const formattedValue = param.format ? param.format(listingData[param.key]) : listingData[param.key];
-//       return acc + `- ${param.label}: ${formattedValue}\n`;
-//     }
-//     return acc;
-//   }, '');
-//   return result;
-// }
-
-// function formatListingI(listingData) {
-//   const parameters = [
-//     { key: 'floorArea', label: 'Floor area', format: (value) => `*${value}m²*` },
-//     { key: 'floorNumber', label: 'Floor number' },
-//     { key: 'residentialFloors', label: 'Residential floors' },
-//     { key: 'bedrooms', label: 'Bedrooms' },
-//     { key: 'sleepingPlaces', label: 'Sleeping places' },
-//     { key: 'beds', label: 'Beds' },
-//     { key: 'furnishing', label: 'Furnishings', format: (value) => `*${value.toLowerCase()}*` },
-//     { key: 'alarmSystem', label: 'Alarm system', format: (value) => (value ? "+" : "-") },
-//     { key: 'condition', label: 'Condition', format: (value) => value.toLowerCase().replace(/_/g, ' ')},
-//     { key: 'bathrooms', label: 'Bathrooms' },
-//     { key: 'kitchen', label: 'Kitchen', format: (value) => (value ? "+" : "-") },
-//     { key: 'balcony', label: 'Balcony', format: (value) => (value ? "+" : "-") },
-//     { key: 'parking', label: 'Parking', format: (value) => (value ? "+" : "-") },
-//     { key: 'electricity', label: 'Electricity', format: (value) => (value ? "+" : "-") },
-//     { key: 'gas', label: 'Gas', format: (value) => (value ? "+" : "-") },
-//     { key: 'airConditioning', label: 'Air conditioning', format: (value) => value.toLowerCase().replace(/_/g, ' ') },
-//     { key: 'heating', label: 'Heating', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
-//     { key: 'waterHeating', label: 'Water heating',format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
-//     { key: 'television', label: 'Television' },
-//     { key: 'internet', label: 'Internet', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
-//     { key: 'infrastructureAmenity', label: 'Infrastructure amenity', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
-//     { key: 'repairAmenity', label: 'Repair amenity', format: (value) => value.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ') },
-//     { key: 'additionalAmenity', label: 'Additional amenity', format: (value) => value.toLowerCase().replace(/_/g, ' ') }
-//   ];
-
-//   let result = parameters.reduce((acc, param) => {
-//     if (listingData[param.key] !== null && listingData[param.key] !== undefined) {
-//       const formattedValue = param.format ? param.format(listingData[param.key]) : listingData[param.key];
-//       return acc + `- ${param.label}: ${formattedValue}\n`;
-//     }
-//     return acc;
-//   }, '');
-
-//   return result;
-// }
-
 function getIdsFromListings(res) {
     if (res && res.data && Array.isArray(res.data.listings)) {
         return res.data.listings.map(listing => listing.id);
@@ -197,7 +140,7 @@ const getListings = async (sessionData) => {
         const listingData = getListingData(listing);
 
         const propertyDetails = `
-${listing.listingType !== null ? `${listing.listingType.toLowerCase()}` : ''} ${listing.price !== null ? `*${listing.price} €*` : ''}
+${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `*${listing.price} €*` : ''}
 ${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name}` : ''}
 ${listingData.floorArea !== null ? `- Property area: *${listingData.floorArea}m²*` : ''}
 ${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms}` : ''}

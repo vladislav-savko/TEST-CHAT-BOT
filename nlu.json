@@ -562,6 +562,26 @@
       "prompts" : [ ]
     } ],
     "priority" : 0
+  }, {
+    "path" : "/detailsPosition",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "details for last one"
+    }, {
+      "text" : "details for first one"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "details_for_position",
+      "entity" : "details_for_position",
+      "required" : true,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
   } ],
   "entities" : [ {
     "entity" : {
@@ -2442,6 +2462,29 @@
       "type" : "pattern",
       "rule" : [ "@duckling.number [(square/miles/meters/sq/m/kilometers/km)]" ],
       "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "details_for_position",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "first one" ],
+      "value" : "{\n position: \"first\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "last one" ],
+      "value" : "{\n position: \"last\"\n}"
     } ]
   } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.interval", "duckling.amount-of-money" ],

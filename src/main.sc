@@ -29,7 +29,9 @@ theme: /
             a: Good day! I’m ready to assist you with choosing a property. Are you interested in renting or buying?
             a: Greetings! Looking for a new apartment? Tell me what you need, and I’ll help you find the best option.
             a: Hello! I am your AI real estate assistant. How can I assist you—renting or buying?
-            
+        scriptEs6:
+            $reactions.answer("If you would like to learn more about our bot commands, simply say **Info**");
+        
     state: Search
         intent!: /searchAll
         scriptEs6:
@@ -241,11 +243,11 @@ theme: /
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
                 $reactions.answer("To see more results, just say **Show more**");
+                $session.lastParams = $session.params;
             } else {
                 $reactions.answer("Sorry, there are no more listings available based on your request.");
             }
-            $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
-            
+
             $session.state = "Display";
 
         state: ShowMore
@@ -255,29 +257,71 @@ theme: /
                 $session.state = "Show more";
                 $reactions.transition("/DisplayResults");
                 
+        state: ShowByPosition
+            intent!: /detailsPosition
+            scriptEs6:
+                //$reactions.answer(JSON.stringify($parseTree));
+                
+                const position = $parseTree.details_for_position?.[0]?.value?.position;
+                const hasSessionIds = $session.ids.length > 0;
+                
+                const getIndexByPosition = (position) => {
+                    if (position === 'last') return $session.ids[$session.ids.length - 1];
+                    if (position === 'first') return $session.ids[0];
+                    return null;
+                };
+                
+                const handleReactions = async () => {
+                    if (hasSessionIds) {
+                        const index = getIndexByPosition(position);
+                        if (index !== null) {
+                            await util.getListingById(index);
+                        } else {
+                            $reactions.answer("Invalid position value.");
+                        }
+                    } else {
+                        $reactions.answer("I don't know what properties I can show you, you need to make a search request first.");
+                    }
+                };
+                
+                await handleReactions();
+                
+            state: Seller
+                q: Seller Contacts
+                scriptEs6:
+                    await util.getSeller();
+                
     state: ShowByIndex
         intent!: /anisadIndex
         scriptEs6:
             const index = $parseTree.index[0].value;
-
             await util.getListingById(index);
             
         state: Seller
             q: Seller Contacts
             scriptEs6:
                 await util.getSeller();
-
+                
     state: Restart
         intent!: /reset
         scriptEs6:
             util.session();
             $reactions.transition("/Start");
+
+    state: Help
+        q!: * (info|Info) *
+        scriptEs6:
+            $reactions.answer("To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, **I want to buy a house in Limassol with the budget above 10k$**");
+            $reactions.answer("You can write which benefits you would like to have in your future property like sea view, terrace, furniture etc. For instance, Can you show me options with the balcony, alarm system and air conditiong");
+            $reactions.answer("If, when adding parameters to a query, at some point you encounter a lack of search results, you can cancel the last entered value using the **Undo** command.");
+            $reactions.answer("To get more details on a specific property, enter \"**show by** *id property*\". You can also use the \"**details for** *first|last* **one**\" commands after the listing is displayed.");
+            $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
     
-    # state: Undo
-    #     q!: ~Undo
-    #     scriptEs6:
-    #         $session.params = $session.lastParams;
-    #         $reactions.transition("/Search/SwitchParams");
+    state: Undo
+        q!: ~Undo
+        scriptEs6:
+            $session.params = $session.lastParams;
+            $reactions.transition("/Search/SwitchParams");
             
     state: Bye
         intent!: /bye
