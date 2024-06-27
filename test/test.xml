@@ -1,14 +1,4 @@
-<!--<test>-->
-<!--    <test-case id="LowBudgetAndNoListings">-->
-<!--       <q>/start</q>-->
-<!--       <a state = "/Start"/>-->
-<!--       <q>I want to buy a house in pafos</q>-->
-<!--       <a>What budget are you looking for?</a>-->
-<!--       <q>My budget is below 10$</q>-->
-<!--       <a>Sorry, there are no more listings available based on your request.</a>-->
-<!--       <a>If you would like to restart the conversation and clear all previous information, simply say **Reset**</a>-->
-<!--    </test-case>-->
-    
+<test>
 <!--    <test-case id="HighBudgetAndListings">-->
 <!--        <q>/start</q>-->
 <!--        <a state = "/Start"/>-->
@@ -22,4 +12,4 @@
 <!--        <a state = "/Start"/>-->
         
 <!--    </test-case>-->
-<!--</test>    -->
+</test>

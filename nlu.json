@@ -443,6 +443,10 @@
       "text" : "approximately @price"
     }, {
       "text" : "my budget is @duckling.amount-of-money"
+    }, {
+      "text" : "i want rent a house"
+    }, {
+      "text" : "i want rent a villa"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -742,11 +746,11 @@
     "records" : [ {
       "type" : "synonyms",
       "rule" : [ "Buy", "Purchase", "Obtain", "Procure", "Sale" ],
-      "value" : "{\n    \"constBuyRent\" : \"SALE\"\n}"
+      "value" : "{\n  \"constBuyRent\": \"SALE\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "Lease", "Take", "Rent" ],
-      "value" : "{\n   \"constBuyRent\" : \"RENT\"\n}"
+      "value" : "{\n  \"constBuyRent\": \"RENT\"\n}"
     } ]
   }, {
     "entity" : {
@@ -1037,10 +1041,6 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "house" ],
-      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"SEMIDETACHED_HOUSE\",\n\"VILLA\"\n  ],\n  \"word\": \"House\"\n}"
-    }, {
-      "type" : "synonyms",
       "rule" : [ "plot" ],
       "value" : "{\n  \"estate\": [\n    \"COMMERCIAL_PLOT\",\n    \"RESIDENTIAL_PLOT\",\n    \"AGRICULTURE_PLOT\"\n  ],\n\"word\" : \"plot\"\n}"
     }, {
@@ -1054,7 +1054,7 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "villa", "Villa", "vila", "Vila" ],
-      "value" : "{\n    \"estate': [\"VILLA\"],\n    \"word\" : \"Villa\"\n}"
+      "value" : "{\n    \"estate\": [\"VILLA\"],\n    \"word\" : \"Villa\"\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "retail space", "retail" ],
@@ -1083,6 +1083,10 @@
       "type" : "synonyms",
       "rule" : [ "public catering facility", "public catering", "catering", "catering facility", "catering building" ],
       "value" : "{\n  \"estate\": [\n    \"PUBLIC_CATERING_FACILITY\"\n  ],\n  \"word\": \"Commerce\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "house", "home" ],
+      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"VILLA\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -2443,7 +2447,7 @@
   }, {
     "entity" : {
       "name" : "area",
-      "enabled" : true,
+      "enabled" : false,
       "shared" : false,
       "type" : "annotation",
       "priority" : 1,

@@ -33,8 +33,8 @@ const getCitiesInfo = async (city) => {
 };
 
 const getListing = async (info) => {
-  const { data } = await instance.post(ENDPOINT.post__listing, info);
-  return data;
+    const { data } = await instance.post(ENDPOINT.post__listing, info);
+    return data;
 };
 
 const getListingById = async (id) => {

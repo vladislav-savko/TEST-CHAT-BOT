@@ -106,12 +106,14 @@ const getAllParamsFromTree = async (parseTree) => {
         filledParams.residentialFloorsTo = residentialFloors.to;
     }
     
-    if (parseTree._listingType) {
-        filledParams.listingType = parseTree._listingType.constBuyRent;
+    if (parseTree.listingType) {
+        // filledParams.listingType = parseTree._listingType.constBuyRent;
+        filledParams.listingType = getProperty(parseTree.listingType, 'constBuyRent');
     }
     
-    if (parseTree._propertyTypes) {
-        filledParams.propertyTypes = parseTree._propertyTypes.estate;
+    if (parseTree.propertyTypes) {
+        // filledParams.propertyTypes = parseTree._propertyTypes.estate;
+        filledParams.propertyTypes = getProperty(parseTree.propertyTypes, 'estate');
     }
     
     if (parseTree._kitchen) {
@@ -188,7 +190,7 @@ const processParams = async () => {
     if ($session.params.location) {
         if (!$session.info.location || ($session.info.location.cityNameEn !== $session.params.location.name)) {
             const location = await utl.getCityInfo($session.params.location.name, $session.params.location.country);
-           $session.info.location = location;
+            $session.info.location = location;
             newParams.push('Location');
         }
     } else emptyParams.push('Location'); 
@@ -283,7 +285,7 @@ const emptyParamsResult = async (params) => {
     }
 
     if (params.length === 0) {
-        $reactions.transition("/DisplayResults");
+        return $reactions.transition("/DisplayResults");
     }
 };
 
