@@ -1086,7 +1086,7 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "house", "home" ],
-      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"VILLA\"\n  ]\n}"
+      "value" : "{\n  \"estate\": [\n    \"DETACHED_HOUSE\",\n    \"VILLA\",\n    \"SEMIDETACHED_HOUSE\"\n  ]\n}"
     } ]
   }, {
     "entity" : {

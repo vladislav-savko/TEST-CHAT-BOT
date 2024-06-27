@@ -163,11 +163,16 @@ ${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repai
         .filter(line => line.trim() !== '')
         .join('\n');
         
-        $response.replies.push(
-          {
+        const image = listing.photos.length !== 0 ? {
             type: "image",
             imageUrl: listing.photos[0],
-          },
+          } : {
+              type: "image",
+              imageUrl: "https://dummyimage.com/600x400/000/ffffff&text=without+photo"
+          };
+        
+        $response.replies.push(
+          image,
           {
             type: "text",
             text: `**${listing.title.trim()}**
