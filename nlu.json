@@ -35,6 +35,8 @@
       "text" : "Thank you"
     }, {
       "text" : "Goodbye"
+    }, {
+      "text" : "great success"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -51,107 +53,16 @@
       "text" : "what can you do"
     }, {
       "text" : "hi"
+    }, {
+      "text" : "hey "
+    }, {
+      "text" : "sup"
     } ],
     "classificationRules" : {
       "refs" : [ ]
     },
     "patterns" : [ ],
     "slots" : [ ],
-    "priority" : 0
-  }, {
-    "path" : "/location",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "location",
-      "entity" : "location",
-      "required" : true,
-      "prompts" : [ ]
-    } ],
-    "priority" : 0
-  }, {
-    "path" : "/bedroom",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ {
-      "text" : "4 bedrooms"
-    }, {
-      "text" : "bedroom"
-    }, {
-      "text" : "bedrooms"
-    }, {
-      "text" : "2 bedrooms"
-    }, {
-      "text" : "with 2 bedrooms"
-    }, {
-      "text" : "with 5 bedrooms"
-    }, {
-      "text" : "with 5 bedroom"
-    }, {
-      "text" : "Show me a property with @duckling.number @bedroom."
-    }, {
-      "text" : "with @duckling.number @bedroom"
-    }, {
-      "text" : "Show me an apartment with @duckling.number @bedroom."
-    }, {
-      "text" : "I am looking for an apartment with @duckling.number @bedroom."
-    }, {
-      "text" : "Find an apartment that has @duckling.number @bedroom."
-    }, {
-      "text" : "Can you find an apartment with @duckling.number @bedroom for me?"
-    }, {
-      "text" : "Show me a house with @duckling.number @bedroom."
-    }, {
-      "text" : "I need a house with @duckling.number @bedroom."
-    }, {
-      "text" : "Find a house that has @duckling.number @bedroom."
-    }, {
-      "text" : "Can you find a house with @duckling.number @bedroom for me?"
-    }, {
-      "text" : "I am looking for a property with @duckling.number @bedroom."
-    }, {
-      "text" : "Find a property that has @duckling.number @bedroom."
-    }, {
-      "text" : "Can you find a property with @duckling.number @bedroom for me?"
-    }, {
-      "text" : "@duckling.number @bedroom"
-    } ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "bedroom",
-      "entity" : "bedroom",
-      "required" : true,
-      "prompts" : [ ]
-    }, {
-      "name" : "Number",
-      "entity" : "duckling.number",
-      "required" : true,
-      "prompts" : [ ]
-    } ],
-    "priority" : 0
-  }, {
-    "path" : "/country",
-    "enabled" : true,
-    "shared" : false,
-    "phrases" : [ ],
-    "classificationRules" : {
-      "refs" : [ ]
-    },
-    "patterns" : [ ],
-    "slots" : [ {
-      "name" : "country",
-      "entity" : "country",
-      "required" : true,
-      "prompts" : [ ]
-    } ],
     "priority" : 0
   }, {
     "path" : "/anisadIndex",
@@ -574,6 +485,10 @@
       "text" : "details for last one"
     }, {
       "text" : "details for first one"
+    }, {
+      "text" : "details about third apt"
+    }, {
+      "text" : "details about second "
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -1049,7 +964,7 @@
       "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "apartment", "aparment", "apartament", "flat" ],
+      "rule" : [ "apartment", "aparment", "apartament", "flat", "apts", "appts" ],
       "value" : "{\n  \"estate\": [\n    \"APARTMENT\"\n  ],\n\"word\" : \"Apartment\"\n}"
     }, {
       "type" : "synonyms",
@@ -2124,7 +2039,7 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "includes storage", "storage" ],
-      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
+      "value" : "{\n  \"infra\": [\n    \"STORAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with sauna", "sauna" ],
@@ -2154,7 +2069,15 @@
       "value" : ""
     }, {
       "type" : "pattern",
-      "rule" : [ "{(budget/price/cost*) $regexp<.*?> @duckling.interval}" ],
+      "rule" : [ "{(budget/price/cost*/up) $regexp<.*?> @duckling.interval}" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "any", "anything", "does not matter", "doesn't matter", "doesnt matter", "whatever" ],
+      "value" : ""
+    }, {
+      "type" : "pattern",
+      "rule" : [ "{(budget/price/cost*/up) $regexp<.*?> @duckling.number}" ],
       "value" : ""
     } ]
   }, {
@@ -2366,7 +2289,7 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "includes storage", "storage" ],
-      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE \"\n  ]\n}"
+      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "near the slope", "close to slope", "near slope", "near a slope", "slope" ],
@@ -2483,12 +2406,16 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "first one" ],
+      "rule" : [ "first one", "first" ],
       "value" : "{\n position: \"first\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "last one" ],
+      "rule" : [ "last one", "third one", "third" ],
       "value" : "{\n position: \"last\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "second one", "second apt", "second" ],
+      "value" : "{\n position: \"second\"\n}"
     } ]
   } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.interval", "duckling.amount-of-money" ],

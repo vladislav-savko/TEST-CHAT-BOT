@@ -64,6 +64,11 @@ const getAllParamsFromTree = async (parseTree) => {
     let filledParams = {};
     //$reactions.answer(JSON.stringify($parseTree));
     
+     if (parseTree.propertyTypes) {
+        // filledParams.propertyTypes = parseTree._propertyTypes.estate;
+        filledParams.propertyTypes = getProperty(parseTree.propertyTypes, 'estate');
+    }
+    
     if (parseTree.bedroom) {
         const bedrooms = getFromIntervalOrNumberBedrooms(parseTree.bedroom);
         filledParams.bedroomsFrom = bedrooms.from;
@@ -71,6 +76,7 @@ const getAllParamsFromTree = async (parseTree) => {
     }
     
     if (parseTree.price) {
+        $reactions.answer(typeof JSON.stringify(parseTree.price));
         const price = getFromIntervalOrNumber(parseTree.price);
         filledParams.priceFrom = price.from;
         filledParams.priceTo = price.to;
@@ -110,12 +116,7 @@ const getAllParamsFromTree = async (parseTree) => {
         // filledParams.listingType = parseTree._listingType.constBuyRent;
         filledParams.listingType = getProperty(parseTree.listingType, 'constBuyRent');
     }
-    
-    if (parseTree.propertyTypes) {
-        // filledParams.propertyTypes = parseTree._propertyTypes.estate;
-        filledParams.propertyTypes = getProperty(parseTree.propertyTypes, 'estate');
-    }
-    
+
     if (parseTree._kitchen) {
         filledParams.kitchen = parseTree._kitchen.kitchen;
     }
@@ -293,9 +294,24 @@ const updSessionInfo = async (info, params) => {
     $session.data = {...info, ...params};
 }
 
+const checkChangePropertyType = async (data, tree) => {
+    if (JSON.stringify(data.propertyTypes) != JSON.stringify(getProperty(tree.propertyTypes, 'estate'))) {
+        var listing = data.listingType;
+        //var city = $session.info.location;
+        var from = data.priceFrom;
+        var to = data.priceTo;
+        utl.session();
+        $session.params.listingType = listing;
+        //$session.params.location = city;
+        $session.params.priceFrom = from;
+        $session.params.priceTo = to;
+    }
+}
+
 export default {
     getAllParamsFromTree,
     processParams,
     emptyParamsResult,
     updSessionInfo,
+    checkChangePropertyType,
 }

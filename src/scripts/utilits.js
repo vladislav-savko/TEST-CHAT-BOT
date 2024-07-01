@@ -150,14 +150,14 @@ ${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathro
 ${(listingData.parking !== null && $session.data.parking.length) ? `- Parking: ${listingData.parking ? "+" : "-"}` : ''}
 ${(listingData.electricity !== null && $session.data.electricity.length) ? `- Electricity: ${listingData.electricity ? "+" : "-"}` : ''}
 ${(listingData.television !== null && $session.data.television.length) ? `- Television: ${listingData.television ? "+" : "-"}` : ''}
-${(listingData.alarmSystem !== null && $session.data.alarmSystem.length) ? `- Alarm System: ${listingData.alarmSystem ? "+" : "-"}` : ''}
+${(listingData.alarmSystem !== null && $session.data.alarmSystem.length) ? `- Alarm system: ${listingData.alarmSystem ? "+" : "-"}` : ''}
 ${(listingData.gas !== null && $session.data.gas.length) ? `- Gas: ${listingData.gas ? "+" : "-"}` : ''}
 ${(listingData.heating !== null && $session.data.heating.length) ? `- Heating: ${listingData.heating}` : ''}
-${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water Heating: ${listingData.waterHeating}` : ''}
+${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water heating: ${listingData.waterHeating}` : ''}
 ${(listingData.internet !== null && $session.data.internet.length) ? `- Internet: ${listingData.internet}` : ''}
-${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air Conditioning: *${listingData.airConditioning}*` : ''}
-${listingData.infrastructureAmenity !== null ? `- Infrastructure Amenity: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')}` : ''}
-${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair Amenity: ${listingData.repairAmenity}` : ''}
+${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air conditioning: *${listingData.airConditioning}*` : ''}
+${listingData.infrastructureAmenity !== null ? `- Infrastructure amenities: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')}` : ''}
+${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair amenities: ${listingData.repairAmenity}` : ''}
 `
         .split('\n')
         .filter(line => line.trim() !== '')

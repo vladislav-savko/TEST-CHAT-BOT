@@ -30,12 +30,17 @@ theme: /
             a: Greetings! Looking for a new apartment? Tell me what you need, and I’ll help you find the best option.
             a: Hello! I am your AI real estate assistant. How can I assist you—renting or buying?
         scriptEs6:
-            $reactions.answer("If you would like to learn more about our bot commands, simply say **Info**");
+            $reactions.answer("If you would like to learn which filters can be used to find the best option for you, simply say **Info**");
         
     state: Search
         intent!: /searchAll
         scriptEs6:
             # $reactions.answer(JSON.stringify($parseTree));
+            if ($parseTree.propertyTypes) {
+                //$reactions.answer("KSO");
+                await pr.checkChangePropertyType($session.data, $parseTree);
+            }
+            //$reactions.answer(JSON.stringify($session.data));
             const params = await pr.getAllParamsFromTree($parseTree);
             $session.params = {...$session.params, ...params};
             $reactions.transition("/Search/SwitchParams");
@@ -57,7 +62,7 @@ theme: /
             q!: * (location/city/county) * {@location [@country]} *
             scriptEs6:
                 if(!$parseTree._location) {
-                    $reactions.answer("In what location would you like to view the property?");
+                    $reactions.answer("In which city would you like to view the property?");
                 } else {
                     const params = await pr.getAllParamsFromTree($parseTree);
                     $session.params = {...$session.params, ...params};
@@ -239,7 +244,7 @@ theme: /
                 $session.data.skip = 0;
             }
             
-            # $reactions.answer(JSON.stringify($session.data));
+            //$reactions.answer(JSON.stringify($session.data));
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
                 $reactions.answer("To see more results, just say **Show more**");
@@ -268,6 +273,7 @@ theme: /
                 const getIndexByPosition = (position) => {
                     if (position === 'last') return $session.ids[$session.ids.length - 1];
                     if (position === 'first') return $session.ids[0];
+                    if (position === 'second') return $session.ids[1];
                     return null;
                 };
                 
@@ -312,7 +318,8 @@ theme: /
         q!: * (info|Info) *
         scriptEs6:
             $reactions.answer("To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, **I want to buy a house in Limassol with the budget above 10k$**");
-            $reactions.answer("You can write which benefits you would like to have in your future property like sea view, terrace, furniture etc. For instance, Can you show me options with the balcony, alarm system and air conditiong");
+           // $reactions.answer("You can write which benefits you would like to have in your future property like sea view, terrace, furniture etc. For instance, Can you show me options with the balcony, alarm system and air conditiong");
+            $reactions.answer("Here is the list of benefits you can type: \n - Alarm system \n - Air conditioning **(Everywhere, Only bedrooms, No)** \n - Balcony \n - Building condition **(Ready To move in , Under construction)** \n - Condition **(New , Well maintaned, Needs renovation)** \n - Kitchen \n - Parking \n - Natural gas \n - Electricity \n - Internet **(No, Wi-Fi, Cable, Mobile)** \n - Heating **(No, Central, Gas, Elctric, Liquid fuel)** \n - Water heating **(No, Central, Boiler, Solar system, Photovoltaic system)** \n - Amenities **(Near the school, Near the park, Calm district, In the center, Parking place, Beautiful view, Sauna, Sea view, Security, Storage, Near the subway, Near the kindergarten, Near the sea, Near the lake, With garden, With garage)** ");
             $reactions.answer("If, when adding parameters to a query, at some point you encounter a lack of search results, you can cancel the last entered value using the **Undo** command.");
             $reactions.answer("To get more details on a specific property, enter \"**show by** *id property*\". You can also use the \"**details for** *first|last* **one**\" commands after the listing is displayed.");
             $reactions.answer("If you would like to restart the conversation and clear all previous information, simply say **Reset**");
