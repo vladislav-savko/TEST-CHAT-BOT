@@ -23,6 +23,17 @@ theme: /
             //$reactions.answer(JSON.stringify($session.data));
             //нужно удалить в проде (НАВЕРНОЕ, а может и так заебись)
             util.session();
+            
+            bind("postProcess", function($context) {
+                if ($context.response.channelType === "telegram") {
+                    $context.response.replies = $context.response.replies.map(function(reply) {
+                        if (reply.type === "text") {
+                            reply.markup = "markdown";
+                        }
+                        return reply;
+                    });
+                }
+            });
         random:
             a: Hello! I am your real estate assistant. Are you looking to rent or buy a property?
             a: Hi! I’m here to help you find the perfect home. Are you planning to rent or buy?
