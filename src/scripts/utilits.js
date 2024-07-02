@@ -213,7 +213,7 @@ const printPost = (listing) => {
   
   $response.replies.push({
     type: "text",
-    markup: 'markdown',
+    markup: 'html',
     text: `${listing.description}`,
   });
   
