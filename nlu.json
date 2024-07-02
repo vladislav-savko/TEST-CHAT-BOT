@@ -37,6 +37,12 @@
       "text" : "Goodbye"
     }, {
       "text" : "great success"
+    }, {
+      "text" : "thanks"
+    }, {
+      "text" : "bb"
+    }, {
+      "text" : "have a good day"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -92,6 +98,8 @@
       "text" : "restart"
     }, {
       "text" : "forget everything"
+    }, {
+      "text" : "clear filter"
     } ],
     "classificationRules" : {
       "refs" : [ ]

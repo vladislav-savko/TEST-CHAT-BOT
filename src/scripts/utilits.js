@@ -135,69 +135,83 @@ function getIdsFromListings(res) {
     }
 }
 
-const getListings = async (sessionData) => {
-  try {
-    sessionData.take = 3;
-    const res = await api.getListing(sessionData);
-    if (res && res.data.listings.length > 0) {
-      $session.ids = getIdsFromListings(res);
-      res.data.listings.map((listing) => {
-        const listingData = getListingData(listing);
+const hasNextPage = (total, take, skip) => {
+    const displayed = skip + take;
+    return displayed < total;
+}
 
-        const propertyDetails = `
-${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\*` : ''}
-${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name}` : ''}
-${listingData.floorArea !== null ? `- Property area: \*${listingData.floorArea}m²\*` : ''}
-${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms}` : ''}
-${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\*` : ''}
-${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"}` : ''}
-${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms}` : ''}
-${(listingData.parking !== null && $session.data.parking.length) ? `- Parking: ${listingData.parking ? "+" : "-"}` : ''}
-${(listingData.electricity !== null && $session.data.electricity.length) ? `- Electricity: ${listingData.electricity ? "+" : "-"}` : ''}
-${(listingData.television !== null && $session.data.television.length) ? `- Television: ${listingData.television ? "+" : "-"}` : ''}
-${(listingData.alarmSystem !== null && $session.data.alarmSystem.length) ? `- Alarm system: ${listingData.alarmSystem ? "+" : "-"}` : ''}
-${(listingData.gas !== null && $session.data.gas.length) ? `- Gas: ${listingData.gas ? "+" : "-"}` : ''}
-${(listingData.heating !== null && $session.data.heating.length) ? `- Heating: ${listingData.heating}` : ''}
-${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water heating: ${listingData.waterHeating}` : ''}
-${(listingData.internet !== null && $session.data.internet.length) ? `- Internet: ${listingData.internet}` : ''}
-${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air conditioning: \*${listingData.airConditioning}\*` : ''}
-${listingData.infrastructureAmenity !== null ? `- Infrastructure amenities: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')}` : ''}
-${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair amenities: ${listingData.repairAmenity}` : ''}
-`
-        .split('\n')
-        .filter(line => line.trim() !== '')
-        .join('\n');
-        
-        const image = listing.photos.length !== 0 ? {
-            type: "image",
-            imageUrl: listing.photos[0],
-          } : {
-              type: "image",
-              imageUrl: "https://dummyimage.com/600x400/000/ffffff&text=without+photo"
-          };
-        
-        $response.replies.push(
-          image,
-          {
-            type: "text",
-            markup: 'markdown',
-            text: `\*${listing.title.trim()}\*
-\*ID: ${listing.id}\*
-${propertyDetails}
-[Show in browser](${linkToBrowserPage(listing)})`,
-          }
-        );
-      });
-      return true;
-    } else {
-      return false;
+const printShowMore = (total, take, skip) => {
+    if ($request.channelType === "telegram") {
+        const buttons = hasNextPage(total, take, skip) ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
+        $response.replies.push({
+            type: "buttons",
+            buttons
+        });
     }
-  } catch (error) {
-    $reactions.answer(
-      "Something's broken, please try again later. Sorry"
-    );
-    return false;
-  }
+}
+
+const getListings = async (sessionData) => {
+    try {
+        sessionData.take = 3;
+        const res = await api.getListing(sessionData);
+        if (res && res.data.listings.length > 0) {
+            $session.ids = getIdsFromListings(res);
+            res.data.listings.map((listing) => {
+                const listingData = getListingData(listing);
+                const propertyDetails = 
+                    `${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\* \n` : ''}` +
+                    `${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name} \n` : ''}` +
+                    `${listingData.floorArea !== null ? `- Property area: \*${listingData.floorArea}m²\* \n` : ''}` +
+                    `${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
+                    `${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\* \n` : ''}` +
+                    `${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms} \n` : ''}` +
+                    `${(listingData.parking !== null && $session.data.parking.length) ? `- Parking: ${listingData.parking ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.electricity !== null && $session.data.electricity.length) ? `- Electricity: ${listingData.electricity ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.television !== null && $session.data.television.length) ? `- Television: ${listingData.television ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.alarmSystem !== null && $session.data.alarmSystem.length) ? `- Alarm system: ${listingData.alarmSystem ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.gas !== null && $session.data.gas.length) ? `- Gas: ${listingData.gas ? "+" : "-"} \n` : ''}` +
+                    `${(listingData.heating !== null && $session.data.heating.length) ? `- Heating: ${listingData.heating} \n` : ''}` +
+                    `${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water heating: ${listingData.waterHeating} \n` : ''}` +
+                    `${(listingData.internet !== null && $session.data.internet.length) ? `- Internet: ${listingData.internet} \n` : ''}` +
+                    `${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air conditioning: \*${listingData.airConditioning}\* \n` : ''}` +
+                    `${listingData.infrastructureAmenity !== null ? `- Infrastructure amenities: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')} \n` : ''}` +
+                    `${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair amenities: ${listingData.repairAmenity}` : ''}`
+                .split('\n')
+                .filter(line => line.trim() !== '')
+                .join('\n');
+    
+                const image = listing.photos.length !== 0 ? {
+                    type: "image",
+                    imageUrl: listing.photos[0],
+                    } : {
+                    type: "image",
+                    imageUrl: "https://dummyimage.com/600x400/000/ffffff&text=without+photo"
+                    };
+    
+                $response.replies.push(
+                    image,
+                    {
+                        type: "text",
+                        markup: 'markdown',
+                        text: `\*${listing.title.trim()}\* \n` +
+                            `\*ID: ${listing.id}\* \n` +
+                            `${propertyDetails} \n` +
+                            `[Show in browser](${linkToBrowserPage(listing)})`,
+                    }
+                );
+            });
+            return true;
+        } else {
+            return false;
+        }
+        printShowMore(res.data.total, 3, sessionData.skip);
+    } catch (error) {
+        $reactions.answer(
+            "Something's broken, please try again later. Sorry"
+        );
+        return false;
+    }
 };
 
 const printPost = (listing) => {
@@ -211,7 +225,7 @@ const printPost = (listing) => {
     });
     
     let turndownService = new TurndownService();
-    const description = turndownService.turndown(listing.description).replaceAll('\\-', '-');
+    const description = turndownService.turndown(listing.description).replaceAll('-','-');
 
     $response.replies.push(...images, {
         type: "text",
@@ -228,7 +242,7 @@ const printPost = (listing) => {
     $response.replies.push({
         type: "text",
         markup: 'markdown',
-        text: `[Open in browser](${linkToBrowserPage(listing)})
+        text: `[Show in browser](${linkToBrowserPage(listing)})
 [Show on map](${linkToMap(listing)})`,
     });
   
