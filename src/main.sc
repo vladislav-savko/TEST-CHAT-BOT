@@ -270,7 +270,7 @@ theme: /
             scriptEs6:
                 $session.data.skip += 3;
                 $session.state = "Show more";
-                $reactions.transition("/DisplayResults");
+                $reactions.transition("/DisplayResults"); 
                 
         state: ShowByPosition
             intent!: /detailsPosition

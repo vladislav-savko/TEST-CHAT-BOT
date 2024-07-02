@@ -10,7 +10,7 @@
     "classificationAlgorithm" : "sts",
     "timezone" : "Europe/Moscow",
     "extendedSettings" : {
-      "allowedPatterns" : [ "location", "electricity", "country", "conditioner_colder", "alarm", "balcony", "bedroom", "furniture", "heater", "house_condition", "infrastructureAmenity", "infrastructureApartmentAmenity", "infrastructureCommerceAmenity", "infrastructureHouseAmenity", "infrastructurePlotAmenity", "internet", "kitchen", "listingType", "natural_gas", "parking", "progress_condition", "propertyTypes", "television", "water_heater", "pattern_water_heater", "repair", "price" ],
+      "allowedPatterns" : [ "location", "electricity", "country", "conditioner_colder", "alarm", "balcony", "bedroom", "furniture", "heater", "house_condition", "infrastructureAmenity", "infrastructureApartmentAmenity", "infrastructureCommerceAmenity", "infrastructureHouseAmenity", "infrastructurePlotAmenity", "internet", "kitchen", "listingType", "natural_gas", "parking", "progress_condition", "propertyTypes", "television", "water_heater", "pattern_water_heater", "repair", "price", "infrastructure_amenity" ],
       "useShared" : false
     },
     "shared" : false,
@@ -68,11 +68,13 @@
     "path" : "/anisadIndex",
     "enabled" : true,
     "shared" : false,
-    "phrases" : [ ],
+    "phrases" : [ {
+      "text" : "show me 6345"
+    } ],
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by index @duckling.number", "* details [(for/by)] [id] @duckling.number *" ],
+    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by [(index\\id)] @duckling.number", "* details [(for/by)] [id] @duckling.number *" ],
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
@@ -2018,49 +2020,6 @@
     } ]
   }, {
     "entity" : {
-      "name" : "infrastructureApartmentAmenity",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "sea view", "view on sea", "view on the sea", "view on a sea", "view sea" ],
-      "value" : "{\n  \"infra\": [\n    \"SEA_VIEW\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "swimming pool", "swim pool", "pool", "swimming" ],
-      "value" : "{\n  \"infra\": [\n    \"SWIMMING_POOL\"\n  ]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "@infrastructureHouseAmenity" ],
-      "value" : ""
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the airport", "close to airport", "close airport", "near airport", "near an airport", "near a airport", "close an airport", "close the airport", "near to airport" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "includes storage", "storage" ],
-      "value" : "{\n  \"infra\": [\n    \"STORAGE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with sauna", "sauna" ],
-      "value" : "{\n  \"infra\": [\n    \"SAUNA\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the slope", "close to slope", "near slope", "near a slope", "slope" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SLOPE\"\n  ]\n}"
-    } ]
-  }, {
-    "entity" : {
       "name" : "price",
       "enabled" : true,
       "shared" : false,
@@ -2089,174 +2048,6 @@
       "type" : "synonyms",
       "rule" : [ "any", "anything", "whatever", "doesnt matter", "does not matter", "doesn't matter", "do not care", "don't care", "dont care", "any budget", "whatever budget", "none", "no budget", "without budget" ],
       "value" : ""
-    } ]
-  }, {
-    "entity" : {
-      "name" : "infrastructureAmenity",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "near the kindergraden", "near the kindergarten", "near the kindergarden", "near kindergarten", "near kindergarden", "near kindergraden", "close to kindergarten", "near to kindergarten", "close kindergarten" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the park", "near park", "close to park", "close park", "park" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "security" ],
-      "value" : "{\n  \"infra\": [\n    \"SECURITY\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "in the center", "center", "in center" ],
-      "value" : "{\n  \"infra\": [\n    \"IN_THE_CENTER\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "beatiful view", "beautiful view ", "good view", "view" ],
-      "value" : "{\n  \"infra\": [\n    \"BEAUTIFUL_VIEW\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "calm district", "calm" ],
-      "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the school", "near school", "close to school", "close school", "school" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "prestige district", "prestige", "prestigious district", "prestigious" ],
-      "value" : "{\n  \"infra\": [\n    \"PRESTIGIOUS_DISTRICT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the sea", "near sea", "close to sea", "sea" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA \"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
-    } ]
-  }, {
-    "entity" : {
-      "name" : "infrastructurePlotAmenity",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "@infrastructureAmenity" ],
-      "value" : ""
-    } ]
-  }, {
-    "entity" : {
-      "name" : "infrastructureCommerceAmenity",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ {
-      "type" : "synonyms",
-      "rule" : [ "separate entrance", "entrance" ],
-      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "includes storage", "storage" ],
-      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE \"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with plot" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
-    }, {
-      "type" : "pattern",
-      "rule" : [ "@infrastructureAmenity" ],
-      "value" : ""
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with basement", "basement" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
-    } ]
-  }, {
-    "entity" : {
-      "name" : "infrastructureHouseAmenity",
-      "enabled" : true,
-      "shared" : false,
-      "type" : "annotation",
-      "priority" : 1,
-      "noSpelling" : true,
-      "noMorph" : false,
-      "phoneticSearch" : false,
-      "fuzzySearch" : false,
-      "client" : false,
-      "hidden" : false
-    },
-    "records" : [ {
-      "type" : "pattern",
-      "rule" : [ "@infrastructureAmenity" ],
-      "value" : ""
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "parking place" ],
-      "value" : "{\n  \"infra\": [\n    \"PARKING_PLACE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the subway", "close to subway", "near subway", "close subway", "close the subway", "near a subway", "not far from subway", "not too far from subway", "not far to subway", "not too far to subway" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the river", "river", "close to river" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the lake", "close to lake", "lake" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with garden", "garden" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_GARDEN\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with garage", "garage" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_GARAGE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "separate entrance", "entrance" ],
-      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with basement", "basement" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with plot", "include plot", "have plot" ],
-      "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -2298,7 +2089,7 @@
       "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "includes storage", "storage" ],
+      "rule" : [ "includes storage", "storage", "storage space" ],
       "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
