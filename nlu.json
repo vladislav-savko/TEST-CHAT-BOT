@@ -358,6 +358,8 @@
       "text" : "i want rent a house"
     }, {
       "text" : "i want rent a villa"
+    }, {
+      "text" : "@price"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -665,6 +667,14 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "Lease", "Take", "Rent" ],
+      "value" : "{\n  \"constBuyRent\": \"RENT\"\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "(Buying|Salling)" ],
+      "value" : "{\n  \"constBuyRent\": \"SALE\"\n}"
+    }, {
+      "type" : "pattern",
+      "rule" : [ "~Rent" ],
       "value" : "{\n  \"constBuyRent\": \"RENT\"\n}"
     } ]
   }, {
@@ -2072,12 +2082,12 @@
       "rule" : [ "{(budget/price/cost*/up) $regexp<.*?> @duckling.interval}" ],
       "value" : ""
     }, {
-      "type" : "synonyms",
-      "rule" : [ "any", "anything", "does not matter", "doesn't matter", "doesnt matter", "whatever" ],
-      "value" : ""
-    }, {
       "type" : "pattern",
       "rule" : [ "{(budget/price/cost*/up) $regexp<.*?> @duckling.number}" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "any", "anything", "whatever", "doesnt matter", "does not matter", "doesn't matter", "do not care", "don't care", "dont care", "any budget", "whatever budget", "none", "no budget", "without budget" ],
       "value" : ""
     } ]
   }, {

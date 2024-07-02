@@ -76,7 +76,6 @@ const getAllParamsFromTree = async (parseTree) => {
     }
     
     if (parseTree.price) {
-        $reactions.answer(typeof JSON.stringify(parseTree.price));
         const price = getFromIntervalOrNumber(parseTree.price);
         filledParams.priceFrom = price.from;
         filledParams.priceTo = price.to;
