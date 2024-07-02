@@ -1,4 +1,5 @@
 import api from "./api.js";
+import TurndownService from "turndown";
 import { API__LINK, VERSION } from "./config.js";
 
 function session() {
@@ -208,6 +209,9 @@ const printPost = (listing) => {
             imageUrl: image,
         };
     });
+    
+    let turndownService = new TurndownService();
+    const description = turndownService.turndown(listing.description).replaceAll('\\-', '-');
 
     $response.replies.push(...images, {
         type: "text",
@@ -218,13 +222,13 @@ const printPost = (listing) => {
     $response.replies.push({
         type: "text",
         markup: 'html',
-        text: `${listing.description}`,
+        text: `${description}`,
     });
   
     $response.replies.push({
         type: "text",
         markup: 'markdown',
-        text: `[Show in browser](${linkToBrowserPage(listing)})
+        text: `[Open in browser](${linkToBrowserPage(listing)})
 [Show on map](${linkToMap(listing)})`,
     });
   
