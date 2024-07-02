@@ -107,6 +107,10 @@ const linkToBrowserPage = (data) => {
   return `${API__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
 };
 
+const linkToMap = (data) => {
+  return `https://www.google.com/maps?q=${data.location?.latitude},${data.location?.longitude}`;
+};
+
 const getListingData = (listing) => {
   if (listing.apartmentSell) return listing.apartmentSell;
   else if (listing.apartmentRent) return listing.apartmentRent;
@@ -220,7 +224,8 @@ const printPost = (listing) => {
     $response.replies.push({
         type: "text",
         markup: 'markdown',
-        text: `[Show in browser](${linkToBrowserPage(listing)})`,
+        text: `[Show in browser](${linkToBrowserPage(listing)})
+[Show on map](${linkToMap(listing)})`,
     });
   
     $response.replies.push({
