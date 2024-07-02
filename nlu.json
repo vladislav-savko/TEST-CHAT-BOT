@@ -82,7 +82,7 @@
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by [(index\\id)] @duckling.number", "* details [(for/by)] [id] @duckling.number *" ],
+    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by [(index\\id)] @duckling.number", "* details [(for/by)] [id] @duckling.number *", "Show details\":\" @duckling.number" ],
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
