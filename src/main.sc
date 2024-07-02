@@ -16,7 +16,7 @@ require: scripts/params.js
 theme: /
 
     state: Start
-        q!: $regex</start>
+        q!: $regex</start> 
         intent!: /hello
         scriptEs6:
             util.initSession();
