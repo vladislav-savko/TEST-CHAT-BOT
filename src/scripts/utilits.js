@@ -224,8 +224,7 @@ const getListings = async (sessionData) => {
                                     url: `${linkToBrowserPage(listing)}`
                                 },
                                 {
-                                    text: `Show details: ${${listing.id}}`,
-                                    url: `${linkToBrowserPage(listing)}`
+                                    text: `Show details: ${listing.id}`,
                                 }
                             ]
                         }
