@@ -141,11 +141,24 @@ const hasNextPage = (total, take, skip) => {
 }
 
 const printShowMore = (total, take, skip) => {
+    const hastNext = hasNextPage(total, take, skip);
     if ($request.channelType === "telegram") {
-        const buttons = hasNextPage(total, take, skip) ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
+        const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
         $response.replies.push({
             type: "buttons",
             buttons
+        });
+    } else if (hastNext) {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text: `To see more results, just say \*Show more\*`,
+        });
+    } else {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text: `There are no more results, you can clear the filters with the **Reset** command`,
         });
     }
 }
@@ -201,11 +214,12 @@ const getListings = async (sessionData) => {
                     }
                 );
             });
+            printShowMore(res.data.total, 3, sessionData.skip);
             return true;
         } else {
+            printShowMore(res.data.total, 3, sessionData.skip);
             return false;
         }
-        printShowMore(res.data.total, 3, sessionData.skip);
     } catch (error) {
         $reactions.answer(
             "Something's broken, please try again later. Sorry"

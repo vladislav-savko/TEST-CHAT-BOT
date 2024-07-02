@@ -253,11 +253,6 @@ theme: /
             }
             const getListingSuccessfully = await util.getListings($session.data);
             if (getListingSuccessfully) {
-                $response.replies.push({
-                    type: "text",
-                    markup: 'markdown',
-                    text: `To see more results, just say \*Show more\*`,
-                });
                 $session.lastParams = $session.params;
             } else {
                 $reactions.answer("Sorry, there are no more listings available based on your request.");

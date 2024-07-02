@@ -76,6 +76,8 @@
     "shared" : false,
     "phrases" : [ {
       "text" : "show me 6345"
+    }, {
+      "text" : "show by id property @duckling.number"
     } ],
     "classificationRules" : {
       "refs" : [ ]

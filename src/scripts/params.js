@@ -212,8 +212,8 @@ const processParams = async () => {
     
     if ($session.params.priceFrom || $session.params.priceTo) {
         if (($session.params.priceFrom !== $session.data.priceFrom) || ($session.params.priceTo !== $session.data.priceTo)) {
-            $session.data.priceTo = $session.params.priceTo;
-            $session.data.priceFrom = $session.params.priceFrom;
+            $session.data.priceTo = Number($session.params.priceTo);
+            $session.data.priceFrom = Number($session.params.priceFrom);
             newParams.push('Price');
         }
     } else emptyParams.push('Price');
