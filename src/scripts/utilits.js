@@ -210,9 +210,27 @@ const getListings = async (sessionData) => {
                         text: `\*${listing.title.trim()}\* \n` +
                             `\*ID: ${listing.id}\* \n` +
                             `${propertyDetails} \n` +
-                            `[Show in browser](${linkToBrowserPage(listing)})`,
+                            `${$request.channelType === "telegram" ? '' : `[Open in browser](${linkToBrowserPage(listing)})`}`,
                     }
                 );
+                
+                if ($request.channelType === "telegram") {
+                    $response.replies.push(
+                        {
+                            type: "inlineButtons",
+                            buttons: [
+                                {
+                                    text: "Open in browser",
+                                    url: `${linkToBrowserPage(listing)}`
+                                },
+                                {
+                                    text: `Show details: ${${listing.id}}`,
+                                    url: `${linkToBrowserPage(listing)}`
+                                }
+                            ]
+                        }
+                    );
+                }
             });
             printShowMore(res.data.total, 3, sessionData.skip);
             return true;
