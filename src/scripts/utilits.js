@@ -206,12 +206,21 @@ const printPost = (listing) => {
 
   $response.replies.push(...images, {
     type: "text",
-    text: `**${listing.title.trim()}**
-**€${listing.price}**
-${listing.description}
-
-[Show in browser](${linkToBrowserPage(listing)})
-`,
+    markup: 'markdown',
+    text: `\*${listing.title.trim()}\*
+\*€${listing.price}\*`,
+  });
+  
+  $response.replies.push({
+    type: "text",
+    markup: 'markdown',
+    text: `${listing.description}`,
+  });
+  
+  $response.replies.push({
+    type: "text",
+    markup: 'markdown',
+    text: `[Show in browser](${linkToBrowserPage(listing)})`,
   });
   
     $response.replies.push({
@@ -225,10 +234,10 @@ ${listing.description}
 const printSellerInfo = (seller) => {
     $response.replies.push({
         type: "text",
-        text: `${seller.firstName} ${seller.lastName}
+        markup: 'markdown',
+        text: `\*${seller.firstName} ${seller.lastName}\*
 ${seller.email}
-${seller.phoneNumber}
-    `,
+${seller.phoneNumber}`,
     });
 };
 

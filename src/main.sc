@@ -30,7 +30,7 @@ theme: /
             a: Greetings! Looking for a new apartment? Tell me what you need, and I’ll help you find the best option.
             a: Hello! I am your AI real estate assistant. How can I assist you—renting or buying?
         scriptEs6:
-            $reactions.answer("If you would like to learn which filters can be used to find the best option for you, simply say **Info**");
+            $reactions.answer("If you would like to learn which filters can be used to find the best option for you, simply say \*Info\*");
         
     state: Search
         intent!: /searchAll
