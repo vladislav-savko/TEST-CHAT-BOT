@@ -96,9 +96,9 @@ const getCityInfo = async (city, country) => {
       }
     }
   } catch (error) {
-    $reactions.answer(
-      "*City* Something's broken, please try again later. Sorry"
-    );
+    // $reactions.answer(
+    //   "*City* Something's broken, please try again later. Sorry"
+    // );
     return false;
   }
 };
@@ -140,11 +140,11 @@ const getListings = async (sessionData) => {
         const listingData = getListingData(listing);
 
         const propertyDetails = `
-${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `*${listing.price} €*` : ''}
+${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\*` : ''}
 ${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name}` : ''}
-${listingData.floorArea !== null ? `- Property area: *${listingData.floorArea}m²*` : ''}
+${listingData.floorArea !== null ? `- Property area: \*${listingData.floorArea}m²\*` : ''}
 ${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms}` : ''}
-${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: *${listingData.furnishing}*` : ''}
+${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\*` : ''}
 ${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"}` : ''}
 ${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms}` : ''}
 ${(listingData.parking !== null && $session.data.parking.length) ? `- Parking: ${listingData.parking ? "+" : "-"}` : ''}
@@ -155,7 +155,7 @@ ${(listingData.gas !== null && $session.data.gas.length) ? `- Gas: ${listingData
 ${(listingData.heating !== null && $session.data.heating.length) ? `- Heating: ${listingData.heating}` : ''}
 ${(listingData.waterHeating !== null && $session.data.waterHeating.length) ? `- Water heating: ${listingData.waterHeating}` : ''}
 ${(listingData.internet !== null && $session.data.internet.length) ? `- Internet: ${listingData.internet}` : ''}
-${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air conditioning: *${listingData.airConditioning}*` : ''}
+${(listingData.airConditioning !== null && $session.data.airConditioning.length) ? `- Air conditioning: \*${listingData.airConditioning}\*` : ''}
 ${listingData.infrastructureAmenity !== null ? `- Infrastructure amenities: ${listingData.infrastructureAmenity.map(v => v.toLowerCase().replace(/_/g, ' ')).join(', ')}` : ''}
 ${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repair amenities: ${listingData.repairAmenity}` : ''}
 `
@@ -175,8 +175,9 @@ ${(listingData.repairAmenity !== null && $session.data.repair.length) ? `- Repai
           image,
           {
             type: "text",
-            text: `**${listing.title.trim()}**
-**ID: ${listing.id}**
+            markup: 'markdown',
+            text: `\*${listing.title.trim()}\*
+\*ID: ${listing.id}\*
 ${propertyDetails}
 [Show in browser](${linkToBrowserPage(listing)})`,
           }
@@ -188,7 +189,7 @@ ${propertyDetails}
     }
   } catch (error) {
     $reactions.answer(
-      "*Listings* Something's broken, please try again later. Sorry"
+      "Something's broken, please try again later. Sorry"
     );
     return false;
   }
@@ -197,31 +198,30 @@ ${propertyDetails}
 const printPost = (listing) => {
   const listingData = getListingData(listing);
 
-  const images = listing.photos.map((image) => {
-    return {
-      type: "image",
-      imageUrl: image,
-    };
-  });
+    const images = listing.photos.map((image) => {
+        return {
+            type: "image",
+            imageUrl: image,
+        };
+    });
 
-  $response.replies.push(...images, {
-    type: "text",
-    markup: 'markdown',
-    text: `\*${listing.title.trim()}\*
-\*€${listing.price}\*`,
-  });
+    $response.replies.push(...images, {
+        type: "text",
+        markup: 'markdown',
+        text: `\*${listing.title.trim()}\*\n\*€${listing.price}\*`,
+    });
   
-  $response.replies.push({
-    type: "text",
-    markup: 'html',
-    text: `${listing.description}`,
-  });
+    $response.replies.push({
+        type: "text",
+        markup: 'html',
+        text: `${listing.description}`,
+    });
   
-  $response.replies.push({
-    type: "text",
-    markup: 'markdown',
-    text: `[Show in browser](${linkToBrowserPage(listing)})`,
-  });
+    $response.replies.push({
+        type: "text",
+        markup: 'markdown',
+        text: `[Show in browser](${linkToBrowserPage(listing)})`,
+    });
   
     $response.replies.push({
         type: "buttons",
