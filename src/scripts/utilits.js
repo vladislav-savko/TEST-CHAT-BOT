@@ -214,18 +214,16 @@ const getListings = async (sessionData) => {
                     }
                 );
                 
-                if ($request.channelType === "telegram") {
-                    $reactions.inlineButtons({
-                        text: `Open in browser`,
-                        url: `${linkToBrowserPage(listing)}`
-                    })
-                    $reactions.inlineButtons({
-                        text: `Show details`,
-                        callback_data: listing.id
-                    })
-                }
-                
-                
+                // if ($request.channelType === "telegram") {
+                //     $reactions.inlineButtons({
+                //         text: `Open in browser`,
+                //         url: `${linkToBrowserPage(listing)}`
+                //     })
+                //     $reactions.inlineButtons({
+                //         text: `Show details`,
+                //         callback_data: listing.id
+                //     })
+                // }
             });
             printShowMore(res.data.total, 3, sessionData.skip);
             return true;
@@ -286,14 +284,14 @@ const printPost = (listing) => {
             text: `[Open in browser](${linkToBrowserPage(listing)}) \n` +
                 `[Show on map](${linkToMap(listing)})`,
         });
+        
+        $response.replies.push({
+            type: "buttons",
+            buttons: [
+                {text: "Seller Contacts"},
+            ]
+        });
     }
-  
-    $response.replies.push({
-        type: "buttons",
-        buttons: [
-            {text: "Seller Contacts"},
-        ]
-    });
 };
 
 const printSellerInfo = (seller) => {
