@@ -215,26 +215,17 @@ const getListings = async (sessionData) => {
                 );
                 
                 if ($request.channelType === "telegram") {
-                    $response.replies.push(
-                        {
-                            type: "inlineButtons",
-                            buttons: [
-                                {
-                                    text: "Open in browser",
-                                    url: `${linkToBrowserPage(listing)}`
-                                },
-                                {
-                                    text: `Show details: ${listing.id}`,
-                                }
-                            ]
-                        }
-                    );
+                    $reactions.inlineButtons({
+                        text: `Open in browser`,
+                        url: `${linkToBrowserPage(listing)}`
+                    })
+                    $reactions.inlineButtons({
+                        text: `Show details`,
+                        callback_data: listing.id
+                    })
                 }
                 
-                $reactions.inlineButtons({
-                    text: `Show details`,
-                    callback_data: listing.id
-                })
+                
             });
             printShowMore(res.data.total, 3, sessionData.skip);
             return true;
