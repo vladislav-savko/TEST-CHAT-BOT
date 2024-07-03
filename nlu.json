@@ -10,7 +10,7 @@
     "classificationAlgorithm" : "sts",
     "timezone" : "Europe/Moscow",
     "extendedSettings" : {
-      "allowedPatterns" : [ "location", "electricity", "country", "conditioner_colder", "alarm", "balcony", "bedroom", "furniture", "heater", "house_condition", "infrastructureAmenity", "infrastructureApartmentAmenity", "infrastructureCommerceAmenity", "infrastructureHouseAmenity", "infrastructurePlotAmenity", "internet", "kitchen", "listingType", "natural_gas", "parking", "progress_condition", "propertyTypes", "television", "water_heater", "pattern_water_heater", "repair", "price", "infrastructure_amenity" ],
+      "allowedPatterns" : [ "location", "electricity", "country", "conditioner_colder", "alarm", "balcony", "bedroom", "furniture", "heater", "house_condition", "infrastructureAmenity", "infrastructureApartmentAmenity", "infrastructureCommerceAmenity", "infrastructureHouseAmenity", "infrastructurePlotAmenity", "internet", "kitchen", "listingType", "natural_gas", "parking", "progress_condition", "propertyTypes", "television", "water_heater", "pattern_water_heater", "repair", "price", "infrastructure_amenity", "area" ],
       "useShared" : false
     },
     "shared" : false,
@@ -674,15 +674,15 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "Buy", "Purchase", "Obtain", "Procure", "Sale" ],
+      "rule" : [ "Buy", "Purchase", "Obtain", "Procure", "Sale", "Selling", "Salling", "buiyng", "byuing", "buyng", "buingc", "buing", "buiyng", "buyin", "buiyng" ],
       "value" : "{\n  \"constBuyRent\": \"SALE\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "Lease", "Take", "Rent" ],
+      "rule" : [ "Lease", "Take", "Rent", "Renting", "rening", "rentng", "rentign", "retnig", "reting", "rentin", "rnting", "rentiing" ],
       "value" : "{\n  \"constBuyRent\": \"RENT\"\n}"
     }, {
       "type" : "pattern",
-      "rule" : [ "(Buying|Salling)" ],
+      "rule" : [ "(Buying|Selling)" ],
       "value" : "{\n  \"constBuyRent\": \"SALE\"\n}"
     }, {
       "type" : "pattern",
@@ -709,7 +709,7 @@
       "value" : "{\"name\":\"Paphos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "limassol", "lemessos", "Lemesos", "Лимасол" ],
+      "rule" : [ "limassol", "lemessos", "Lemesos", "Лимасол", "limasol" ],
       "value" : "{\"name\":\"Limassol\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -978,11 +978,11 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "plot" ],
+      "rule" : [ "plot", "ground", "parcel" ],
       "value" : "{\n  \"estate\": [\n    \"COMMERCIAL_PLOT\",\n    \"RESIDENTIAL_PLOT\",\n    \"AGRICULTURE_PLOT\"\n  ],\n\"word\" : \"plot\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "commerce" ],
+      "rule" : [ "commerce", "comerce" ],
       "value" : "{\n  \"estate\": [\n    \"OFFICE\",\n    \"HOTEL\",\n    \"MANUFACTURING\",\n    \"RETAIL_SPACE\",\n    \"PUBLIC_CATERING_FACILITY\",\n    \"WAREHOUSE\",\n    \"CAR_PARKING\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
@@ -1006,7 +1006,7 @@
       "value" : "{\n  \"estate\": [\n    \"MANUFACTURING\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "office" ],
+      "rule" : [ "office", "ofice" ],
       "value" : "{\n  \"estate\": [\n    \"OFFICE\"\n  ],\n  \"word\": \"Commerce\"\n}"
     }, {
       "type" : "synonyms",
@@ -1041,15 +1041,15 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "needs renovation", "renovation needed", "need renovation", "renovation need" ],
+      "rule" : [ "needs renovation", "renovation needed", "need renovation", "renovation need", "Requires renovation", "Needs refurbishment", "Requires refurbishment", "Needs remodeling", "Requires remodeling" ],
       "value" : "{\n  \"house_condition\": [\n    \"NEEDS_RENOVATION\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "well maintaned", "well maintain ", "maintaned", "maintain" ],
+      "rule" : [ "well maintaned", "well maintain ", "maintaned", "maintain", "Well kept", "Well preserved" ],
       "value" : "{\n  \"house_condition\": [\n    \"WELL_MAINTAINED\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "new house", "new apartment", "new property", "new building", "new" ],
+      "rule" : [ "new house", "new apartment", "new property", "new building", "new", "Newly built", "Brand new", "Recently constructed", "Freshly built", "Newly completed" ],
       "value" : "{\n  \"house_condition\": [\n    \"NEW\"\n  ]\n}"
     } ]
   }, {
@@ -1091,11 +1091,11 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "ready to move in" ],
+      "rule" : [ "ready to move in", "ready to move", "Move-in ready", "Immediate occupancy", "Ready for immediate occupancy", "Set to move in", "Move-in condition", "Move in ready", "Move in condition" ],
       "value" : "{\n  \"condition\": [\n    \"READY_TO_MOVE_IN\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "under construction" ],
+      "rule" : [ "under construction", "In development", "In progress", "Being built", "Undergoing construction", "In the process of being built", "Undergoing development", "Under assembly" ],
       "value" : "{\n  \"condition\": [\n    \"UNDER_CONSTRUCTION\"\n  ]\n}"
     } ]
   }, {
@@ -2075,11 +2075,11 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "calm district", "calm" ],
+      "rule" : [ "calm district", "calm", "Quiet neighborhood", "Peaceful area", "Tranquil district", "Serene neighborhood", "Quiet area", "Peaceful neighborhood", "Tranquil area", "Serene district", "Quiet zone", "Low-noise area" ],
       "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the park", "near park", "close to park", "close park", "park" ],
+      "rule" : [ "near the park", "near park", "close to park", "close park", "park", "Close to the park", "Adjacent to the park", "Next to the park", "By the park", "Beside the park", "Near the green space", "In proximity to the park", "Alongside the park", "In the vicinity of the park" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2091,15 +2091,15 @@
       "value" : "{\n  \"infra\": [\n    \"SECURITY\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the river", "river", "close to river" ],
+      "rule" : [ "near the river", "river", "close to river", "Close to the river", "Adjacent to the river", "Next to the river", "By the river", "Beside the river", "Alongside the river", "In proximity to the river", "Near the riverbank", "In the vicinity of the river" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "with plot", "include plot", "have plot" ],
+      "rule" : [ "with plot", "include plot", "have plot", "With land", "Plot included", "Land included" ],
       "value" : "{\n  \"infra\": [\n    \"WITH_PLOT\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "includes storage", "storage", "storage space" ],
+      "rule" : [ "includes storage", "storage", "storage space", "Storage section", "Storage zone" ],
       "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2111,15 +2111,15 @@
       "value" : "{\n  \"infra\": [\n    \"SAUNA\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "beatiful view", "beautiful view ", "good view", "good view" ],
+      "rule" : [ "becatiful view", "beautiful view ", "good view", "good view", "Stunning view", "Gorgeous view", "Breathtaking view", "Spectacular view", "Scenic view", "Picturesque view", "Panoramic view", "Lovely view", "Majestic view", "Impressive view" ],
       "value" : "{\n  \"infra\": [\n    \"BEAUTIFUL_VIEW\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "in the center", "center", "in center" ],
+      "rule" : [ "in the center", "center", "in center", "In the heart", "Centrally located", "At the core", "In the downtown", "In the central area", "In the central district", "In the city center", "In the center of town" ],
       "value" : "{\n  \"infra\": [\n    \"IN_THE_CENTER\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the school", "near school", "close to school", "close school", "school" ],
+      "rule" : [ "near the school", "near school", "close to school", "close school", "school", "Close to the school", "Adjacent to the school", "By the school" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2131,23 +2131,19 @@
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "separate entrance", "entrance" ],
-      "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "with basement", "basement" ],
+      "rule" : [ "with basement", "basement", "Basement included", "Basement included", "Includes basement", "Includes basement" ],
       "value" : "{\n  \"infra\": [\n    \"WITH_BASEMENT\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "with garage", "garage" ],
+      "rule" : [ "with garage", "garage", "With parking garage", "Includes garage", "Garage included", "Garage space" ],
       "value" : "{\n  \"infra\": [\n    \"WITH_GARAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "with garden", "garden" ],
+      "rule" : [ "with garden", "garden", "With yard", "Outdoor garden" ],
       "value" : "{\n  \"infra\": [\n    \"WITH_GARDEN\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "separate entrance", "entrance" ],
+      "rule" : [ "separate entrance", "entrance", "Private entrance", "Independent entrance", "Separate access", "Separate door", "Exclusive entrance" ],
       "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2155,11 +2151,11 @@
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "swimming pool", "swim pool", "pool", "swimming" ],
+      "rule" : [ "swimming pool", "swim pool", "pool", "swimming", "Swimming facility", "Pool area", "Poolside" ],
       "value" : "{\n  \"infra\": [\n    \"SWIMMING_POOL\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest" ],
+      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest", "Close to the forest", "Next to the forest", "By the forest", "Near the woods", "Bordering the forest", "In the vicinity of the forest", "Beside the forest", "In proximity to the forest" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
     }, {
       "type" : "synonyms",
@@ -2167,15 +2163,15 @@
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain" ],
+      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain", "Close to the mountains", "Adjacent to the mountains", "Next to the mountains", "By the mountains", "Beside the mountains", "Near the foothills", "Alongside the mountains", "In the vicinity of the mountains", "At the base of the mountains" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the lake", "close to lake", "lake" ],
+      "rule" : [ "near the lake", "close to lake", "lake", "Close to the lake", "Adjacent to the lake", "Next to the lake", "By the lake", "Beside the lake", "Near the lakeside", "Along the lake", "In the vicinity of the lake", "At the edge of the lake" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "parking place", "parking space" ],
+      "rule" : [ "parking place", "parking space", "Parking spot", "Parking slot", "Parking lot" ],
       "value" : "{\n  \"infra\": [\n    \"PARKING_PLACE\"\n  ]\n}"
     } ]
   }, {
@@ -2194,7 +2190,7 @@
     },
     "records" : [ {
       "type" : "pattern",
-      "rule" : [ "@duckling.interval" ],
+      "rule" : [ "@duckling.interval [(square/miles/meters/sq/m/kilometers/km/sq.m)]" ],
       "value" : ""
     }, {
       "type" : "pattern",
