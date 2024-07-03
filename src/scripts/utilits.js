@@ -171,7 +171,7 @@ const getListings = async (sessionData) => {
         const res = await api.getListing(sessionData);
         if (res && res.data.listings.length > 0) {
             $session.ids = getIdsFromListings(res);
-            res.data.listings.map((listing) => {
+            res.data.listings.map((listing, idx) => {
                 const listingData = getListingData(listing);
                 const propertyDetails = 
                     `${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\* \n` : ''}` +
@@ -224,6 +224,15 @@ const getListings = async (sessionData) => {
                     $reactions.inlineButtons({
                         text: `Show details`,
                         callback_data: listing.id
+                    })
+                }
+                
+                if (idx === res.data.listings.length - 1) {
+                    $reactions.inlineButtons({
+                        text: `Show more`,
+                    })
+                    $reactions.inlineButtons({
+                        text: `Reset`,
                     })
                 }
             });
