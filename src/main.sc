@@ -259,6 +259,17 @@ theme: /
             }
 
             $session.state = "Display";
+            
+        state: GetVariant
+            event: telegramCallbackQuery
+            script:
+                parseInt($request.query);
+                await util.getListingById(index);
+            
+            state: Seller
+                q: Seller Contacts
+                scriptEs6:
+                    await util.getSeller();
 
         state: ShowMore
             q: * (show more listings|more listings|next listings|show more) *
