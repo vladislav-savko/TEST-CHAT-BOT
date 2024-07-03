@@ -148,7 +148,8 @@ const printShowMore = (total, take, skip) => {
             type: "text",
             markup: 'markdown',
             text: `To see more results, just say \*Show more\*`,
-    });
+        });
+    }
     
     if ($request.channelType === "telegram") {
         const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
