@@ -267,7 +267,7 @@ const printPost = (listing) => {
     });
     
     let turndownService = new TurndownService();
-    const description = turndownService.turndown(listing.description).replaceAll('-','-');
+    const description = turndownService.turndown(listing.description).replaceAll('\\-','-');
 
     $response.replies.push(...images, {
         type: "text",
