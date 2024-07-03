@@ -263,7 +263,7 @@ theme: /
         state: GetVariant
             event: telegramCallbackQuery
             script:
-                parseInt($request.query);
+                const index = parseInt($request.query);
                 await util.getListingById(index);
             
             state: Seller
