@@ -266,12 +266,23 @@ const printPost = (listing) => {
         text: `${description}`,
     });
   
-    $response.replies.push({
-        type: "text",
-        markup: 'markdown',
-        text: `[Show in browser](${linkToBrowserPage(listing)})
-[Show on map](${linkToMap(listing)})`,
-    });
+    if ($request.channelType === "telegram") {
+        $reactions.inlineButtons({
+            text: `Open in browser`,
+            url: `${linkToBrowserPage(listing)}`
+        })
+        $reactions.inlineButtons({
+            text: `Show on map`,
+            url: `${linkToMap(listing)}`
+        })
+    } else {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text: `[Open in browser](${linkToBrowserPage(listing)}) \n` +
+                `[Show on map](${linkToMap(listing)})`,
+        });
+    }
   
     $response.replies.push({
         type: "buttons",
