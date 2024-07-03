@@ -230,6 +230,11 @@ const getListings = async (sessionData) => {
                         }
                     );
                 }
+                
+                $reactions.inlineButtons({
+                    text: `Show details`,
+                    callback_data: listing.id
+                })
             });
             printShowMore(res.data.total, 3, sessionData.skip);
             return true;
