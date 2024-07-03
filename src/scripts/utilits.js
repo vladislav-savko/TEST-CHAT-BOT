@@ -143,21 +143,24 @@ const hasNextPage = (total, take, skip) => {
 const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
     
-    if (hastNext) {
+    if ($request.channelType === "telegram") {
         $response.replies.push({
             type: "text",
             markup: 'markdown',
-            text: `To see more results, just say \*Show more\*`,
+            text: ``,
         });
-    }
-    
-    if ($request.channelType === "telegram") {
         const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
         $response.replies.push({
             type: "buttons",
             buttons
         });
-    } else if (!hastNext) {
+    } else if (hastNext) {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text: `To see more results, just say \*Show more\*`,
+        });
+    } else {
         $response.replies.push({
             type: "text",
             markup: 'markdown',
@@ -243,7 +246,7 @@ const getListings = async (sessionData) => {
 };
 
 const printPost = (listing) => {
-  const listingData = getListingData(listing);
+    const listingData = getListingData(listing);
 
     const images = listing.photos.map((image) => {
         return {
