@@ -142,19 +142,21 @@ const hasNextPage = (total, take, skip) => {
 
 const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
+    
+    if (hastNext) {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text: `To see more results, just say \*Show more\*`,
+    });
+    
     if ($request.channelType === "telegram") {
         const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
         $response.replies.push({
             type: "buttons",
             buttons
         });
-    } else if (hastNext) {
-        $response.replies.push({
-            type: "text",
-            markup: 'markdown',
-            text: `To see more results, just say \*Show more\*`,
-        });
-    } else {
+    } else if (!hastNext) {
         $response.replies.push({
             type: "text",
             markup: 'markdown',
