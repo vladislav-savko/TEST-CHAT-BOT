@@ -275,6 +275,10 @@ const printPost = (listing) => {
             text: `Show on map`,
             url: `${linkToMap(listing)}`
         })
+        $reactions.inlineButtons({
+            text: `Seller Contacts`,
+            callback_data: `Seller Contacts`
+        })
     } else {
         $response.replies.push({
             type: "text",

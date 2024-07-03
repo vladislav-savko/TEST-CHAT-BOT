@@ -305,8 +305,13 @@ theme: /
     state: GetVariant
         event!: telegramCallbackQuery
         scriptEs6:
-            const index = parseInt($request.query);
-            await util.getListingById(index);
+            if (Number($request.query))
+            {
+                const index = parseInt($request.query);
+                await util.getListingById(index);
+            } else if ($request.query === 'Seller Contacts') {
+                $reactions.transition("/GetVariant/Seller"); 
+            }
             
         state: Seller
             q: Seller Contacts
