@@ -146,6 +146,21 @@ const printShowMore = (total, take, skip) => {
     if ($request.channelType === "telegram") {
         $response.replies = $response.replies || [];
         const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
+        
+        if (hastNext) {
+            $response.replies.push({
+                type: "text",
+                markup: 'markdown',
+                text: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
+            });
+        } else {
+            $response.replies.push({
+                type: "text",
+                markup: 'markdown',
+                text: `There are no more results, say "\*Reset\*" to clear the filters.`,
+            });
+        }
+        
         $response.replies.push({
             type: "buttons",
             buttons
@@ -224,15 +239,6 @@ const getListings = async (sessionData) => {
                     $reactions.inlineButtons({
                         text: `Show details`,
                         callback_data: listing.id
-                    })
-                }
-                
-                if (idx === res.data.listings.length - 1) {
-                    $reactions.inlineButtons({
-                        text: `Show more`,
-                    })
-                    $reactions.inlineButtons({
-                        text: `Reset`,
                     })
                 }
             });
