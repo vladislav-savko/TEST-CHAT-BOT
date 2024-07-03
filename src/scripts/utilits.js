@@ -144,11 +144,7 @@ const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
     
     if ($request.channelType === "telegram") {
-        $response.replies.push({
-            type: "text",
-            markup: 'markdown',
-            text: ``,
-        });
+        $response.replies = [];
         const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
         $response.replies.push({
             type: "buttons",
