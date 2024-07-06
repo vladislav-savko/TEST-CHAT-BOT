@@ -33,7 +33,7 @@ const getCitiesInfo = async (city) => {
 };
 
 const getListing = async (info) => {
-    $reactions.answer(JSON.stringify(info));
+    //$reactions.answer(JSON.stringify(info));
     const { data } = await instance.post(ENDPOINT.post__listing, info);
     return data;
 };
