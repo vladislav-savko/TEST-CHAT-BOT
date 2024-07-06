@@ -180,6 +180,19 @@ const printShowMore = (total, take, skip) => {
     }
 }
 
+const getLocationProperty = (listingLocation) => {
+    if (!listingLocation) return '';
+
+    const { city } = listingLocation;
+    const { district, country } = city;
+
+    let location = '';
+
+    location = city.name !== district.name ? `${city.name}, ${district.name}` : `${city.name}`;
+
+    return `${location}, ${country.name} \n`;
+}
+
 const getListings = async (sessionData) => {
     try {
         sessionData.take = 3;
@@ -190,9 +203,9 @@ const getListings = async (sessionData) => {
                 const listingData = getListingData(listing);
                 const propertyDetails = 
                     `${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\* \n` : ''}` +
-                    `${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name} \n` : ''}` +
-                    `${listingData.floorArea !== null ? `- Property area: \*${listingData.floorArea}m²\* \n` : ''}` +
-                    `${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
+                    `${getLocationProperty(listing.location)}` +
+                    `${(listingData.floorArea !== null || listingData.plotArea !== null) ? `- Property area: \*${listingData.floorArea || listingData.plotArea}m²\* \n` : ''}` +
+                    `${(listingData.bedrooms !== null && listingData.bedrooms !== undefined) ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
                     `${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\* \n` : ''}` +
                     `${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"} \n` : ''}` +
                     `${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms} \n` : ''}` +

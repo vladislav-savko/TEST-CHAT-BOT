@@ -1,15 +1,2 @@
 <test>
-<!--    <test-case id="HighBudgetAndListings">-->
-<!--        <q>/start</q>-->
-<!--        <a state = "/Start"/>-->
-<!--        <q>I want to buy a house in limassol</q>-->
-<!--        <a>What budget are you looking for?</a>-->
-<!--    </test-case>-->
-    
-    
-<!--    <test-case id="NoListingType">-->
-<!--        <q>/start</q>-->
-<!--        <a state = "/Start"/>-->
-        
-<!--    </test-case>-->
 </test>
