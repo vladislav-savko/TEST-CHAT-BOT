@@ -113,14 +113,18 @@ const linkToMap = (data) => {
 };
 
 const getListingData = (listing) => {
-  if (listing.apartmentSell) return listing.apartmentSell;
-  else if (listing.apartmentRent) return listing.apartmentRent;
-  else if (listing.houseSell) return listing.houseSell;
-  else if (listing.houseRent) return listing.houseRent;
-  else if (listing.commerceSell) return listing.commerceSell;
-  else if (listing.commerceRent) return listing.commerceRent;
-  else if (listing.plotSell) return listing.plotSell;
-  else if (listing.plotRent) return listing.plotRent;
+  const propertyTypes = [
+    'apartmentSell',
+    'apartmentRent',
+    'houseSell',
+    'houseRent',
+    'commerceSell',
+    'commerceRent',
+    'plotSell',
+    'plotRent'
+  ];
+
+  return propertyTypes.find(propertyType => listing[propertyType]);
 };
 
 const postJSON = (object) => {
@@ -141,43 +145,56 @@ const hasNextPage = (total, take, skip) => {
 }
 
 const printShowMore = (total, take, skip) => {
-    const hastNext = hasNextPage(total, take, skip);
-    
-    if ($request.channelType === "telegram") {
-        $response.replies = $response.replies || [];
-        const buttons = hastNext ? [{text: "Show more"}, {text: "Сlear filters"}] : [{text: "Сlear filters"}];
-        
-        if (hastNext) {
-            $response.replies.push({
-                type: "text",
-                markup: 'markdown',
-                text: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
-            });
-        } else {
-            $response.replies.push({
-                type: "text",
-                markup: 'markdown',
-                text: `There are no more results, say "\*Reset\*" to clear the filters.`,
-            });
-        }
-        
+    const hasNext = hasNextPage(total, take, skip);
+    const isTelegram = $request.channelType === "telegram";
+    $response.replies = $response.replies || [];
+
+    const addTextReply = (text) => {
+        $response.replies.push({
+            type: "text",
+            markup: 'markdown',
+            text
+        });
+    };
+
+    const addButtonsReply = (buttons) => {
         $response.replies.push({
             type: "buttons",
             buttons
         });
-    } else if (hastNext) {
-        $response.replies.push({
-            type: "text",
-            markup: 'markdown',
-            text: `To see more results, just say \*Show more\*`,
-        });
+    };
+
+    const telegramButtons = hasNext 
+        ? [{ text: "Show more" }, { text: "Clear filters" }]
+        : [{ text: "Clear filters" }];
+
+    if (isTelegram) {
+        if (hasNext) {
+            addTextReply('To see more results say "*Show more*". To clear filters say "*Reset*"');
+        } else {
+            addTextReply('There are no more results, say "*Reset*" to clear the filters.');
+        }
+        addButtonsReply(telegramButtons);
     } else {
-        $response.replies.push({
-            type: "text",
-            markup: 'markdown',
-            text: `There are no more results, you can clear the filters with the **Reset** command`,
-        });
+        if (hasNext) {
+            addTextReply('To see more results, just say "*Show more*"');
+        } else {
+            addTextReply('There are no more results, you can clear the filters with the **Reset** command');
+        }
     }
+};
+
+const getLocationProperty = (listingLocation) => {
+    if (!listingLocation) return '';
+    
+    const { city } = listingLocation;
+    const { district, country } = city;
+    
+    let location = '';
+    
+    location = city.name !== district.name ? `${city.name}, ${district.name}` : `${city.name}`;
+    
+    return `${location}, ${country.name} \n`;
 }
 
 const getListings = async (sessionData) => {
@@ -190,9 +207,9 @@ const getListings = async (sessionData) => {
                 const listingData = getListingData(listing);
                 const propertyDetails = 
                     `${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\* \n` : ''}` +
-                    `${listing.location !== null && listing.location.city !== null && listing.location.city.name !== null ? `${listing.location.city.name} \n` : ''}` +
-                    `${listingData.floorArea !== null ? `- Property area: \*${listingData.floorArea}m²\* \n` : ''}` +
-                    `${listingData.bedrooms !== null ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
+                    `${getLocationProperty(listing.location)}` +
+                    `${(listingData.floorArea !== null || listingData.plotArea !== null) ? `- Property area: \*${listingData.floorArea || listingData.plotArea}m²\* \n` : ''}` +
+                    `${(listingData.bedrooms !== null || listingData.bedrooms !== undefined) ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
                     `${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\* \n` : ''}` +
                     `${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"} \n` : ''}` +
                     `${(listingData.bathrooms !== null && false) ? `- Bathrooms: ${listingData.bathrooms} \n` : ''}` +
@@ -259,12 +276,10 @@ const getListings = async (sessionData) => {
 const printPost = (listing) => {
     const listingData = getListingData(listing);
 
-    const images = listing.photos.map((image) => {
-        return {
-            type: "image",
-            imageUrl: image,
-        };
-    });
+    const images = listing.photos.map((image) => ({
+        type: "image",
+        imageUrl: image,
+    }));
     
     let turndownService = new TurndownService();
     const description = turndownService.turndown(listing.description).replaceAll('\\-','-');
@@ -281,33 +296,34 @@ const printPost = (listing) => {
         text: `${description}`,
     });
   
+    const addButtons = (buttons) => {
+        $response.replies.push({
+            type: "buttons",
+            buttons,
+        });
+    };
+
     if ($request.channelType === "telegram") {
         $reactions.inlineButtons({
             text: `Open in browser`,
-            url: `${linkToBrowserPage(listing)}`
-        })
+            url: linkToBrowserPage(listing),
+        });
         $reactions.inlineButtons({
             text: `Show on map`,
-            url: `${linkToMap(listing)}`
-        })
+            url: linkToMap(listing),
+        });
         $reactions.inlineButtons({
             text: `Seller Contacts`,
-            callback_data: `Seller Contacts`
-        })
+            callback_data: `Seller Contacts`,
+        });
     } else {
         $response.replies.push({
             type: "text",
             markup: 'markdown',
-            text: `[Open in browser](${linkToBrowserPage(listing)}) \n` +
-                `[Show on map](${linkToMap(listing)})`,
+            text: `[Open in browser](${linkToBrowserPage(listing)}) \n[Show on map](${linkToMap(listing)})`,
         });
-        
-        $response.replies.push({
-            type: "buttons",
-            buttons: [
-                {text: "Seller Contacts"},
-            ]
-        });
+
+        addButtons([{ text: "Seller Contacts" }]);
     }
 };
 
@@ -315,9 +331,9 @@ const printSellerInfo = (seller) => {
     $response.replies.push({
         type: "text",
         markup: 'markdown',
-        text: `\*${seller.firstName} ${seller.lastName}\*
-${seller.email}
-${seller.phoneNumber}`,
+        text: `\*${seller.firstName} ${seller.lastName}\* \n` 
+            `${seller.email} \n` +
+            `${seller.phoneNumber}`,
     });
 };
 
