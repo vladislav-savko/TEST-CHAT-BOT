@@ -537,6 +537,22 @@
       "array" : false
     } ],
     "priority" : 0
+  }, {
+    "path" : "/filtersInfo",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "filters"
+    }, {
+      "text" : "show filters"
+    }, {
+      "text" : "filters details"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "priority" : 0
   } ],
   "entities" : [ {
     "entity" : {
