@@ -86,8 +86,9 @@
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
-      "required" : true,
-      "prompts" : [ ]
+      "required" : false,
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   }, {
@@ -381,47 +382,56 @@
       "name" : "alarm",
       "entity" : "alarm",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "balcony",
       "entity" : "balcony",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "bedroom",
       "entity" : "bedroom",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "conditioner_colder",
       "entity" : "conditioner_colder",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "country",
       "entity" : "country",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "electricity",
       "entity" : "electricity",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "furniture",
       "entity" : "furniture",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "heater",
       "entity" : "heater",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "house_condition",
       "entity" : "house_condition",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "internet",
       "entity" : "internet",
@@ -432,47 +442,56 @@
       "name" : "kitchen",
       "entity" : "kitchen",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "listingType",
       "entity" : "listingType",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "location",
       "entity" : "location",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "natural_gas",
       "entity" : "natural_gas",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "parking",
       "entity" : "parking",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "progress_condition",
       "entity" : "progress_condition",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "propertyTypes",
       "entity" : "propertyTypes",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "television",
       "entity" : "television",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "water_heater",
       "entity" : "water_heater",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "infrastructure_amenity",
       "entity" : "infrastructure_amenity",
@@ -483,12 +502,14 @@
       "name" : "repair",
       "entity" : "repair",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "price",
       "entity" : "price",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   }, {
@@ -512,7 +533,8 @@
       "name" : "details_for_position",
       "entity" : "details_for_position",
       "required" : true,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   } ],
@@ -2225,7 +2247,7 @@
       "value" : "{\n position: \"second\"\n}"
     } ]
   } ],
-  "enabledSystemEntities" : [ "duckling.number", "duckling.interval", "duckling.amount-of-money" ],
+  "enabledSystemEntities" : [ "duckling.number", "duckling.amount-of-money", "duckling.interval" ],
   "spellerDictionary" : [ ],
   "systemEntities" : [ {
     "name" : "duckling.number",
@@ -2235,6 +2257,10 @@
     "name" : "duckling.ordinal",
     "version" : "v2",
     "enabled" : false
+  }, {
+    "name" : "duckling.amount-of-money",
+    "version" : "v2",
+    "enabled" : true
   }, {
     "name" : "duckling.distance",
     "version" : "v2",
@@ -2281,10 +2307,6 @@
     "enabled" : false
   }, {
     "name" : "duckling.interval",
-    "version" : "v2",
-    "enabled" : true
-  }, {
-    "name" : "duckling.amount-of-money",
     "version" : "v2",
     "enabled" : true
   } ],

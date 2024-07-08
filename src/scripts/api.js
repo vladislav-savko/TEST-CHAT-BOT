@@ -20,15 +20,18 @@ export const instance = axios.create({
   "Content-type": "application/json",
 });
 
-const getCitiesInfo = async (city) => {
+const getCitiesInfo = async (city, country) => {
   const take = 1;
-
+  const patt = `${country},${city}`; // Concatenate country and city with a comma
   const { data } = await instance.get(ENDPOINT.get__cities, {
     params: {
       take: take,
-      pattern: city,
+      pattern: patt,
     },
   });
+  if (data.data.length > 1) {
+      data.data = [data.data[0]];
+  }
   return data;
 };
 

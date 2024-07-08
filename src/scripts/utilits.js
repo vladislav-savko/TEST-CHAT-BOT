@@ -75,7 +75,7 @@ const initSession = () => {
 
 const getCityInfo = async (city, country) => {
   try {
-    const resC = await api.getCitiesInfo(city);
+    const resC = await api.getCitiesInfo(city, country);
     if (resC) {
       const filteredCities = resC.data.filter(
         (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
@@ -196,6 +196,7 @@ const getLocationProperty = (listingLocation) => {
 const getListings = async (sessionData) => {
     try {
         sessionData.take = 3;
+        //$reactions.answer(JSON.stringify(sessionData));
         const res = await api.getListing(sessionData);
         if (res && res.data.listings.length > 0) {
             $session.ids = getIdsFromListings(res);
@@ -204,7 +205,7 @@ const getListings = async (sessionData) => {
                 const propertyDetails = 
                     `${listing.listingType !== null ? `${listing.listingType}` : ''} ${listing.price !== null ? `\*${listing.price} €\* \n` : ''}` +
                     `${getLocationProperty(listing.location)}` +
-                    `${(listingData.floorArea !== null || listingData.plotArea !== null) ? `- Property area: \*${listingData.floorArea || listingData.plotArea}m²\* \n` : ''}` +
+                    `${(listingData.floorArea || listingData.plotArea) ? `- Property area: \*${listingData.floorArea || listingData.plotArea}m²\* \n` : ''}` +
                     `${(listingData.bedrooms !== null && listingData.bedrooms !== undefined) ? `- Bedrooms: ${listingData.bedrooms} \n` : ''}` +
                     `${(listingData.furnishing !== null && $session.data.furnishing.length) ? `- Furnishing: \*${listingData.furnishing}\* \n` : ''}` +
                     `${(listingData.balcony !== null && $session.data.balcony.length) ? `- Balcony: ${listingData.balcony ? "+" : "-"} \n` : ''}` +
@@ -328,9 +329,9 @@ const printSellerInfo = (seller) => {
     $response.replies.push({
         type: "text",
         markup: 'markdown',
-        text: `\*${seller.firstName} ${seller.lastName}\*
-${seller.email}
-${seller.phoneNumber}`,
+        text: `\*${seller.firstName} ${seller.lastName}\* \n` +
+            `${seller.email} \n` +
+            `${seller.phoneNumber}`,
     });
 };
 

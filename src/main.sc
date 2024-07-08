@@ -321,8 +321,17 @@ theme: /
     state: ShowByIndex
         intent!: /anisadIndex
         scriptEs6:
-            const index = $parseTree.index[0].value;
-            await util.getListingById(index);
+            if(!$parseTree.index) {
+                $reactions.answer("Please provide the property ID.");
+            } else {
+                const index = $parseTree.index[0].value;
+                await util.getListingById(index);
+            }
+            
+        state: Get
+            q: * @duckling.number::index *
+            scriptEs6:
+                $reactions.transition("/ShowByIndex"); 
             
         state: Seller
             q: Seller Contacts
