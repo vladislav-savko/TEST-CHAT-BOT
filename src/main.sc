@@ -39,7 +39,7 @@ theme: /
     state: Search
         intent!: /searchAll
         scriptEs6:
-            # $reactions.answer(JSON.stringify($parseTree));
+            // $reactions.answer(JSON.stringify($parseTree));
             if ($parseTree.propertyTypes) {
                 //$reactions.answer("KSO");
                 await pr.checkChangePropertyType($session.data, $parseTree);
@@ -59,7 +59,7 @@ theme: /
                 const data = $session.data;
                 
                 await pr.updSessionInfo(data, params);
-                # $reactions.answer(JSON.stringify($session.data));
+                // $reactions.answer(JSON.stringify($session.data));
                 await pr.emptyParamsResult(emptyParams);
                 
         state: InputLocation
@@ -270,7 +270,7 @@ theme: /
         state: ShowByPosition
             intent!: /detailsPosition
             scriptEs6:
-                # $reactions.answer(JSON.stringify($parseTree));
+                // $reactions.answer(JSON.stringify($parseTree));
                 
                 const position = $parseTree.details_for_position?.[0]?.value?.position;
                 const hasSessionIds = $session.ids.length > 0;
