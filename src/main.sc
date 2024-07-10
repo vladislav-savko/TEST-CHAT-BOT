@@ -13,8 +13,10 @@ require: scripts/params.js
     type = scriptEs6
     name = pr
     
+require: scripts/init.js
+    
 theme: /
-
+    
     state: Start
         q!: $regex</start> 
         intent!: /hello
@@ -301,6 +303,11 @@ theme: /
                 q: Seller Contacts
                 scriptEs6:
                     await util.getSeller();
+                    
+        state: FiltersInfo
+            intent!: /filtersInfo
+            scriptEs6:
+                await util.getFiltersInfo();
                     
     state: GetVariant
         event!: telegramCallbackQuery

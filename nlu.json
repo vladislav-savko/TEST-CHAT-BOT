@@ -2211,6 +2211,34 @@
       "type" : "synonyms",
       "rule" : [ "parking place", "parking space", "Parking spot", "Parking slot", "Parking lot" ],
       "value" : "{\n  \"infra\": [\n    \"PARKING_PLACE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "cctv", "cameras", "camera", "videocamera", "videocameras" ],
+      "value" : "{\n  \"infra\": [\n    \"CCTV\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "thermal insulation", "insulation" ],
+      "value" : "{\n  \"infra\": [\n    \"THERMAL_INSULATION\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "golf" ],
+      "value" : "{\n  \"infra\": [\n    \"GOLF\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "bbq", "with bbq", "barbecue", "barbeq" ],
+      "value" : "{\n  \"infra\": [\n    \"BBQ_AREA\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "gym", "training space", "training" ],
+      "value" : "{\n  \"infra\": [\n    \"GYM\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "reception" ],
+      "value" : "{\n  \"infra\": [\n    \"RECEPTION\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "energy efficient", "energetic efficiency" ],
+      "value" : "{\n  \"infra\": [\n    \"ENERGY_EFFICIENT\"\n  ]\n}"
     } ]
   }, {
     "entity" : {

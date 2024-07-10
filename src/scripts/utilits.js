@@ -474,6 +474,54 @@ const getSeller = async () => {
     }
 };
 
+const getFiltersInfo = async () => {
+    const { data } = $session;
+    const { propertyTypes, listingType, priceFrom, priceTo, plotAreaTo, 
+        plotAreaFrom, bedroomsFrom, bedroomsTo, densityFrom, densityTo, 
+        coverageRatioTo, coverageRatioFrom, residentialFloorsTo, 
+        residentialFloorsFrom, floorAreaFrom, floorAreaTo, water, 
+        sewageSystemBoolean, bathroomBoolean, buildingConditions, furnishing, 
+        repair, alarmSystem, condition, parking, electricity, gas, 
+        airConditioning, heating, waterHeating, kitchen, balcony, television, 
+        internet, infrastructureApartmentAmenity, infrastructurePlotAmenity, 
+        infrastructureCommerceAmenity, cityId  
+    } = data;
+    
+    const filters = `${propertyTypes.length ? `Property types: ${propertyTypes.join(', ').toLowerCase()} \n` : ''}` +
+        `${listingType ? `Listing type: ${listingType.toLowerCase()} \n` : ''}` +
+        `${priceFrom !== null || priceTo !== null ? `Budget: ${priceFrom !== null ? `from ${priceFrom}` : ''}${priceFrom !== null && priceTo !== null ? ' to ' : ''}${priceTo !== null ? `up to ${priceTo}` : ''} \n` : ''}` +
+        `${plotAreaFrom !== null || plotAreaTo !== null ? `Plot area: ${plotAreaFrom !== null ? `from ${plotAreaFrom}` : ''}${plotAreaFrom !== null && plotAreaTo !== null ? ' to ' : ''}${plotAreaTo !== null ? `up to ${plotAreaTo}` : ''} \n` : ''}` +
+        `${bedroomsFrom !== null || bedroomsTo !== null ? `Bedrooms: ${bedroomsFrom !== null ? `from ${bedroomsFrom}` : ''}${bedroomsFrom !== null && bedroomsTo !== null ? ' to ' : ''}${bedroomsTo !== null ? `up to ${bedroomsTo}` : ''} \n` : ''}` +
+        `${densityFrom !== null || densityTo !== null ? `Density: ${densityFrom !== null ? `from ${densityFrom}` : ''}${densityFrom !== null && densityTo !== null ? ' to ' : ''}${densityTo !== null ? `up to ${densityTo}` : ''} \n` : ''}` +
+        `${coverageRatioFrom !== null || coverageRatioTo !== null ? `Coverage ratio: ${coverageRatioFrom !== null ? `from ${coverageRatioFrom}` : ''}${coverageRatioFrom !== null && coverageRatioTo !== null ? ' to ' : ''}${coverageRatioTo !== null ? `up to ${coverageRatioTo}` : ''} \n` : ''}` +
+        `${residentialFloorsFrom !== null || residentialFloorsTo !== null ? `Residential floors: ${residentialFloorsFrom !== null ? `from ${residentialFloorsFrom}` : ''}${residentialFloorsFrom !== null && residentialFloorsTo !== null ? ' to ' : ''}${residentialFloorsTo !== null ? `up to ${residentialFloorsTo}` : ''} \n` : ''}` +
+        // `${yearOfConstructionFrom !== null || yearOfConstructionTo !== null ? `Year of construction: ${yearOfConstructionFrom !== null ? `from ${yearOfConstructionFrom}` : ''}${yearOfConstructionFrom !== null && yearOfConstructionTo !== null ? ' to ' : ''}${yearOfConstructionTo !== null ? `up to ${yearOfConstructionTo}` : ''} \n` : ''}` +
+        `${floorAreaFrom !== null || floorAreaTo !== null ? `Floor area: ${floorAreaFrom !== null ? `from ${floorAreaFrom}` : ''}${floorAreaFrom !== null && floorAreaTo !== null ? ' to ' : ''}${floorAreaTo !== null ? `up to ${floorAreaTo}` : ''} \n` : ''}` +
+        `${water.length ? `Water: ${water.join(', ').toLowerCase()} \n` : ''}` +
+        `${sewageSystemBoolean.length ? `Sewage system: ${sewageSystemBoolean.join(', ').toLowerCase()} \n` : ''}` +
+        `${buildingConditions.length ? `Building conditions: ${buildingConditions.join(', ').toLowerCase()} \n` : ''}` +
+        `${furnishing.length ? `Furnishing: ${furnishing.join(', ').toLowerCase()} \n` : ''}` +
+        `${repair.length ? `Repair: ${repair.join(', ').toLowerCase()} \n` : ''}` +
+        `${alarmSystem.length ? `Alarm system: ${alarmSystem.join(', ').toLowerCase()} \n` : ''}` +
+        `${condition.length ? `Condition: ${condition.join(', ').toLowerCase()} \n` : ''}` +
+        `${parking.length ? `Parking: ${parking.join(', ').toLowerCase()} \n` : ''}` +
+        `${electricity.length ? `Electricity: ${electricity.join(', ').toLowerCase()} \n` : ''}` +
+        `${gas.length ? `Gas: ${gas.join(', ').toLowerCase()} \n` : ''}` +
+        `${airConditioning.length ? `Air conditioning: ${airConditioning.join(', ').toLowerCase()} \n` : ''}` +
+        `${heating.length ? `Heating: ${heating.join(', ').toLowerCase()} \n` : ''}` +
+        `${waterHeating.length ? `Water heating: ${waterHeating.join(', ').toLowerCase()} \n` : ''}` +
+        `${kitchen.length ? `Kitchen: ${kitchen.join(', ').toLowerCase()} \n` : ''}` +
+        `${balcony.length ? `Balcony: ${balcony.join(', ').toLowerCase()} \n` : ''}` +
+        `${television.length ? `Television: ${television.join(', ').toLowerCase()} \n` : ''}` +
+        `${internet.length ? `Internet: ${internet.join(', ').toLowerCase()} \n` : ''}` +
+        `${infrastructureApartmentAmenity.length ? `Infrastructure apartment amenity: ${infrastructureApartmentAmenity.join(', ').toLowerCase()} \n` : ''}` +
+        `${infrastructurePlotAmenity.length ? `Infrastructure plot amenity: ${infrastructurePlotAmenity.join(', ').toLowerCase()} \n` : ''}` +
+        `${infrastructureCommerceAmenity.length ? `Infrastructure commerce amenity: ${infrastructureCommerceAmenity.join(', ').toLowerCase()} \n` : ''}` +
+        `${$session.params.location.name !== null ? `Location: ${$session.params.location.name}, ${$session.params.location.country} \n` : ''}`;
+        
+    $reactions.answer(filters);
+}
+
 const confirmAction = (listingType, estateType) => {
     const action = listingType.toLowerCase() === "sale" ? "buy" : listingType;
     $reactions.answer(`You chose to ${action} ${estateType}. Is that correct?`);
@@ -583,4 +631,5 @@ export default {
     arrayСomparison,
     copyObjectWithoutFields,
     printHelpText,
+    getFiltersInfo,
 };
