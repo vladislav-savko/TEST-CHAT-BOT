@@ -1,3 +1,4 @@
+/** @type {Translation} */
 export default {
     fetchErrors: {
         notFoundCityInCounty: (country) =>
