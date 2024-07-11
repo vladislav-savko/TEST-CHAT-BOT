@@ -520,66 +520,6 @@ const getFiltersInfo = async () => {
     $reactions.answer(filters);
 }
 
-const confirmAction = (listingType, estateType) => {
-    const action = listingType.toLowerCase() === "sale" ? "buy" : listingType;
-    $reactions.answer(`You chose to ${action} ${estateType}. Is that correct?`);
-};
-
-const confirmSearch = (listingType, estateType, city, country) => {
-    const action = listingType === "SALE" ? "buy" : listingType;
-    $reactions.answer(
-        `You chose to ${action} a ${estateType} in ${city}, ${country}. Is that correct?`
-    );
-};
-
-function containsBedroomAndOthers(arr) {
-    const bedroomWords = [
-        "bed",
-        "room",
-        "furniture",
-        "sleep",
-        "rest",
-        "bedroom",
-        "bedrooms",
-        "beds",
-        "rooms",
-    ];
-
-    const words = arr.toString().toLowerCase().split(/\W+/);
-
-    const containsOtherWords = words.some((word) =>
-        bedroomWords.includes(word)
-    );
-
-    return containsOtherWords;
-}
-
-function bedroomAndOthers(arr) {
-    const bedroomWords = [
-        "bed",
-        "room",
-        "furniture",
-        "sleep",
-        "rest",
-        "bedroom",
-        "bedrooms",
-        "beds",
-        "rooms",
-    ];
-
-    const words = arr.toString().toLowerCase().split(/\W+/);
-
-    const otherWord = words.find((word) => bedroomWords.includes(word));
-
-    return otherWord;
-}
-
-function ucFirst(str) {
-    if (!str) return str;
-
-    return str[0] + str.slice(1);
-}
-
 function arrayСomparison(arr1, arr2) {
     return (
         arr1.length === arr2.length &&
@@ -620,10 +560,6 @@ export default {
     initSession,
     getCityInfo,
     getListings,
-    confirmAction,
-    confirmSearch,
-    containsBedroomAndOthers,
-    bedroomAndOthers,
     getListingById,
     getSeller,
     arrayСomparison,

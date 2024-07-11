@@ -12,6 +12,10 @@ require: scripts/utilits.js
 require: scripts/params.js
     type = scriptEs6
     name = pr
+
+require: scripts/local/local.js
+    type = scriptEs6
+    name = local
     
 require: scripts/init.js
     
