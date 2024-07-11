@@ -1,5 +1,4 @@
 import utl from "./utilits.js";
-import api from "./api.js";
 
 const getFromIntervalOrNumber = (obj) => {
     let from = 0;

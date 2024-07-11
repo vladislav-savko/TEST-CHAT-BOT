@@ -191,9 +191,7 @@ const getLocationProperty = (listingLocation) => {
     const { city } = listingLocation;
     const { district, country } = city;
 
-    let location = "";
-
-    location =
+    let location =
         city.name !== district.name
             ? `${city.name}, ${district.name}`
             : `${city.name}`;
@@ -417,7 +415,7 @@ const printPost = (listing) => {
             url: `${linkToMap(listing)}`,
         });
         $reactions.inlineButtons({
-            text: `Seller Contacts`,
+            text: `Seller contacts`,
             callback_data: `Seller Contacts`,
         });
     } else {
