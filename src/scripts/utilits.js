@@ -2,7 +2,7 @@ import api from "./api.js";
 import TurndownService from "turndown";
 import { API__LINK, VERSION } from "./config.js";
 
-function session() {
+export function session() {
     $session.data = {
         skip: 0,
         take: 3,
@@ -69,13 +69,13 @@ function session() {
     $session.version = VERSION;
 }
 
-const initSession = () => {
+export const initSession = () => {
     if (!$session.data || $session.version !== VERSION) {
         session();
     }
 };
 
-const getCityInfo = async (city, country) => {
+export const getCityInfo = async (city, country) => {
     try {
         const resC = await api.getCitiesInfo(city, country);
         if (resC) {
@@ -109,15 +109,15 @@ const getCityInfo = async (city, country) => {
     }
 };
 
-const linkToBrowserPage = (data) => {
+export const linkToBrowserPage = (data) => {
     return `${API__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
 };
 
-const linkToMap = (data) => {
+export const linkToMap = (data) => {
     return `https://www.google.com/maps?q=${data.location?.latitude},${data.location?.longitude}`;
 };
 
-const getListingData = (listing) => {
+export const getListingData = (listing) => {
     if (listing.apartmentSell) return listing.apartmentSell;
     else if (listing.apartmentRent) return listing.apartmentRent;
     else if (listing.houseSell) return listing.houseSell;
@@ -128,11 +128,11 @@ const getListingData = (listing) => {
     else if (listing.plotRent) return listing.plotRent;
 };
 
-const postJSON = (object) => {
+export const postJSON = (object) => {
     $reactions.answer(JSON.stringify(object));
 };
 
-function getIdsFromListings(res) {
+export function getIdsFromListings(res) {
     if (res && res.data && Array.isArray(res.data.listings)) {
         return res.data.listings.map((listing) => listing.id);
     } else {
@@ -140,12 +140,12 @@ function getIdsFromListings(res) {
     }
 }
 
-const hasNextPage = (total, take, skip) => {
+export const hasNextPage = (total, take, skip) => {
     const displayed = skip + take;
     return displayed < total;
 };
 
-const printShowMore = (total, take, skip) => {
+export const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
 
     if ($request.channelType === "telegram") {
@@ -187,7 +187,7 @@ const printShowMore = (total, take, skip) => {
     }
 };
 
-const getLocationProperty = (listingLocation) => {
+export const getLocationProperty = (listingLocation) => {
     if (!listingLocation) return "";
 
     const { city } = listingLocation;
@@ -201,7 +201,7 @@ const getLocationProperty = (listingLocation) => {
     return `${location}, ${country.name} \n`;
 };
 
-const getListings = async (sessionData) => {
+export const getListings = async (sessionData) => {
     try {
         sessionData.take = 3;
         //$reactions.answer(JSON.stringify(sessionData));
@@ -380,7 +380,7 @@ const getListings = async (sessionData) => {
     }
 };
 
-const printPost = (listing) => {
+export const printPost = (listing) => {
     const listingData = getListingData(listing);
 
     const images = listing.photos.map((image) => {
@@ -436,7 +436,7 @@ const printPost = (listing) => {
     }
 };
 
-const printSellerInfo = (seller) => {
+export const printSellerInfo = (seller) => {
     $response.replies.push({
         type: "text",
         markup: "markdown",
@@ -447,7 +447,7 @@ const printSellerInfo = (seller) => {
     });
 };
 
-const getListingById = async (id) => {
+export const getListingById = async (id) => {
     try {
         const listing = await api.getListingById(id);
 
@@ -461,7 +461,7 @@ const getListingById = async (id) => {
     }
 };
 
-const getSeller = async () => {
+export const getSeller = async () => {
     try {
         const seller = await api.getSellerById($session.seller);
 
@@ -474,7 +474,7 @@ const getSeller = async () => {
     }
 };
 
-const getFiltersInfo = async () => {
+export const getFiltersInfo = async () => {
     const { data } = $session;
     const {
         propertyTypes,
@@ -716,14 +716,14 @@ const getFiltersInfo = async () => {
     $reactions.answer(filters);
 };
 
-function arrayСomparison(arr1, arr2) {
+export function arrayСomparison(arr1, arr2) {
     return (
         arr1.length === arr2.length &&
         arr1.every((value) => arr2.includes(value))
     );
 }
 
-function copyObjectWithoutFields(source, fieldsToExclude) {
+export function copyObjectWithoutFields(source, fieldsToExclude) {
     const result = {};
     for (let key in source) {
         if (!fieldsToExclude.includes(key)) {
@@ -733,7 +733,7 @@ function copyObjectWithoutFields(source, fieldsToExclude) {
     return result;
 }
 
-const printHelpText = () => {
+export const printHelpText = () => {
     const texts = [
         "To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, *I want to buy a house in Limassol with the budget above 10k$*",
         "Here is the list of benefits you can type: \n - Alarm system \n - Air conditioning *(Everywhere, Only bedrooms, No)* \n - Balcony \n - Building condition *(Ready To move in , Under construction)* \n - Condition *(New , Well maintaned, Needs renovation)* \n - Kitchen \n - Parking \n - Natural gas \n - Electricity \n - Internet *(No, Wi-Fi, Cable, Mobile)* \n - Heating *(No, Central, Gas, Elctric, Liquid fuel)* \n - Water heating *(No, Central, Boiler, Solar system, Photovoltaic system)* \n - Amenities *(Near the school, Near the park, Calm district, In the center, Parking place, Beautiful view, Sauna, Sea view, Security, Storage, Near the subway, Near the kindergarten, Near the sea, Near the lake, With garden, With garage)*",

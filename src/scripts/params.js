@@ -59,7 +59,7 @@ const getInfAmenity = (obj) => {
     return [...new Set(obj.flatMap((item) => item.infra))];
 };
 
-const getAllParamsFromTree = async (parseTree) => {
+export const getAllParamsFromTree = async (parseTree) => {
     let filledParams = {};
     //$reactions.answer(JSON.stringify($parseTree));
 
@@ -203,7 +203,7 @@ const getAllParamsFromTree = async (parseTree) => {
     return filledParams;
 };
 
-const processParams = async () => {
+export const processParams = async () => {
     let emptyParams = [];
     let newParams = [];
 
@@ -307,7 +307,7 @@ const processParams = async () => {
     return { emptyParams, newParams };
 };
 
-const emptyParamsResult = async (params) => {
+export const emptyParamsResult = async (params) => {
     const routes = {
         PropertyTypes: "/Search/InputPropertyTypes",
         Location: "/Search/InputLocation",
@@ -327,11 +327,11 @@ const emptyParamsResult = async (params) => {
     }
 };
 
-const updSessionInfo = async (info, params) => {
+export const updSessionInfo = async (info, params) => {
     $session.data = { ...info, ...params };
 };
 
-const checkChangePropertyType = async (data, tree) => {
+export const checkChangePropertyType = async (data, tree) => {
     if (
         JSON.stringify(data.propertyTypes) !=
         JSON.stringify(getProperty(tree.propertyTypes, "estate"))
@@ -348,10 +348,17 @@ const checkChangePropertyType = async (data, tree) => {
     }
 };
 
+export async function updateSessionParamsAndTransition() {
+    const params = await getAllParamsFromTree($parseTree);
+    $session.params = { ...$session.params, ...params };
+    $reactions.transition("/Search/SwitchParams");
+}
+
 export default {
     getAllParamsFromTree,
     processParams,
     emptyParamsResult,
     updSessionInfo,
     checkChangePropertyType,
+    updateSessionParamsAndTransition,
 };
