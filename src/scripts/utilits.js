@@ -1,6 +1,8 @@
 import api from "./api.js";
 import TurndownService from "turndown";
 import { API__LINK, VERSION } from "./config.js";
+import local from "./local/local.js";
+import response from "./response.js";
 
 export function session() {
     $session.data = {
@@ -95,8 +97,9 @@ export const getCityInfo = async (city, country) => {
                 }
                 return filteredCities[0];
             } else {
-                $reactions.answer(
-                    `Sorry, no cities found in ${country}. Please try again.`
+                const { lang } = $session;
+                response.randomText(
+                    local(lang).fetchErrors.notFoundCityInCounty(country)
                 );
                 return false;
             }
@@ -147,43 +150,24 @@ export const hasNextPage = (total, take, skip) => {
 
 export const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
+    const { lang } = $session;
 
     if ($request.channelType === "telegram") {
-        $response.replies = $response.replies || [];
         const buttons = hastNext
-            ? [{ text: "Show more" }, { text: "Сlear filters" }]
-            : [{ text: "Сlear filters" }];
+            ? [local(lang).buttons.showMore, local(lang).buttons.clearFilters]
+            : [local(lang).buttons.clearFilters];
 
         if (hastNext) {
-            $response.replies.push({
-                type: "text",
-                markup: "markdown",
-                text: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
-            });
+            response.text(local(lang).info.showMoreResultsAndReset);
         } else {
-            $response.replies.push({
-                type: "text",
-                markup: "markdown",
-                text: `There are no more results, say "\*Reset\*" to clear the filters.`,
-            });
+            response.text(local(lang).info.noMoreResultsReset);
         }
 
-        $response.replies.push({
-            type: "buttons",
-            buttons,
-        });
+        response.buttons(buttons);
     } else if (hastNext) {
-        $response.replies.push({
-            type: "text",
-            markup: "markdown",
-            text: `To see more results, just say \*Show more\*`,
-        });
+        response.text(local(lang).info.showMoreResults);
     } else {
-        $response.replies.push({
-            type: "text",
-            markup: "markdown",
-            text: `There are no more results, you can clear the filters with the **Reset** command`,
-        });
+        response.text(local(lang).info.noMoreResultsResetCommand);
     }
 };
 
@@ -202,6 +186,7 @@ export const getLocationProperty = (listingLocation) => {
 };
 
 export const getListings = async (sessionData) => {
+    const { lang } = $session;
     try {
         sessionData.take = 3;
         //$reactions.answer(JSON.stringify(sessionData));
@@ -331,41 +316,33 @@ export const getListings = async (sessionData) => {
 
                 const image =
                     listing.photos.length !== 0
-                        ? {
-                              type: "image",
-                              imageUrl: listing.photos[0],
-                          }
-                        : {
-                              type: "image",
-                              imageUrl:
-                                  "https://dummyimage.com/600x400/000/ffffff&text=without+photo",
-                          };
+                        ? listing.photos[0]
+                        : "https://dummyimage.com/600x400/000/ffffff&text=without+photo";
 
-                $response.replies.push(image, {
-                    type: "text",
-                    markup: "markdown",
-                    text:
-                        `\*${listing.title.trim()}\* \n` +
-                        `\*ID: ${listing.id}\* \n` +
-                        `${propertyDetails} \n` +
-                        `${
-                            $request.channelType === "telegram"
-                                ? ""
-                                : `[Open in browser](${linkToBrowserPage(
-                                      listing
-                                  )})`
-                        }`,
-                });
+                const description =
+                    `\*${listing.title.trim()}\* \n` +
+                    `\*ID: ${listing.id}\* \n` +
+                    `${propertyDetails} \n` +
+                    `${
+                        $request.channelType === "telegram"
+                            ? ""
+                            : `[${
+                                  local(lang).buttons.openInBrowser
+                              }](${linkToBrowserPage(listing)})`
+                    }`;
+
+                response.image(image);
+                response.text(description);
 
                 if ($request.channelType === "telegram") {
-                    $reactions.inlineButtons({
-                        text: `Open in browser`,
-                        url: `${linkToBrowserPage(listing)}`,
-                    });
-                    $reactions.inlineButtons({
-                        text: `Show details`,
-                        callback_data: listing.id,
-                    });
+                    response.inlineURL(
+                        local(lang).buttons.openInBrowser,
+                        `${linkToBrowserPage(listing)}`
+                    );
+                    response.inlineCallback(
+                        local(lang).buttons.showDetails,
+                        listing.id
+                    );
                 }
             });
             printShowMore(res.data.total, 3, sessionData.skip);
@@ -375,79 +352,59 @@ export const getListings = async (sessionData) => {
             return false;
         }
     } catch (error) {
-        $reactions.answer("Something's broken, please try again later. Sorry");
+        response.text(local(lang).fetchErrors.listing);
         return false;
     }
 };
 
 export const printPost = (listing) => {
-    const listingData = getListingData(listing);
-
-    const images = listing.photos.map((image) => {
-        return {
-            type: "image",
-            imageUrl: image,
-        };
-    });
+    const { lang } = $session;
+    const images = listing.photos.map((image) => image);
 
     let turndownService = new TurndownService();
     const description = turndownService
         .turndown(listing.description)
         .replaceAll("\\-", "-");
 
-    $response.replies.push(...images, {
-        type: "text",
-        markup: "markdown",
-        text: `\*${listing.title.trim()}\*\n\*€${listing.price}\*`,
-    });
-
-    $response.replies.push({
-        type: "text",
-        markup: "html",
-        text: `${description}`,
-    });
+    response.images(images);
+    response.text(`\*${listing.title.trim()}\*\n\*€${listing.price}\*`);
+    response.text(description, "html");
 
     if ($request.channelType === "telegram") {
-        $reactions.inlineButtons({
-            text: `Open in browser`,
-            url: `${linkToBrowserPage(listing)}`,
-        });
-        $reactions.inlineButtons({
-            text: `Show on map`,
-            url: `${linkToMap(listing)}`,
-        });
-        $reactions.inlineButtons({
-            text: `Seller contacts`,
-            callback_data: `Seller Contacts`,
-        });
+        response.inlineURL(
+            local(lang).buttons.openInBrowser,
+            `${linkToBrowserPage(listing)}`
+        );
+        response.inlineURL(
+            local(lang).buttons.showOnMap,
+            `${linkToMap(listing)}`
+        );
+        response.inlineCallback(
+            local(lang).buttons.sellerContacts,
+            `Seller Contacts`
+        );
     } else {
-        $response.replies.push({
-            type: "text",
-            markup: "markdown",
-            text:
-                `[Open in browser](${linkToBrowserPage(listing)}) \n` +
-                `[Show on map](${linkToMap(listing)})`,
-        });
+        const linksText =
+            `[${local(lang).buttons.openInBrowser}](${linkToBrowserPage(
+                listing
+            )}) \n` +
+            `[${local(lang).buttons.showOnMap}](${linkToMap(listing)})`;
 
-        $response.replies.push({
-            type: "buttons",
-            buttons: [{ text: "Seller Contacts" }],
-        });
+        response.text(linksText);
+        response.buttons([local(lang).buttons.sellerContacts]);
     }
 };
 
 export const printSellerInfo = (seller) => {
-    $response.replies.push({
-        type: "text",
-        markup: "markdown",
-        text:
-            `\*${seller.firstName} ${seller.lastName}\* \n` +
-            `${seller.email} \n` +
-            `${seller.phoneNumber}`,
-    });
+    const text =
+        `\*${seller.firstName} ${seller.lastName}\* \n` +
+        `${seller.email} \n` +
+        `${seller.phoneNumber}`;
+    response.text(text);
 };
 
 export const getListingById = async (id) => {
+    const { lang } = $session;
     try {
         const listing = await api.getListingById(id);
 
@@ -456,12 +413,13 @@ export const getListingById = async (id) => {
             $session.seller = id;
         }
     } catch (error) {
-        $reactions.answer("Something's broken, please try again later. Sorry");
+        response.text(local(lang).fetchErrors.listing);
         return false;
     }
 };
 
 export const getSeller = async () => {
+    const { lang } = $session;
     try {
         const seller = await api.getSellerById($session.seller);
 
@@ -469,7 +427,7 @@ export const getSeller = async () => {
             printSellerInfo(seller.data);
         }
     } catch (error) {
-        $reactions.answer("Sorry, I can't get seller information.");
+        response.text(local(lang).fetchErrors.seller);
         return false;
     }
 };
@@ -734,20 +692,11 @@ export function copyObjectWithoutFields(source, fieldsToExclude) {
 }
 
 export const printHelpText = () => {
-    const texts = [
-        "To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, *I want to buy a house in Limassol with the budget above 10k$*",
-        "Here is the list of benefits you can type: \n - Alarm system \n - Air conditioning *(Everywhere, Only bedrooms, No)* \n - Balcony \n - Building condition *(Ready To move in , Under construction)* \n - Condition *(New , Well maintaned, Needs renovation)* \n - Kitchen \n - Parking \n - Natural gas \n - Electricity \n - Internet *(No, Wi-Fi, Cable, Mobile)* \n - Heating *(No, Central, Gas, Elctric, Liquid fuel)* \n - Water heating *(No, Central, Boiler, Solar system, Photovoltaic system)* \n - Amenities *(Near the school, Near the park, Calm district, In the center, Parking place, Beautiful view, Sauna, Sea view, Security, Storage, Near the subway, Near the kindergarten, Near the sea, Near the lake, With garden, With garage)*",
-        "If, when adding parameters to a query, at some point you encounter a lack of search results, you can cancel the last entered value using the *Undo* command.",
-        'To get more details on a specific property, enter "*show by* _id property_". You can also use the "*details for* _first|last_ *one*" commands after the listing is displayed.',
-        "If you would like to restart the conversation and clear all previous information, simply say *Reset*",
-    ];
+    const { lang } = $session;
+    const texts = local(lang).help;
 
     texts.map((text) => {
-        $response.replies.push({
-            type: "text",
-            markup: "markdown",
-            text,
-        });
+        response.text(text);
     });
 };
 

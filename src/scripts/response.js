@@ -51,6 +51,17 @@ const image = (imageUrl) => {
     });
 };
 
+const images = (imageUrlArray) => {
+    const images = imageUrlArray.map((imageUrl) => {
+        return {
+            type: "image",
+            imageUrl,
+        };
+    });
+
+    $response.replies.push(images);
+};
+
 export default {
     text,
     randomText,
@@ -58,4 +69,5 @@ export default {
     inlineURL,
     inlineCallback,
     image,
+    images,
 };
