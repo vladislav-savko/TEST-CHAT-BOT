@@ -30,6 +30,10 @@ import help from "./help.js";
 import undo from "./undo.js";
 import bye from "./bye.js";
 
+import noMatch from "./noMatch.js";
+
+import switchIntefraceLanguage from "./switchIntefraceLanguage.js";
+
 export default {
     start,
     search,
@@ -61,4 +65,8 @@ export default {
     help,
     undo,
     bye,
+
+    noMatch,
+
+    switchIntefraceLanguage,
 };

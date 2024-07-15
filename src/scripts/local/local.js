@@ -4,7 +4,7 @@ import ru from "./ru.js";
 import gr from "./gr.js";
 import uk from "./uk.js";
 
-import "./types.js";
+import "../typeDoc/local.js";
 
 /** @type {{ [key: string]: Translation }} */
 const local = {

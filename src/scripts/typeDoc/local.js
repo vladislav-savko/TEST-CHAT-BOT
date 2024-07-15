@@ -102,3 +102,10 @@
  * @property {GetProperty} getProperty - Объект с запросами на получение свойств недвижимости
  * @property {Property} property - Объект с описанием свойств недвижимости
 */
+
+/**
+ * @typedef {Object} Language
+ * @property {string} code - Код языка
+ * @property {string} langEn - Название языка на английском
+ * @property {string} lang - Название языка на исходном языке
+ */

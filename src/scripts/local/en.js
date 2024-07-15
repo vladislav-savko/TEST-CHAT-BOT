@@ -68,6 +68,7 @@ export default {
         location: `In which city would you like to view the property?`,
         propertyType: `What type of property are you interested in: apartment, house, villa, commerce, plot?`,
         residentialFloors: `On which floors should residential floors be located?`,
+        language: `Which interface language would you like to choose?`,
     },
     property: {
         airConditioning: `Air conditioning`,

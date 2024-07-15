@@ -68,6 +68,7 @@ export default {
         location: `W jakim mieście chcesz obejrzeć nieruchomość?`,
         propertyType: `Jakim rodzajem nieruchomości jesteś zainteresowany: mieszkanie, dom, willa, handel, działka?`,
         residentialFloors: `Na których piętrach powinny znajdować się piętra mieszkalne?`,
+        language: `Jaki język interfejsu chcesz wybrać?`,
     },
     property: {
         airConditioning: `Klimatyzacja`,

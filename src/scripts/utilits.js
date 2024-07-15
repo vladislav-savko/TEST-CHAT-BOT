@@ -4,6 +4,8 @@ import { API__LINK, VERSION } from "./config.js";
 import local from "./local/local.js";
 import response from "./response.js";
 
+import "./typeDoc/session.js";
+
 export function session() {
     $session.data = {
         skip: 0,
@@ -66,6 +68,7 @@ export function session() {
 
     $session.lang = "en";
 
+    //параметры по которым был последний успешный запрос
     $session.lastParams = {};
 
     $session.version = VERSION;
@@ -698,6 +701,12 @@ export const printHelpText = () => {
     texts.map((text) => {
         response.text(text);
     });
+};
+
+/** Меняет язык интерфейса.
+ * @param {string} code - Код языка, на который нужно переключиться. */
+export const switchLanguage = (code) => {
+    $session.lang = code;
 };
 
 export default {

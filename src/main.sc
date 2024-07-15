@@ -26,6 +26,17 @@ theme: /
         intent!: /hello
         scriptEs6:
             await stateJs.start();
+
+    state: SwitchIntefraceLanguage
+        q!: $regex</interface>
+        intent!: /switchLanguage
+        scriptEs6:
+            await stateJs.switchIntefraceLanguage();
+
+        state: Get  
+            q: * @language *
+            scriptEs6:
+                $reactions.transition("/SwitchIntefraceLanguage");
         
     state: Search
         intent!: /searchAll
