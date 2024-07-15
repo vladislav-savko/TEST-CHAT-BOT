@@ -553,8 +553,450 @@
     },
     "patterns" : [ ],
     "priority" : 0
+  }, {
+    "path" : "/switchLanguage",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "Please change the interface language to"
+    }, {
+      "text" : "I want to enable the interface language Russian"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ "Change language to @language", "Switch to @language", "Set interface to @language", "I want @language interface", "Make interface @language", "@language interface, please" ],
+    "slots" : [ {
+      "name" : "language",
+      "entity" : "language",
+      "required" : false,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
   } ],
   "entities" : [ {
+    "entity" : {
+      "name" : "bathroom",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "pattern",
+      "rule" : [ "{((@duckling.interval|@duckling.number)(*bathroom*))}" ],
+      "value" : ""
+    } ]
+  }, {
+    "entity" : {
+      "name" : "language",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "Afrikaans", "afrikans", "африкаанс", "af" ],
+      "value" : "{\"code\":\"af\",\"langEn\":\"Afrikaans\",\"lang\":\"Afrikaans\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Albanian", "shqip", "албанский", "sq" ],
+      "value" : "{\"code\":\"sq\",\"langEn\":\"Albanian\",\"lang\":\"Shqip\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Amharic", "አማርኛ", "амхарский", "am" ],
+      "value" : "{\"code\":\"am\",\"langEn\":\"Amharic\",\"lang\":\"አማርኛ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Arabic", "عربي", "арабский", "ar" ],
+      "value" : "{\"code\":\"ar\",\"langEn\":\"Arabic\",\"lang\":\"عربي\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Armenian", "Հայերեն", "армянский", "hy" ],
+      "value" : "{\"code\":\"hy\",\"langEn\":\"Armenian\",\"lang\":\"Հայերեն\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Azerbaijani", "Azərbaycanca", "азербайджанский", "az" ],
+      "value" : "{\"code\":\"az\",\"langEn\":\"Azerbaijani\",\"lang\":\"Azərbaycanca\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bashkir", "Башҡорт теле", "башкирский", "ba" ],
+      "value" : "{\"code\":\"ba\",\"langEn\":\"Bashkir\",\"lang\":\"Башҡорт теле\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Belarusian", "Беларуская", "белорусский", "be" ],
+      "value" : "{\"code\":\"be\",\"langEn\":\"Belarusian\",\"lang\":\"Беларуская\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bengali", "বাংলা", "бенгальский", "bn" ],
+      "value" : "{\"code\":\"bn\",\"langEn\":\"Bengali\",\"lang\":\"বাংলা\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bosnian", "Bosanski", "боснийский", "bs" ],
+      "value" : "{\"code\":\"bs\",\"langEn\":\"Bosnian\",\"lang\":\"Bosanski\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Breton", "Brezhoneg", "бретонский", "br" ],
+      "value" : "{\"code\":\"br\",\"langEn\":\"Breton\",\"lang\":\"Brezhoneg\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Bulgarian", "Български", "болгарский", "bg" ],
+      "value" : "{\"code\":\"bg\",\"langEn\":\"Bulgarian\",\"lang\":\"Български\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Burmese", "မြန်မာစာ", "бирманский", "my" ],
+      "value" : "{\"code\":\"my\",\"langEn\":\"Burmese\",\"lang\":\"မြန်မာစာ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Catalan", "Català", "каталанский", "ca" ],
+      "value" : "{\"code\":\"ca\",\"langEn\":\"Catalan\",\"lang\":\"Català\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Chinese", "中文", "китайский", "zh" ],
+      "value" : "{\"code\":\"zh\",\"langEn\":\"Chinese\",\"lang\":\"中文\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Croatian", "Hrvatski", "хорватский", "hr" ],
+      "value" : "{\"code\":\"hr\",\"langEn\":\"Croatian\",\"lang\":\"Hrvatski\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Czech", "Čeština", "чешский", "cs" ],
+      "value" : "{\"code\":\"cs\",\"langEn\":\"Czech\",\"lang\":\"Čeština\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Danish", "Dansk", "датский", "da" ],
+      "value" : "{\"code\":\"da\",\"langEn\":\"Danish\",\"lang\":\"Dansk\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Dutch", "Nederlands", "нидерландский", "nl" ],
+      "value" : "{\"code\":\"nl\",\"langEn\":\"Dutch\",\"lang\":\"Nederlands\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "English", "English", "английский", "en" ],
+      "value" : "{\"code\":\"en\",\"langEn\":\"English\",\"lang\":\"English\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Estonian", "Eesti", "эстонский", "et" ],
+      "value" : "{\"code\":\"et\",\"langEn\":\"Estonian\",\"lang\":\"Eesti\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Finnish", "Suomi", "финский", "fi" ],
+      "value" : "{\"code\":\"fi\",\"langEn\":\"Finnish\",\"lang\":\"Suomi\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "French", "Français", "французский", "fr" ],
+      "value" : "{\"code\":\"fr\",\"langEn\":\"French\",\"lang\":\"Français\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Fula", "Fulah", "Pulaar", "Pular", "Fulfulde", "фула", "ff" ],
+      "value" : "{\"code\":\"ff\",\"langEn\":\"Fula\",\"lang\":\"Fulfulde\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Galician", "Galego", "галисийский", "gl" ],
+      "value" : "{\"code\":\"gl\",\"langEn\":\"Galician\",\"lang\":\"Galego\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Gaelic", "Scottish", "Gàidhlig", "гэльский", "gd" ],
+      "value" : "{\"code\":\"gd\",\"langEn\":\"Gaelic\",\"lang\":\"Gàidhlig\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Georgian", "ქართული", "грузинский", "ka" ],
+      "value" : "{\"code\":\"ka\",\"langEn\":\"Georgian\",\"lang\":\"ქართული\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "German", "Deutsch", "немецкий", "de" ],
+      "value" : "{\"code\":\"de\",\"langEn\":\"German\",\"lang\":\"Deutsch\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Greek", "Ελληνικά", "греческий", "el" ],
+      "value" : "{\"code\":\"el\",\"langEn\":\"Greek\",\"lang\":\"Ελληνικά\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Gujarati", "ગુજરાતી", "гуджарати", "gu" ],
+      "value" : "{\"code\":\"gu\",\"langEn\":\"Gujarati\",\"lang\":\"ગુજરાતી\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Haitian Creole", "Kreyòl Ayisyen", "гаитянский креольский", "ht" ],
+      "value" : "{\"code\":\"ht\",\"langEn\":\"Haitian Creole\",\"lang\":\"Kreyòl Ayisyen\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Hausa", "Harshen Hausa", "хауса", "ha" ],
+      "value" : "{\"code\":\"ha\",\"langEn\":\"Hausa\",\"lang\":\"Harshen Hausa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Hebrew", "עברית", "иврит", "he" ],
+      "value" : "{\"code\":\"he\",\"langEn\":\"Hebrew\",\"lang\":\"עברית\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Hindi", "हिन्दी", "хинди", "hi" ],
+      "value" : "{\"code\":\"hi\",\"langEn\":\"Hindi\",\"lang\":\"हिन्दी\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Hungarian", "Magyar", "венгерский", "hu" ],
+      "value" : "{\"code\":\"hu\",\"langEn\":\"Hungarian\",\"lang\":\"Magyar\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Icelandic", "Íslenska", "исландский", "is" ],
+      "value" : "{\"code\":\"is\",\"langEn\":\"Icelandic\",\"lang\":\"Íslenska\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Igbo", "Asụsụ Igbo", "игбо", "ig" ],
+      "value" : "{\"code\":\"ig\",\"langEn\":\"Igbo\",\"lang\":\"Asụsụ Igbo\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Indonesian", "Bahasa Indonesia", "индонезийский", "id" ],
+      "value" : "{\"code\":\"id\",\"langEn\":\"Indonesian\",\"lang\":\"Bahasa Indonesia\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Irish", "Gaeilge", "ирландский", "ga" ],
+      "value" : "{\"code\":\"ga\",\"langEn\":\"Irish\",\"lang\":\"Gaeilge\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Italian", "Italiano", "итальянский", "it" ],
+      "value" : "{\"code\":\"it\",\"langEn\":\"Italian\",\"lang\":\"Italiano\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Japanese", "日本語", "японский", "ja" ],
+      "value" : "{\"code\":\"ja\",\"langEn\":\"Japanese\",\"lang\":\"日本語\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Javanese", "ꦧꦱꦗꦮ", "яванский", "jv" ],
+      "value" : "{\"code\":\"jv\",\"langEn\":\"Javanese\",\"lang\":\"ꦧꦱꦗꦮ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kannada", "ಕನ್ನಡ", "каннада", "kn" ],
+      "value" : "{\"code\":\"kn\",\"langEn\":\"Kannada\",\"lang\":\"ಕನ್ನಡ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kazakh", "Қазақ", "казахский", "kk" ],
+      "value" : "{\"code\":\"kk\",\"langEn\":\"Kazakh\",\"lang\":\"Қазақ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Khmer", "ខ្មែរ", "кхмерский", "km" ],
+      "value" : "{\"code\":\"km\",\"langEn\":\"Khmer\",\"lang\":\"ខ្មែរ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Korean", "한국어", "корейский", "ko" ],
+      "value" : "{\"code\":\"ko\",\"langEn\":\"Korean\",\"lang\":\"한국어\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lao", "ພາສາລາວ", "лаосский", "lo" ],
+      "value" : "{\"code\":\"lo\",\"langEn\":\"Lao\",\"lang\":\"ພາສາລາວ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Latvian", "Latviešu", "латышский", "lv" ],
+      "value" : "{\"code\":\"lv\",\"langEn\":\"Latvian\",\"lang\":\"Latviešu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lingala", "Lingála", "лингала", "ln" ],
+      "value" : "{\"code\":\"ln\",\"langEn\":\"Lingala\",\"lang\":\"Lingála\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Lithuanian", "Lietuvių", "литовский", "lt" ],
+      "value" : "{\"code\":\"lt\",\"langEn\":\"Lithuanian\",\"lang\":\"Lietuvių\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Luganda", "Ganda", "Oluganda", "луганда", "lg" ],
+      "value" : "{\"code\":\"lg\",\"langEn\":\"Luganda\",\"lang\":\"Oluganda\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Luxembourgish", "Lëtzebuergesch", "люксембургский", "lb" ],
+      "value" : "{\"code\":\"lb\",\"langEn\":\"Luxembourgish\",\"lang\":\"Lëtzebuergesch\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Macedonian", "Македонски", "македонский", "mk" ],
+      "value" : "{\"code\":\"mk\",\"langEn\":\"Macedonian\",\"lang\":\"Македонски\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malagasy", "Malagasy", "малагасийский", "mg" ],
+      "value" : "{\"code\":\"mg\",\"langEn\":\"Malagasy\",\"lang\":\"Malagasy\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malay", "Bahasa Melayu", "малайский", "ms" ],
+      "value" : "{\"code\":\"ms\",\"langEn\":\"Malay\",\"lang\":\"Bahasa Melayu\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Malayalam", "മലയാളം", "малаялам", "ml" ],
+      "value" : "{\"code\":\"ml\",\"langEn\":\"Malayalam\",\"lang\":\"മലയാളം\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Marathi", "मराठी", "маратхи", "mr" ],
+      "value" : "{\"code\":\"mr\",\"langEn\":\"Marathi\",\"lang\":\"मराठी\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Mongolian", "Монгол", "монгольский", "mn" ],
+      "value" : "{\"code\":\"mn\",\"langEn\":\"Mongolian\",\"lang\":\"Монгол\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Nepali", "नेपाली", "непальский", "ne" ],
+      "value" : "{\"code\":\"ne\",\"langEn\":\"Nepali\",\"lang\":\"नेपाली\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Norwegian", "Norsk", "норвежский", "no" ],
+      "value" : "{\"code\":\"no\",\"langEn\":\"Norwegian\",\"lang\":\"Norsk\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Occitan", "Occitan", "окситанский", "oc" ],
+      "value" : "{\"code\":\"oc\",\"langEn\":\"Occitan\",\"lang\":\"Occitan\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Oriya", "ଓଡ଼ିଆ", "ория", "or" ],
+      "value" : "{\"code\":\"or\",\"langEn\":\"Oriya\",\"lang\":\"ଓଡ଼ିଆ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Pashto", "Pushto", "پښتو", "пушту", "ps" ],
+      "value" : "{\"code\":\"ps\",\"langEn\":\"Pashto\",\"lang\":\"پښتو\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Persian", "Farsi", "فارسی", "персидский", "fa" ],
+      "value" : "{\"code\":\"fa\",\"langEn\":\"Persian\",\"lang\":\"فارسی\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Polish", "Polski", "польский", "pl" ],
+      "value" : "{\"code\":\"pl\",\"langEn\":\"Polish\",\"lang\":\"Polski\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Portuguese", "Português", "португальский", "pt" ],
+      "value" : "{\"code\":\"pt\",\"langEn\":\"Portuguese\",\"lang\":\"Português\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Punjabi", "Eastern", "ਪੰਜਾਬੀ", "панджаби", "pa" ],
+      "value" : "{\"code\":\"pa\",\"langEn\":\"Punjabi\",\"lang\":\"ਪੰਜਾਬੀ\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Romanian", "Română", "румынский", "ro" ],
+      "value" : "{\"code\":\"ro\",\"langEn\":\"Romanian\",\"lang\":\"Română\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Russian", "Русский", "руский", "ru", "ру" ],
+      "value" : "{\"code\":\"ru\",\"langEn\":\"Russian\",\"lang\":\"Русский\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Serbian", "Српски", "сербский", "sr" ],
+      "value" : "{\"code\":\"sr\",\"langEn\":\"Serbian\",\"lang\":\"Српски\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Setswana", "Tswana", "тсвана", "tn" ],
+      "value" : "{\"code\":\"tn\",\"langEn\":\"Setswana\",\"lang\":\"Tswana\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sindhi", "سنڌي", "синдхи", "sd" ],
+      "value" : "{\"code\":\"sd\",\"langEn\":\"Sindhi\",\"lang\":\"سنڌي\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sinhalese", "සිංහල", "сингальский", "si" ],
+      "value" : "{\"code\":\"si\",\"langEn\":\"Sinhalese\",\"lang\":\"සිංහල\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Siswati", "SiSwati", "свази", "ss" ],
+      "value" : "{\"code\":\"ss\",\"langEn\":\"Siswati\",\"lang\":\"SiSwati\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Slovak", "Slovenčina", "словацкий", "sk" ],
+      "value" : "{\"code\":\"sk\",\"langEn\":\"Slovak\",\"lang\":\"Slovenčina\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Slovenian", "Slovenščina", "словенский", "sl" ],
+      "value" : "{\"code\":\"sl\",\"langEn\":\"Slovenian\",\"lang\":\"Slovenščina\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Somali", "Soomaali", "сомалийский", "so" ],
+      "value" : "{\"code\":\"so\",\"langEn\":\"Somali\",\"lang\":\"Soomaali\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Spanish", "Español", "Espanol", "es", "esp" ],
+      "value" : "{\"code\":\"es\",\"langEn\":\"Spanish\",\"lang\":\"Español\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sundanese", "Basa Sunda", "сунданский", "su" ],
+      "value" : "{\"code\":\"su\",\"langEn\":\"Sundanese\",\"lang\":\"Basa Sunda\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Swahili", "Kiswahili", "суахили", "sw" ],
+      "value" : "{\"code\":\"sw\",\"langEn\":\"Swahili\",\"lang\":\"Kiswahili\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Swati", "Swati", "свази", "ss" ],
+      "value" : "{\"code\":\"ss\",\"langEn\":\"Swati\",\"lang\":\"Swati\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Swedish", "Svenska", "шведский", "sv" ],
+      "value" : "{\"code\":\"sv\",\"langEn\":\"Swedish\",\"lang\":\"Svenska\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tagalog", "Tagalog", "тагалог", "tl" ],
+      "value" : "{\"code\":\"tl\",\"langEn\":\"Tagalog\",\"lang\":\"Tagalog\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Tamil", "தமிழ்", "тамильский", "ta" ],
+      "value" : "{\"code\":\"ta\",\"langEn\":\"Tamil\",\"lang\":\"தமிழ்\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Thai", "ไทย", "тайский", "th" ],
+      "value" : "{\"code\":\"th\",\"langEn\":\"Thai\",\"lang\":\"ไทย\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Turkish", "Türkçe", "турецкий", "tr" ],
+      "value" : "{\"code\":\"tr\",\"langEn\":\"Turkish\",\"lang\":\"Türkçe\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ukrainian", "Українська", "украинский", "uk" ],
+      "value" : "{\"code\":\"uk\",\"langEn\":\"Ukrainian\",\"lang\":\"Українська\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Urdu", "اردو", "урду", "ur" ],
+      "value" : "{\"code\":\"ur\",\"langEn\":\"Urdu\",\"lang\":\"اردو\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Uzbek", "O‘zbek", "узбекский", "uz" ],
+      "value" : "{\"code\":\"uz\",\"langEn\":\"Uzbek\",\"lang\":\"O‘zbek\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Vietnamese", "Tiếng Việt", "вьетнамский", "vi" ],
+      "value" : "{\"code\":\"vi\",\"langEn\":\"Vietnamese\",\"lang\":\"Tiếng Việt\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Welsh", "Cymraeg", "валлийский", "cy" ],
+      "value" : "{\"code\":\"cy\",\"langEn\":\"Welsh\",\"lang\":\"Cymraeg\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Wolof", "Wolof", "волоф", "wo" ],
+      "value" : "{\"code\":\"wo\",\"langEn\":\"Wolof\",\"lang\":\"Wolof\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Western Frisian", "Frysk", "западно-фризский", "fy" ],
+      "value" : "{\"code\":\"fy\",\"langEn\":\"Western Frisian\",\"lang\":\"Frysk\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Xhosa", "isiXhosa", "коса", "xh" ],
+      "value" : "{\"code\":\"xh\",\"langEn\":\"Xhosa\",\"lang\":\"isiXhosa\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Yiddish", "ייִדיש", "идиш", "yi" ],
+      "value" : "{\"code\":\"yi\",\"langEn\":\"Yiddish\",\"lang\":\"ייִדיש\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Yoruba", "Èdè Yorùbá", "йоруба", "yo" ],
+      "value" : "{\"code\":\"yo\",\"langEn\":\"Yoruba\",\"lang\":\"Èdè Yorùbá\"}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Zulu", "isiZulu", "зулу", "zu" ],
+      "value" : "{\"code\":\"zu\",\"langEn\":\"Zulu\",\"lang\":\"isiZulu\"}"
+    } ]
+  }, {
     "entity" : {
       "name" : "bedroom",
       "enabled" : true,
@@ -2239,6 +2681,26 @@
       "type" : "synonyms",
       "rule" : [ "energy efficient", "energetic efficiency" ],
       "value" : "{\n  \"infra\": [\n    \"ENERGY_EFFICIENT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "underfloor heating", "under heating", "floor heating" ],
+      "value" : "{\n  \"infra\": [\n    \"UNDERFLOOR_HEATING\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "sustainable design" ],
+      "value" : "{\n  \"infra\": [\n    \"SUSTAINABLE_DESIGN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "photovoltaic provisions" ],
+      "value" : "{\n  \"infra\": [\n    \"PHOTOVOLTAIC_PROVISIONS\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "panoramic windows", "panorama windows", "panorama window" ],
+      "value" : "{\n  \"infra\": [\n    \"PANORAMIC_WINDOWS\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "underground parking", "lower parking", "under parking", "ground parking" ],
+      "value" : "{\n  \"infra\": [\n    \"UNDERGROUND_PARKING\"\n  ]\n}"
     } ]
   }, {
     "entity" : {

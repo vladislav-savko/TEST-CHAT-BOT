@@ -4,6 +4,7 @@ import search from "./search.js";
 import switchParams from "./switchParams.js";
 
 import inputLocation from "./input/inputLocation.js";
+import inputBathroom from "./input/inputBathroom.js";
 import inputBedrooms from "./input/inputBedrooms.js";
 import inputListingTypes from "./input/inputListingTypes.js";
 import inputPropertyTypes from "./input/inputPropertyTypes.js";
@@ -35,6 +36,7 @@ export default {
     switchParams,
 
     inputLocation,
+    inputBathroom,
     inputBedrooms,
     inputListingTypes,
     inputPropertyTypes,

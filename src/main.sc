@@ -45,6 +45,16 @@ theme: /
                 q: * {@location @country} *
                 scriptEs6:
                     $reactions.transition("/Search/InputLocation");
+        
+        state: InputBathrooms
+            q!: * bathrooms* * (@duckling.interval::bathroom|@duckling.number::bathroom) *
+            scriptEs6:
+                await stateJs.inputBathroom();
+                    
+            state: Get
+                q: * (@duckling.interval::bathroom|@duckling.number::bathroom) *
+                scriptEs6:
+                    $reactions.transition("/Search/InputBathrooms");
                     
         state: InputBedrooms
             q!: * bedroom* * (@duckling.interval::bedroom|@duckling.number::bedroom) *
