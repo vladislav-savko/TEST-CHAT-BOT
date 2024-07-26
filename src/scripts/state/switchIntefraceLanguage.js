@@ -10,7 +10,7 @@ export default async () => {
         /** @type {{ _language: Language }} */
         const { _language: lngObj } = $parseTree;
         if (available.includes(lngObj.code)) {
-            switchLanguage(lngObj.code);
+            await switchLanguage(lngObj.code);
         } else {
             //интерфейса с таким языком не предусмотрено, выберите из существующих
         }

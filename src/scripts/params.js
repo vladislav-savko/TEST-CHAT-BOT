@@ -26,7 +26,7 @@ const getFromIntervalOrNumberBedrooms = (obj) => {
     let to = null;
 
     if (!obj[0].value.from) {
-        to = obj[0].value;
+        //to = obj[0].value;
         from = obj[0].value;
     } else {
         if (!obj[0].value.to) {

@@ -41,14 +41,19 @@ theme: /
     state: Search
         intent!: /searchAll
         scriptEs6:
+           // $reactions.answer(JSON.stringify($parseTree));
+            //$reactions.answer(JSON.stringify($session.data));
+
             await stateJs.search();
              
         state: SwitchParams
             scriptEs6:
+                # await $reactions.answer(JSON.stringify($parseTree));
                 await stateJs.switchParams();
                 
         state: InputLocation
-            q!: * (location/city/county) * [{@location [@country]}] *
+            #q!: * [{@location [@country]}] *
+            # q!: * (location/city/county) * [{@location [@country]}] *
             scriptEs6:
                 await stateJs.inputLocation();
                     
@@ -68,7 +73,7 @@ theme: /
                     $reactions.transition("/Search/InputBathrooms");
                     
         state: InputBedrooms
-            q!: * bedroom* * (@duckling.interval::bedroom|@duckling.number::bedroom) *
+            #q!: * bedroom* 
             scriptEs6:
                 await stateJs.inputBedrooms();
                     
@@ -78,7 +83,7 @@ theme: /
                     $reactions.transition("/Search/InputBedrooms");
                     
         state: InputListingTypes
-            q!: * {Listing types [ownership]} * @listingType *
+           # q!: * {Listing types [ownership]} * @listingType *
             scriptEs6:
                 await stateJs.inputListingTypes();
                     
@@ -88,8 +93,9 @@ theme: /
                     $reactions.transition("/Search/InputListingTypes");
         
         state: InputPropertyTypes
-            q!: * {Property types} * @propertyTypes *
+            #q!: * {Property types} * @propertyTypes *
             scriptEs6:
+                # await $reactions.answer(JSON.stringify($parseTree));
                 await stateJs.inputPropertyTypes();
                     
             state: Get
@@ -159,6 +165,7 @@ theme: /
 
     state: DisplayResults
         scriptEs6:
+            //$reactions.answer(JSON.stringify($session.data));
             await stateJs.displayResults();
 
         state: ShowMore
@@ -221,7 +228,7 @@ theme: /
         scriptEs6:
             await stateJs.undo();
             
-    state: Bye
+    state: Bye1 mill
         intent!: /bye
         scriptEs6:
             await stateJs.bye();

@@ -66,7 +66,7 @@ export function session() {
     $session.seller = null;
     $session.ids = [];
 
-    $session.lang = "en";
+    $session.lang = $session.lang || "en";
 
     //параметры по которым был последний успешный запрос
     $session.lastParams = {};
@@ -705,8 +705,9 @@ export const printHelpText = () => {
 
 /** Меняет язык интерфейса.
  * @param {string} code - Код языка, на который нужно переключиться. */
-export const switchLanguage = (code) => {
+export const switchLanguage = async (code) => {
     $session.lang = code;
+    $client.lang = code;
 };
 
 export default {
