@@ -71,12 +71,12 @@ bind("preMatch", function($context) {
     language(text).then(function (lng_res) {
         var lng = lng_res.scored_languages_list[0].languages[0];
         
-        if (isStringInArray(lng, langs)) {
-            correct(text, lng).then(function (crt_res) {
-                text = crt_res;
-                $context.request.query = crt_res;
-            });
-        }
+        // if (isStringInArray(lng, langs)) {
+        //     correct(text, lng).then(function (crt_res) {
+        //         text = crt_res;
+        //         $context.request.query = crt_res;
+        //     });
+        // }
         
         if (lng === 'en') return true;
         

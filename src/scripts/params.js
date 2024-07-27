@@ -3,6 +3,8 @@ import utl from "./utilits.js";
 const getFromIntervalOrNumber = (obj) => {
     let from = 0;
     let to = null;
+    
+    $reactions.answer(JSON.stringify(obj));
 
     if (!obj[0].value.from) {
         to = obj[0].value;
@@ -22,11 +24,11 @@ const getFromIntervalOrNumber = (obj) => {
 };
 
 const getFromIntervalOrNumberBedrooms = (obj) => {
-    let from = 0;
+    let from = 1;
     let to = null;
 
     if (!obj[0].value.from) {
-        //to = obj[0].value;
+        to = obj[0].value;
         from = obj[0].value;
     } else {
         if (!obj[0].value.to) {

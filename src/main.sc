@@ -165,7 +165,7 @@ theme: /
 
     state: DisplayResults
         scriptEs6:
-            //$reactions.answer(JSON.stringify($session.data));
+            $reactions.answer(JSON.stringify($session.data));
             await stateJs.displayResults();
 
         state: ShowMore
