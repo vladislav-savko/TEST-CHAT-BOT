@@ -10,6 +10,7 @@ export default async () => {
         "listingType",
         "propertyTypes",
         "infAmenity",
+        "locAmenity",
         "priceFrom",
         "priceTo",
         "areaFrom",

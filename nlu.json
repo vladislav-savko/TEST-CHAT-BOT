@@ -377,6 +377,8 @@
       "text" : "@listingType @bedroom @propertyType in @location @price"
     }, {
       "text" : "buy 5 bedroom house in limassol under 1 million"
+    }, {
+      "text" : "@location_features"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -514,6 +516,12 @@
       "required" : false,
       "prompts" : [ ],
       "array" : false
+    }, {
+      "name" : "location_features",
+      "entity" : "location_features",
+      "required" : false,
+      "prompts" : [ ],
+      "array" : true
     } ],
     "priority" : 0
   }, {
@@ -1019,6 +1027,10 @@
     "records" : [ {
       "type" : "pattern",
       "rule" : [ "{((@duckling.interval|@duckling.number)(*room*|br))}" ],
+      "value" : ""
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "studio" ],
       "value" : ""
     } ]
   }, {
@@ -1527,10 +1539,6 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "needs renovation", "renovation needed", "need renovation", "renovation need", "Requires renovation", "Needs refurbishment", "Requires refurbishment", "Needs remodeling", "Requires remodeling" ],
-      "value" : "{\n  \"house_condition\": [\n    \"NEEDS_RENOVATION\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
       "rule" : [ "well maintaned", "well maintain ", "maintaned", "maintain", "Well kept", "Well preserved" ],
       "value" : "{\n  \"house_condition\": [\n    \"WELL_MAINTAINED\"\n  ]\n}"
     }, {
@@ -1583,6 +1591,14 @@
       "type" : "synonyms",
       "rule" : [ "under construction", "In development", "In progress", "Being built", "Undergoing construction", "In the process of being built", "Undergoing development", "Under assembly" ],
       "value" : "{\n  \"condition\": [\n    \"UNDER_CONSTRUCTION\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "needs renovation", "renovation needed", "need renovation", "renovation need", "Requires renovation", "Needs refurbishment", "Requires refurbishment", "Needs remodeling", "Requires remodeling" ],
+      "value" : "{\n  \"condition\": [\n    \"NEEDS_RENOVATION\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "no renovation needed", "renovated", "with renovation", "remodeled" ],
+      "value" : "{\n  \"condition\": [\n    \"RENOVATED\"\n  ]\n}"
     } ]
   }, {
     "entity" : {
@@ -2561,24 +2577,8 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "calm district", "calm", "Quiet neighborhood", "Peaceful area", "Tranquil district", "Serene neighborhood", "Quiet area", "Peaceful neighborhood", "Tranquil area", "Serene district", "Quiet zone", "Low-noise area" ],
-      "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the park", "near park", "close to park", "close park", "park", "Close to the park", "Adjacent to the park", "Next to the park", "By the park", "Beside the park", "Near the green space", "In proximity to the park", "Alongside the park", "In the vicinity of the park" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the sea", "near sea", "close to sea", "sea", "sea view", "view on sea", "view on the sea", "view on a sea", "view sea" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA\",\n    \"SEA_VIEW\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
       "rule" : [ "security", "safe area" ],
       "value" : "{\n  \"infra\": [\n    \"SECURITY\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the river", "river", "close to river", "Close to the river", "Adjacent to the river", "Next to the river", "By the river", "Beside the river", "Alongside the river", "In proximity to the river", "Near the riverbank", "In the vicinity of the river" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with plot", "include plot", "have plot", "With land", "Plot included", "Land included" ],
@@ -2586,11 +2586,7 @@
     }, {
       "type" : "synonyms",
       "rule" : [ "includes storage", "storage", "storage space", "Storage section", "Storage zone" ],
-      "value" : "{\n  \"infra\": [\n    \"INCLUDES_STORAGE\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the slope", "close to slope", "near slope", "near a slope", "slope" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SLOPE\"\n  ]\n}"
+      "value" : "{\n  \"infra\": [\n    \"STORAGE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with sauna", "sauna" ],
@@ -2599,22 +2595,6 @@
       "type" : "synonyms",
       "rule" : [ "becatiful view", "beautiful view ", "good view", "good view", "Stunning view", "Gorgeous view", "Breathtaking view", "Spectacular view", "Scenic view", "Picturesque view", "Panoramic view", "Lovely view", "Majestic view", "Impressive view" ],
       "value" : "{\n  \"infra\": [\n    \"BEAUTIFUL_VIEW\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "in the center", "center", "in center", "In the heart", "Centrally located", "At the core", "In the downtown", "In the central area", "In the central district", "In the city center", "In the center of town" ],
-      "value" : "{\n  \"infra\": [\n    \"IN_THE_CENTER\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the school", "near school", "close to school", "close school", "school", "Close to the school", "Adjacent to the school", "By the school" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "prestige district", "prestige", "prestigious district", "prestigious" ],
-      "value" : "{\n  \"infra\": [\n    \"PRESTIGIOUS_DISTRICT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the subway", "close to subway", "near subway", "close subway", "close the subway", "near a subway", "not far from subway", "not too far from subway", "not far to subway" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "with basement", "basement", "Basement included", "Basement included", "Includes basement", "Includes basement" ],
@@ -2633,28 +2613,8 @@
       "value" : "{\n  \"infra\": [\n    \"SEPARATE_ENTRANCE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "near the airport", "close to airport", "close airport", "near airport", "near an airport", "near a airport", "close an airport", "close the airport", "near to airport" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
       "rule" : [ "swimming pool", "swim pool", "pool", "swimming", "Swimming facility", "Pool area", "Poolside" ],
       "value" : "{\n  \"infra\": [\n    \"SWIMMING_POOL\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest", "Close to the forest", "Next to the forest", "By the forest", "Near the woods", "Bordering the forest", "In the vicinity of the forest", "Beside the forest", "In proximity to the forest" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the kindergraden", "near the kindergarten", "near the kindergarden", "near kindergarten", "near kindergarden", "close to kindergarten", "close to kindergarten", "near to kindergarten", "close kindergarten" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain", "Close to the mountains", "Adjacent to the mountains", "Next to the mountains", "By the mountains", "Beside the mountains", "Near the foothills", "Alongside the mountains", "In the vicinity of the mountains", "At the base of the mountains" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
-    }, {
-      "type" : "synonyms",
-      "rule" : [ "near the lake", "close to lake", "lake", "Close to the lake", "Adjacent to the lake", "Next to the lake", "By the lake", "Beside the lake", "Near the lakeside", "Along the lake", "In the vicinity of the lake", "At the edge of the lake" ],
-      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
     }, {
       "type" : "synonyms",
       "rule" : [ "parking place", "parking space", "Parking spot", "Parking slot", "Parking lot" ],
@@ -2757,6 +2717,85 @@
       "type" : "synonyms",
       "rule" : [ "second one", "second apt", "second" ],
       "value" : "{\n position: \"second\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "location_features",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "calm district", "calm", "Quiet neighborhood", "Peaceful area", "Tranquil district", "Serene neighborhood", "Peaceful neighborhood", "Quiet area", "Tranquil area", "calm neighborhood", "Serene district", "Low-noise area", "Quiet zone" ],
+      "value" : "{\n  \"infra\": [\n    \"CALM_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the school", "near school", "close to school", "close school", "school", "Close to the school", "Adjacent to the school" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SCHOOL\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the subway", "close to subway", "near subway", "close subway", "close the subway", "near a subway", "not far from subway", "not too far from subway", "not far to subway" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SUBWAY\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the park", "near park", "close to park", "close park", "park", "Close to the park", "Adjacent to the park", "Next to the park", "By the park", "Beside the park", "Near the green space", "In proximity to the park", "Alongside the park" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_PARK\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the kindergraden", "near the kindergarten", "near the kindergarden", "near kindergarten", "near kindergarden", "close to kindergarten", "close to kindergarten", "near to kindergarten" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_KINDERGARTEN\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "in the center", "center", "in center", "In the heart", "Centrally located", "At the core", "In the downtown", "In the central area", "In the central district", "In the city center" ],
+      "value" : "{\n  \"infra\": [\n    \"CITY_CENTER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "prestige district", "prestige", "prestigious district", "prestigious" ],
+      "value" : "{\n  \"infra\": [\n    \"PRESTIGIOUS_DISTRICT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the forest", "near forest", "close to forest", "near to forest", "close forest", "forest", "Close to the forest", "Next to the forest", "By the forest", "Near the woods", "Bordering the forest", "in the woods", "In the vicinity of the forest", "Beside the forest", "In proximity to the forest" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_FOREST\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the sea", "near sea", "close to sea", "adjacent to the sea", "adjacent to sea" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the river", "river", "close to river", "Close to the river", "Adjacent to the river", "Next to the river", "By the river", "Beside the river", "Alongside the river", "In proximity to the river", "Near the riverbank" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_RIVER\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the lake", "close to lake", "lake", "Close to the lake", "Adjacent to the lake", "Next to the lake", "By the lake", "Beside the lake", "Near the lakeside", "Along the lake", "In the vicinity of the lake", "At the edge of the lake" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_LAKE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "sea view", "view on sea", "view on the sea", "view on a sea" ],
+      "value" : "{\n  \"infra\": [\n    \"SEA_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "sea" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SEA\",\n    \"SEA_VIEW\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the slope", "close to slope", "near slope", "near a slope" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_SLOPE\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the airport", "close to airport", "close airport", "near airport", "near an airport", "near a airport", "close an airport", "close the airport", "near to airport" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_AIRPORT\"\n  ]\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain", "Close to the mountains", "Adjacent to the mountains", "Next to the mountains", "By the mountains", "Beside the mountains", "Near the foothills", "Alongside the mountains", "In the vicinity of the mountains", "At the base of the mountains" ],
+      "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
     } ]
   } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.amount-of-money", "duckling.interval" ],

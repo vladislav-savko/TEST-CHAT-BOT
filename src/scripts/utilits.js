@@ -18,8 +18,9 @@ export function session() {
         priceTo: null,
         plotAreaTo: null,
         plotAreaFrom: null,
-        bedroomsFrom: null,
-        bedroomsTo: null,
+        //bedroomsFrom: null,
+        //bedroomsTo: null,
+        bedrooms: [],
         densityFrom: null,
         densityTo: null,
         coverageRatioTo: null,
@@ -48,6 +49,8 @@ export function session() {
         balcony: [],
         television: [],
         internet: [],
+        locationFeatures: [],
+        infrastructureHouseAmenity: [],
         infrastructureApartmentAmenity: [],
         infrastructurePlotAmenity: [],
         infrastructureCommerceAmenity: [],
@@ -301,6 +304,15 @@ export const getListings = async (sessionData) => {
                     `${
                         listingData.infrastructureAmenity !== null
                             ? `- Infrastructure amenities: ${listingData.infrastructureAmenity
+                                  .map((v) =>
+                                      v.toLowerCase().replace(/_/g, " ")
+                                  )
+                                  .join(", ")} \n`
+                            : ""
+                    }` +
+                    `${
+                        listingData.locationFeatures !== null
+                            ? `- Location features: ${listingData.locationFeatures
                                   .map((v) =>
                                       v.toLowerCase().replace(/_/g, " ")
                                   )

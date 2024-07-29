@@ -61,6 +61,10 @@ const getInfAmenity = (obj) => {
     return [...new Set(obj.flatMap((item) => item.infra))];
 };
 
+const getLocAmenity = (obj) => {
+    return [...new Set(obj.flatMap((item) => item.infra))];
+};
+
 export const getAllParamsFromTree = async (parseTree) => {
     let filledParams = {};
     //$reactions.answer(JSON.stringify($parseTree));
@@ -75,8 +79,22 @@ export const getAllParamsFromTree = async (parseTree) => {
 
     if (parseTree.bedroom) {
         const bedrooms = getFromIntervalOrNumberBedrooms(parseTree.bedroom);
-        filledParams.bedroomsFrom = bedrooms.from;
-        filledParams.bedroomsTo = bedrooms.to;
+        //filledParams.bedroomsFrom = bedrooms.from;
+        //filledParams.bedroomsTo = bedrooms.to;
+        if (bedrooms.from == bedrooms.to) {
+            if (typeof bedrooms.from === "string") {
+                filledParams.bedrooms = [0];
+            } else {
+                filledParams.bedrooms = [bedrooms.from];
+            }
+        } else {
+            filledParams.bedrooms = [];
+            bedrooms.to = bedrooms.to === null ? 20 : bedrooms.to;
+            while (bedrooms.from - 1 != bedrooms.to) {
+                filledParams.bedrooms.push(bedrooms.to);
+                bedrooms.to -= 1;
+            }
+        }
     }
 
     if (parseTree.price) {
@@ -183,8 +201,14 @@ export const getAllParamsFromTree = async (parseTree) => {
     }
 
     if (parseTree._infrastructure_amenity) {
-        filledParams.infAmenity = getInfAmenity(
-            parseTree._infrastructure_amenity
+            filledParams.infAmenity = getInfAmenity(
+                parseTree._infrastructure_amenity
+            );
+    }
+    
+    if (parseTree._location_features) {
+        filledParams.locAmenity = getLocAmenity(
+            parseTree._location_features
         );
     }
 
@@ -257,17 +281,17 @@ export const processParams = async () => {
     if ($session.params.infAmenity && !emptyParams.includes("PropertyTypes")) {
         switch ($session.data.propertyTypes[0]) {
             case "APARTMENT":
+                $session.data.infrastructureApartmentAmenity.push($session.params.infAmenity[0]);
+                break;
             case "DETACHED_HOUSE":
             case "SEMIDETACHED_HOUSE":
             case "VILLA":
-                $session.data.infrastructureApartmentAmenity =
-                    $session.params.infAmenity;
+                $session.data.infrastructureHouseAmenity.push($session.params.infAmenity[0]);
                 break;
             case "COMMERCIAL_PLOT":
             case "RESIDENTIAL_PLOT":
             case "AGRICULTURE_PLOT":
-                $session.data.infrastructurePlotAmenity =
-                    $session.params.infAmenity;
+                $session.data.infrastructurePlotAmenity.push($session.params.infAmenity[0]);
                 break;
             case "OFFICE":
             case "HOTEL":
@@ -275,8 +299,33 @@ export const processParams = async () => {
             case "RETAIL_SPACE":
             case "WAREHOUSE":
             case "CAR_PARKING":
-                $session.data.infrastructureCommerceAmenity =
-                    $session.params.infAmenity;
+                $session.data.infrastructureCommerceAmenity.push($session.params.infAmenity[0]);
+                break;
+        }
+    }
+    
+    if ($session.params.locAmenity && !emptyParams.includes("PropertyTypes")) {
+         switch ($session.data.propertyTypes[0]) {
+            case "APARTMENT":
+                $session.data.locationFeatures.push($session.params.locAmenity[0]);
+                break;
+            case "DETACHED_HOUSE":
+            case "SEMIDETACHED_HOUSE":
+            case "VILLA":
+                $session.data.locationFeatures.push($session.params.locAmenity[0]);
+                break;
+            case "COMMERCIAL_PLOT":
+            case "RESIDENTIAL_PLOT":
+            case "AGRICULTURE_PLOT":
+                $session.data.locationFeatures.push($session.params.locAmenity[0]);
+                break;
+            case "OFFICE":
+            case "HOTEL":
+            case "MANUFACTURING":
+            case "RETAIL_SPACE":
+            case "WAREHOUSE":
+            case "CAR_PARKING":
+                $session.data.locationFeatures.push($session.params.locAmenity[0]);
                 break;
         }
     }
