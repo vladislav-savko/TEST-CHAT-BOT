@@ -14,13 +14,17 @@ export default async () => {
         if (available.includes(lngObj.code)) {
             await switchLanguage(lngObj.code);
 
-            /** @type { State } */
-            const lastState = findLastNonSwitchState(
+            /** @type {{ state: State }} */
+            const lastTransition = findLastNonSwitchState(
                 $session.transitionsHistory
             );
 
-            if (lastState) $reactions.transition(lastState);
-            else $reactions.transition("/Start");
+            if (lastTransition) {
+                const { state: lastState } = lastTransition;
+                $reactions.transition(lastState);
+            } else {
+                $reactions.transition("/Start");
+            }
         } else {
             //интерфейса с таким языком не предусмотрено, выберите из существующих
         }
