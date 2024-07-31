@@ -18,9 +18,8 @@ export function session() {
         priceTo: null,
         plotAreaTo: null,
         plotAreaFrom: null,
-        //bedroomsFrom: null,
-        //bedroomsTo: null,
-        bedrooms: [],
+        bedroomsFrom: null,
+        bedroomsTo: null,
         densityFrom: null,
         densityTo: null,
         coverageRatioTo: null,
@@ -49,8 +48,6 @@ export function session() {
         balcony: [],
         television: [],
         internet: [],
-        locationFeatures: [],
-        infrastructureHouseAmenity: [],
         infrastructureApartmentAmenity: [],
         infrastructurePlotAmenity: [],
         infrastructureCommerceAmenity: [],
@@ -69,7 +66,7 @@ export function session() {
     $session.seller = null;
     $session.ids = [];
 
-    $session.lang = $session.lang || "en";
+    $session.lang = null;
 
     //параметры по которым был последний успешный запрос
     $session.lastParams = {};
@@ -304,15 +301,6 @@ export const getListings = async (sessionData) => {
                     `${
                         listingData.infrastructureAmenity !== null
                             ? `- Infrastructure amenities: ${listingData.infrastructureAmenity
-                                  .map((v) =>
-                                      v.toLowerCase().replace(/_/g, " ")
-                                  )
-                                  .join(", ")} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.locationFeatures !== null
-                            ? `- Location features: ${listingData.locationFeatures
                                   .map((v) =>
                                       v.toLowerCase().replace(/_/g, " ")
                                   )
@@ -717,9 +705,8 @@ export const printHelpText = () => {
 
 /** Меняет язык интерфейса.
  * @param {string} code - Код языка, на который нужно переключиться. */
-export const switchLanguage = async (code) => {
+export const switchLanguage = (code) => {
     $session.lang = code;
-    $client.lang = code;
 };
 
 export default {
