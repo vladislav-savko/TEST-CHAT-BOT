@@ -708,6 +708,15 @@ export const switchLanguage = (code) => {
     $session.lang = code;
 };
 
+export function findLastNonSwitchState(transitions) {
+    for (let i = transitions.length - 1; i >= 0; i--) {
+      if (transitions[i].state !== "/SwitchIntefraceLanguage") {
+        return transitions[i];
+      }
+    }
+    return null; // если все элементы "/SwitchIntefraceLanguage"
+  }
+
 export default {
     session,
     initSession,

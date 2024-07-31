@@ -15,6 +15,12 @@
  */
 
 /**
+ * @typedef {Object} DeferredState
+ * @property {State} value - Название состояния.
+ * @property {boolean} deferred - Отложенный переход.
+ */
+
+/**
  * Встроенный сервис ответов (документация не точная)
  * @type {{
  *   answer: (text: string) => void,
@@ -26,7 +32,7 @@
  *   random: (min: number, max: number) => number,
  *   setClientTimezone: (timezone: string) => void,
  *   timeout: (timeout: number, nextState: string) => void,
- *   transition: (state: State) => void,
+ *   transition: (state: State | DeferredState) => void,
  *   ttsWithVariables: (text: string, variables: Variables) => void,
  *   video: (videoUrl: string) => void
  * }}

@@ -28,7 +28,7 @@ theme: /
             await stateJs.start();
 
     state: SwitchIntefraceLanguage
-        q!: $regex</interface>
+        q!: $regex</switchLanguage>
         intent!: /switchLanguage
         scriptEs6:
             await stateJs.switchIntefraceLanguage();

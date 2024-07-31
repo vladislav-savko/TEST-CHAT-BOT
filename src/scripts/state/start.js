@@ -8,8 +8,6 @@ export default async () => {
 
     const { lang } = $session;
 
-    response.log(lang);
-
     if (!lang) {
         $reactions.transition("/SwitchIntefraceLanguage");
     } else {
