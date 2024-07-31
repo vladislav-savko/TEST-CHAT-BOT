@@ -5,6 +5,8 @@ import local from "./local/local.js";
 import response from "./response.js";
 
 import "./typeDoc/session.js";
+import "./typeDoc/reactions.js";
+import "./typeDoc/states.js";
 
 export function session() {
     $session.data = {
@@ -66,9 +68,6 @@ export function session() {
     $session.seller = null;
     $session.ids = [];
 
-    $session.lang = null;
-
-    //параметры по которым был последний успешный запрос
     $session.lastParams = {};
 
     $session.version = VERSION;

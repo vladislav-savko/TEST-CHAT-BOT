@@ -1,0 +1,17 @@
+{
+    "name": "state-watcher",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/watch.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch": "node src/watch.js",
+        "update": "node src/updateStates.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chokidar": "^3.6.0"
+    }
+}

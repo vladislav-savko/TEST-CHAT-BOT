@@ -24,6 +24,7 @@ export default {
         noMoreResultsResetCommand: `Nie ma więcej wyników, możesz wyczyścić filtry komendą **Reset**`,
         showMoreResults: `Aby zobaczyć więcej wyników, po prostu powiedz \*Pokaż więcej\*`,
         showMoreResultsAndReset: `Aby zobaczyć więcej wyników powiedz "\*Pokaż więcej\*". Aby wyczyścić filtry powiedz "\*Reset\*"`,
+        language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
     },
     help: [
         "Aby rozpocząć wyszukiwanie, musisz podać lokalizację, typ nieruchomości (dom, willa, mieszkanie, handel, działka), typ oferty (wynajem lub kupno) i budżet. Na przykład, *Chcę kupić dom w Limassol z budżetem powyżej 10 tys. dolarów*",

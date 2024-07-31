@@ -26,6 +26,7 @@
  * @property {string} noMoreResultsResetCommand - Информация о команде сброса фильтров при отсутствии результатов
  * @property {string} showMoreResults - Инструкция о показе дополнительных результатов
  * @property {string} showMoreResultsAndReset - Инструкция о показе дополнительных результатов и сбросе фильтров
+ * @property {string} language - Доступные языки для перевода интерфейса
 */
 
 /**

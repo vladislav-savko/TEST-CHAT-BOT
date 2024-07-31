@@ -1,3 +1,7 @@
+const log = (text) => {
+    $reactions.answer(toPrettyString(text));
+};
+
 const text = (text, markup = "markdown") => {
     $response.replies.push({
         type: "text",
@@ -63,6 +67,7 @@ const images = (imageUrlArray) => {
 };
 
 export default {
+    log,
     text,
     randomText,
     buttons,

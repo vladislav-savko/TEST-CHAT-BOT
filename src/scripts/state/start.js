@@ -8,8 +8,12 @@ export default async () => {
 
     const { lang } = $session;
 
-    $reactions.answer(toPrettyString($session));
+    response.log(lang);
 
-    response.randomText(local(lang).hello);
-    response.text(local(lang).info.about);
+    if (!lang) {
+        $reactions.transition("/SwitchIntefraceLanguage");
+    } else {
+        response.randomText(local(lang).hello);
+        response.text(local(lang).info.about);
+    }
 };

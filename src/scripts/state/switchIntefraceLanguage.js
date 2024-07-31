@@ -3,9 +3,11 @@ import local, { available } from "../local/local.js";
 import response from "../response.js";
 
 export default async () => {
+    response.log($context);
     const { lang } = $session;
     if (!$parseTree._language) {
         response.text(local(lang).getProperty.language);
+        response.text(local(lang).info.language);
     } else {
         /** @type {{ _language: Language }} */
         const { _language: lngObj } = $parseTree;

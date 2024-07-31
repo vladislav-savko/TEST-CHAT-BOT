@@ -24,6 +24,7 @@ export default {
         noMoreResultsResetCommand: `There are no more results, you can clear the filters with the **Reset** command`,
         showMoreResults: `To see more results, just say \*Show more\*`,
         showMoreResultsAndReset: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
+        language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
     },
     help: [
         "To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, *I want to buy a house in Limassol with the budget above 10k$*",
