@@ -575,6 +575,8 @@
       "text" : "Please change the interface language to"
     }, {
       "text" : "I want to enable the interface language Russian"
+    }, {
+      "text" : "Change interface language"
     } ],
     "classificationRules" : {
       "refs" : [ ]
