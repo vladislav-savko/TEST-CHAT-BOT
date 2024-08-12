@@ -379,6 +379,10 @@
       "text" : "buy 5 bedroom house in limassol under 1 million"
     }, {
       "text" : "@location_features"
+    }, {
+      "text" : "@fireplace"
+    }, {
+      "text" : "@company_name"
     } ],
     "classificationRules" : {
       "refs" : [ ]
@@ -522,6 +526,16 @@
       "required" : false,
       "prompts" : [ ],
       "array" : true
+    }, {
+      "name" : "fireplace",
+      "entity" : "fireplace",
+      "required" : false,
+      "prompts" : [ ]
+    }, {
+      "name" : "company_name",
+      "entity" : "company_name",
+      "required" : false,
+      "prompts" : [ ]
     } ],
     "priority" : 0
   }, {
@@ -586,6 +600,32 @@
       "name" : "language",
       "entity" : "language",
       "required" : false,
+      "prompts" : [ ]
+    } ],
+    "priority" : 0
+  }, {
+    "path" : "/sort",
+    "enabled" : true,
+    "shared" : false,
+    "phrases" : [ {
+      "text" : "sort from low to high"
+    }, {
+      "text" : "sort from high to low"
+    }, {
+      "text" : "show newest first"
+    }, {
+      "text" : "show low first"
+    }, {
+      "text" : "show high first"
+    } ],
+    "classificationRules" : {
+      "refs" : [ ]
+    },
+    "patterns" : [ ],
+    "slots" : [ {
+      "name" : "sorter",
+      "entity" : "sorter",
+      "required" : true,
       "prompts" : [ ]
     } ],
     "priority" : 0
@@ -1205,27 +1245,27 @@
     },
     "records" : [ {
       "type" : "synonyms",
-      "rule" : [ "paphos", "pafos", "Nea Pafos", "Пафос" ],
+      "rule" : [ "paphos", "pafos", "Nea Pafos", "Пафос", "Пафосе", "Пафоси" ],
       "value" : "{\"name\":\"Paphos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "limassol", "lemessos", "Lemesos", "Лимасол", "limasol" ],
+      "rule" : [ "limassol", "lemessos", "Lemesos", "Лимасол", "limasol", "Лимасоле", "Лимасоли" ],
       "value" : "{\"name\":\"Limassol\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "nicosia", "lefkosia", "Lefkosia", "Никосия" ],
+      "rule" : [ "nicosia", "lefkosia", "Lefkosia", "Никосия", "Никосие", "Никосии" ],
       "value" : "{\"name\":\"Nicosia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "larnaca", "larnaka", "Larnaka", "Ларнака" ],
+      "rule" : [ "larnaca", "larnaka", "Larnaka", "Ларнака", "Ларнаке", "Ларнаки" ],
       "value" : "{\"name\":\"Larnaca\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "famagusta", "ammochostos", "Ammochostos", "Фамагуста" ],
+      "rule" : [ "famagusta", "ammochostos", "Ammochostos", "Фамагуста", "Фамагусте", "Фамагусти" ],
       "value" : "{\"name\":\"Famagusta\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kyrenia", "girne", "Girne", "Кирения" ],
+      "rule" : [ "kyrenia", "girne", "Girne", "Кирения", "Кирение", "Кирении" ],
       "value" : "{\"name\":\"Kyrenia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1233,67 +1273,67 @@
       "value" : "{\"name\":\"Ayia Napa\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "protaras", "Protaras", "Протарас" ],
+      "rule" : [ "protaras", "Protaras", "Протарас", "Протарасе", "Протараси" ],
       "value" : "{\"name\":\"Protaras\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "troodos", "Troodos", "Троодос" ],
+      "rule" : [ "troodos", "Troodos", "Троодос", "Троодосе", "Троодоси" ],
       "value" : "{\"name\":\"Troodos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "polis", "Poleis", "Полис" ],
+      "rule" : [ "polis", "Poleis", "Полис", "Полисе", "Полиси" ],
       "value" : "{\"name\":\"Polis\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "paralimni", "Paralimni", "Паралимни" ],
+      "rule" : [ "paralimni", "Paralimni", "Паралимни", "Паралимне" ],
       "value" : "{\"name\":\"Paralimni\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "pervolia", "Pervolia", "Перволия" ],
+      "rule" : [ "pervolia", "Pervolia", "Перволия", "Перволии", "Перволие" ],
       "value" : "{\"name\":\"Pervolia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kolossi", "Kolossi", "Колосси" ],
+      "rule" : [ "kolossi", "Kolossi", "Колосси", "Колоссе" ],
       "value" : "{\"name\":\"Kolossi\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "akrotiri", "Akrotiri", "Акротири" ],
+      "rule" : [ "akrotiri", "Akrotiri", "Акротири", "Акротире" ],
       "value" : "{\"name\":\"Akrotiri\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "pegeia", "Pegeia", "Пейя", "peyia" ],
+      "rule" : [ "pegeia", "Pegeia", "Пейя", "peyia", "Пейе", "Пейа" ],
       "value" : "{\"name\":\"Pegeia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "lefkara", "Lefkara", "Лефкара" ],
+      "rule" : [ "lefkara", "Lefkara", "Лефкара", "Лефкаре", "Лефкари" ],
       "value" : "{\"name\":\"Lefkara\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "dhekelia", "Dhekelia", "Декелия" ],
+      "rule" : [ "dhekelia", "Dhekelia", "Декелия", "Декелии", "Декелие" ],
       "value" : "{\"name\":\"Dhekelia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kiti", "Kiti", "Кити" ],
+      "rule" : [ "kiti", "Kiti", "Кити", "Ките" ],
       "value" : "{\"name\":\"Kiti\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kakopetria", "Kakopetria", "Какопетрия" ],
+      "rule" : [ "kakopetria", "Kakopetria", "Какопетрия", "Какопетрие", "Какопетрии" ],
       "value" : "{\"name\":\"Kakopetria\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "agia irini", "Agia Irini", "Агия Ирини" ],
+      "rule" : [ "agia irini", "Agia Irini", "Агия Ирини", "Агия Ирине" ],
       "value" : "{\"name\":\"Agia Irini\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "anogyra", "Anogyra", "Аногира" ],
+      "rule" : [ "anogyra", "Anogyra", "Аногира", "Аногире", "Аногири" ],
       "value" : "{\"name\":\"Anogyra\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "arachna", "Arachna", "Арахна" ],
+      "rule" : [ "arachna", "Arachna", "Арахна", "Арахне", "Арахни" ],
       "value" : "{\"name\":\"Arachna\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "archimandrita", "Archimandrita", "Архимандрита" ],
+      "rule" : [ "archimandrita", "Archimandrita", "Архимандрита", "Архимандрите", "Архимандрити" ],
       "value" : "{\"name\":\"Archimandrita\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1301,27 +1341,27 @@
       "value" : "{\"name\":\"Geroskipou\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kalavasos", "Kalavasos", "Калавасос" ],
+      "rule" : [ "kalavasos", "Kalavasos", "Калавасос", "Калавасосе" ],
       "value" : "{\"name\":\"Kalavasos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kampos", "Kampos", "Кампос" ],
+      "rule" : [ "kampos", "Kampos", "Кампос", "Кампосе" ],
       "value" : "{\"name\":\"Kampos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kissonerga", "Kissonerga", "Киссонерга" ],
+      "rule" : [ "kissonerga", "Kissonerga", "Киссонерга", "Киссонерге" ],
       "value" : "{\"name\":\"Kissonerga\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kouklia", "Kouklia", "Куклия" ],
+      "rule" : [ "kouklia", "Kouklia", "Куклия", "Куклии", "Куклие" ],
       "value" : "{\"name\":\"Kouklia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "mazotos", "Mazotos", "Мазотос" ],
+      "rule" : [ "mazotos", "Mazotos", "Мазотос", "Мазотосе", "Мазотоси" ],
       "value" : "{\"name\":\"Mazotos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "nikitari", "Nikitari", "Никитари" ],
+      "rule" : [ "nikitari", "Nikitari", "Никитари", "Никитаре" ],
       "value" : "{\"name\":\"Nikitari\",\"country\":\"Cyprus\"}"
     } ]
   }, {
@@ -2798,6 +2838,207 @@
       "type" : "synonyms",
       "rule" : [ "near the mountains", "near to mountains", "near the mountain", "mountains", "mountain", "Close to the mountains", "Adjacent to the mountains", "Next to the mountains", "By the mountains", "Beside the mountains", "Near the foothills", "Alongside the mountains", "In the vicinity of the mountains", "At the base of the mountains" ],
       "value" : "{\n  \"infra\": [\n    \"NEAR_THE_MOUNTAINS\"\n  ]\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "sorter",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "show newest options", "show newest" ],
+      "value" : "{\n  \"sorter\": \"NEWEST\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "from high to low", "show high first", "high first" ],
+      "value" : "{\n  \"sorter\": \"PRICE_HIGH_TO_LOW\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "from low to high", "show low first", "low first" ],
+      "value" : "{\n  \"sorter\": \"PRICE_LOW_TO_HIGH\"\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "fireplace",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "without fireplace", "no fireplace", "does not contain fireplace", "exclude fireplace" ],
+      "value" : "{\n  \"fire\": null\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "with fireplace", "contains fireplace", "fireplace", "contain fireplace" ],
+      "value" : "{\n  \"fire\": true\n}"
+    } ]
+  }, {
+    "entity" : {
+      "name" : "company_name",
+      "enabled" : true,
+      "shared" : false,
+      "type" : "annotation",
+      "priority" : 1,
+      "noSpelling" : true,
+      "noMorph" : false,
+      "phoneticSearch" : false,
+      "fuzzySearch" : false,
+      "client" : false,
+      "hidden" : false
+    },
+    "records" : [ {
+      "type" : "synonyms",
+      "rule" : [ "Aphrodite Holiday Rentals", "Aphrodite holiday" ],
+      "value" : "{\n  \"company\": \"Aphrodite Holiday Rentals\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Blue Nautilus Projects", "Blue Nautilus" ],
+      "value" : "{\n  \"company\": \"Blue Nautilus Projects\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Cyprus Developers Alliance" ],
+      "value" : "{\n  \"company\": \"Cyprus Developers Alliance\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "DemPro - Real Estate Agents", "DemPro" ],
+      "value" : "{\n  \"company\": \"DemPro - Real Estate Agents\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "DOM real estate Agency", "Dom", "Dom real estate", "Dom Agency" ],
+      "value" : "{\n  \"company\": \"DOM Real Estate Agency\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "FOX smart estate agency", "fox smart estate", "fox smart", "fox" ],
+      "value" : "{\n  \"company\": \"FOX Smart Estate Agency\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Go gordian", "Gordian" ],
+      "value" : "{\n  \"company\": \"Go Gordian\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Home to Home - Greece", "Home to Home" ],
+      "value" : "{\n  \"company\": \"Home to Home - Greece\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "MPA property" ],
+      "value" : "{\n  \"company\": \"MPA Property\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "OH consulting ltd", "OH consulting", "OH" ],
+      "value" : "{\n  \"company\": \"OH Consulting LTD\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "P. Pericleous real estate", "P. Pericleous", "Pericleous " ],
+      "value" : "{\n  \"company\": \"P. PERICLEOUS REAL ESTATE\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Quality group" ],
+      "value" : "{\n  \"company\": \"Quality Group\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "SQ one", "SQ" ],
+      "value" : "{\n  \"company\": \"SQ ONE\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Top real estate Cyprus", "Top real estate", "Top estate" ],
+      "value" : "{\n  \"company\": \"Top Real Estate Cyprus\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "CENTURY 21 CYPRUS", "Century 21", "21 Century" ],
+      "value" : "{\n  \"company\": \"CENTURY 21 CYPRUS\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Chris Michael Property Group" ],
+      "value" : "{\n  \"company\": \"Chris Michael Property Group\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Estia Properties", "Estia" ],
+      "value" : "{\n  \"company\": \"Estia Properties\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Georgiou Cater Parts ltd", "Gerogiou Cater Parts", "Gerogiou Cater" ],
+      "value" : "{\n  \"company\": \"Georgiou Cater Parts ltd\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "GPA upgraded homes", "GPA upgraded", "GPA " ],
+      "value" : "{\n  \"company\": \"GPA UPGRADED HOMES\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "M2 Solution estate", "M2 solutions", "M2" ],
+      "value" : "{\n  \"company\": \"M2 Solutions Estate\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Myconstructor", "My constructor" ],
+      "value" : "{\n  \"company\": \"Myconstructor\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Octa properties", "octa" ],
+      "value" : "{\n  \"company\": \"OCTA PROPERTIES\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Sabbianco Properties", "Sabbianco" ],
+      "value" : "{\n  \"company\": \"Sabbianco Properties\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Stylianides group", "stylianides" ],
+      "value" : "{\n  \"company\": \"Stylianides Group\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Admare Property", "Admare" ],
+      "value" : "{\n   \"company\" : \"Admare Property\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "APHRODITE HILLS RESORT" ],
+      "value" : "{\n  \"company\": \"APHRODITE HILLS RESORT\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Ayia Napa Marina" ],
+      "value" : "{\n  \"company\": \"Ayia Napa Marina\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Domaland properties Ltd", "Domaland properties", "Domaland" ],
+      "value" : "{\n  \"company\": \"DOMALAND PROPERTIES Ltd\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "EA Lemesos Estates", "EA Lemesos", "EA" ],
+      "value" : "{\n  \"company\": \"EA Lemesos Estates\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "First Class Homes" ],
+      "value" : "{\n  \"company\": \"First Class Homes \"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Kazo real estate", "kazo" ],
+      "value" : "{\n  \"company\": \"KAZO Real Estate\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Medousa Developers", "Medousa" ],
+      "value" : "{\n  \"company\": \"Medousa Developers\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "RE/MAX Cyprus", "RE/MAX", "Re max", "remax" ],
+      "value" : "{\n  \"company\": \"RE/MAX Cyprus\"\n}"
+    }, {
+      "type" : "synonyms",
+      "rule" : [ "Rossos Developers", "Rossos" ],
+      "value" : "{\n  \"company\": \"Rossos Developers\"\n}"
     } ]
   } ],
   "enabledSystemEntities" : [ "duckling.number", "duckling.amount-of-money", "duckling.interval" ],

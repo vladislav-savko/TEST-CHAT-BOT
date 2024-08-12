@@ -27,6 +27,8 @@ export default {
         language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
     },
     help: [
+        "Aby zmienić język, napisz język, w którym chcesz, aby twój bot się z tobą komunikował. Na przykład, Przełącz na język grecki",
+        "Bot może mówić w 5 językach: \n - Angielski \n - Grecki \n - Rosyjski \n - Ukraiński \n - Polski",
         "Aby rozpocząć wyszukiwanie, musisz podać lokalizację, typ nieruchomości (dom, willa, mieszkanie, handel, działka), typ oferty (wynajem lub kupno) i budżet. Na przykład, *Chcę kupić dom w Limassol z budżetem powyżej 10 tys. dolarów*",
         "Oto lista udogodnień, które możesz wpisać: \n - System alarmowy \n - Klimatyzacja *(Wszędzie, Tylko w sypialniach, Brak)* \n - Balkon \n - Stan budynku *(Gotowe do zamieszkania, W budowie)* \n - Stan *(Nowe, Dobrze utrzymane, Wymaga remontu)* \n - Kuchnia \n - Parking \n - Gaz ziemny \n - Elektryczność \n - Internet *(Brak, Wi-Fi, Kablowy, Mobilny)* \n - Ogrzewanie *(Brak, Centralne, Gazowe, Elektryczne, Paliwo ciekłe)* \n - Ogrzewanie wody *(Brak, Centralne, Bojler, System słoneczny, System fotowoltaiczny)* \n - Udogodnienia *(Blisko szkoły, Blisko parku, Spokojna okolica, W centrum, Miejsce parkingowe, Piękny widok, Sauna, Widok na morze, Ochrona, Magazyn, Blisko metra, Blisko przedszkola, Blisko morza, Blisko jeziora, Z ogrodem, Z garażem)*",
         "Jeśli podczas dodawania parametrów do zapytania napotkasz brak wyników wyszukiwania, możesz cofnąć ostatnią wprowadzaną wartość za pomocą komendy *Cofnij*.",
@@ -62,6 +64,7 @@ export default {
         bedrooms: `Ile sypialni potrzebujesz?`,
         budget: `Jaki jest twój budżet?`,
         coverageRatio: `Jakie są preferencje dotyczące współczynnika zabudowy?`,
+        country: `Would you like to check all the option in this country?`,
         density: `Jaką gęstość zabudowy potrzebujesz?`,
         floorNumber: `Na których piętrach chcesz znaleźć pomieszczenia?`,
         id: `Proszę podać ID nieruchomości.`,

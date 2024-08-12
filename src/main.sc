@@ -225,6 +225,12 @@ theme: /
         intent!: /bye
         scriptEs6:
             await stateJs.bye();
+            
+    state: Sort
+        intent!: /sort
+        scriptEs6:
+            $session.data.sort = $parseTree.value.sorter;
+            $reactions.transition("/Search");
 
     state: NoMatch
         event!: noMatch

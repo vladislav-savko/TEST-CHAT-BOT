@@ -81,7 +81,8 @@ bind("preMatch", function($context) {
         if (lng === 'en') return true;
         
         translate(text, lng).then(function (trn_res) {
-            $context.request.query = trn_res.response.translated_text;
+            $context.request.query += ". ";
+            $context.request.query += trn_res.response.translated_text;
         });
     })
 });

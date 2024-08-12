@@ -1,11 +1,11 @@
 import utl from "./utilits.js";
+import api from "./api.js";
+
 
 const getFromIntervalOrNumber = (obj) => {
     let from = 0;
     let to = null;
     
-    $reactions.answer(JSON.stringify(obj));
-
     if (!obj[0].value.from) {
         to = obj[0].value;
     } else {
@@ -95,6 +95,14 @@ export const getAllParamsFromTree = async (parseTree) => {
                 bedrooms.to -= 1;
             }
         }
+    }
+    
+    if (parseTree.company_name) {
+        filledParams.companyName = parseTree.company_name[0].value.company;
+    }
+    
+    if (parseTree.fireplace) {
+        filledParams.fireplace = parseTree.fireplace[0].value.fire;
     }
 
     if (parseTree.price) {
@@ -195,6 +203,13 @@ export const getAllParamsFromTree = async (parseTree) => {
             "water"
         );
     }
+    
+    if (parseTree.country) {
+       const countr = await api.getCountriesInfo(
+           parseTree.country[0].value.name
+           );
+       filledParams.countryId = countr.data[0].countryId;
+    }
 
     if (parseTree.location) {
         filledParams.location = getCity(parseTree.location);
@@ -245,7 +260,12 @@ export const processParams = async () => {
             $session.info.location = location;
             newParams.push("Location");
         }
-    } else emptyParams.push("Location");
+    } else if ($session.params.countryId) {
+        newParams.push("Location");
+    } else {
+        emptyParams.push("Location");
+    }
+    
 
     //sale_rent
     if ($session.params.listingType) {

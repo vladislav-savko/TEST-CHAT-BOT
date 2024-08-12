@@ -29,11 +29,29 @@ const getCitiesInfo = async (city, country) => {
             pattern: patt,
         },
     });
+    $reactions.answer(JSON.stringify(data));
     if (data.data.length > 1) {
         data.data = [data.data[0]];
     }
     return data;
 };
+
+
+const getCountriesInfo = async (country) => {
+    const take = 1;
+    const patt = `${country}`; // Concatenate country and city with a comma
+    const { data } = await instance.get(ENDPOINT.get__cities, {
+        params: {
+            take: take,
+            pattern: patt,
+        },
+    });
+    if (data.data.length > 1) {
+        data.data = [data.data[0]];
+    }
+    return data;
+};
+
 
 const getListing = async (info) => {
     //$reactions.answer(JSON.stringify(info));
@@ -56,6 +74,7 @@ const getSellerById = async (id) => {
 
 export default {
     getCitiesInfo,
+    getCountriesInfo,
     getListing,
     getListingById,
     getSellerById,
