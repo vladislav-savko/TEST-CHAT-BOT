@@ -345,7 +345,7 @@ export const getListings = async (sessionData) => {
                     );
                     response.inlineCallback(
                         local(lang).buttons.showDetails,
-                        listing.id
+                        response.text(listing.id)
                     );
                 }
             });

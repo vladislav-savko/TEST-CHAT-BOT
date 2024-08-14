@@ -29,7 +29,7 @@ const getCitiesInfo = async (city, country) => {
             pattern: patt,
         },
     });
-    $reactions.answer(JSON.stringify(data));
+    //$reactions.answer(JSON.stringify(data));
     if (data.data.length > 1) {
         data.data = [data.data[0]];
     }
