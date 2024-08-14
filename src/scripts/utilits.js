@@ -345,8 +345,8 @@ export const getListings = async (sessionData) => {
                     );
                     response.inlineCallback(
                         local(lang).buttons.showDetails,
-                        response.text(listing.id)
-                    );
+                        `${listing.id}`
+                        );
                 }
             });
             printShowMore(res.data.total, 3, sessionData.skip);
