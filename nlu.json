@@ -1273,7 +1273,7 @@
       "value" : "{\"name\":\"Ayia Napa\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "protaras", "Protaras", "Протарас", "Протарасе", "Протараси" ],
+      "rule" : [ "protaras", "Protaras", "Протарас", "Протарасе", "Протараси", "Πρωταρά", "Πρωταράς" ],
       "value" : "{\"name\":\"Protaras\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1353,7 +1353,7 @@
       "value" : "{\"name\":\"Kissonerga\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kouklia", "Kouklia", "Куклия", "Куклии", "Куклие" ],
+      "rule" : [ "kouklia", "Kouklia", "Куклия", "Куклии", "Куклие", "Κούκλια" ],
       "value" : "{\"name\":\"Kouklia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1361,7 +1361,7 @@
       "value" : "{\"name\":\"Mazotos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "nikitari", "Nikitari", "Никитари", "Никитаре" ],
+      "rule" : [ "nikitari", "Nikitari", "Никитари", "Никитаре", "Νικητάρι" ],
       "value" : "{\"name\":\"Nikitari\",\"country\":\"Cyprus\"}"
     } ]
   }, {
