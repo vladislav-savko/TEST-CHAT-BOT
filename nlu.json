@@ -82,7 +82,7 @@
     "classificationRules" : {
       "refs" : [ ]
     },
-    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by [(index\\id)] @duckling.number", "* details [(for/by)] [id] @duckling.number *", "Show details\":\" @duckling.number", "[id/ID] @duckling.number" ],
+    "patterns" : [ "Show @duckling.number", "Show by @duckling.number", "Show by [(index\\id)] @duckling.number", "* details [(for/by)] [id] @duckling.number *", "Show details\":\" @duckling.number", "[id/ID] @duckling.number", "See also @duckling.number" ],
     "slots" : [ {
       "name" : "index",
       "entity" : "duckling.number",
@@ -530,12 +530,14 @@
       "name" : "fireplace",
       "entity" : "fireplace",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     }, {
       "name" : "company_name",
       "entity" : "company_name",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   }, {
@@ -600,7 +602,8 @@
       "name" : "language",
       "entity" : "language",
       "required" : false,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   }, {
@@ -626,7 +629,8 @@
       "name" : "sorter",
       "entity" : "sorter",
       "required" : true,
-      "prompts" : [ ]
+      "prompts" : [ ],
+      "array" : false
     } ],
     "priority" : 0
   } ],

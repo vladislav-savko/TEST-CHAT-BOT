@@ -38,13 +38,19 @@ function language (text) {
     })
 }
 
-function translate (text, lng) {
-    return $http.get("https://655.mtis.workers.dev/translate?text=${text}&source_lang=${lng}&target_lang=en", {
+// function translate (text, lng) {
+//     return $http.get("https://655.mtis.workers.dev/translate?text=${text}&source_lang=${lng}&target_lang=en", {
+//         timeout: 10000,
+//         query: {
+//             text: text,
+//             lng: lng
+//         }
+//     })
+// }
+
+function translate (text) {
+    return $http.get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
         timeout: 10000,
-        query: {
-            text: text,
-            lng: lng
-        }
     })
 }
 
@@ -80,9 +86,13 @@ bind("preMatch", function($context) {
         
         if (lng === 'en') return true;
         
-        translate(text, lng).then(function (trn_res) {
-            $context.request.query += ". ";
-            $context.request.query += trn_res.response.translated_text;
+        // translate(text, lng).then(function (trn_res) {
+        //     $context.request.query += ". ";
+        //     $context.request.query += trn_res.response.translated_text;
+        // });
+        
+        translate(text).then(function (trn_res) {
+            $context.request.query = trn_res.data[0].translations[0].text;
         });
     })
 });
