@@ -55,10 +55,6 @@ const image = (imageUrl) => {
     });
 };
 
-/**
- * @param {string[]} imageUrlArray
- * @returns {void}
- */
 const imagesTG = (imageUrlArray) => {
     if (imageUrlArray.length < 2) {
         image(imageUrlArray[0]);
@@ -86,10 +82,6 @@ const imagesTG = (imageUrlArray) => {
     $response.replies.push(...allImages);
 };
 
-/**
- * @param {string[]} imageUrlArray
- * @returns {void}
- */
 const images = (imageUrlArray) => {
     const images = imageUrlArray.map((image) => {
         return {

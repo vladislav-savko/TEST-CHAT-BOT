@@ -362,7 +362,6 @@ export const getListings = async (sessionData) => {
 };
 
 export const printPost = (listing) => {
-    response.log(listing);
     const { lang } = $session;
     const images = listing.photos.map((image) => image);
 
