@@ -2,6 +2,7 @@ import { getListingById } from "../utilits.js";
 
 export default async () => {
     const value = $request.query.replace("by ", '');
+    log(value)
     if (Number(value)) {
         const index = parseInt(value);
         await getListingById(index);
