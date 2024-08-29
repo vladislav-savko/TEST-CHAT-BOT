@@ -1,12 +1,11 @@
 import { getListingById } from "../utilits.js";
 
 export default async () => {
-    $request.query = $request.query.replace("by ", '');
-    log($request.query);
-    if (Number($request.query)) {
-        const index = parseInt($request.query);
+    const value = $request.query.replace("by ", '');
+    if (Number(value)) {
+        const index = parseInt(value);
         await getListingById(index);
-    } else if ($request.query === "Seller Contacts") {
+    } else if (value === "Seller Contacts") {
         $reactions.transition("/TelegramCallback/Seller");
     }
 };
