@@ -346,7 +346,7 @@ export const getListings = async (sessionData) => {
                     response.inlineCallback(
                         local(lang).buttons.showDetails,
                         `${listing.id}`
-                        );
+                    );
                 }
             });
             printShowMore(res.data.total, 3, sessionData.skip);
@@ -362,41 +362,48 @@ export const getListings = async (sessionData) => {
 };
 
 export const printPost = (listing) => {
-    // const { lang } = $session;
-    // const images = listing.photos.map((image) => image);
+    response.log(listing);
+    const { lang } = $session;
+    const images = listing.photos.map((image) => image);
 
-    // let turndownService = new TurndownService();
-    // const description = turndownService
-    //     .turndown(listing.description)
-    //     .replaceAll("\\-", "-");
+    let turndownService = new TurndownService();
+    const description = turndownService
+        .turndown(listing.description)
+        .replaceAll("\\-", "-");
 
-    // response.images(images);
-    // response.text(`\*${listing.title.trim()}\*\n\*€${listing.price}\*`);
-    // response.text(description, "html");
+    if ($request.channelType === "telegram") {
+        response.imagesTG(images);
+    } else {
+        response.images(images);
+    }
 
-    // if ($request.channelType === "telegram") {
-    //     response.inlineURL(
-    //         local(lang).buttons.openInBrowser,
-    //         `${linkToBrowserPage(listing)}`
-    //     );
-    //     response.inlineURL(
-    //         local(lang).buttons.showOnMap,
-    //         `${linkToMap(listing)}`
-    //     );
-    //     response.inlineCallback(
-    //         local(lang).buttons.sellerContacts,
-    //         `Seller Contacts`
-    //     );
-    // } else {
-    //     const linksText =
-    //         `[${local(lang).buttons.openInBrowser}](${linkToBrowserPage(
-    //             listing
-    //         )}) \n` +
-    //         `[${local(lang).buttons.showOnMap}](${linkToMap(listing)})`;
+    response.text(`\*${listing.title.trim()}\*\n\*€${listing.price}\*`);
+    response.text(description, "html");
 
-    //     response.text(linksText);
-    //     response.buttons([local(lang).buttons.sellerContacts]);
-    // }
+    if ($request.channelType === "telegram") {
+        response.inlineURL(
+            local(lang).buttons.openInBrowser,
+            `${linkToBrowserPage(listing)}`
+        );
+        response.inlineURL(
+            local(lang).buttons.showOnMap,
+            `${linkToMap(listing)}`
+        );
+        response.inlineCallback(
+            local(lang).buttons.sellerContacts,
+            `Seller Contacts`
+        );
+    } else {
+        const linksText =
+            `[${local(lang).buttons.openInBrowser}](${linkToBrowserPage(
+                listing
+            )}) \n` +
+            `[${local(lang).buttons.showOnMap}](${linkToMap(listing)})`;
+
+        response.text(linksText);
+
+        response.buttons([local(lang).buttons.sellerContacts]);
+    }
 };
 
 export const printSellerInfo = (seller) => {

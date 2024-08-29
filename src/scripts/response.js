@@ -55,15 +55,50 @@ const image = (imageUrl) => {
     });
 };
 
+/**
+ * @param {string[]} imageUrlArray
+ * @returns {void}
+ */
+const imagesTG = (imageUrlArray) => {
+    if (imageUrlArray.length < 2) {
+        image(imageUrlArray[0]);
+        return;
+    }
+
+    const chunkSize = 10;
+    const allImages = [];
+
+    for (let i = 0; i < imageUrlArray.length; i += chunkSize) {
+        const chunk = imageUrlArray.slice(i, i + chunkSize).map((imageUrl) => ({
+            type: "photo",
+            media: imageUrl,
+        }));
+
+        allImages.push({
+            type: "raw",
+            body: {
+                media: chunk,
+            },
+            method: "sendMediaGroup",
+        });
+    }
+
+    $response.replies.push(...allImages);
+};
+
+/**
+ * @param {string[]} imageUrlArray
+ * @returns {void}
+ */
 const images = (imageUrlArray) => {
-    const images = imageUrlArray.map((imageUrl) => {
+    const images = imageUrlArray.map((image) => {
         return {
             type: "image",
-            imageUrl,
+            imageUrl: image,
         };
     });
 
-    $response.replies.push(images);
+    $response.replies.push(...images);
 };
 
 export default {
@@ -75,4 +110,5 @@ export default {
     inlineCallback,
     image,
     images,
+    imagesTG,
 };
