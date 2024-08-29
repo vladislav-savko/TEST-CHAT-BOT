@@ -61,8 +61,10 @@ const getListing = async (info) => {
 };
 
 const getListingById = async (id) => {
+    // $reactions.answer(JSON.stringify(id));
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
+    log(data.data);
     return data;
 };
 

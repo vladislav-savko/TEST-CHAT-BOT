@@ -1265,11 +1265,11 @@
       "value" : "{\"name\":\"Famagusta\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kyrenia", "girne", "Girne", "Кирения", "Кирение", "Кирении" ],
+      "rule" : [ "kyrenia", "girne", "Girne", "Кирения", "Кирение", "Кирении", "Κερύνεια" ],
       "value" : "{\"name\":\"Kyrenia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "ayia napa", "agia napa", "Agia Napa", "Айя Напа" ],
+      "rule" : [ "ayia napa", "agia napa", "Agia Napa", "Айя Напа", "Αγία Νάπα" ],
       "value" : "{\"name\":\"Ayia Napa\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1277,11 +1277,11 @@
       "value" : "{\"name\":\"Protaras\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "troodos", "Troodos", "Троодос", "Троодосе", "Троодоси" ],
+      "rule" : [ "troodos", "Troodos", "Троодос", "Троодосе", "Троодоси", "Τρόοδο" ],
       "value" : "{\"name\":\"Troodos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "polis", "Poleis", "Полис", "Полисе", "Полиси" ],
+      "rule" : [ "polis", "Poleis", "Полис", "Полисе", "Полиси", "Πόλη" ],
       "value" : "{\"name\":\"Polis\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1289,11 +1289,11 @@
       "value" : "{\"name\":\"Paralimni\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "pervolia", "Pervolia", "Перволия", "Перволии", "Перволие" ],
+      "rule" : [ "pervolia", "Pervolia", "Перволия", "Перволии", "Перволие", "Περβόλια" ],
       "value" : "{\"name\":\"Pervolia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kolossi", "Kolossi", "Колосси", "Колоссе" ],
+      "rule" : [ "kolossi", "Kolossi", "Колосси", "Колоссе", "Κολόσσ" ],
       "value" : "{\"name\":\"Kolossi\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1309,47 +1309,47 @@
       "value" : "{\"name\":\"Lefkara\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "dhekelia", "Dhekelia", "Декелия", "Декелии", "Декелие" ],
+      "rule" : [ "dhekelia", "Dhekelia", "Декелия", "Декелии", "Декелие", "Δεκέλεια" ],
       "value" : "{\"name\":\"Dhekelia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kiti", "Kiti", "Кити", "Ките" ],
+      "rule" : [ "kiti", "Kiti", "Кити", "Ките", "Κίτι" ],
       "value" : "{\"name\":\"Kiti\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kakopetria", "Kakopetria", "Какопетрия", "Какопетрие", "Какопетрии" ],
+      "rule" : [ "kakopetria", "Kakopetria", "Какопетрия", "Какопетрие", "Какопетрии", "Κακοπετριά" ],
       "value" : "{\"name\":\"Kakopetria\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "agia irini", "Agia Irini", "Агия Ирини", "Агия Ирине" ],
+      "rule" : [ "agia irini", "Agia Irini", "Агия Ирини", "Агия Ирине", "Αγία Ειρήνη" ],
       "value" : "{\"name\":\"Agia Irini\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "anogyra", "Anogyra", "Аногира", "Аногире", "Аногири" ],
+      "rule" : [ "anogyra", "Anogyra", "Аногира", "Аногире", "Аногири", "Ανώγυρα" ],
       "value" : "{\"name\":\"Anogyra\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "arachna", "Arachna", "Арахна", "Арахне", "Арахни" ],
+      "rule" : [ "arachna", "Arachna", "Арахна", "Арахне", "Арахни", "Αραχνα" ],
       "value" : "{\"name\":\"Arachna\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "archimandrita", "Archimandrita", "Архимандрита", "Архимандрите", "Архимандрити" ],
+      "rule" : [ "archimandrita", "Archimandrita", "Архимандрита", "Архимандрите", "Архимандрити", "Αρχιμανδρίτα" ],
       "value" : "{\"name\":\"Archimandrita\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "geroskipou", "Geroskipou", "Героскипу" ],
+      "rule" : [ "geroskipou", "Geroskipou", "Героскипу", "Γεροσκήπου" ],
       "value" : "{\"name\":\"Geroskipou\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kalavasos", "Kalavasos", "Калавасос", "Калавасосе" ],
+      "rule" : [ "kalavasos", "Kalavasos", "Калавасос", "Калавасосе", "Καλαβασό" ],
       "value" : "{\"name\":\"Kalavasos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kampos", "Kampos", "Кампос", "Кампосе" ],
+      "rule" : [ "kampos", "Kampos", "Кампос", "Кампосе", "Κάμπο" ],
       "value" : "{\"name\":\"Kampos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "kissonerga", "Kissonerga", "Киссонерга", "Киссонерге" ],
+      "rule" : [ "kissonerga", "Kissonerga", "Киссонерга", "Киссонерге", "Κισσόνεργα" ],
       "value" : "{\"name\":\"Kissonerga\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
@@ -1357,7 +1357,7 @@
       "value" : "{\"name\":\"Kouklia\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
-      "rule" : [ "mazotos", "Mazotos", "Мазотос", "Мазотосе", "Мазотоси" ],
+      "rule" : [ "mazotos", "Mazotos", "Мазотос", "Мазотосе", "Мазотоси", "Μαζωτό" ],
       "value" : "{\"name\":\"Mazotos\",\"country\":\"Cyprus\"}"
     }, {
       "type" : "synonyms",
