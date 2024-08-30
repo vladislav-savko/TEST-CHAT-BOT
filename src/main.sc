@@ -214,7 +214,7 @@ theme: /
             await stateJs.restart();
 
     state: Help
-        q!: * (info|Info) *
+        q!: * (info|~Info|Information) *
         scriptEs6:
             await stateJs.help();
     
