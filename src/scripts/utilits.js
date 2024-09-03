@@ -57,6 +57,8 @@ export function session() {
         infrastructureCommerceAmenity: [],
         withoutSold: true,
         cityId: null,
+        locationFeatures: [],
+        infrastructurePlotAmenity: [],
     };
 
     $session.info = {
@@ -464,10 +466,13 @@ export const getFiltersInfo = async () => {
         balcony,
         television,
         internet,
+        bedrooms,
+        location,
+        bathrooms,
     } = data;
 
-    const { city, country } = info;
-    response.log({ ...data, ...info });
+    // const { city, country } = info;
+    // response.log({ ...data, ...info });
 
     const {
         propertyType: tPropertyTypes,
@@ -481,28 +486,43 @@ export const getFiltersInfo = async () => {
         internet: tInternet,
         balcony: tBalcony,
         infrastructureAmenities: tIA,
+        bedrooms: tBedrooms,
+        bathrooms: tBathrooms,
+        location: tLocation,
     } = local(lang).property;
 
     const filters = [
-        propertyTypes ? `${propertyTypes}` : null,
-        listingType ? `${listingType}` : null,
+        propertyTypes
+            ? `${tPropertyTypes.value}: ${propertyTypes
+                  .map((type) => tPropertyTypes[type])
+                  .join(", ")}`
+            : null,
+        listingType
+            ? `${tListingType.value}: ${tListingType[listingType]}`
+            : null,
         priceFrom || priceTo
             ? `${tPrice.value}: ${priceFrom || "0"} - ${priceTo || ""}`
             : null,
-        water.length ? `${tWater}: ${water}` : null,
+        bedrooms ? `${tBedrooms}: ${bedrooms.join(", ")}` : null,
+        bathrooms ? `${tBathrooms}: ${bathrooms.join(", ")}` : null,
+        location ? `${tLocation}: ${location.address}` : null,
         buildingConditions.length
-            ? `${tBuildingConditions}: ${buildingConditions}`
+            ? `${tBuildingConditions.value}: ${buildingConditions
+                  .map((type) => tBuildingConditions[type])
+                  .join(", ")}`
             : null,
-        furnishing.length ? `${tFurnishing}: ${furnishing}` : null,
-        repair.length ? `${tRepair}: ${repair}` : null,
-        alarmSystem.length ? `${tAlarmSystem}: ${alarmSystem}` : null,
-        internet.length ? `${tInternet}: ${internet}` : null,
-        balcony.length ? `${tBalcony}: ${balcony}` : null,
+        // furnishing.length ? `${tFurnishing}: ${furnishing}` : null,
+        // repair.length ? `${tRepair}: ${repair}` : null,
+        // alarmSystem.length ? `${tAlarmSystem}: ${alarmSystem}` : null,
+        // internet.length ? `${tInternet}: ${internet}` : null,
+        // balcony.length ? `${tBalcony}: ${balcony}` : null,
     ]
         .filter(Boolean)
         .join("\n");
 
-    response.text(filters);
+    const filtersText = local(lang).general.filters + "\n";
+
+    response.text(filtersText + filters);
 };
 
 export function arrayСomparison(arr1, arr2) {

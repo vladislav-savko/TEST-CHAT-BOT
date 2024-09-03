@@ -325,7 +325,7 @@ export const processParams = async () => {
     }
     
     if ($session.params.locAmenity && !emptyParams.includes("PropertyTypes")) {
-         switch ($session.data.propertyTypes[0]) {
+        switch ($session.data.propertyTypes[0]) {
             case "APARTMENT":
                 $session.data.locationFeatures.push($session.params.locAmenity[0]);
                 break;
