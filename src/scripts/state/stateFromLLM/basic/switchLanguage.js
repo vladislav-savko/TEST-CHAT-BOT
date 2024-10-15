@@ -7,7 +7,7 @@ export default async () => {
 
     const lngCode = $session.lastData?.language;
     
-    if (!lngCode) {
+    if (!lngCode || lngCode === lang) {
         response.text(local(lang).getProperty.language);
         response.text(local(lang).info.language);
 
