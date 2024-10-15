@@ -95,7 +95,7 @@ theme: /
             await stateJs.restart();
 
     state: InfoAbout
-        q!: * (info|~Info|Information|\/info) *
+        q!: $regex</info>
         scriptEs6:
             await stateJs.help();
     
