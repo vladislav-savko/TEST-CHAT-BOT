@@ -109,6 +109,7 @@ export default {
         water: `Woda`,
         waterHeating: `Podgrzewanie wody`,
         location: `Lokalizacja`,
+        locationFeatures: `Cechy lokalizacji`,
         price: {
             value: `Cena`,
             budget: `Budżet`,

@@ -1,98 +1,155 @@
-// bind("preMatch", function($context) {
-//     if ($context.request.query[0] !== '/') {
-//         $http.post("https://caila.io/api/mlpgate/account/1000062767/model/51023/predict", {
-//             body: {
-//                 "texts": [
-//                     $context.request.query
-//                 ]
-//             },
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "MLP-API-KEY": "1000160400.95801.PGCrF5ntqFXT6Nolbhg6Qfcbq5xeEJTjL1MMUEQi"
-//             },
-//         }).then(function (resL) {
-//             if (resL.scored_languages_list[0].languages[0] !== 'en') {
-//                 $http.get("https://655.mtis.workers.dev/translate?text=${text}&source_lang=${lng}&target_lang=en", {
-//                     timeout: 10000,
-//                     query: {
-//                         text: $context.request.query,
-//                         lng: resL.scored_languages_list[0].languages[0]
-//                     }
-//                 }).then(function (res) {
-//                     $context.request.query = res.response.translated_text;
-//                 });
-//             }
-//         });
-//     }
-// });
+function language(text) {
+    return $http.post(
+        "https://caila.io/api/mlpgate/account/1000062767/model/51023/predict",
+        {
+            body: {
+                texts: [text],
+            },
+            headers: {
+                "Content-Type": "application/json",
+                "MLP-API-KEY":
+                    "1000160400.95801.PGCrF5ntqFXT6Nolbhg6Qfcbq5xeEJTjL1MMUEQi",
+            },
+        }
+    );
+}
 
-function language (text) { 
-    return $http.post("https://caila.io/api/mlpgate/account/1000062767/model/51023/predict", {
+function translate(text, sourceLang) {
+    return $http
+        .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
+            timeout: 25000,
+        })
+        .then(function (response) {
+            if (response.data.code === 200) {
+                return response;
+            } else {
+                return $http
+                    .get(
+                        "https://translate.cloudflare.jaxing.cc/?text=" +
+                            encodeURIComponent(text) +
+                            "&source_lang=" +
+                            sourceLang +
+                            "&target_lang=en",
+                        {
+                            timeout: 25000,
+                        }
+                    )
+                    .then(function (response_) {
+                        return response_;
+                    });
+            }
+        });
+}
+
+function getPrompt(input, dataExtracted, currentState) {
+    return (
+        "Input: " +
+        input +
+        " DataExtracted: " +
+        JSON.stringify(dataExtracted) +
+        " CurrentState: " +
+        currentState.replace("/", "") +
+        " AnswerState: AnswerData:<|eot_id|>"
+    );
+}
+
+function llm(input, dataExtracted, currentState) {
+    return $http.post("213.149.180.145:58080/chat", {
+        timeout: 25000,
         body: {
-            "texts": [text]
+            message: getPrompt(input, dataExtracted, currentState),
+            code_prompt: "state-entity",
         },
         headers: {
             "Content-Type": "application/json",
-            "MLP-API-KEY": "1000160400.95801.PGCrF5ntqFXT6Nolbhg6Qfcbq5xeEJTjL1MMUEQi"
         },
-    })
-}
-
-// function translate (text, lng) {
-//     return $http.get("https://655.mtis.workers.dev/translate?text=${text}&source_lang=${lng}&target_lang=en", {
-//         timeout: 10000,
-//         query: {
-//             text: text,
-//             lng: lng
-//         }
-//     })
-// }
-
-function translate (text) {
-    return $http.get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
-        timeout: 10000,
-    })
-}
-
-function correct (text, lng) {
-    return $http.post("https://spl-c.onrender.com/correct?text=${text}&lng=${lng}", {
-        timeout: 10000,
-        query: {
-            text: text,
-            lng: lng
-        }
-    })
+    });
 }
 
 function isStringInArray(str, array) {
     return array.indexOf(str) !== -1;
 }
 
-var langs = ['ru', 'en', 'el', 'pl', 'uk'];
+var langs = ["ru", "en", "el", "pl", "uk"];
 
-bind("preMatch", function($context) {
+function formatData(obj) {
+    var formattedObject = {};
+    var skipProperties = [
+        "skip",
+        "take",
+        "sort",
+        "isIncludeCollapsing",
+        "withoutSold",
+    ];
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (skipProperties.indexOf(key) === -1) {
+                if (Array.isArray(obj[key]) && obj[key].length > 0) {
+                    formattedObject[key] = obj[key];
+                } else if (
+                    typeof obj[key] === "boolean" ||
+                    typeof obj[key] === "number"
+                ) {
+                    formattedObject[key] = obj[key];
+                } else if (
+                    typeof obj[key] === "string" &&
+                    obj[key].trim() !== ""
+                ) {
+                    formattedObject[key] = obj[key];
+                }
+            }
+        }
+    }
+
+    return formattedObject;
+}
+
+function getState(state) {
+    switch (state) {
+        case "Seller":
+            return "/DisplayResult/ShowByPosition/Seller";
+        default:
+            return "/" + state;
+    }
+}
+
+bind("preMatch", function ($context) {
     var text = $context.request.query;
-    if (text[0] === '/') return true;
-    
+    if (text[0] === "/") return true;
+
     language(text).then(function (lng_res) {
         var lng = lng_res.scored_languages_list[0].languages[0];
-        
-        // if (isStringInArray(lng, langs)) {
-        //     correct(text, lng).then(function (crt_res) {
-        //         text = crt_res;
-        //         $context.request.query = crt_res;
-        //     });
-        // }
-        
-        if (lng === 'en') return true;
-        
-        // translate(text, lng).then(function (trn_res) {
-        //     $context.request.query += ". ";
-        //     $context.request.query += trn_res.response.translated_text;
-        // });
-        
-        translate(text).then(function (trn_res) {
-            $context.request.query = trn_res.data[0].translations[0].text;
+        var currentState = $context.currentState.split("/")[0];
+        currentState === "DisplayResult" ? "InputData" : currentState;
+        var dataExtracted = formatData($context.session.data) || {};
+
+        translate(text, lng).then(function (trn_res) {
+            var t_text = "";
+            log(trn_res);
+            if (trn_res.code === 200) {
+                t_text = trn_res.data[0].translations[0].text;
+            } else {
+                t_text = trn_res.data.response.translated_text;
+            }
+
+            $context.request.query = t_text;
+            log(toPrettyString($context));
+
+            llm(t_text, dataExtracted, currentState).then(function (llm_res) {
+                log(toPrettyString(llm_res));
+                var content = llm_res.formatted_response[0];
+
+                var answerState = content.answer_state;
+                var answerData = content.answer_data;
+
+                $context.session.lastData = answerData;
+
+                log(answerState);
+                log(answerData);
+
+                log(content);
+                $context.temp.targetState = getState(answerState);
+            });
         });
-    })
+    });
 });

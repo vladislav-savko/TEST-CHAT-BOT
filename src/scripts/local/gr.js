@@ -109,6 +109,7 @@ export default {
         water: `Νερό`,
         waterHeating: `Θέρμανση νερού`,
         location: `Τοποθεσία`,
+        locationFeatures: `Χαρακτηριστικά τοποθεσίας`,
         price: {
             value: `Τιμή`,
             budget: `Προϋπολογισμός`,

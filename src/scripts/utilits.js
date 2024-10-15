@@ -1,8 +1,15 @@
-import api from "./api.js";
+import api, { translate } from "./api.js";
 import TurndownService from "turndown";
-import { API__LINK, VERSION } from "./config.js";
+import { VERSION } from "./config.js";
 import local from "./local/local.js";
 import response from "./response.js";
+import {
+    getPropertyDetails,
+    getPreviewImage,
+    getDescription,
+    getLinkToBrowserPage,
+    getLinkToMap,
+} from "./createTextData.js";
 
 import "./typeDoc/session.js";
 import "./typeDoc/reactions.js";
@@ -12,60 +19,53 @@ export function session() {
     $session.data = {
         skip: 0,
         take: 3,
-        propertyTypes: [""],
-        listingType: "",
-        sort: "NEWEST",
         rooms: [],
-        companyName: "",
-        priceFrom: null,
-        priceTo: null,
-        plotAreaTo: null,
-        plotAreaFrom: null,
-        bedroomsFrom: null,
-        bedroomsTo: null,
+        listingType: "",
+        sort: "BY_INDEX",
+        energyEfficiency: [],
+        airConditioning: [],
+        alarmSystem: [],
+        bathroomNumbers: [],
+        bedrooms: [],
+        buildingConditions: [],
+        cityId: null,
+        companyName: null,
+        countryId: null,
+        coverageRatioFrom: null,
+        coverageRatioTo: null,
         densityFrom: null,
         densityTo: null,
-        coverageRatioTo: null,
-        coverageRatioFrom: null,
-        residentialFloorsTo: null,
-        residentialFloorsFrom: null,
-        yearOfConstructionFrom: null,
-        yearOfConstructionTo: null,
+        districtId: null,
+        electricity: [],
+        fireplace: [],
         floorAreaFrom: null,
         floorAreaTo: null,
-        water: [],
-        sewageSystemBoolean: [],
-        bathroomBoolean: [],
-        buildingConditions: [],
         furnishing: [],
-        repair: [],
-        alarmSystem: [],
-        condition: [],
-        parking: [],
-        electricity: [],
-        gas: [],
-        airConditioning: [],
         heating: [],
-        fireplace: null,
-        waterHeating: [],
-        kitchen: [],
-        balcony: [],
-        television: [],
+        infrastructureAmenity: [],
         internet: [],
-        infrastructureApartmentAmenity: [],
-        infrastructurePlotAmenity: [],
-        infrastructureCommerceAmenity: [],
-        withoutSold: true,
-        cityId: null,
+        isIncludeCollapsing: true,
         locationFeatures: [],
-        infrastructurePlotAmenity: [],
+        parking: [],
+        pentHouse: [],
+        plotAreaFrom: null,
+        plotAreaTo: null,
+        priceFrom: null,
+        priceTo: null,
+        propertyStatus: [],
+        propertyTypes: [],
+        repairAmenity: [],
+        residentialFloorsFrom: null,
+        residentialFloorsTo: null,
+        sewageSystem: [],
+        swimmingPool: [],
+        water: [],
+        withoutSold: true,
+        yearOfConstructionFrom: null,
+        yearOfConstructionTo: null,
     };
 
-    $session.info = {
-        city: null,
-        country: null,
-        property: null,
-    };
+    $session.location = {};
 
     $session.params = {};
     $session.state = null;
@@ -83,344 +83,212 @@ export const initSession = () => {
     }
 };
 
-export const getCityInfo = async (city, country) => {
+export const getCityInfo = async (city, country = "cyprus") => {
     try {
         const resC = await api.getCitiesInfo(city, country);
-        if (resC) {
-            const filteredCities = resC.data.filter(
-                (city) =>
-                    city.countryNameEn.toLowerCase() === country.toLowerCase()
+        if (!resC) return false;
+
+        const filteredCities = resC.data.filter(
+            (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
+        );
+
+        if (filteredCities.length === 0) {
+            const { lang } = $session;
+            response.randomText(
+                local(lang).fetchErrors.notFoundCityInCounty(country)
             );
-            if (filteredCities.length > 0) {
-                if (
-                    filteredCities[0].districtName == filteredCities[0].cityName
-                ) {
-                    $session.data.districtId = filteredCities[0].districtId;
-                    delete $session.data.cityId;
-                } else {
-                    $session.data.cityId = filteredCities[0].cityId;
-                    delete $session.data.districtId;
-                }
-                return filteredCities[0];
-            } else {
-                const { lang } = $session;
-                response.randomText(
-                    local(lang).fetchErrors.notFoundCityInCounty(country)
-                );
-                return false;
-            }
+            return false;
         }
+
+        const [firstCity] = filteredCities;
+        if (firstCity.districtName === firstCity.cityName) {
+            $session.data.districtId = firstCity.districtId;
+            $session.data.cityId = null;
+        } else {
+            $session.data.cityId = firstCity.cityId;
+            $session.data.districtId = null;
+        }
+
+        return firstCity;
     } catch (error) {
-        // $reactions.answer(
-        //   "*City* Something's broken, please try again later. Sorry"
-        // );
+        // $reactions.answer("*City* Something's broken, please try again later. Sorry");
         return false;
     }
 };
 
-export const linkToBrowserPage = (data) => {
-    return `${API__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
-};
-
-export const linkToMap = (data) => {
-    return `https://www.google.com/maps?q=${data.location?.latitude},${data.location?.longitude}`;
-};
-
 export const getListingData = (listing) => {
-    if (listing.apartmentSell) return listing.apartmentSell;
-    else if (listing.apartmentRent) return listing.apartmentRent;
-    else if (listing.houseSell) return listing.houseSell;
-    else if (listing.houseRent) return listing.houseRent;
-    else if (listing.commerceSell) return listing.commerceSell;
-    else if (listing.commerceRent) return listing.commerceRent;
-    else if (listing.plotSell) return listing.plotSell;
-    else if (listing.plotRent) return listing.plotRent;
-};
+    const types = [
+        "apartmentSell",
+        "apartmentRent",
+        "houseSell",
+        "houseRent",
+        "commerceSell",
+        "commerceRent",
+        "plotSell",
+        "plotRent",
+    ];
 
-export const postJSON = (object) => {
-    $reactions.answer(JSON.stringify(object));
+    for (const type of types) {
+        if (listing[type]) return listing[type];
+    }
 };
 
 export function getIdsFromListings(res) {
-    if (res && res.data && Array.isArray(res.data.listings)) {
-        return res.data.listings.map((listing) => listing.id);
-    } else {
-        return [];
-    }
+    return res && res.data && Array.isArray(res.data.listings)
+        ? res.data.listings.map((listing) => listing.id)
+        : [];
 }
 
-export const hasNextPage = (total, take, skip) => {
-    const displayed = skip + take;
-    return displayed < total;
-};
+export const hasNextPage = (total, take, skip) => skip + take < total;
 
 export const printShowMore = (total, take, skip) => {
     const hastNext = hasNextPage(total, take, skip);
     const { lang } = $session;
+    const isTelegram = $request.channelType === "telegram";
 
-    if ($request.channelType === "telegram") {
-        const buttons = hastNext
-            ? [local(lang).buttons.showMore, local(lang).buttons.clearFilters]
-            : [local(lang).buttons.clearFilters];
+    const textMessage = hastNext
+        ? local(lang).info.showMoreResults
+        : local(lang).info.noMoreResultsReset;
 
-        if (hastNext) {
-            response.text(local(lang).info.showMoreResultsAndReset);
-        } else {
-            response.text(local(lang).info.noMoreResultsReset);
-        }
+    const telegramTextMessage = hastNext
+        ? local(lang).info.showMoreResultsAndReset
+        : local(lang).info.noMoreResultsReset;
 
-        response.buttons(buttons);
-    } else if (hastNext) {
-        response.text(local(lang).info.showMoreResults);
+    const telegramButtons = hastNext
+        ? [local(lang).buttons.showMore, local(lang).buttons.clearFilters]
+        : [local(lang).buttons.clearFilters];
+
+    if (isTelegram) {
+        response.text(telegramTextMessage);
+        response.buttons(telegramButtons);
     } else {
-        response.text(local(lang).info.noMoreResultsResetCommand);
+        response.text(textMessage + (hastNext ? "" : "Command"));
     }
-};
-
-export const getLocationProperty = (listingLocation) => {
-    if (!listingLocation) return "";
-
-    const { city } = listingLocation;
-    const { district, country } = city;
-
-    let location =
-        city.name !== district.name
-            ? `${city.name}, ${district.name}`
-            : `${city.name}`;
-
-    return `${location}, ${country.name} \n`;
 };
 
 export const getListings = async (sessionData) => {
     const { lang } = $session;
-    try {
-        sessionData.take = 3;
-        //$reactions.answer(JSON.stringify(sessionData));
+    sessionData.take = 3;
+
+    // try {
         const res = await api.getListing(sessionData);
-        if (res && res.data.listings.length > 0) {
+        const hasListings = res && res.data.listings.length > 0;
+
+        if (hasListings) {
             $session.ids = getIdsFromListings(res);
-            res.data.listings.map((listing, idx) => {
+
+            res.data.listings.forEach((listing) => {
                 const listingData = getListingData(listing);
-                const propertyDetails =
-                    `${
-                        listing.listingType !== null
-                            ? `${listing.listingType}`
-                            : ""
-                    } ${
-                        listing.price !== null
-                            ? `\*${listing.price} €\* \n`
-                            : ""
-                    }` +
-                    `${getLocationProperty(listing.location)}` +
-                    `${
-                        listingData.floorArea || listingData.plotArea
-                            ? `- Property area: \*${
-                                  listingData.floorArea || listingData.plotArea
-                              }m²\* \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.bedrooms !== null &&
-                        listingData.bedrooms !== undefined
-                            ? `- Bedrooms: ${listingData.bedrooms} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.furnishing !== null &&
-                        $session.data.furnishing.length
-                            ? `- Furnishing: \*${listingData.furnishing}\* \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.balcony !== null &&
-                        $session.data.balcony.length
-                            ? `- Balcony: ${listingData.balcony ? "+" : "-"} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.bathrooms !== null && false
-                            ? `- Bathrooms: ${listingData.bathrooms} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.parking !== null &&
-                        $session.data.parking.length
-                            ? `- Parking: ${listingData.parking ? "+" : "-"} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.electricity !== null &&
-                        $session.data.electricity.length
-                            ? `- Electricity: ${
-                                  listingData.electricity ? "+" : "-"
-                              } \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.television !== null &&
-                        $session.data.television.length
-                            ? `- Television: ${
-                                  listingData.television ? "+" : "-"
-                              } \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.alarmSystem !== null &&
-                        $session.data.alarmSystem.length
-                            ? `- Alarm system: ${
-                                  listingData.alarmSystem ? "+" : "-"
-                              } \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.gas !== null && $session.data.gas.length
-                            ? `- Gas: ${listingData.gas ? "+" : "-"} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.heating !== null &&
-                        $session.data.heating.length
-                            ? `- Heating: ${listingData.heating} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.waterHeating !== null &&
-                        $session.data.waterHeating.length
-                            ? `- Water heating: ${listingData.waterHeating} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.internet !== null &&
-                        $session.data.internet.length
-                            ? `- Internet: ${listingData.internet} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.airConditioning !== null &&
-                        $session.data.airConditioning.length
-                            ? `- Air conditioning: \*${listingData.airConditioning}\* \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.infrastructureAmenity !== null
-                            ? `- Infrastructure amenities: ${listingData.infrastructureAmenity
-                                  .map((v) =>
-                                      v.toLowerCase().replace(/_/g, " ")
-                                  )
-                                  .join(", ")} \n`
-                            : ""
-                    }` +
-                    `${
-                        listingData.repairAmenity !== null &&
-                        $session.data.repair.length
-                            ? `- Repair amenities: ${listingData.repairAmenity}`
-                            : ""
-                    }`
-                        .split("\n")
-                        .filter((line) => line.trim() !== "")
-                        .join("\n");
 
-                const image =
-                    listing.photos.length !== 0
-                        ? listing.photos[0]
-                        : "https://dummyimage.com/600x400/000/ffffff&text=without+photo";
+                const propertyDetails = getPropertyDetails(
+                    listing,
+                    listingData
+                );
 
-                const description =
-                    `\*${listing.title.trim()}\* \n` +
-                    `\*ID: ${listing.id}\* \n` +
-                    `${propertyDetails} \n` +
-                    `${
-                        $request.channelType === "telegram"
-                            ? ""
-                            : `[${
-                                  local(lang).buttons.openInBrowser
-                              }](${linkToBrowserPage(listing)})`
-                    }`;
+                const previewImage = getPreviewImage(listing);
 
-                response.image(image);
+                const description = getDescription(
+                    listing,
+                    propertyDetails,
+                    lang
+                );
+
+                response.image(previewImage);
                 response.text(description);
 
                 if ($request.channelType === "telegram") {
+                    const { buttons } = local(lang);
                     response.inlineURL(
-                        local(lang).buttons.openInBrowser,
-                        `${linkToBrowserPage(listing)}`
+                        buttons.openInBrowser,
+                        getLinkToBrowserPage(listing)
                     );
-                    response.inlineCallback(
-                        local(lang).buttons.showDetails,
-                        `${listing.id}`
-                    );
+                    response.inlineCallback(buttons.showDetails, listing.id);
                 }
             });
+
             printShowMore(res.data.total, 3, sessionData.skip);
             return true;
         } else {
             printShowMore(res.data.total, 3, sessionData.skip);
             return false;
         }
-    } catch (error) {
-        response.text(local(lang).fetchErrors.listing);
-        return false;
-    }
+    // } catch (error) {
+    //     response.text(local(lang).fetchErrors.listing);
+    //     return false;
+    // }
 };
 
-export const printPost = (listing) => {
+export const printPost = async (listing) => {
     const { lang } = $session;
-    const images = listing.photos.map((image) => image);
+    const images = listing.photos;
 
-    let turndownService = new TurndownService();
-    const description = turndownService
+    const turndownService = new TurndownService();
+    let description = turndownService
         .turndown(listing.description)
         .replaceAll("\\-", "-");
 
-    if ($request.channelType === "telegram") {
-        response.imagesTG(images);
+    const translate_description = await translate(description, 'en');
+
+    if (translate_description.code === 200) {
+        description = translate_description.data[0].translations[0].text;
     } else {
-        response.images(images);
+        description = translate_description.data.response.translated_text;
     }
 
-    response.text(`\*${listing.title.trim()}\*\n\*€${listing.price}\*`);
+    const sendImages = () => {
+        if ($request.channelType === "telegram") {
+            response.imagesTG(images);
+        } else {
+            response.images(images);
+        }
+    };
+
+    const sendButtons = () => {
+        const { buttons } = local(lang);
+        if ($request.channelType === "telegram") {
+            response.inlineURL(
+                buttons.openInBrowser,
+                getLinkToBrowserPage(listing)
+            );
+            response.inlineURL(buttons.showOnMap, getLinkToMap(listing));
+            response.inlineCallback(buttons.sellerContacts, "Seller Contacts");
+        } else {
+            const linksText =
+                `[${buttons.openInBrowser}](${getLinkToBrowserPage(
+                    listing
+                )}) \n` + `[${buttons.showOnMap}](${getLinkToMap(listing)})`;
+            response.text(linksText);
+            response.buttons([buttons.sellerContacts]);
+        }
+    };
+
+    sendImages();
+
+    const title_lang =
+        $session.lang === "gr"
+            ? "cy"
+            : $session.lang === "uk"
+            ? "ua"
+            : $session.lang;
+
+
+    response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
     response.text(description, "html");
-
-    if ($request.channelType === "telegram") {
-        response.inlineURL(
-            local(lang).buttons.openInBrowser,
-            `${linkToBrowserPage(listing)}`
-        );
-        response.inlineURL(
-            local(lang).buttons.showOnMap,
-            `${linkToMap(listing)}`
-        );
-        response.inlineCallback(
-            local(lang).buttons.sellerContacts,
-            `Seller Contacts`
-        );
-    } else {
-        const linksText =
-            `[${local(lang).buttons.openInBrowser}](${linkToBrowserPage(
-                listing
-            )}) \n` +
-            `[${local(lang).buttons.showOnMap}](${linkToMap(listing)})`;
-
-        response.text(linksText);
-
-        response.buttons([local(lang).buttons.sellerContacts]);
-    }
+    sendButtons();
 };
 
 export const printSellerInfo = (seller) => {
-    const text =
-        `\*${seller.firstName} ${seller.lastName}\* \n` +
-        `${seller.email} \n` +
-        `${seller.phoneNumber}`;
+    const text = `*${seller.firstName} ${seller.lastName}*\n${seller.email}\n${seller.phoneNumber}`;
     response.text(text);
 };
 
 export const getListingById = async (id) => {
     const { lang } = $session;
     try {
-        const listing = await api.getListingById(id);
+        const { data: listing } = await api.getListingById(id);
+
         if (listing) {
-            printPost(listing.data);
+            await printPost(listing);
             $session.seller = id;
         }
     } catch (error) {
@@ -430,12 +298,13 @@ export const getListingById = async (id) => {
 };
 
 export const getSeller = async () => {
-    const { lang } = $session;
+    const { lang, seller: sellerId } = $session;
+
     try {
-        const seller = await api.getSellerById($session.seller);
+        const { data: seller } = await api.getSellerById(sellerId);
 
         if (seller) {
-            printSellerInfo(seller.data);
+            printSellerInfo(seller);
         }
     } catch (error) {
         response.text(local(lang).fetchErrors.seller);
@@ -546,7 +415,7 @@ export const printHelpText = () => {
     const { lang } = $session;
     const texts = local(lang).help;
 
-    texts.map((text) => {
+    texts.forEach((text) => {
         response.text(text);
     });
 };
@@ -558,14 +427,14 @@ export const switchLanguage = (code) => {
 };
 
 export function findLastNonSwitchState(transitions) {
-    if (!transitions) return null;
+    if (!Array.isArray(transitions)) return null;
 
     for (let i = transitions.length - 1; i >= 0; i--) {
-        if (transitions[i].state !== "/SwitchIntefraceLanguage") {
+        if (transitions[i].state !== "/SwitchInterfaceLanguage") {
             return transitions[i];
         }
     }
-    return null; // если все элементы "/SwitchIntefraceLanguage"
+    return null;
 }
 
 export default {

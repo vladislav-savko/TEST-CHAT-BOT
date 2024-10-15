@@ -109,6 +109,7 @@ export default {
         water: `Вода`,
         waterHeating: `Водонагрев`,
         location: `Локация`,
+        locationFeatures: `Особенности местоположения`,
         price: {
             value: `Цена`,
             budget: `Бюджет`,

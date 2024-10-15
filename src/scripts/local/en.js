@@ -109,6 +109,7 @@ export default {
         water: `Water`,
         waterHeating: `Water heating`,
         location: `Location`,
+        locationFeatures: `Location features`,
         price: {
             value: `Price`,
             budget: `Budget`,

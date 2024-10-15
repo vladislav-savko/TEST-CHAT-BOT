@@ -15,48 +15,38 @@ const ENDPOINT = {
 
 export const instance = axios.create({
     baseURL: `${API__LINK}/api/`,
-    timeout: 1000,
+    timeout: 25000,
     "Cache-Control": "no-cache",
     "Content-type": "application/json",
 });
 
 const getCitiesInfo = async (city, country) => {
-    const take = 1;
-    const patt = `${country},${city}`; // Concatenate country and city with a comma
+    const patt = `${country},${city}`;
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
-            take: take,
             pattern: patt,
+            take: 1,
         },
     });
-    //$reactions.answer(JSON.stringify(data));
-    if (data.data.length > 1) {
-        data.data = [data.data[0]];
-    }
-    return data;
-};
 
+    return data.data.length > 1 ? [data.data[0]] : data.data;
+};
 
 const getCountriesInfo = async (country) => {
-    const take = 1;
-    const patt = `${country}`; // Concatenate country and city with a comma
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
-            take: take,
-            pattern: patt,
+            pattern: country, // Use country directly
+            take: 1,
         },
     });
-    if (data.data.length > 1) {
-        data.data = [data.data[0]];
-    }
-    return data;
+
+    return data.data.length > 1 ? [data.data[0]] : data.data;
 };
 
-
 const getListing = async (info) => {
-    //$reactions.answer(JSON.stringify(info));
+    // $reactions.answer(JSON.stringify(info));
     const { data } = await instance.post(ENDPOINT.post__listing, info);
-    //$reactions.answer(JSON.stringify(data));
+    // $reactions.answer(JSON.stringify(data));
     return data;
 };
 
@@ -64,7 +54,7 @@ const getListingById = async (id) => {
     // $reactions.answer(JSON.stringify(id));
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
-    log(data.data);
+    // log(data.data);
     return data;
 };
 
@@ -74,6 +64,31 @@ const getSellerById = async (id) => {
     return data;
 };
 
+export const translate = async (text, sourceLang) => {
+    const lang =
+    $session.lang === "gr"
+        ? "el"
+        : $session.lang;
+
+    const response = await axios.get(
+        `https://suapi.net/api/text/translate?to=${lang}&text[]=${text}`,
+        {
+            timeout: 25000,
+        }
+    );
+
+    if (response.data.code === 200) {
+        return response;
+    } else {
+        const fallbackResponse = await axios.get(
+            `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=${lang}`,
+            {
+                timeout: 25000,
+            }
+        );
+        return fallbackResponse;
+    }
+};
 export default {
     getCitiesInfo,
     getCountriesInfo,
