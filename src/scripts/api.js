@@ -77,7 +77,7 @@ export const translate = async (text, sourceLang) => {
         }
     );
 
-    if (response.data.code === 200) {
+    if (response.code === 200) {
         return response;
     } else {
         const fallbackResponse = await axios.get(

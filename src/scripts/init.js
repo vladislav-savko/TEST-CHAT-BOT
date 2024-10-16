@@ -119,7 +119,7 @@ bind("preMatch", function ($context) {
 
     language(text).then(function (lng_res) {
         var lng = lng_res.scored_languages_list[0].languages[0];
-        var currentState = $context.currentState.split("/")[1];
+        var currentState = $context.currentState.split('/').slice(1).join('/');
         currentState === "DisplayResult" ? "InputData" : currentState;
         var dataExtracted = formatData($context.session.data) || {};
 
