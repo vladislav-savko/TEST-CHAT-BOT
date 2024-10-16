@@ -265,11 +265,11 @@ export const printPost = async (listing) => {
     sendImages();
 
     const title_lang =
-        $session.lang === "gr"
+        $session.lang === "el"
             ? "cy"
             : $session.lang === "uk"
             ? "ua"
-            : $session.lang;
+            : $session.lang || 'en';
 
 
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);

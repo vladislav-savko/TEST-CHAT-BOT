@@ -1,7 +1,7 @@
 import en from "./en.js";
 import pl from "./pl.js";
 import ru from "./ru.js";
-import gr from "./gr.js";
+import el from "./el.js";
 import uk from "./uk.js";
 
 import "../typeDoc/local.js";
@@ -11,11 +11,11 @@ const local = {
     en,
     ru,
     pl,
-    gr,
+    el,
     uk,
 };
 
-export const available = ["en", "ru", "pl", "gr", "uk"];
+export const available = ["en", "ru", "pl", "el", "uk"];
 
 /** @type {{(lang: string) => Translation}} */
 export default (lang = "en") => {

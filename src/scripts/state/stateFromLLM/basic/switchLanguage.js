@@ -6,13 +6,19 @@ export default async () => {
     const { lang } = $session;
 
     const lngCode = $session.lastData?.language;
-    
+
     if (!lngCode || lngCode === lang) {
         response.text(local(lang).getProperty.language);
         response.text(local(lang).info.language);
 
         if ($request.channelType === "telegram") {
-            response.buttons(['/en', '/el', '/ru', '/pl', '/uk']);
+            response.buttons([
+                "English",
+                "Ελληνικά",
+                "Русский",
+                "Polski",
+                "Українська",
+            ]);
         }
     } else {
         if (available.includes(lngCode)) {

@@ -102,11 +102,11 @@ export const getPreviewImage = (listing) => {
 
 export const getDescription = (listing, propertyDetails, lang) => {
     const title_lang =
-        $session.lang === "gr"
+        $session.lang === "el"
             ? "cy"
             : $session.lang === "uk"
             ? "ua"
-            : $session.lang;
+            : $session.lang || 'en';
 
     const openInBrowserButton =
         $request.channelType !== "telegram"
