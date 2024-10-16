@@ -48,8 +48,8 @@ function getPrompt(input, dataExtracted, currentState) {
         " DataExtracted: " +
         JSON.stringify(dataExtracted) +
         " CurrentState: " +
-        currentState.replace("/", "") +
-        " AnswerState: AnswerData:<|eot_id|>"
+        currentState +
+        " AnswerState: AnswerData:"
     );
 }
 
