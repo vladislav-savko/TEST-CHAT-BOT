@@ -45,11 +45,11 @@ function getPrompt(input, dataExtracted, currentState) {
     return (
         "Input: " +
         input +
-        " DataExtracted: " +
+        "; DataExtracted: " +
         JSON.stringify(dataExtracted) +
-        " CurrentState: " +
+        "; CurrentState: " +
         currentState +
-        " AnswerState:  AnswerData:<|eot_id|>"
+        "; AnswerState: ; AnswerData: ;"
     );
 }
 
