@@ -59,6 +59,7 @@ function llm(input, dataExtracted, currentState) {
         body: {
             message: getPrompt(input, dataExtracted, currentState),
             code_prompt: "state-entity",
+            temperature: 0.7
         },
         headers: {
             "Content-Type": "application/json",
@@ -122,6 +123,7 @@ bind("preMatch", function ($context) {
         var currentState = $context.currentState.split('/').slice(1).join('/');
         currentState === "DisplayResult" ? "InputData" : currentState;
         var dataExtracted = formatData($context.session.data) || {};
+        log(currentState);
 
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
