@@ -49,7 +49,7 @@ function getPrompt(input, dataExtracted, currentState) {
         JSON.stringify(dataExtracted) +
         "; CurrentState: " +
         currentState +
-        "; AnswerState: ; AnswerData: ;"
+        "; AnswerState: ; AnswerData: ;<|eot_id|>"
     );
 }
 
