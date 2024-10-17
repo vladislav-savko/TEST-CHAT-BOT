@@ -59,7 +59,6 @@ function llm(input, dataExtracted, currentState) {
         body: {
             message: getPrompt(input, dataExtracted, currentState),
             code_prompt: "state-entity",
-            temperature: 0.7,
         },
         headers: {
             "Content-Type": "application/json",
