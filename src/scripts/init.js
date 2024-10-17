@@ -127,7 +127,6 @@ bind("preMatch", function ($context) {
             ? "Hello"
             : currentState;
         var dataExtracted = formatData($context.session.data) || {};
-        log(currentState);
 
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
