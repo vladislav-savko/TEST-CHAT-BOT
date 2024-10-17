@@ -59,7 +59,7 @@ function llm(input, dataExtracted, currentState) {
         body: {
             message: getPrompt(input, dataExtracted, currentState),
             code_prompt: "state-entity",
-            temperature: 0.7
+            temperature: 0.7,
         },
         headers: {
             "Content-Type": "application/json",
@@ -120,8 +120,12 @@ bind("preMatch", function ($context) {
 
     language(text).then(function (lng_res) {
         var lng = lng_res.scored_languages_list[0].languages[0];
-        var currentState = $context.currentState.split('/').slice(1).join('/');
-        currentState === "DisplayResult" ? "InputData" : currentState;
+        var currentState = $context.currentState.split("/").slice(1).join("/");
+        currentState === "DisplayResult"
+            ? "InputData"
+            : currentState === "Start"
+            ? "Hello"
+            : currentState;
         var dataExtracted = formatData($context.session.data) || {};
         log(currentState);
 
