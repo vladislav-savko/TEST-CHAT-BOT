@@ -19,37 +19,32 @@ export const processParams = async () => {
             $session.location = location;
             newParams.push("Location");
         }
-    } else {
-        emptyParams.push("Location");
     }
 
-    //sale_rent
     if (newData.listingType) {
         if (newData.listingType !== $session.data.listingType) {
             $session.data.listingType = newData.listingType;
             newParams.push("ListingTypes");
         }
-    } else emptyParams.push("ListingTypes");
-
-    // response.log(newData);
+    }
 
     if (newData.propertyType) {
         const formatToArray = (input) =>
             Array.isArray(input) ? input : [input];
-        
+
         let pp = formatToArray(newData.propertyType);
-        
-        pp = pp.map(type => {
-            if (type === "HOUSE") {
-                return ["DETACHED_HOUSE", "SEMIDETACHED_HOUSE", "VILLA"];
-            }
-            return type;
-        }).flat();
-    
+
+        pp = pp
+            .map((type) => {
+                if (type === "HOUSE") {
+                    return ["DETACHED_HOUSE", "SEMIDETACHED_HOUSE", "VILLA"];
+                }
+                return type;
+            })
+            .flat();
+
         $session.data.propertyTypes = pp;
         newParams.push("PropertyTypes");
-    } else {
-        emptyParams.push("PropertyTypes");
     }
 
     if (newData.priceFrom || newData.priceTo) {
@@ -61,92 +56,20 @@ export const processParams = async () => {
             $session.data.priceFrom = Number(newData.priceFrom);
             newParams.push("Price");
         }
-    } else emptyParams.push("Price");
-
-    // if ($session.params.infAmenity && !emptyParams.includes("PropertyTypes")) {
-    //     switch ($session.data.propertyTypes[0]) {
-    //         case "APARTMENT":
-    //             $session.data.infrastructureApartmentAmenity.push(
-    //                 $session.params.infAmenity[0]
-    //             );
-    //             break;
-    //         case "DETACHED_HOUSE":
-    //         case "SEMIDETACHED_HOUSE":
-    //         case "VILLA":
-    //             $session.data.infrastructureHouseAmenity.push(
-    //                 $session.params.infAmenity[0]
-    //             );
-    //             break;
-    //         case "COMMERCIAL_PLOT":
-    //         case "RESIDENTIAL_PLOT":
-    //         case "AGRICULTURE_PLOT":
-    //             $session.data.infrastructurePlotAmenity.push(
-    //                 $session.params.infAmenity[0]
-    //             );
-    //             break;
-    //         case "OFFICE":
-    //         case "HOTEL":
-    //         case "MANUFACTURING":
-    //         case "RETAIL_SPACE":
-    //         case "WAREHOUSE":
-    //         case "CAR_PARKING":
-    //             $session.data.infrastructureCommerceAmenity.push(
-    //                 $session.params.infAmenity[0]
-    //             );
-    //             break;
-    //     }
-    // }
-
-    if ($session.params.locAmenity && !emptyParams.includes("PropertyTypes")) {
-        // switch ($session.data.propertyTypes[0]) {
-        //     case "APARTMENT":
-        //         $session.data.locationFeatures.push($session.params.locAmenity[0]);
-        //         break;
-        //     case "DETACHED_HOUSE":
-        //     case "SEMIDETACHED_HOUSE":
-        //     case "VILLA":
-        //         $session.data.locationFeatures.push($session.params.locAmenity[0]);
-        //         break;
-        //     case "COMMERCIAL_PLOT":
-        //     case "RESIDENTIAL_PLOT":
-        //     case "AGRICULTURE_PLOT":
-        //         $session.data.locationFeatures.push($session.params.locAmenity[0]);
-        //         break;
-        //     case "OFFICE":
-        //     case "HOTEL":
-        //     case "MANUFACTURING":
-        //     case "RETAIL_SPACE":
-        //     case "WAREHOUSE":
-        //     case "CAR_PARKING":
-        //         $session.data.locationFeatures.push($session.params.locAmenity[0]);
-        //         break;
-        // }
     }
 
-    // if (
-    //     ($session.params.areaFrom || $session.params.areaTo) &&
-    //     !emptyParams.includes("PropertyTypes")
-    // ) {
-    //     switch ($session.data.propertyTypes[0]) {
-    //         case "COMMERCIAL_PLOT":
-    //         case "RESIDENTIAL_PLOT":
-    //         case "AGRICULTURE_PLOT": {
-    //             $session.data.plotAreaFrom = $session.params.areaFrom;
-    //             $session.data.plotAreaTo = $session.params.areaTo;
-    //             break;
-    //         }
-    //         case "OFFICE":
-    //         case "HOTEL":
-    //         case "MANUFACTURING":
-    //         case "RETAIL_SPACE":
-    //         case "WAREHOUSE":
-    //         case "CAR_PARKING": {
-    //             $session.data.floorAreaFrom = $session.params.areaFrom;
-    //             $session.data.floorAreaTo = $session.params.areaTo;
-    //             break;
-    //         }
-    //     }
-    // }
+    if (
+        (!$session.data.districtId && !$session.data.cityId) &&
+        (!newData.city && !newData.country)
+    ) {
+        log($session.data.districtId);
+        log($session.data.cityId);
+        emptyParams.push("Location");
+    }
+    if (!$session.data.listingType) emptyParams.push("ListingTypes");
+    if (!$session.data.propertyTypes.length) emptyParams.push("PropertyTypes");
+    if (!$session.data.priceTo && !$session.data.priceFrom)
+        emptyParams.push("Price");
 
     return { emptyParams, newParams };
 };

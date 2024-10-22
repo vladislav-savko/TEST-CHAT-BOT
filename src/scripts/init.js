@@ -15,41 +15,61 @@ function language(text) {
 }
 
 function translate(text, sourceLang) {
-    return $http
-        .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
-            timeout: 25000,
-        })
-        .then(function (response) {
-            if (response.code === 200) {
-                return response;
-            } else {
-                return $http
-                    .get(
-                        "https://translate.cloudflare.jaxing.cc/?text=" +
-                            encodeURIComponent(text) +
-                            "&source_lang=" +
-                            sourceLang +
-                            "&target_lang=en",
-                        {
-                            timeout: 25000,
-                        }
-                    )
-                    .then(function (response_) {
-                        return response_;
-                    });
-            }
-        });
+    // return $http
+    //     .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
+    //         timeout: 5000,
+    //     })
+    //     .then(function (response) {
+    //         if (response.code === 200) {
+    //             return response;
+    //         } else {
+    //             return $http
+    //                 .get(
+    //                     "https://translate.cloudflare.jaxing.cc/?text=" +
+    //                         encodeURIComponent(text) +
+    //                         "&source_lang=" +
+    //                         sourceLang +
+    //                         "&target_lang=en",
+    //                     {
+    //                         timeout: 5000,
+    //                     }
+    //                 )
+    //                 .then(function (response_) {
+    //                     return response_;
+    //                 });
+    //         }
+    //     })
+    //     .catch(function () {
+            return $http
+                .get(
+                    "https://translate.cloudflare.jaxing.cc/?text=" +
+                        encodeURIComponent(text) +
+                        "&source_lang=" +
+                        sourceLang +
+                        "&target_lang=en",
+                    {
+                        timeout: 10000,
+                    }
+                )
+                .then(function (response_) {
+                    return response_;
+                });
+        // });
 }
 
 function getPrompt(input, dataExtracted, currentState) {
     return (
-        "Input: " +
-        input +
-        "; DataExtracted: " +
-        JSON.stringify(dataExtracted) +
-        "; CurrentState: " +
-        currentState +
-        "; AnswerState: ; AnswerData: ;<|eot_id|>"
+        // "UserRequest: " +
+        // input +
+        // // "; Context: " +
+        // // JSON.stringify(dataExtracted) +
+        // "; ProcessingState: " +
+        // currentState +
+        // ";"
+        "Input: " + input + "; " +
+        "CurrentState: " + currentState + "; " +
+        "AnswerState: ; " +
+        "AnswerData: " + "<|eot_id|>"
     );
 }
 
@@ -59,6 +79,7 @@ function llm(input, dataExtracted, currentState) {
         body: {
             message: getPrompt(input, dataExtracted, currentState),
             code_prompt: "state-entity",
+            temperature: 0.5,
         },
         headers: {
             "Content-Type": "application/json",
@@ -104,13 +125,22 @@ function formatData(obj) {
     return formattedObject;
 }
 
-function getState(state) {
+function getState(state, data) {
+    var nextState = state;
     switch (state) {
         case "Seller":
-            return "/DisplayResult/ShowByPosition/Seller";
+            nextState = "/DisplayResult/ShowByPosition/Seller";
+            break;
         default:
-            return "/" + state;
+            nextState = "/" + state;
+            break;
     }
+
+    if (data.language) {
+        nextState = "/SwitchInterfaceLanguage";
+    }
+
+    return nextState;
 }
 
 bind("preMatch", function ($context) {
@@ -120,11 +150,12 @@ bind("preMatch", function ($context) {
     language(text).then(function (lng_res) {
         var lng = lng_res.scored_languages_list[0].languages[0];
         var currentState = $context.currentState.split("/").slice(1).join("/");
-        currentState === "DisplayResult"
-            ? "InputData"
-            : currentState === "Start"
-            ? "Hello"
-            : currentState;
+        currentState =
+            currentState === "DisplayResult"
+                ? "InputData"
+                : currentState === "Start"
+                ? "Hello"
+                : currentState;
         var dataExtracted = formatData($context.session.data) || {};
 
         translate(text, lng).then(function (trn_res) {
@@ -133,7 +164,7 @@ bind("preMatch", function ($context) {
             if (trn_res.code === 200) {
                 t_text = trn_res.data[0].translations[0].text;
             } else {
-                t_text = trn_res.data.response.translated_text;
+                t_text = trn_res.response.translated_text;
             }
 
             $context.request.query = t_text;
@@ -152,7 +183,7 @@ bind("preMatch", function ($context) {
                 log(answerData);
 
                 log(content);
-                $context.temp.targetState = getState(answerState);
+                $context.temp.targetState = getState(answerState, answerData);
             });
         });
     });

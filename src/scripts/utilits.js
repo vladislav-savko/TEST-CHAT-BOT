@@ -84,6 +84,7 @@ export const initSession = () => {
 };
 
 export const getCityInfo = async (city, country = "cyprus") => {
+    log("getCity");
     try {
         const resC = await api.getCitiesInfo(city, country);
         if (!resC) return false;
@@ -171,47 +172,40 @@ export const getListings = async (sessionData) => {
     sessionData.take = 3;
 
     // try {
-        const res = await api.getListing(sessionData);
-        const hasListings = res && res.data.listings.length > 0;
+    const res = await api.getListing(sessionData);
+    const hasListings = res && res.data.listings.length > 0;
 
-        if (hasListings) {
-            $session.ids = getIdsFromListings(res);
+    if (hasListings) {
+        $session.ids = getIdsFromListings(res);
 
-            res.data.listings.forEach((listing) => {
-                const listingData = getListingData(listing);
+        res.data.listings.forEach((listing) => {
+            const listingData = getListingData(listing);
 
-                const propertyDetails = getPropertyDetails(
-                    listing,
-                    listingData
+            const propertyDetails = getPropertyDetails(listing, listingData);
+
+            const previewImage = getPreviewImage(listing);
+
+            const description = getDescription(listing, propertyDetails, lang);
+
+            response.image(previewImage);
+            response.text(description);
+
+            if ($request.channelType === "telegram") {
+                const { buttons } = local(lang);
+                response.inlineURL(
+                    buttons.openInBrowser,
+                    getLinkToBrowserPage(listing)
                 );
+                response.inlineCallback(buttons.showDetails, listing.id);
+            }
+        });
 
-                const previewImage = getPreviewImage(listing);
-
-                const description = getDescription(
-                    listing,
-                    propertyDetails,
-                    lang
-                );
-
-                response.image(previewImage);
-                response.text(description);
-
-                if ($request.channelType === "telegram") {
-                    const { buttons } = local(lang);
-                    response.inlineURL(
-                        buttons.openInBrowser,
-                        getLinkToBrowserPage(listing)
-                    );
-                    response.inlineCallback(buttons.showDetails, listing.id);
-                }
-            });
-
-            printShowMore(res.data.total, 3, sessionData.skip);
-            return true;
-        } else {
-            printShowMore(res.data.total, 3, sessionData.skip);
-            return false;
-        }
+        printShowMore(res.data.total, 3, sessionData.skip);
+        return true;
+    } else {
+        printShowMore(res.data.total, 3, sessionData.skip);
+        return false;
+    }
     // } catch (error) {
     //     response.text(local(lang).fetchErrors.listing);
     //     return false;
@@ -227,7 +221,7 @@ export const printPost = async (listing) => {
         .turndown(listing.description)
         .replaceAll("\\-", "-");
 
-    const translate_description = await translate(description, 'en');
+    const translate_description = await translate(description, "en");
 
     if (translate_description.code === 200) {
         description = translate_description.data[0].translations[0].text;
@@ -269,8 +263,7 @@ export const printPost = async (listing) => {
             ? "cy"
             : $session.lang === "uk"
             ? "ua"
-            : $session.lang || 'en';
-
+            : $session.lang || "en";
 
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
     response.text(description, "html");
