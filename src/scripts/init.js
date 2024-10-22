@@ -40,21 +40,21 @@ function translate(text, sourceLang) {
     //         }
     //     })
     //     .catch(function () {
-            return $http
-                .get(
-                    "https://translate.cloudflare.jaxing.cc/?text=" +
-                        encodeURIComponent(text) +
-                        "&source_lang=" +
-                        sourceLang +
-                        "&target_lang=en",
-                    {
-                        timeout: 10000,
-                    }
-                )
-                .then(function (response_) {
-                    return response_;
-                });
-        // });
+    return $http
+        .get(
+            "https://translate.cloudflare.jaxing.cc/?text=" +
+                encodeURIComponent(text) +
+                "&source_lang=" +
+                sourceLang +
+                "&target_lang=en",
+            {
+                timeout: 10000,
+            }
+        )
+        .then(function (response_) {
+            return response_;
+        });
+    // });
 }
 
 function getPrompt(input, dataExtracted, currentState) {
@@ -66,10 +66,15 @@ function getPrompt(input, dataExtracted, currentState) {
         // "; ProcessingState: " +
         // currentState +
         // ";"
-        "Input: " + input + "; " +
-        "CurrentState: " + currentState + "; " +
+        "Input: " +
+        input +
+        "; " +
+        "CurrentState: " +
+        currentState +
+        "; " +
         "AnswerState: ; " +
-        "AnswerData: " + "<|eot_id|>"
+        "AnswerData: " +
+        "<|eot_id|>"
     );
 }
 
@@ -155,7 +160,9 @@ bind("preMatch", function ($context) {
                 ? "InputData"
                 : currentState === "Start"
                 ? "Hello"
-                : currentState;
+                : currentState
+                ? currentState
+                : "Hello";
         var dataExtracted = formatData($context.session.data) || {};
 
         translate(text, lng).then(function (trn_res) {

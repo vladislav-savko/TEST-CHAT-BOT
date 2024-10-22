@@ -4,6 +4,8 @@ import local from "./local/local.js";
 export const getPropertyDetails = (listing, listingData) => {
     const lang = $session.lang;
 
+    log($session.data);
+
     const details = [
         listing.price ? `*${listing.price} €*` : "",
         // getLocationProperty(listing.location),
@@ -106,7 +108,7 @@ export const getDescription = (listing, propertyDetails, lang) => {
             ? "cy"
             : $session.lang === "uk"
             ? "ua"
-            : $session.lang || 'en';
+            : $session.lang || "en";
 
     const openInBrowserButton =
         $request.channelType !== "telegram"
