@@ -17,7 +17,7 @@ export const getPropertyDetails = (listing, listingData) => {
         listingData.bedrooms != null
             ? `- 🛏 ${local(lang).property.bathrooms}: ${listingData.bedrooms}`
             : "",
-        listingData.furnishing != null && $session.data.furnishing.length
+        listingData.furnishing != null && $session.data.furnishing
             ? `- 🛋 ${local(lang).property.furnishing}: *${
                   listingData.furnishing
               }*`
@@ -30,7 +30,7 @@ export const getPropertyDetails = (listing, listingData) => {
         listingData.bathrooms != null
             ? `- 🛁 ${local(lang).property.bathrooms}: ${listingData.bathrooms}`
             : "",
-        listingData.parking != null && $session.data.parking.length
+        listingData.parking != null && $session.data.parking
             ? `- 🅿️ ${local(lang).property.parking}: ${
                   listingData.parking ? "+" : "-"
               }`
@@ -45,7 +45,7 @@ export const getPropertyDetails = (listing, listingData) => {
                   listingData.television ? "+" : "-"
               }`
             : "",
-        listingData.alarmSystem != null && $session.data.alarmSystem.length
+        listingData.alarmSystem != null && $session.data.alarmSystem
             ? `- 🚨 ${local(lang).property.alarmSystem}: ${
                   listingData.alarmSystem ? "+" : "-"
               }`
@@ -56,16 +56,16 @@ export const getPropertyDetails = (listing, listingData) => {
         listingData.heating != null && $session.data.heating
             ? `- 🔥 ${local(lang).property.heating}: ${listingData.heating}`
             : "",
-        listingData.waterHeating != null && $session.data.water.length
+        listingData.waterHeating != null && $session.data.water
             ? `- ${local(lang).property.waterHeating}: ${
                   listingData.waterHeating
               }`
             : "",
-        listingData.internet != null && $session.data.internet.length
+        listingData.internet != null && $session.data.internet
             ? `- 🌐 ${local(lang).property.internet}: ${listingData.internet}`
             : "",
         listingData.airConditioning != null &&
-        $session.data.airConditioning.length
+        $session.data.airConditioning
             ? `- ${local(lang).property.airConditioning}: *${
                   listingData.airConditioning
               }*`

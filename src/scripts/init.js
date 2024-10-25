@@ -149,11 +149,18 @@ bind("preMatch", function ($context) {
 
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
-            log(trn_res);
-            if (trn_res.code === 200) {
-                t_text = trn_res.data[0].translations[0].text;
+
+            var isNumberOnly = /^[\d\-]+$/.test(text);
+
+            if (isNumberOnly) {
+                t_text = text;
             } else {
-                t_text = trn_res.response.translated_text;
+                log(trn_res);
+                if (trn_res.code === 200) {
+                    t_text = trn_res.data[0].translations[0].text;
+                } else {
+                    t_text = trn_res.response.translated_text;
+                }
             }
 
             $context.request.query = t_text;

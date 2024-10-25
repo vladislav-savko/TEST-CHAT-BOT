@@ -85,11 +85,12 @@ export const initSession = () => {
 
 export const getCityInfo = async (city, country = "cyprus") => {
     log("getCity");
+    country = country || "cyprus";
     try {
         const resC = await api.getCitiesInfo(city, country);
-        if (!resC) return false;
-
-        const filteredCities = resC.data.filter(
+        log(resC);
+        // if (!resC) return false;
+        const filteredCities = resC.filter(
             (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
         );
 
@@ -101,7 +102,7 @@ export const getCityInfo = async (city, country = "cyprus") => {
             return false;
         }
 
-        const [firstCity] = filteredCities;
+        const firstCity = filteredCities[0];
         if (firstCity.districtName === firstCity.cityName) {
             $session.data.districtId = firstCity.districtId;
             $session.data.cityId = null;
