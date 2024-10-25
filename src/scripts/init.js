@@ -58,24 +58,7 @@ function translate(text, sourceLang) {
 }
 
 function getPrompt(input, dataExtracted, currentState) {
-    return (
-        // "UserRequest: " +
-        // input +
-        // // "; Context: " +
-        // // JSON.stringify(dataExtracted) +
-        // "; ProcessingState: " +
-        // currentState +
-        // ";"
-        "Input: " +
-        input +
-        "; " +
-        "CurrentState: " +
-        currentState +
-        "; " +
-        "AnswerState: ; " +
-        "AnswerData: " +
-        "<|eot_id|>"
-    );
+    return "Input: " + input + "; " + "CurrentState: " + currentState;
 }
 
 function llm(input, dataExtracted, currentState) {
@@ -84,7 +67,6 @@ function llm(input, dataExtracted, currentState) {
         body: {
             message: getPrompt(input, dataExtracted, currentState),
             code_prompt: "state-entity",
-            temperature: 0.5,
         },
         headers: {
             "Content-Type": "application/json",

@@ -59,11 +59,13 @@ export const processParams = async () => {
     }
 
     if (
-        (!$session.data.districtId && !$session.data.cityId) &&
-        (!newData.city && !newData.country)
+        !$session.location ||
+        (!$session.data.districtId &&
+            !$session.data.cityId &&
+            !newData.city &&
+            !newData.country)
     ) {
-        log($session.data.districtId);
-        log($session.data.cityId);
+        log($session.location);
         emptyParams.push("Location");
     }
     if (!$session.data.listingType) emptyParams.push("ListingTypes");
