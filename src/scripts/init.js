@@ -161,10 +161,10 @@ bind("preMatch", function ($context) {
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
 
-            var isNumberOnly = /^[\d\-]+$/.test(text);
+            var isNumberOnly = /^(up|down)?\s*(to)?\s*\d+(k)?(-\d+(k)?)*$/.test(text);
 
             if (isNumberOnly) {
-                t_text = text;
+                t_text = 'budget ' + text;
             } else {
                 log(trn_res);
                 if (trn_res.code === 200) {

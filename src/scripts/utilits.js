@@ -103,12 +103,18 @@ export const getCityInfo = async (city, country = "cyprus") => {
         }
 
         const firstCity = filteredCities[0];
-        if (firstCity.districtName === firstCity.cityName) {
+        if (!firstCity.districtName && !firstCity.cityName) {
+            $session.data.countryId = firstCity.countryId;
+            $session.data.cityId = null;
+            $session.data.districtId = null;
+        } else if (firstCity.districtName === firstCity.cityName) {
             $session.data.districtId = firstCity.districtId;
             $session.data.cityId = null;
+            $session.data.countryId = null;
         } else {
             $session.data.cityId = firstCity.cityId;
             $session.data.districtId = null;
+            $session.data.countryId = null;
         }
 
         return firstCity;

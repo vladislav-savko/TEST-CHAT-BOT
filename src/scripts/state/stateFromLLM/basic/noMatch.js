@@ -9,7 +9,7 @@ export default async () => {
 
     if (answer) {
         const answer_translated = await translate(answer, 'en');
-        const text = "";
+        let text = "";
         if (answer_translated.code === 200) {
             text = answer_translated.data[0].translations[0].text;
         } else {

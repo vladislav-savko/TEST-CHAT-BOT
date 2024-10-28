@@ -8,10 +8,16 @@ export const processParams = async () => {
     const newData = $session.lastData;
 
     if (newData.city || newData.country) {
-        if (
-            !$session.location ||
-            $session.location.cityNameEn !== newData.city
-        ) {
+        const cityChanged =
+            newData.city &&
+            (!$session.location ||
+                $session.location.cityNameEn !== newData.city);
+        const countryChanged =
+            newData.country &&
+            (!$session.location ||
+                $session.location.countryNameEn !== newData.country);
+
+        if (cityChanged || countryChanged) {
             const location = await utl.getCityInfo(
                 newData.city,
                 newData.country
@@ -62,6 +68,7 @@ export const processParams = async () => {
         !$session.location ||
         (!$session.data.districtId &&
             !$session.data.cityId &&
+            !$session.data.countryId &&
             !newData.city &&
             !newData.country)
     ) {
