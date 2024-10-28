@@ -114,6 +114,7 @@ function formatData(obj) {
 
 function getState(state, data, input_text) {
     var nextState = state;
+
     switch (state) {
         case "Seller":
             nextState = "/DisplayResult/ShowByPosition/Seller";
@@ -130,12 +131,16 @@ function getState(state, data, input_text) {
         nextState = "/SwitchInterfaceLanguage";
     }
 
-    var isHello =
-        /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i.test(
-            input_text
-        );
-    if (isHello) {
-        nextState = "/Start";
+    const phrases = [
+        { regex: /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i, state: "/Start" },
+        { regex: /^(info|information)$/i, state: "/InfoAbout" },
+    ];
+
+    for (const phrase of phrases) {
+        if (phrase.regex.test(input_text)) {
+            nextState = phrase.state;
+            break;
+        }
     }
 
     return nextState;
