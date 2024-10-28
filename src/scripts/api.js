@@ -77,7 +77,7 @@ export const translate = async (text, sourceLang) => {
         }
     );
 
-    if (response.code === 200) {
+    if (response && response.code === 200) {
         return response;
     } else {
         const fallbackResponse = await axios.get(
@@ -89,6 +89,7 @@ export const translate = async (text, sourceLang) => {
         return fallbackResponse;
     }
 };
+
 export default {
     getCitiesInfo,
     getCountriesInfo,

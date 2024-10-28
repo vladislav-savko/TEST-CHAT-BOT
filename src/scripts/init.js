@@ -112,11 +112,14 @@ function formatData(obj) {
     return formattedObject;
 }
 
-function getState(state, data) {
+function getState(state, data, input_text) {
     var nextState = state;
     switch (state) {
         case "Seller":
             nextState = "/DisplayResult/ShowByPosition/Seller";
+            break;
+        case "Hello":
+            nextState = "/Start";
             break;
         default:
             nextState = "/" + state;
@@ -125,6 +128,14 @@ function getState(state, data) {
 
     if (data.language) {
         nextState = "/SwitchInterfaceLanguage";
+    }
+
+    var isHello =
+        /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i.test(
+            input_text
+        );
+    if (isHello) {
+        nextState = "/Start";
     }
 
     return nextState;
@@ -179,7 +190,11 @@ bind("preMatch", function ($context) {
                 log(answerData);
 
                 log(content);
-                $context.temp.targetState = getState(answerState, answerData);
+                $context.temp.targetState = getState(
+                    answerState,
+                    answerData,
+                    t_text
+                );
             });
         });
     });
