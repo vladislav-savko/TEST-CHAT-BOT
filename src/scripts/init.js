@@ -131,13 +131,13 @@ function getState(state, data, input_text) {
         nextState = "/SwitchInterfaceLanguage";
     }
 
-    const phrases = [
+    var phrases = [
         { regex: /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i, state: "/Start" },
         { regex: /^(info|information)$/i, state: "/InfoAbout" },
         { regex: /^(Seller contacts|Seller)$/i, state: "/DisplayResult/ShowByPosition/Seller"}
     ];
 
-    for (const phrase of phrases) {
+    for (var phrase of phrases) {
         if (phrase.regex.test(input_text)) {
             nextState = phrase.state;
             break;
