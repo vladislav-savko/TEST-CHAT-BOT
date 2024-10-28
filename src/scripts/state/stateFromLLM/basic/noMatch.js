@@ -9,12 +9,14 @@ export default async () => {
 
     if (answer) {
         const answer_translated = await translate(answer, 'en');
-
+        const text = "";
         if (answer_translated.code === 200) {
-            description = answer_translated.data[0].translations[0].text;
+            text = answer_translated.data[0].translations[0].text;
         } else {
-            description = answer_translated.data.response.translated_text;
+            text = answer_translated.data.response.translated_text;
         }
+        
+        response.text(text);
     } else {
         response.randomText(local(lang).noMatch);
     }
