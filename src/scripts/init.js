@@ -15,101 +15,63 @@ function language(text) {
 }
 
 function translate(text, sourceLang) {
-    // return $http
-    //     .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
-    //         timeout: 5000,
-    //     })
-    //     .then(function (response) {
-    //         if (response.code === 200) {
-    //             return response;
-    //         } else {
-    //             return $http
-    //                 .get(
-    //                     "https://translate.cloudflare.jaxing.cc/?text=" +
-    //                         encodeURIComponent(text) +
-    //                         "&source_lang=" +
-    //                         sourceLang +
-    //                         "&target_lang=en",
-    //                     {
-    //                         timeout: 5000,
-    //                     }
-    //                 )
-    //                 .then(function (response_) {
-    //                     return response_;
-    //                 });
-    //         }
-    //     })
-    //     .catch(function () {
     return $http
-        .get(
-            "https://translate.cloudflare.jaxing.cc/?text=" +
-                encodeURIComponent(text) +
-                "&source_lang=" +
-                sourceLang +
-                "&target_lang=en",
-            {
-                timeout: 10000,
+        .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
+            timeout: 10000,
+        })
+        .then(function (response) {
+            if (response.code === 200) {
+                return response;
+            } else {
+                return $http
+                    .get(
+                        "https://translate.cloudflare.jaxing.cc/?text=" +
+                            encodeURIComponent(text) +
+                            "&source_lang=" +
+                            sourceLang +
+                            "&target_lang=en",
+                        {
+                            timeout: 10000,
+                        }
+                    )
+                    .then(function (response_) {
+                        return response_;
+                    });
             }
-        )
-        .then(function (response_) {
-            return response_;
+        })
+        .catch(function () {
+            return $http
+                .get(
+                    "https://translate.cloudflare.jaxing.cc/?text=" +
+                        encodeURIComponent(text) +
+                        "&source_lang=" +
+                        sourceLang +
+                        "&target_lang=en",
+                    {
+                        timeout: 10000,
+                    }
+                )
+                .then(function (response_) {
+                    return response_;
+                });
         });
-    // });
 }
 
-function getPrompt(input, dataExtracted, currentState) {
+function getPrompt(input, currentState) {
     return "Input: " + input + "; " + "CurrentState: " + currentState;
 }
 
-function llm(input, dataExtracted, currentState) {
+function llm(input, currentState) {
     return $http.post("213.149.180.145:58080/chat", {
         timeout: 25000,
         body: {
-            message: getPrompt(input, dataExtracted, currentState),
+            message: getPrompt(input, currentState),
             code_prompt: "state-entity",
         },
         headers: {
             "Content-Type": "application/json",
         },
     });
-}
-
-function isStringInArray(str, array) {
-    return array.indexOf(str) !== -1;
-}
-
-var langs = ["ru", "en", "el", "pl", "uk"];
-
-function formatData(obj) {
-    var formattedObject = {};
-    var skipProperties = [
-        "skip",
-        "take",
-        "sort",
-        "isIncludeCollapsing",
-        "withoutSold",
-    ];
-    for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            if (skipProperties.indexOf(key) === -1) {
-                if (Array.isArray(obj[key]) && obj[key].length > 0) {
-                    formattedObject[key] = obj[key];
-                } else if (
-                    typeof obj[key] === "boolean" ||
-                    typeof obj[key] === "number"
-                ) {
-                    formattedObject[key] = obj[key];
-                } else if (
-                    typeof obj[key] === "string" &&
-                    obj[key].trim() !== ""
-                ) {
-                    formattedObject[key] = obj[key];
-                }
-            }
-        }
-    }
-
-    return formattedObject;
 }
 
 function getState(state, data, input_text) {
@@ -132,9 +94,15 @@ function getState(state, data, input_text) {
     }
 
     var phrases = [
-        { regex: /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i, state: "/Start" },
+        {
+            regex: /^(hi( to)?|hello|greeting(s)?|hey|good (morning|afternoon|evening))$/i,
+            state: "/Start",
+        },
         { regex: /^(info|information)$/i, state: "/InfoAbout" },
-        { regex: /^(Seller contacts|Seller)$/i, state: "/DisplayResult/ShowByPosition/Seller"}
+        {
+            regex: /^(Seller contacts|Seller)$/i,
+            state: "/DisplayResult/ShowByPosition/Seller",
+        },
     ];
 
     for (var i = 0; i < phrases.length; i++) {
@@ -163,15 +131,16 @@ bind("preMatch", function ($context) {
                 : currentState
                 ? currentState
                 : "Hello";
-        var dataExtracted = formatData($context.session.data) || {};
 
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
 
-            var isNumberOnly = /^(up|down)?\s*(to)?\s*\d+(k)?(-\d+(k)?)*$/.test(text);
+            var isNumberOnly = /^(up|down)?\s*(to)?\s*\d+(k)?(-\d+(k)?)*$/.test(
+                text
+            );
 
             if (isNumberOnly) {
-                t_text = 'budget ' + text;
+                t_text = "budget " + text;
             } else {
                 log(trn_res);
                 if (trn_res.code === 200) {
@@ -184,7 +153,7 @@ bind("preMatch", function ($context) {
             $context.request.query = t_text;
             log(toPrettyString($context));
 
-            llm(t_text, dataExtracted, currentState).then(function (llm_res) {
+            llm(t_text, currentState).then(function (llm_res) {
                 log(toPrettyString(llm_res));
                 var content = llm_res.formatted_response[0];
 
