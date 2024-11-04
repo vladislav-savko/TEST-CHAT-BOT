@@ -57,15 +57,11 @@ function translate(text, sourceLang) {
         });
 }
 
-function getPrompt(input, currentState) {
-    return "Input: " + input + "; " + "CurrentState: " + currentState;
-}
-
-function llm(input, currentState) {
+function llm(input) {
     return $http.post("213.149.180.145:58080/chat", {
         timeout: 25000,
         body: {
-            message: getPrompt(input, currentState),
+            message: input,
             code_prompt: "state-entity",
         },
         headers: {
@@ -153,12 +149,12 @@ bind("preMatch", function ($context) {
             $context.request.query = t_text;
             log(toPrettyString($context));
 
-            llm(t_text, currentState).then(function (llm_res) {
+            llm(t_text).then(function (llm_res) {
                 log(toPrettyString(llm_res));
                 var content = llm_res.formatted_response[0];
 
-                var answerState = content.answer_state;
-                var answerData = content.answer_data;
+                var answerState = content.state;
+                var answerData = content.data;
 
                 $context.session.lastData = answerData;
 
