@@ -21,7 +21,7 @@ export const instance = axios.create({
 });
 
 const getCitiesInfo = async (city, country) => {
-    const patt = `${country},${city}`;
+    const patt = city && country ? `${country},${city}` : city || country;
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
             pattern: patt,
@@ -65,10 +65,7 @@ const getSellerById = async (id) => {
 };
 
 export const translate = async (text, sourceLang) => {
-    const lang =
-    $session.lang === "gr"
-        ? "el"
-        : $session.lang;
+    const lang = $session.lang === "gr" ? "el" : $session.lang;
 
     const response = await axios.get(
         `https://suapi.net/api/text/translate?to=${lang}&text[]=${text}`,
