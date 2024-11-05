@@ -3,9 +3,12 @@ import axios from "axios";
 import { API__LINK } from "./config.js";
 
 const ENDPOINT = {
-    get__cities: "cities/search",
+    // get__cities: "cities/search",
+    get__cities: "city/search-into-database",
     //https://anisad.com/api/cities/search?take=10&pattern=nicosia
-    post__listing: "listing/search",
+    //https://anisad.com/api/city/search-into-database?take=10&pattern=cyprus
+    // post__listing: "listing/search",
+    post__listing: "listing-search/filters",
     //https://anisad.com/api/listing/search
     get__listing_by_id: "listing",
     //https://anisad.com/api/listing/6255
@@ -14,7 +17,7 @@ const ENDPOINT = {
 };
 
 export const instance = axios.create({
-    baseURL: `${API__LINK}/api/`,
+    baseURL: `${API__LINK}/api/v1/`,
     timeout: 25000,
     "Cache-Control": "no-cache",
     "Content-type": "application/json",
@@ -22,6 +25,7 @@ export const instance = axios.create({
 
 const getCitiesInfo = async (city, country) => {
     const patt = city && country ? `${country},${city}` : city || country;
+    log(patt);
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
             pattern: patt,
