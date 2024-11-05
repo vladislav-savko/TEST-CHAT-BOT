@@ -92,14 +92,14 @@ function getState(state, data, input_text) {
         },
         { regex: /^(info|information)$/i, state: "/InfoAbout" },
         {
-            regex: /^(Seller contacts|Seller)$/i,
+            regex: /^(seller contacts|seller)$/i,
             state: "/DisplayResult/ShowByPosition/Seller",
         },
     ];
 
     for (var i = 0; i < phrases.length; i++) {
         var phrase = phrases[i];
-        if (phrase.regex.test(input_text)) {
+        if (phrase.regex.test(input_text.toLowerCase())) {
             nextState = phrase.state;
             break;
         }
@@ -153,7 +153,7 @@ bind("preMatch", function ($context) {
                 var answerState = content.state;
                 var answerData = content.data;
 
-                $context.session.lastData = JSON.parse(answerData);
+                $context.session.lastData = JSON.parse(answerData || '{}');
 
                 log(answerState);
                 log(answerData);
