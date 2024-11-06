@@ -110,6 +110,7 @@ export default {
         waterHeating: `Водонагрівання`,
         location: `Локація`,
         locationFeatures: `Особливості розташування`,
+        swimmingPool: "Басейн",
         price: {
             value: `Ціна`,
             budget: `Бюджет`,

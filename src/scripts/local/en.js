@@ -110,6 +110,7 @@ export default {
         waterHeating: `Water heating`,
         location: `Location`,
         locationFeatures: `Location features`,
+        swimmingPool: "Swimming pool",
         price: {
             value: `Price`,
             budget: `Budget`,

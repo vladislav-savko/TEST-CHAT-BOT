@@ -110,6 +110,7 @@ export default {
         waterHeating: `Podgrzewanie wody`,
         location: `Lokalizacja`,
         locationFeatures: `Cechy lokalizacji`,
+        swimmingPool: "Basen",
         price: {
             value: `Cena`,
             budget: `Budżet`,

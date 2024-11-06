@@ -155,9 +155,6 @@ bind("preMatch", function ($context) {
 
                 $context.session.lastData = JSON.parse(answerData || '{}');
 
-                log(answerState);
-                log(answerData);
-
                 log(content);
                 $context.temp.targetState = getState(
                     answerState,

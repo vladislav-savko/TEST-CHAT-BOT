@@ -110,6 +110,7 @@ export default {
         waterHeating: `Θέρμανση νερού`,
         location: `Τοποθεσία`,
         locationFeatures: `Χαρακτηριστικά τοποθεσίας`,
+        swimmingPool: "Πισίνα",
         price: {
             value: `Τιμή`,
             budget: `Προϋπολογισμός`,

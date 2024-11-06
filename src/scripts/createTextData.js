@@ -10,12 +10,12 @@ export const getPropertyDetails = (listing, listingData) => {
         listing.price ? `*${listing.price} €*` : "",
         // getLocationProperty(listing.location),
         listingData.floorArea || listingData.plotArea
-            ? `- ${local(lang).property.area}: *${
+            ? `- ⛶ ${local(lang).property.area}: *${
                   listingData.floorArea || listingData.plotArea
               } m²*`
             : "",
         listingData.bedrooms != null
-            ? `- 🛏 ${local(lang).property.bathrooms}: ${listingData.bedrooms}`
+            ? `- 🛏 ${local(lang).property.bedrooms}: ${listingData.bedrooms}`
             : "",
         listingData.furnishing != null && $session.data.furnishing
             ? `- 🛋 ${local(lang).property.furnishing}: *${
@@ -50,6 +50,11 @@ export const getPropertyDetails = (listing, listingData) => {
                   listingData.alarmSystem ? "+" : "-"
               }`
             : "",
+        listingData.swimmingPool != null
+            ? `- 🏊‍♂️ ${local(lang).property.swimmingPool}: ${
+                  listingData.swimmingPool ? "+" : "-"
+              }`
+            : "",
         listingData.gas != null
             ? `- ${local(lang).property.gas}: ${listingData.gas ? "+" : "-"}`
             : "",
@@ -57,15 +62,14 @@ export const getPropertyDetails = (listing, listingData) => {
             ? `- 🔥 ${local(lang).property.heating}: ${listingData.heating}`
             : "",
         listingData.waterHeating != null && $session.data.water
-            ? `- ${local(lang).property.waterHeating}: ${
+            ? `- 🚿 ${local(lang).property.waterHeating}: ${
                   listingData.waterHeating
               }`
             : "",
         listingData.internet != null && $session.data.internet
             ? `- 🌐 ${local(lang).property.internet}: ${listingData.internet}`
             : "",
-        listingData.airConditioning != null &&
-        $session.data.airConditioning
+        listingData.airConditioning != null && $session.data.airConditioning
             ? `- ${local(lang).property.airConditioning}: *${
                   listingData.airConditioning
               }*`
