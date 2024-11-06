@@ -1,4 +1,4 @@
-import { API__LINK } from "./config.js";
+import { MAIN__LINK } from "./config.js";
 import local from "./local/local.js";
 
 export const getPropertyDetails = (listing, listingData) => {
@@ -76,23 +76,29 @@ export const getPropertyDetails = (listing, listingData) => {
             : "",
         listingData.infrastructureAmenity != null
             ? `- ${
-                  local(lang).property.infrastructureAmenities
+                  local(lang).property.infrastructureAmenities.value
               }: ${listingData.infrastructureAmenity
-                  .map((v) => v.toLowerCase().replace(/_/g, " "))
+                  .map(
+                      (value) =>
+                          local(lang).property.infrastructureAmenities[value]
+                  )
+                  .filter(Boolean)
                   .join(", ")}`
             : "",
         listingData.repairAmenity != null
             ? `- ${
-                  local(lang).property.repairAmenities
+                  local(lang).property.repairAmenities.value
               }: ${listingData.repairAmenity
-                  .map((v) => v.toLowerCase().replace(/_/g, " "))
+                  .map((value) => local(lang).property.repairAmenities[value])
+                  .filter(Boolean)
                   .join(", ")}`
             : "",
         listingData.locationFeatures != null
             ? `- ${
-                  local(lang).property.locationFeatures
+                  local(lang).property.locationFeatures.value
               }: ${listingData.locationFeatures
-                  .map((v) => v.toLowerCase().replace(/_/g, " "))
+                  .map((value) => local(lang).property.locationFeatures[value])
+                  .filter(Boolean)
                   .join(", ")}`
             : "",
     ];
@@ -130,7 +136,7 @@ export const getDescription = (listing, propertyDetails, lang) => {
 };
 
 export const getLinkToBrowserPage = (data) => {
-    return `${API__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
+    return `${MAIN__LINK}/${data.seo.listingType}/${data.seo.countryName}/${data.seo.cityName}/${data.seo.category}/${data.seo.propertyType}/${data.id}`;
 };
 
 export const getLinkToMap = (data) => {

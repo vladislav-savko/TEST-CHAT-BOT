@@ -64,6 +64,11 @@ export const processParams = async () => {
         }
     }
 
+    if (newData.infrastructureAmenity) {
+        if (newData.infrastructureAmenity.includes("INDOOR_POOL"))
+            $session.data.swimmingPool = [true];
+    }
+
     if (
         !$session.location ||
         (!$session.data.districtId &&
