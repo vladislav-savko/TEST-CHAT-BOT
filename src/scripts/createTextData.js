@@ -8,74 +8,85 @@ export const getPropertyDetails = (listing, listingData) => {
 
     const details = [
         listing.price ? `*${listing.price} €*` : "",
-        // getLocationProperty(listing.location),
         listingData.floorArea || listingData.plotArea
-            ? `- ⛶ ${local(lang).property.area}: *${
+            ? `⛶ ${local(lang).property.area}: *${
                   listingData.floorArea || listingData.plotArea
               } m²*`
             : "",
         listingData.bedrooms != null
-            ? `- 🛏 ${local(lang).property.bedrooms}: ${listingData.bedrooms}`
+            ? `🛏 ${local(lang).property.bedrooms}: ${listingData.bedrooms}`
             : "",
         listingData.furnishing != null && $session.data.furnishing
-            ? `- 🛋 ${local(lang).property.furnishing}: *${
-                  listingData.furnishing
+            ? `🛋 ${local(lang).property.furnishing.value}: *${
+                  local(lang).property.furnishing[listingData.furnishing]
               }*`
             : "",
         listingData.balcony != null
-            ? `- ${local(lang).property.balcony}: ${
+            ? `${local(lang).property.balcony}: ${
                   listingData.balcony ? "+" : "-"
               }`
             : "",
         listingData.bathrooms != null
-            ? `- 🛁 ${local(lang).property.bathrooms}: ${listingData.bathrooms}`
+            ? `🛁 ${local(lang).property.bathrooms}: ${listingData.bathrooms}`
             : "",
         listingData.parking != null && $session.data.parking
-            ? `- 🅿️ ${local(lang).property.parking}: ${
+            ? `🅿️ ${local(lang).property.parking}: ${
                   listingData.parking ? "+" : "-"
               }`
             : "",
         listingData.electricity != null && $session.data.electricity
-            ? `- ⚡️ ${local(lang).property.electricity}: ${
+            ? `⚡️ ${local(lang).property.electricity}: ${
                   listingData.electricity ? "+" : "-"
               }`
             : "",
         listingData.television != null
-            ? `- 📺 ${local(lang).property.television}: ${
+            ? `📺 ${local(lang).property.television}: ${
                   listingData.television ? "+" : "-"
               }`
             : "",
         listingData.alarmSystem != null && $session.data.alarmSystem
-            ? `- 🚨 ${local(lang).property.alarmSystem}: ${
+            ? `🚨 ${local(lang).property.alarmSystem}: ${
                   listingData.alarmSystem ? "+" : "-"
               }`
             : "",
         listingData.swimmingPool != null
-            ? `- 🏊‍♂️ ${local(lang).property.swimmingPool}: ${
+            ? `🏊‍♂️ ${local(lang).property.swimmingPool}: ${
                   listingData.swimmingPool ? "+" : "-"
               }`
             : "",
         listingData.gas != null
-            ? `- ${local(lang).property.gas}: ${listingData.gas ? "+" : "-"}`
+            ? `${local(lang).property.gas}: ${listingData.gas ? "+" : "-"}`
             : "",
         listingData.heating != null && $session.data.heating
-            ? `- 🔥 ${local(lang).property.heating}: ${listingData.heating}`
+            ? `- 🔥 ${local(lang).property.heating.value}: ${listingData.heating
+                  .map((value) => local(lang).property.heating[value])
+                  .filter(Boolean)
+                  .join(", ")}`
             : "",
         listingData.waterHeating != null && $session.data.water
-            ? `- 🚿 ${local(lang).property.waterHeating}: ${
-                  listingData.waterHeating
-              }`
+            ? `🚿 ${
+                  local(lang).property.waterHeating.value
+              }: ${listingData.waterHeating
+                  .map((value) => local(lang).property.waterHeating[value])
+                  .filter(Boolean)
+                  .join(", ")}`
             : "",
-        listingData.internet != null && $session.data.internet
-            ? `- 🌐 ${local(lang).property.internet}: ${listingData.internet}`
+        listingData.internet != null && $session.data.internet.length
+            ? `🌐 ${local(lang).property.internet.value}: ${listingData.internet
+                  .map((value) => local(lang).property.internet[value])
+                  .filter(Boolean)
+                  .join(", ")}`
             : "",
-        listingData.airConditioning != null && $session.data.airConditioning
-            ? `- ${local(lang).property.airConditioning}: *${
-                  listingData.airConditioning
+        listingData.airConditioning != null &&
+        $session.data.airConditioning.length
+            ? `${local(lang).property.airConditioning.value}: *${
+                  local(lang).property.airConditioning[
+                      listingData.airConditioning
+                  ]
               }*`
             : "",
         listingData.infrastructureAmenity != null
-            ? `- ${
+            ? `${
                   local(lang).property.infrastructureAmenities.value
               }: ${listingData.infrastructureAmenity
                   .map(
@@ -86,7 +97,7 @@ export const getPropertyDetails = (listing, listingData) => {
                   .join(", ")}`
             : "",
         listingData.repairAmenity != null
-            ? `- ${
+            ? `${
                   local(lang).property.repairAmenities.value
               }: ${listingData.repairAmenity
                   .map((value) => local(lang).property.repairAmenities[value])
@@ -94,7 +105,7 @@ export const getPropertyDetails = (listing, listingData) => {
                   .join(", ")}`
             : "",
         listingData.locationFeatures != null
-            ? `- ${
+            ? `${
                   local(lang).property.locationFeatures.value
               }: ${listingData.locationFeatures
                   .map((value) => local(lang).property.locationFeatures[value])
