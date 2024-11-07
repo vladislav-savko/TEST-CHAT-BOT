@@ -58,7 +58,7 @@ export const getPropertyDetails = (listing, listingData) => {
             ? `${local(lang).property.gas}: ${listingData.gas ? "+" : "-"}`
             : "",
         listingData.heating != null && $session.data.heating
-            ? `- 🔥 ${local(lang).property.heating.value}: ${listingData.heating
+            ? `🔥 ${local(lang).property.heating.value}: ${listingData.heating
                   .map((value) => local(lang).property.heating[value])
                   .filter(Boolean)
                   .join(", ")}`
@@ -86,9 +86,9 @@ export const getPropertyDetails = (listing, listingData) => {
               }*`
             : "",
         listingData.infrastructureAmenity != null
-            ? `${
+            ? `*${
                   local(lang).property.infrastructureAmenities.value
-              }: ${listingData.infrastructureAmenity
+              }*: ${listingData.infrastructureAmenity
                   .map(
                       (value) =>
                           local(lang).property.infrastructureAmenities[value]
@@ -97,17 +97,17 @@ export const getPropertyDetails = (listing, listingData) => {
                   .join(", ")}`
             : "",
         listingData.repairAmenity != null
-            ? `${
+            ? `*${
                   local(lang).property.repairAmenities.value
-              }: ${listingData.repairAmenity
+              }*: ${listingData.repairAmenity
                   .map((value) => local(lang).property.repairAmenities[value])
                   .filter(Boolean)
                   .join(", ")}`
             : "",
         listingData.locationFeatures != null
-            ? `${
+            ? `*${
                   local(lang).property.locationFeatures.value
-              }: ${listingData.locationFeatures
+              }*: ${listingData.locationFeatures
                   .map((value) => local(lang).property.locationFeatures[value])
                   .filter(Boolean)
                   .join(", ")}`
