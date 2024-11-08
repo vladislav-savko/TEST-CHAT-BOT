@@ -16,7 +16,7 @@ function language(text) {
 
 function translate(text, sourceLang) {
     return $http
-        .get("https://suapi.net/api/text/translate?to=en&text[]=" + text, {
+        .get("https://suapi.net/api/text/translate?to=en&text[]=\"" + text + "\"", {
             timeout: 10000,
         })
         .then(function (response) {
