@@ -24,7 +24,7 @@ export const instance = axios.create({
 });
 
 const getCitiesInfo = async (city, country) => {
-    const patt = city && country ? `${country},${city}` : city || country;
+    const patt = city && country ? `${city}, ${country}` : city || country;
     log(patt);
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
