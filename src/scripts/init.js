@@ -80,6 +80,9 @@ function getState(state, data, input_text) {
         case "Hello":
             nextState = "/Start";
             break;
+        case "ShowMore":
+            nextState = "/DisplayResult/ShowMore";
+            break;
         default:
             nextState = "/" + state;
             break;
@@ -127,7 +130,10 @@ bind("preMatch", function ($context) {
         translate(text, lng).then(function (trn_res) {
             var t_text = "";
 
-            var isNumberOnly = /^(up|down)?\s*(to)?\s*\d+(k|к)?(-\d+(k)?)?\s*(thousand[s]?|million[s]?)?$/i.test(text);
+            var isNumberOnly =
+                /^(up|down)?\s*(to)?\s*\d+(k|к)?(-\d+(k)?)?\s*(thousand[s]?|million[s]?)?$/i.test(
+                    text
+                );
             var hasKeywords = /(up|down|from|to)/i.test(text);
 
             if (isNumberOnly && !hasKeywords) {
@@ -153,7 +159,7 @@ bind("preMatch", function ($context) {
                 var answerState = content.state;
                 var answerData = content.data;
 
-                $context.session.lastData = JSON.parse(answerData || '{}');
+                $context.session.lastData = JSON.parse(answerData || "{}");
 
                 log(content);
                 $context.temp.targetState = getState(
