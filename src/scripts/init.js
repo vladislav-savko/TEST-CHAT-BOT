@@ -80,7 +80,7 @@ function getState(state, data, input_text) {
         case "Hello":
             nextState = "/Start";
             break;
-        case "ShowMore":
+        case "ShowMore": 
             nextState = "/DisplayResult/ShowMore";
             break;
         default:
