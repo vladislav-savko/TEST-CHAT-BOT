@@ -6,6 +6,7 @@ import restart from "./basic/restart.js";
 import showByIndex from "./basic/showByIndex.js";
 import seller from './basic/seller.js'
 import help from "./basic/help.js";
+import showMore from "./basic/showMore.js";
 
 import getLanguage from "./input/getLanguage.js";
 import inputData from "./input/inputData.js";
@@ -25,6 +26,7 @@ export default {
     showByIndex,
     seller,
     help,
+    showMore,
 
     inputData,
     inputBedrooms,
