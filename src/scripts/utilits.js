@@ -204,7 +204,7 @@ export const getListings = async (sessionData) => {
                     buttons.openInBrowser,
                     getLinkToBrowserPage(listing)
                 );
-                response.inlineCallback(buttons.showDetails, listing.id);
+                response.inlineCallback(buttons.showDetails, `Show details for ${listing.id}`);
             }
         });
 
