@@ -18,7 +18,7 @@ const ENDPOINT = {
 
 export const instance = axios.create({
     baseURL: `${API__LINK}/api/v1/`,
-    timeout: 25000,
+    timeout: 10000,
     "Cache-Control": "no-cache",
     "Content-type": "application/json",
 });
