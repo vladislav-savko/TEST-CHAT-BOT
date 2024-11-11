@@ -186,8 +186,8 @@ export const getListings = async (sessionData) => {
         $session.ids = getIdsFromListings(res);
 
         res.data.listings.forEach((listing) => {
-            // const listingData = getListingData(listing);
-            const listingData = listing.realtyDetails;
+            const listingData = getListingData(listing);
+            // const listingData = listing.realtyDetails;
 
             const propertyDetails = getPropertyDetails(listing, listingData);
 

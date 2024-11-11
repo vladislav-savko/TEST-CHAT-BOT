@@ -9,6 +9,7 @@ const ENDPOINT = {
     //https://anisad.com/api/city/search-into-database?take=10&pattern=cyprus
     // post__listing: "listing/search",
     post__listing: "listing-search/filters",
+    // post__listing: "elastic-search/filter-by-elastic",
     //https://anisad.com/api/listing/search
     get__listing_by_id: "listing",
     //https://anisad.com/api/listing/6255
