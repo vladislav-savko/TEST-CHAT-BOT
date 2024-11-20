@@ -1,5 +1,5 @@
 import axios from "axios";
-import response from "../../response";
+import response from "../../response.js";
 
 export default async () => {
     response.channel("sendChatAction", { action: "typing" });
