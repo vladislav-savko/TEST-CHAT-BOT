@@ -122,7 +122,7 @@ bind("preMatch", function ($context) {
         body: { action: "typing" },
     });
 
-    $context.reactions.transition({ value: "/Preprocess", deferrent: true });
+    $context.temp.transition({ value: "/Preprocess", deferrent: true });
 });
 
 bind(
