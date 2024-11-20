@@ -124,6 +124,7 @@ bind("preMatch", function ($context) {
 
     log($context.temp);
     $context.temp.targetState = "/Preprocess";
+    $context.temp.resteriskPreMatchApplied = true;
 });
 
 bind(
