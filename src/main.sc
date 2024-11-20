@@ -14,6 +14,10 @@ theme: /
         scriptEs6:
             await stateJs.start();
 
+    state: Preprocess
+        script:
+            return true;
+
     state: SwitchInterfaceLanguage
         q!: $regex</switchLanguage>
         scriptEs6:
