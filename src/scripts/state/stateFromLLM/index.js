@@ -18,10 +18,13 @@ import inputPropertyTypes from "./input/inputPropertyTypes.js";
 import inputPrice from "./input/inputPrice.js";
 
 import telegraCallback from "./basic/telegramCallback.js";
+
 import preprocess from "./preprocess.js";
+import loader from "./loader.js";
 
 export default {
     preprocess,
+    loader,
     
     start,
     switchLanguage,
