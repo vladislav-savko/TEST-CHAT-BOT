@@ -114,13 +114,15 @@ function getState(state, data, input_text) {
     return nextState;
 }
 
-bind("preMatch", function ($context) {
-    // $context.response.replies.push({
-    //     type: "raw",
-    //     method: "sendChatAction",
-    //     action: "typing",
-    // });
+bind("preProcess", function ($context) {
+    $context.response.replies.push({
+        type: "raw",
+        method: "sendChatAction",
+        action: "typing",
+    });
+});
 
+bind("preMatch", function ($context) {
     var text = $context.request.query;
     if (text[0] === "/") return true;
 
