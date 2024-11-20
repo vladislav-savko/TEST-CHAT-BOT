@@ -122,7 +122,9 @@ bind("preMatch", function ($context) {
         body: { action: "typing" },
     });
 
+    var text = $context.request.query;
     if (text[0] === "/") return true;
+    
     $context.temp.targetState = "/Preprocess";
 });
 
