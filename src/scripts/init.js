@@ -118,7 +118,7 @@ bind("preProcess", function ($context) {
     $context.response.replies.push({
         type: "raw",
         method: "sendChatAction",
-        action: "typing",
+        body: { action: "typing" },
     });
 });
 
