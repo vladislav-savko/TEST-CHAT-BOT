@@ -148,9 +148,9 @@ export default async () => {
                 const answerData = content.data;
 
                 $session.lastData = JSON.parse(answerData || "{}");
-                $reactions.transition(
-                    getState(answerState, answerData, t_text)
-                );
+                // $reactions.transition(
+                //     getState(answerState, answerData, t_text)
+                // );
             });
         });
     });
