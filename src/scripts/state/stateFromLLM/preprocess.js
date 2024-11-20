@@ -1,4 +1,3 @@
-import response from "../../response.js";
 import axios from "axios";
 
 export default async () => {
@@ -66,7 +65,7 @@ export default async () => {
         return response.data;
     };
 
-    const getState = (state, data, input_text) => {
+    const getState = (state, input_text) => {
         let nextState = state;
 
         switch (state) {
@@ -107,53 +106,38 @@ export default async () => {
     };
 
     const text = $context.request.query;
-    
-    log(text);
 
-    // language(text).then((lng_res) => {
-    //     const lng = lng_res.scored_languages_list[0].languages[0];
-    //     let currentState = $context.currentState.split("/").slice(1).join("/");
+    const language_ = await language(text);
+    const lng = language_.scored_languages_list[0].languages[0];
 
-    //     currentState =
-    //         currentState === "DisplayResult"
-    //             ? "InputData"
-    //             : currentState === "Start"
-    //             ? "Hello"
-    //             : currentState || "Hello";
+    const translate_ = await translate(text, lng);
 
-    //     translate(text, lng).then((trn_res) => {
-    //         let t_text = "";
+    let t_text = "";
 
-    //         const isNumberOnly =
-    //             /^(up|down)?\s*(to)?\s*\d+(k|к)?(-\d+(k)?)?\s*(thousand[s]?|million[s]?)?$/i.test(
-    //                 text
-    //             );
-    //         const hasKeywords = /(up|down|from|to)/i.test(text);
+    const isNumberOnly =
+        /^(up|down)?\s*(to)?\s*\d+(k|к)?(-\d+(k)?)?\s*(thousand[s]?|million[s]?)?$/i.test(
+            text
+        );
+    const hasKeywords = /(up|down|from|to)/i.test(text);
 
-    //         if (isNumberOnly && !hasKeywords) {
-    //             t_text = `budget to ${text}`;
-    //         } else if (isNumberOnly) {
-    //             t_text = `budget ${text}`;
-    //         } else {
-    //             if (trn_res.code === 200) {
-    //                 t_text = trn_res.data[0].translations[0].text;
-    //             } else {
-    //                 t_text = trn_res.response.translated_text;
-    //             }
-    //         }
+    if (isNumberOnly && !hasKeywords) {
+        t_text = `budget to ${text}`;
+    } else if (isNumberOnly) {
+        t_text = `budget ${text}`;
+    } else {
+        if (translate_.code === 200) {
+            t_text = translate_.data[0].translations[0].text;
+        } else {
+            t_text = translate_.response.translated_text;
+        }
+    }
 
-    //         $context.request.query = t_text;
+    $context.request.query = t_text;
 
-    //         llm(t_text).then((llm_res) => {
-    //             const content = llm_res;
-    //             const answerState = content.state;
-    //             const answerData = content.data;
+    const llm_ = await llm(t_text);
+    const answerState = llm_.state;
+    const answerData = llm_.data;
 
-    //             $session.lastData = JSON.parse(answerData || "{}");
-    //             // $reactions.transition(
-    //             //     getState(answerState, answerData, t_text)
-    //             // );
-    //         });
-    //     });
-    // });
+    $session.lastData = JSON.parse(answerData || "{}");
+    $reactions.transition(getState(answerState, answerData, t_text));
 };
