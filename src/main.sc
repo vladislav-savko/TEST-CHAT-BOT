@@ -16,7 +16,67 @@ theme: /
 
     state: Preprocess
         script:
-            return true;
+            var text = $context.request.query;
+            if (text[0] === "/") return true;
+
+            language(text).then(function (lng_res) {
+                var lng = lng_res.scored_languages_list[0].languages[0];
+                var currentState = $context.currentState
+                    .split("/")
+                    .slice(1)
+                    .join("/");
+                currentState =
+                    currentState === "DisplayResult"
+                        ? "InputData"
+                        : currentState === "Start"
+                        ? "Hello"
+                        : currentState
+                        ? currentState
+                        : "Hello";
+
+                translate(text, lng).then(function (trn_res) {
+                    var t_text = "";
+
+                    var isNumberOnly =
+                        /^(up|down)?\s*(to)?\s*\d+(k|к)?(-\d+(k)?)?\s*(thousand[s]?|million[s]?)?$/i.test(
+                            text
+                        );
+                    var hasKeywords = /(up|down|from|to)/i.test(text);
+
+                    if (isNumberOnly && !hasKeywords) {
+                        t_text = "budget to " + text;
+                    } else if (isNumberOnly) {
+                        t_text = "budget " + text;
+                    } else {
+                        log(trn_res);
+                        if (trn_res.code === 200) {
+                            t_text = trn_res.data[0].translations[0].text;
+                        } else {
+                            t_text = trn_res.response.translated_text;
+                        }
+                    }
+
+                    $context.request.query = t_text;
+                    log(toPrettyString($context));
+
+                    llm(t_text).then(function (llm_res) {
+                        log(toPrettyString(llm_res));
+                        var content = llm_res;
+
+                        var answerState = content.state;
+                        var answerData = content.data;
+
+                        $context.session.lastData = JSON.parse(answerData || "{}");
+
+                        log(content);
+                        $context.temp.targetState = getState(
+                            answerState,
+                            answerData,
+                            t_text
+                        );
+                    });
+                });
+            });
 
     state: SwitchInterfaceLanguage
         q!: $regex</switchLanguage>
