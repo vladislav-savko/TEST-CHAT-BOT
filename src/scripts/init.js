@@ -121,6 +121,8 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
+
+    return true;
 });
 
 bind("preMatch", function ($context) {
