@@ -123,7 +123,7 @@ bind("preMatch", function ($context) {
     });
 
     $context.temp.targetState = "/Preprocess";
-}, "", "", true);
+});
 
 bind(
     "preMatch",
@@ -190,5 +190,5 @@ bind(
             });
         });
     },
-    "/Preprocess"
+    "/Preprocess", "", true
 );
