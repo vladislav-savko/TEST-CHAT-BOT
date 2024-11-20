@@ -125,6 +125,7 @@ bind(
         });
 
         log($context.temp);
+        $context.temp.resteriskPreMatchApplied = true;
         $context.temp.targetState = "/Preprocess";
     },
     "",
