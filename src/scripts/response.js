@@ -51,6 +51,14 @@ const images = (imageUrlArray) => {
     );
 };
 
+const channel = (method, body) => {
+    $response.replies.push({
+        type: "raw",
+        body,
+        method,
+    });
+};
+
 export default {
     log,
     text,
@@ -61,4 +69,5 @@ export default {
     image,
     images,
     imagesTG,
+    channel,
 };
