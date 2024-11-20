@@ -16,9 +16,12 @@ function language(text) {
 
 function translate(text, sourceLang) {
     return $http
-        .get("https://suapi.net/api/text/translate?to=en&text[]=\"" + text + "\"", {
-            timeout: 10000,
-        })
+        .get(
+            'https://suapi.net/api/text/translate?to=en&text[]="' + text + '"',
+            {
+                timeout: 10000,
+            }
+        )
         .then(function (response) {
             if (response.code === 200) {
                 return response;
@@ -80,7 +83,7 @@ function getState(state, data, input_text) {
         case "Hello":
             nextState = "/Start";
             break;
-        case "ShowMore": 
+        case "ShowMore":
             nextState = "/DisplayResult/ShowMore";
             break;
         default:
@@ -112,6 +115,12 @@ function getState(state, data, input_text) {
 }
 
 bind("preMatch", function ($context) {
+    $response.replies.push({
+        type: "raw",
+        method: "sendChatAction",
+        action: "typing",
+    });
+
     var text = $context.request.query;
     if (text[0] === "/") return true;
 
