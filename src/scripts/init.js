@@ -124,6 +124,7 @@ bind(
             body: { action: "typing" },
         });
 
+        log($context.temp);
         $context.temp.targetState = "/Preprocess";
     },
     "",
