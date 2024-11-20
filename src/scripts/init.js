@@ -114,20 +114,17 @@ function getState(state, data, input_text) {
     return nextState;
 }
 
-bind(
-    "preMatch",
-    function ($context) {
-        $context.response.replies = $context.response.replies || [];
-        $context.response.replies.push({
-            type: "raw",
-            method: "sendChatAction",
-            body: { action: "typing" },
-        });
+bind("preMatch", function ($context) {
+    $context.response.replies = $context.response.replies || [];
+    $context.response.replies.push({
+        type: "raw",
+        method: "sendChatAction",
+        body: { action: "typing" },
+    });
 
-        log($context.temp);
-        $context.temp.targetState = "/Preprocess";
-    },
-);
+    log($context.temp);
+    $context.temp.targetState = "/Preprocess";
+});
 
 bind(
     "preMatch",
