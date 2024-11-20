@@ -1,13 +1,14 @@
 import response from "../../response.js";
+import axios from "axios";
 
 export default async () => {
-    const language = (text) => {
-        return $http.post(
+    const language = async (text) => {
+        const response = await axios.post(
             "https://caila.io/api/mlpgate/account/1000062767/model/51023/predict",
             {
-                body: {
-                    texts: [text],
-                },
+                texts: [text],
+            },
+            {
                 headers: {
                     "Content-Type": "application/json",
                     "MLP-API-KEY":
@@ -15,47 +16,53 @@ export default async () => {
                 },
             }
         );
+        return response.data;
     };
 
     const translate = async (text, sourceLang) => {
         try {
-            const response = await $http.get(
+            const response = await axios.get(
                 `https://suapi.net/api/text/translate?to=en&text[]="${text}"`,
                 { timeout: 10000 }
             );
-            if (response.code === 200) {
-                return response;
+
+            if (response.status === 200) {
+                return response.data;
             } else {
-                const fallbackResponse = await $http.get(
+                const fallbackResponse = await axios.get(
                     `https://translate.cloudflare.jaxing.cc/?text=${encodeURIComponent(
                         text
                     )}&source_lang=${sourceLang}&target_lang=en`,
                     { timeout: 10000 }
                 );
-                return fallbackResponse;
+                return fallbackResponse.data;
             }
         } catch (error) {
-            const fallbackResponse = await $http.get(
+            const fallbackResponse = await axios.get(
                 `https://translate.cloudflare.jaxing.cc/?text=${encodeURIComponent(
                     text
                 )}&source_lang=${sourceLang}&target_lang=en`,
                 { timeout: 10000 }
             );
-            return fallbackResponse;
+            return fallbackResponse.data;
         }
     };
 
-    const llm = (input) => {
-        return $http.post("213.149.180.145:58080/chat", {
-            timeout: 25000,
-            body: {
+    const llm = async (input) => {
+        const response = await axios.post(
+            "http://213.149.180.145:58080/chat",
+            {
                 message: input,
                 code_prompt: "state-entity",
             },
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                timeout: 25000,
+            }
+        );
+        return response.data;
     };
 
     const getState = (state, data, input_text) => {
