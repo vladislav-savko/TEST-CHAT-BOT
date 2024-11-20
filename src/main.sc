@@ -15,7 +15,7 @@ theme: /
             await stateJs.start();
 
     state: Preprocess
-        script:
+        scriptEs6:
             await stateJs.preprocess();
 
     state: SwitchInterfaceLanguage
