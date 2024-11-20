@@ -121,12 +121,10 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
-
-    $context.temp.targetState = "/Preprocess";
 });
 
 bind(
-    "preMatch",
+    "preProcess",
     function ($context) {
         var text = $context.request.query;
         if (text[0] === "/") return true;
