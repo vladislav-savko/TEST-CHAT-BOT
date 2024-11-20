@@ -115,6 +115,7 @@ function getState(state, data, input_text) {
 }
 
 bind("preMatch", function ($context) {
+    $context.response.replies ??= [];
     $context.response.replies.push({
         type: "raw",
         method: "sendChatAction",
