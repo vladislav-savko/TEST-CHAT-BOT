@@ -115,6 +115,7 @@ function getState(state, data, input_text) {
 }
 
 bind("preProcess", function ($context) {
+    log($context);
     $context.response.replies.push({
         type: "raw",
         method: "sendChatAction",
