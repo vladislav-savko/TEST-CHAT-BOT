@@ -118,7 +118,7 @@ bind("preMatch", function ($context) {
     var text = $context.request.query;
     if (text[0] === "/") return true;
 
-    $context.temp.targetState = "/Preprocess";
+    $context.temp.targetState = "/Loader";
 });
 
 bind(

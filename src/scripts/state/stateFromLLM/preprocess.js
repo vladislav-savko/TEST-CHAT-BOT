@@ -1,9 +1,6 @@
 import axios from "axios";
-import response from "../../response.js";
 
 export default async () => {
-    response.channel("sendChatAction", { action: "typing" });
-
     const language = async (text) => {
         const response = await axios.post(
             "https://caila.io/api/mlpgate/account/1000062767/model/51023/predict",

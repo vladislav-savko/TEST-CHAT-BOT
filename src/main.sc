@@ -14,6 +14,10 @@ theme: /
         scriptEs6:
             await stateJs.start();
 
+    state: Loader
+        scriptEs6:
+            await stateJs.loader();
+
     state: Preprocess
         scriptEs6:
             await stateJs.preprocess();
