@@ -121,7 +121,9 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
+});
 
+bind("preMatch", function ($context) {
     var text = $context.request.query;
     if (text[0] === "/") return true;
 
