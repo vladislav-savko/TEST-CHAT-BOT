@@ -16,7 +16,7 @@ theme: /
 
     state: Preprocess
         script:
-            $context.request.query = 'Hi';
+            return true;
 
     state: SwitchInterfaceLanguage
         q!: $regex</switchLanguage>
