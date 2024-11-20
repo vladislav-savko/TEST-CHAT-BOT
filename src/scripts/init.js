@@ -115,10 +115,26 @@ function getState(state, data, input_text) {
 }
 
 bind("preMatch", function ($context) {
+    $context.response.replies = $context.response.replies || [];
+    $context.response.replies.push({
+        type: "raw",
+        method: "sendChatAction",
+        body: { action: "typing" },
+    });
+    
     var text = $context.request.query;
     if (text[0] === "/") return true;
 
     $context.temp.targetState = "/Loader";
+});
+
+bind("preProcess", function ($context) {
+    $context.response.replies = $context.response.replies || [];
+    $context.response.replies.push({
+        type: "raw",
+        method: "sendChatAction",
+        body: { action: "typing" },
+    });
 });
 
 bind(
