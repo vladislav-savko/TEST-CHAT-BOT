@@ -122,7 +122,7 @@ bind("preMatch", function ($context) {
         body: { action: "typing" },
     });
 
-    $context.temp.targetState("/Preprocess");
+    $context.temp.targetState = "/Preprocess";
 }, "", "", true);
 
 bind(
