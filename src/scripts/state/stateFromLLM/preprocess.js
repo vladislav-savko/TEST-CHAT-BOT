@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TG_TOKEN } from "../../config";
+import { TG_TOKEN } from "../../config.js";
 
 export default async () => {
     const language = async (text) => {
