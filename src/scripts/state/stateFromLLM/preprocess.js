@@ -1,7 +1,21 @@
 import axios from "axios";
+import { TG_TOKEN } from "../../config";
 
 export default async () => {
     const language = async (text) => {
+        const chat_id = $context.rawRequest.message.from.id;
+        await axios.post(
+            `https://api.telegram.org/bot${TG_TOKEN}/sendChatAction`,
+            {
+                chat_id,
+                action: "typing",
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
         const response = await axios.post(
             "https://caila.io/api/mlpgate/account/1000062767/model/51023/predict",
             {
