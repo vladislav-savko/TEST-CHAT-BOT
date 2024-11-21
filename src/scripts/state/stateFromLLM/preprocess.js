@@ -17,6 +17,7 @@ export default async () => {
         //     }
         // );
         log($context.rawRequest);
+        log($context);
         const response = await axios.post(
             "https://caila.io/api/mlpgate/account/1000062767/model/51023/predict",
             {
