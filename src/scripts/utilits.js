@@ -204,7 +204,10 @@ export const getListings = async (sessionData) => {
                     buttons.openInBrowser,
                     getLinkToBrowserPage(listing)
                 );
-                response.inlineCallback(buttons.showDetails, `Show details for ${listing.id}`);
+                response.inlineCallback(
+                    buttons.showDetails,
+                    `Show details for ${listing.id}`
+                );
             }
         });
 
@@ -371,7 +374,7 @@ export const getFiltersInfo = async () => {
         priceFrom || priceTo
             ? `${tPrice.value}: ${priceFrom || "0"} - ${priceTo || ""}`
             : null,
-        bedrooms ? `${tBedrooms}: ${bedrooms.join(", ")}` : null,
+        bedrooms.length ? `${tBedrooms}: ${bedrooms.join(", ")}` : null,
         bathrooms ? `${tBathrooms}: ${bathrooms.join(", ")}` : null,
         location ? `${tLocation}: ${location.address}` : null,
         buildingConditions.length
@@ -388,7 +391,7 @@ export const getFiltersInfo = async () => {
         .filter(Boolean)
         .join("\n");
 
-    const filtersText = local(lang).general.filters + "\n";
+    const filtersText = local(lang).general.filters + ":\n";
 
     response.text(filtersText + filters);
 };
@@ -429,7 +432,11 @@ export function findLastNonSwitchState(transitions) {
     if (!Array.isArray(transitions)) return null;
 
     for (let i = transitions.length - 1; i >= 0; i--) {
-        if (transitions[i].state !== "/SwitchInterfaceLanguage") {
+        if (
+            transitions[i].state !== "/SwitchInterfaceLanguage" &&
+            transitions[i].state !== "/Preprocess" &&
+            transitions[i].state !== "/Loader"
+        ) {
             return transitions[i];
         }
     }

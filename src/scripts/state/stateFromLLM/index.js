@@ -8,6 +8,7 @@ import seller from "./basic/seller.js";
 import help from "./basic/help.js";
 import showMore from "./basic/showMore.js";
 import bye from "./basic/bye.js";
+import filtersInfo from "./basic/filtersInfo.js";
 
 import getLanguage from "./input/getLanguage.js";
 import inputData from "./input/inputData.js";
@@ -37,6 +38,7 @@ export default {
     help,
     showMore,
     bye,
+    filtersInfo,
 
     inputData,
     inputBedrooms,

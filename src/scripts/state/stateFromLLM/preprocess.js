@@ -1,5 +1,4 @@
 import axios from "axios";
-import { TG_TOKEN } from "../../config.js";
 
 export default async () => {
     const language = async (text) => {
@@ -71,6 +70,9 @@ export default async () => {
         switch (state) {
             case "Seller":
                 nextState = "/DisplayResult/ShowByPosition/Seller";
+                break;
+            case "FiltersInfo":
+                nextState = "/DisplayResult/FiltersInfo";
                 break;
             case "Hello":
                 nextState = "/Start";
