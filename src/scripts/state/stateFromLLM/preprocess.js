@@ -140,6 +140,8 @@ export default async () => {
     const answerState = llm_.state;
     const answerData = llm_.data;
 
+    log(llm_);
+
     $session.lastData = JSON.parse(answerData || "{}");
     $reactions.transition(getState(answerState, t_text));
 };

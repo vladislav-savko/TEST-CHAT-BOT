@@ -85,7 +85,8 @@ export const getPropertyDetails = (listing, listingData) => {
                   ]
               }*`
             : "",
-        listingData.infrastructureAmenity != null
+        listingData.infrastructureAmenity != null &&
+        listingData.infrastructureAmenity.length
             ? `*${
                   local(lang).property.infrastructureAmenities.value
               }*: ${listingData.infrastructureAmenity
@@ -96,7 +97,8 @@ export const getPropertyDetails = (listing, listingData) => {
                   .filter(Boolean)
                   .join(", ")}`
             : "",
-        listingData.repairAmenity != null
+        listingData.repairAmenity != null &&
+        listingData.repairAmenity.length
             ? `*${
                   local(lang).property.repairAmenities.value
               }*: ${listingData.repairAmenity
@@ -104,7 +106,8 @@ export const getPropertyDetails = (listing, listingData) => {
                   .filter(Boolean)
                   .join(", ")}`
             : "",
-        listingData.locationFeatures != null
+        listingData.locationFeatures != null &&
+        listingData.locationFeatures.length
             ? `*${
                   local(lang).property.locationFeatures.value
               }*: ${listingData.locationFeatures

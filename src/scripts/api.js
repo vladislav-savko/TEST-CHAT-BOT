@@ -8,7 +8,7 @@ const ENDPOINT = {
     //https://anisad.com/api/cities/search?take=10&pattern=nicosia
     //https://anisad.com/api/city/search-into-database?take=10&pattern=cyprus
     // post__listing: "listing/search",
-    post__listing: "listing-search/filters",
+    post__listing: "elastic-search/search-extended",
     // post__listing: "elastic-search/filter-by-elastic",
     //https://anisad.com/api/listing/search
     get__listing_by_id: "listing",

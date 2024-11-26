@@ -20,9 +20,6 @@ export function session() {
         skip: 0,
         take: 3,
         rooms: [],
-        listingType: "",
-        sort: "BY_INDEX",
-        energyEfficiency: [],
         airConditioning: [],
         alarmSystem: [],
         bathroomNumbers: [],
@@ -37,6 +34,7 @@ export function session() {
         densityTo: null,
         districtId: null,
         electricity: [],
+        energyEfficiency: [],
         fireplace: [],
         floorAreaFrom: null,
         floorAreaTo: null,
@@ -45,6 +43,7 @@ export function session() {
         infrastructureAmenity: [],
         internet: [],
         isIncludeCollapsing: true,
+        listingType: "",
         locationFeatures: [],
         parking: [],
         pentHouse: [],
@@ -58,6 +57,7 @@ export function session() {
         residentialFloorsFrom: null,
         residentialFloorsTo: null,
         sewageSystem: [],
+        sort: "BY_INDEX",
         swimmingPool: [],
         water: [],
         withoutSold: true,
@@ -184,6 +184,8 @@ export const getListings = async (sessionData) => {
 
     if (hasListings) {
         $session.ids = getIdsFromListings(res);
+
+        log(res.data.listings);
 
         res.data.listings.forEach((listing) => {
             // const listingData = getListingData(listing);
@@ -319,63 +321,94 @@ export const getSeller = async () => {
 export const getFiltersInfo = async () => {
     const { data, info, lang } = $session;
     const {
-        propertyTypes,
-        listingType,
-        priceFrom,
-        priceTo,
-        water,
-        buildingConditions,
-        furnishing,
-        repair,
-        alarmSystem,
-        condition,
-        parking,
-        electricity,
-        gas,
-        airConditioning,
-        heating,
-        waterHeating,
-        kitchen,
-        balcony,
-        television,
-        internet,
-        bedrooms,
-        location,
-        bathrooms,
+        airConditioning, //[],
+        alarmSystem, //[],
+        bathroomNumbers, //[],
+        bedrooms, //[],
+        buildingConditions, //[],
+        companyName, // null,
+        coverageRatioFrom, //null,
+        coverageRatioTo, //null,
+        densityFrom, //null,
+        densityTo, //null,
+        districtId, //null,
+        electricity, //[],
+        energyEfficiency, //[],
+        fireplace, //[],
+        floorAreaFrom, // null,
+        floorAreaTo, //null,
+        furnishing, //[],
+        heating, //[],
+        infrastructureAmenity, // [],
+        internet, // [],
+        listingType, //"",
+        locationFeatures,// [],
+        parking, // [],
+        pentHouse, //[],
+        plotAreaFrom,// null,
+        plotAreaTo,//null,
+        priceFrom,//null,
+        priceTo, //null,
+        propertyStatus, //[],
+        propertyTypes, //[],
+        repairAmenity, //[],
+        residentialFloorsFrom, // null,
+        residentialFloorsTo, //null,
+        sewageSystem, //[],
+        swimmingPool, //[],
+        water, //[],
+        withoutSold, // true,
+        yearOfConstructionFrom, // null,
+        yearOfConstructionTo, //null,
     } = data;
 
-    // const { city, country } = info;
-    // response.log({ ...data, ...info });
-
     const {
-        propertyType: tPropertyTypes,
-        listingType: tListingType,
-        price: tPrice,
-        water: tWater,
-        buildigConditions: tBuildingConditions,
-        furnishing: tFurnishing,
+        airConditioning: tAirConditioning, //value
         alarmSystem: tAlarmSystem,
-        internet: tInternet,
+        area: tArea,
         balcony: tBalcony,
-        bedrooms: tBedrooms,
         bathrooms: tBathrooms,
+        bedrooms: tBedrooms,
+        buildigConditions: tBuildingConditions, //value
+        coverageRatio: tCoverageRatio,
+        density: tDensity,
+        electricity: tElectricity,
+        floorArea: tFloorArea,
+        furnishing: tFurnishing, //value
+        gas: tGas,
+        heating: tHeating, //value
+        infrastructureAmenities: tInfrastructureAmenities, //value
+        internet: tInternet, //value
+        kitchen: tKitchen,
+        parking: tParking,
+        repairAmenities: tRepairAmenities, //value
+        residentialFloors: tResidentialFloors,
+        sewageSystem: tSewageSystem,
+        television: tTelevision,
+        water: tWater,
+        waterHeating: tWaterHeating, //value
         location: tLocation,
+        locationFeatures: tLocationFeatures, //value
+        swimmingPool: tSwimmingPool,
+        price: tPrice, //value
+        listingType: tListingType, //value
+        propertyType: tPropertyType, //value
     } = local(lang).property;
 
     const filters = [
         propertyTypes
-            ? `${tPropertyTypes.value}: ${propertyTypes
-                  .map((type) => tPropertyTypes[type])
+            ? `${tPropertyType.value}: ${propertyTypes
+                  .map((type) => tPropertyType[type])
                   .join(", ")}`
             : null,
         listingType
             ? `${tListingType.value}: ${tListingType[listingType]}`
             : null,
         priceFrom || priceTo
-            ? `${tPrice.value}: ${priceFrom || "0"} - ${priceTo || ""}`
+            ? `${tPrice.budget}: ${priceFrom || "0"} - ${priceTo || ""}`
             : null,
         bedrooms.length ? `${tBedrooms}: ${bedrooms.join(", ")}` : null,
-        bathrooms ? `${tBathrooms}: ${bathrooms.join(", ")}` : null,
+        bathroomNumbers.length ? `${tBathrooms}: ${bathroomNumbers.join(", ")}` : null,
         location ? `${tLocation}: ${location.address}` : null,
         buildingConditions.length
             ? `${tBuildingConditions.value}: ${buildingConditions
