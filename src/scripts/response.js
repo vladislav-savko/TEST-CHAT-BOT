@@ -59,6 +59,10 @@ const channel = (method, body) => {
     });
 };
 
+const asyncResponse = (body) => {
+    $conversationApi.sendTextToClient(body);
+};
+
 export default {
     log,
     text,
@@ -70,4 +74,5 @@ export default {
     images,
     imagesTG,
     channel,
+    asyncResponse,
 };

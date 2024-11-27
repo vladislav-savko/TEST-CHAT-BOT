@@ -59,7 +59,7 @@ export function session() {
         sewageSystem: [],
         sort: "BY_INDEX",
         swimmingPool: [],
-        water: [],
+        waterHeating: [],
         withoutSold: true,
         yearOfConstructionFrom: null,
         yearOfConstructionTo: null,
@@ -124,23 +124,6 @@ export const getCityInfo = async (city, country = "cyprus") => {
     }
 };
 
-export const getListingData = (listing) => {
-    const types = [
-        "apartmentSell",
-        "apartmentRent",
-        "houseSell",
-        "houseRent",
-        "commerceSell",
-        "commerceRent",
-        "plotSell",
-        "plotRent",
-    ];
-
-    for (const type of types) {
-        if (listing[type]) return listing[type];
-    }
-};
-
 export function getIdsFromListings(res) {
     return res && res.data && Array.isArray(res.data.listings)
         ? res.data.listings.map((listing) => listing.id)
@@ -178,51 +161,57 @@ export const getListings = async (sessionData) => {
     const { lang } = $session;
     sessionData.take = 3;
 
-    // try {
-    const res = await api.getListing(sessionData);
-    const hasListings = res && res.data.listings.length > 0;
+    try {
+        const res = await api.getListing(sessionData);
+        const hasListings = res && res.data.listings.length > 0;
 
-    if (hasListings) {
-        $session.ids = getIdsFromListings(res);
+        if (hasListings) {
+            $session.ids = getIdsFromListings(res);
 
-        log(res.data.listings);
+            log(res.data.listings);
 
-        res.data.listings.forEach((listing) => {
-            // const listingData = getListingData(listing);
-            const listingData = listing.realtyDetails;
+            res.data.listings.forEach((listing) => {
+                const listingData = listing.realtyDetails;
 
-            const propertyDetails = getPropertyDetails(listing, listingData);
-
-            const previewImage = getPreviewImage(listing);
-
-            const description = getDescription(listing, propertyDetails, lang);
-
-            response.image(previewImage);
-            response.text(description);
-
-            if ($request.channelType === "telegram") {
-                const { buttons } = local(lang);
-                response.inlineURL(
-                    buttons.openInBrowser,
-                    getLinkToBrowserPage(listing)
+                const propertyDetails = getPropertyDetails(
+                    listing,
+                    listingData
                 );
-                response.inlineCallback(
-                    buttons.showDetails,
-                    `Show details for ${listing.id}`
-                );
-            }
-        });
 
-        printShowMore(res.data.total, 3, sessionData.skip);
-        return true;
-    } else {
-        printShowMore(res.data.total, 3, sessionData.skip);
+                const previewImage = getPreviewImage(listing);
+
+                const description = getDescription(
+                    listing,
+                    propertyDetails,
+                    lang
+                );
+
+                response.image(previewImage);
+                response.text(description);
+
+                if ($request.channelType === "telegram") {
+                    const { buttons } = local(lang);
+                    response.inlineURL(
+                        buttons.openInBrowser,
+                        getLinkToBrowserPage(listing)
+                    );
+                    response.inlineCallback(
+                        buttons.showDetails,
+                        `Show details for ${listing.id}`
+                    );
+                }
+            });
+
+            printShowMore(res.data.total, 3, sessionData.skip);
+            return true;
+        } else {
+            printShowMore(res.data.total, 3, sessionData.skip);
+            return false;
+        }
+    } catch (error) {
+        // response.text(local(lang).fetchErrors.listing);
         return false;
     }
-    // } catch (error) {
-    //     response.text(local(lang).fetchErrors.listing);
-    //     return false;
-    // }
 };
 
 export const printPost = async (listing) => {
@@ -319,48 +308,143 @@ export const getSeller = async () => {
 };
 
 export const getFiltersInfo = async () => {
-    const { data, info, lang } = $session;
+    const { data, location, lang } = $session;
     const {
-        airConditioning, //[],
-        alarmSystem, //[],
-        bathroomNumbers, //[],
-        bedrooms, //[],
-        buildingConditions, //[],
-        companyName, // null,
-        coverageRatioFrom, //null,
-        coverageRatioTo, //null,
-        densityFrom, //null,
-        densityTo, //null,
-        districtId, //null,
-        electricity, //[],
-        energyEfficiency, //[],
-        fireplace, //[],
-        floorAreaFrom, // null,
-        floorAreaTo, //null,
-        furnishing, //[],
-        heating, //[],
-        infrastructureAmenity, // [],
-        internet, // [],
-        listingType, //"",
-        locationFeatures,// [],
-        parking, // [],
-        pentHouse, //[],
-        plotAreaFrom,// null,
-        plotAreaTo,//null,
-        priceFrom,//null,
-        priceTo, //null,
-        propertyStatus, //[],
-        propertyTypes, //[],
-        repairAmenity, //[],
-        residentialFloorsFrom, // null,
-        residentialFloorsTo, //null,
-        sewageSystem, //[],
-        swimmingPool, //[],
-        water, //[],
-        withoutSold, // true,
-        yearOfConstructionFrom, // null,
-        yearOfConstructionTo, //null,
+        airConditioning, //AirConditioningEnum[],
+        alarmSystem, //boolean[],
+        bathroomNumbers, //Array<number | string>,
+        bedrooms, //Array<number | string>,
+        buildingConditions, //BuildingConditionEnum[],
+        companyName, //string,
+        coverageRatioFrom, //number,
+        coverageRatioTo, //number,
+        densityFrom, //number,
+        densityTo, //number,
+        electricity, //boolean[],
+        energyEfficiency, //EnergyEfficiencyEnum[],
+        fireplace, //boolean[],
+        floorAreaFrom, //number,
+        floorAreaTo, //number,
+        furnishing, //FurnishingEnum[],
+        gas, //boolean[],
+        heating, //HeatingEnum[],
+        infrastructureAmenity, //InfrastructureAmenitiesV2Enum[],
+        internet, //InternetEnum[],
+        listingType, //ListingTypeEnum,
+        locationFeatures, //LocationFeaturesEnum[],
+        parking, //boolean[],
+        pentHouse, //boolean[],
+        plotAreaFrom, //number,
+        plotAreaTo, //number,
+        priceFrom, //number,
+        priceTo, //number,
+        propertyStatus, //PropertyStatusEnum[],
+        propertyTypes, //PropertyTypeEnum[],
+        repairAmenity, //RepairAmenitiesV2Enum[],
+        residentialFloorsFrom, //number,
+        residentialFloorsTo, //number,
+        sewageSystem, //SewageSystemEnum[],
+        swimmingPool, //boolean[],
+        water, //WaterEnum[],
+        yearOfConstructionFrom, //number,
+        yearOfConstructionTo, //number,
     } = data;
+
+    // additionalAmenity?: AdditionalAmenitiesV2Enum[];
+    // airConditioning?: AirConditioningEnum[];
+    // alarmSystem?: boolean[];
+    // appliances?: boolean[];
+    // balcony?: boolean[];
+    // bathroom?: boolean[];
+    // bathroomBoolean?: boolean[];
+    // bathroomNumbers: Array<number | string>;
+    // bathroomsFrom: number;
+    // bathroomsTo: number;
+    // bedrooms: Array<number | string>;
+    // bedroomsFrom?: number;
+    // bedroomsTo?: number;
+    // bedsFrom?: number;
+    // bedsTo?: number;
+    // buildingConditions?: BuildingConditionEnum[];
+    // category?: ListingCategoryEnum[];
+    // cityId?: number;
+    // cityName?: string;
+    // companyName?: string;
+    // condition?: ConditionEnum[];
+    // countryId?: number;
+    // coverageRatioFrom: number;
+    // coverageRatioTo: number;
+    // densityFrom: number;
+    // densityTo: number;
+    // districtId?: number;
+    // districtIdFrom?: number;
+    // districtIdTo?: number;
+    // districtName?: string;
+    // electricity?: boolean[];
+    // energyEfficiency?: EnergyEfficiencyEnum[];
+    // excludeCityId: number;
+    // excludeIds: number[];
+    // fireplace?: boolean[];
+    // floorAreaFrom?: number;
+    // floorAreaTo?: number;
+    // floorNumberFrom?: number;
+    // floorNumberTo?: number;
+    // furnishing?: FurnishingEnum[];
+    // gas?: boolean[];
+    // heating?: HeatingEnum[];
+    // infrastructureAmenity?: InfrastructureAmenitiesV2Enum[];
+    // internet?: InternetEnum[];
+    // isIncludeCollapsing?: boolean;
+    // isOnlyTop?: boolean;
+    // isOnlyVia?: boolean;
+    // isOrderByTop?: boolean;
+    // isOrderByVia?: boolean;
+    // isOrderRandom?: boolean;
+    // kitchen?: boolean[];
+    // latitudeFrom: number;
+    // latitudeTo: number;
+    // listingType?: ListingTypeEnum;
+    // locationFeatures?: LocationFeaturesEnum[];
+    // longitudeFrom: number;
+    // longitudeTo: number;
+    // numberOfOwnersFrom: number;
+    // numberOfOwnersTo: number;
+    // parentId?: Array<string>;
+    // parking?: boolean[];
+    // pentHouse?: boolean[];
+    // petFriendly?: boolean[];
+    // plotAreaFrom?: number;
+    // plotAreaTo?: number;
+    // priceFrom?: number;
+    // priceTo?: number;
+    // propertyStatus?: PropertyStatusEnum[];
+    // propertyTypes?: PropertyTypeEnum[];
+    // proposalTypes?: ProposalTypeEnum[];
+    // realEstateReferenceNumberFrom: number;
+    // realEstateReferenceNumberTo: number;
+    // repair?: RepairEnum[];
+    // repairAmenity?: RepairAmenitiesV2Enum[];
+    // residentialFloorsFrom?: number;
+    // residentialFloorsTo?: number;
+    // rooms?: RoomsEnum[];
+    // sellerIds: number[];
+    // sewageSystem?: SewageSystemEnum[];
+    // sewageSystemBoolean?: boolean[];
+    // sleepingPlacesFrom?: number;
+    // sleepingPlacesTo?: number;
+    // sort: ListingSearchOrderEnum = ListingSearchOrderEnum.NEWEST;
+    // swimmingPool?: boolean[];
+    // television?: boolean[];
+    // updatedDateFrom?: Date;
+    // updatedDateTo?: Date;
+    // ventilation?: VentilationEnum[];
+    // water?: WaterEnum[];
+    // waterHeating?: WaterHeatingEnum[];
+    // withoutSold?: boolean;
+    // yearOfConstructionFrom: number;
+    // yearOfConstructionTo: number;
+    // yearsOwnedFrom: number;
+    // yearsOwnedTo: number;
 
     const {
         airConditioning: tAirConditioning, //value
@@ -408,18 +492,84 @@ export const getFiltersInfo = async () => {
             ? `${tPrice.budget}: ${priceFrom || "0"} - ${priceTo || ""}`
             : null,
         bedrooms.length ? `${tBedrooms}: ${bedrooms.join(", ")}` : null,
-        bathroomNumbers.length ? `${tBathrooms}: ${bathroomNumbers.join(", ")}` : null,
+        bathroomNumbers.length
+            ? `${tBathrooms}: ${bathroomNumbers.join(", ")}`
+            : null,
         location ? `${tLocation}: ${location.address}` : null,
         buildingConditions.length
             ? `${tBuildingConditions.value}: ${buildingConditions
                   .map((type) => tBuildingConditions[type])
                   .join(", ")}`
             : null,
-        // furnishing.length ? `${tFurnishing}: ${furnishing}` : null,
-        // repair.length ? `${tRepair}: ${repair}` : null,
-        // alarmSystem.length ? `${tAlarmSystem}: ${alarmSystem}` : null,
-        // internet.length ? `${tInternet}: ${internet}` : null,
-        // balcony.length ? `${tBalcony}: ${balcony}` : null,
+        airConditioning.length
+            ? `${tAirConditioning.value}: ${airConditioning
+                  .map((type) => tAirConditioning[type])
+                  .join(", ")}`
+            : null,
+        alarmSystem.length
+            ? `${tAlarmSystem}: ${alarmSystem[0] ? "+" : "-"}`
+            : null,
+        coverageRatioFrom || coverageRatioTo
+            ? `${tCoverageRatio}: ${coverageRatioFrom || "0"} - ${
+                  coverageRatioTo || ""
+              }`
+            : null,
+        densityFrom || densityTo
+            ? `${tDensity}: ${densityFrom || "0"} - ${densityTo || ""}`
+            : null,
+        electricity.length
+            ? `${tElectricity}: ${electricity[0] ? "+" : "-"}`
+            : null,
+        floorAreaFrom || floorAreaTo
+            ? `${tFloorArea}: ${floorAreaFrom || "0"} - ${floorAreaTo || ""}`
+            : null,
+        furnishing.length
+            ? `${tFurnishing.value}: ${furnishing
+                  .map((type) => tFurnishing[type])
+                  .join(", ")}`
+            : null,
+        heating.length
+            ? `${tHeating.value}: ${heating
+                  .map((type) => tHeating[type])
+                  .join(", ")}`
+            : null,
+        infrastructureAmenity.length
+            ? `${tInfrastructureAmenities.value}: ${infrastructureAmenity
+                  .map((type) => tInfrastructureAmenities[type])
+                  .join(", ")}`
+            : null,
+        internet.length
+            ? `${tInternet.value}: ${internet
+                  .map((type) => tInternet[type])
+                  .join(", ")}`
+            : null,
+        locationFeatures.length
+            ? `${tLocationFeatures.value}: ${locationFeatures
+                  .map((type) => tLocationFeatures[type])
+                  .join(", ")}`
+            : null,
+        parking.length ? `${tParking}: ${parking[0] ? "+" : "-"}` : null,
+        repairAmenity.length
+            ? `${tRepairAmenities.value}: ${repairAmenity
+                  .map((type) => tRepairAmenities[type])
+                  .join(", ")}`
+            : null,
+        residentialFloorsFrom || residentialFloorsTo
+            ? `${tResidentialFloors}: ${residentialFloorsFrom || "0"} - ${
+                  residentialFloorsTo || ""
+              }`
+            : null,
+        sewageSystem.length
+            ? `${tSewageSystem}: ${sewageSystem[0] ? "+" : "-"}`
+            : null,
+        swimmingPool.length
+            ? `${tSwimmingPool}: ${swimmingPool[0] ? "+" : "-"}`
+            : null,
+        waterHeating.length
+            ? `${tWaterHeating.value}: ${waterHeating
+                  .map((type) => tWaterHeating[type])
+                  .join(", ")}`
+            : null,
     ]
         .filter(Boolean)
         .join("\n");
