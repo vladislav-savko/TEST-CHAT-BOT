@@ -566,7 +566,7 @@ export const getFiltersInfo = async () => {
         swimmingPool.length
             ? `${tSwimmingPool}: ${swimmingPool[0] ? "+" : "-"}`
             : null,
-        water.length
+        waterHeating.length
             ? `${tWaterHeating.value}: ${waterHeating
                   .map((type) => tWaterHeating[type])
                   .join(", ")}`
