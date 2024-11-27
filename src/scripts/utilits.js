@@ -345,6 +345,7 @@ export const getFiltersInfo = async () => {
         residentialFloorsTo, //number,
         sewageSystem, //SewageSystemEnum[],
         swimmingPool, //boolean[],
+        waterHeating, //WaterHeatingEnum[],
         water, //WaterEnum[],
         yearOfConstructionFrom, //number,
         yearOfConstructionTo, //number,
@@ -521,7 +522,7 @@ export const getFiltersInfo = async () => {
             ? `${tElectricity}: ${electricity[0] ? "+" : "-"}`
             : null,
         floorAreaFrom || floorAreaTo
-            ? `${tFloorArea}: ${floorAreaFrom || "0"} - ${floorAreaTo || ""}`
+            ? `${tArea}: ${floorAreaFrom || "0"} - ${floorAreaTo || ""}`
             : null,
         furnishing.length
             ? `${tFurnishing.value}: ${furnishing
@@ -565,7 +566,7 @@ export const getFiltersInfo = async () => {
         swimmingPool.length
             ? `${tSwimmingPool}: ${swimmingPool[0] ? "+" : "-"}`
             : null,
-        waterHeating.length
+        water.length
             ? `${tWaterHeating.value}: ${waterHeating
                   .map((type) => tWaterHeating[type])
                   .join(", ")}`
