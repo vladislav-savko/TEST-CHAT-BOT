@@ -8,5 +8,7 @@ export default async () => {
         await getListingById(index);
     } else if (value === "Seller Contacts") {
         $reactions.transition("/TelegramCallback/Seller");
+    } else if (value.includes("Clear parament")) {
+        $reactions.transition("/DisplayResult/FiltersInfo");
     }
 };
