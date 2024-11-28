@@ -19,7 +19,7 @@ import inputPropertyTypes from "./input/inputPropertyTypes.js";
 import inputPrice from "./input/inputPrice.js";
 
 import telegramCallback from "./basic/telegramCallback.js";
-s
+
 import preprocess from "./preprocess.js";
 import loader from "./loader.js";
 
