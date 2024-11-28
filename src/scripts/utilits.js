@@ -672,7 +672,7 @@ export const getFiltersInfo = async () => {
     };
 
     const filters = Object.entries(filters_property).map(([key, { info }]) => {
-        if (info) return info + "\n";
+        if (info !== null) return info + "\n";
     });
 
     const buttons = Object.entries(filters_property).map(
