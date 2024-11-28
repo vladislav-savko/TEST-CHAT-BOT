@@ -673,10 +673,11 @@ export const getFiltersInfo = async () => {
 
     const filters = Object.entries(filters_property).map(([key, { info }]) => {
         if (info !== null) {
-            log(info);
-            return info + "\n";
+            return `${info} "\n"`;
         }
     });
+
+    log(filters);
 
     const buttons = Object.entries(filters_property).map(
         ([key, { text, info }]) => {
