@@ -480,106 +480,218 @@ export const getFiltersInfo = async () => {
         propertyType: tPropertyType, //value
     } = local(lang).property;
 
-    const filters = [
-        propertyTypes
-            ? `*${tPropertyType.value}*: ${propertyTypes
-                  .map((type) => tPropertyType[type])
-                  .join(", ")}`
-            : null,
-        listingType
-            ? `*${tListingType.value}*: ${tListingType[listingType]}`
-            : null,
-        priceFrom || priceTo
-            ? `*${tPrice.budget}*: ${priceFrom || "0"} - ${priceTo || ""}`
-            : null,
-        bedrooms.length ? `*${tBedrooms}*: ${bedrooms.join(", ")}` : null,
-        bathroomNumbers.length
-            ? `*${tBathrooms}*: ${bathroomNumbers.join(", ")}`
-            : null,
-        location
-            ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
-            : null,
-        buildingConditions.length
-            ? `*${tBuildingConditions.value}*: ${buildingConditions
-                  .map((type) => tBuildingConditions[type])
-                  .join(", ")}`
-            : null,
-        airConditioning.length
-            ? `*${tAirConditioning.value}*: ${airConditioning
-                  .map((type) => tAirConditioning[type])
-                  .join(", ")}`
-            : null,
-        alarmSystem.length
-            ? `*${tAlarmSystem}*: ${alarmSystem[0] ? "+" : "-"}`
-            : null,
-        coverageRatioFrom || coverageRatioTo
-            ? `*${tCoverageRatio}*: ${coverageRatioFrom || "0"} - ${
-                  coverageRatioTo || ""
-              }`
-            : null,
-        densityFrom || densityTo
-            ? `*${tDensity}*: ${densityFrom || "0"} - ${densityTo || ""}`
-            : null,
-        electricity.length
-            ? `*${tElectricity}*: ${electricity[0] ? "+" : "-"}`
-            : null,
-        floorAreaFrom || floorAreaTo
-            ? `*${tArea}*: ${floorAreaFrom || "0"} - ${floorAreaTo || ""}`
-            : null,
-        furnishing.length
-            ? `*${tFurnishing.value}*: ${furnishing
-                  .map((type) => tFurnishing[type])
-                  .join(", ")}`
-            : null,
-        heating.length
-            ? `*${tHeating.value}*: ${heating
-                  .map((type) => tHeating[type])
-                  .join(", ")}`
-            : null,
-        infrastructureAmenity.length
-            ? `*${tInfrastructureAmenities.value}*: ${infrastructureAmenity
-                  .map((type) => tInfrastructureAmenities[type])
-                  .join(", ")}`
-            : null,
-        internet.length
-            ? `*${tInternet.value}*: ${internet
-                  .map((type) => tInternet[type])
-                  .join(", ")}`
-            : null,
-        locationFeatures.length
-            ? `*${tLocationFeatures.value}*: ${locationFeatures
-                  .map((type) => tLocationFeatures[type])
-                  .join(", ")}`
-            : null,
-        parking.length ? `*${tParking}*: ${parking[0] ? "+" : "-"}` : null,
-        repairAmenity.length
-            ? `*${tRepairAmenities.value}*: ${repairAmenity
-                  .map((type) => tRepairAmenities[type])
-                  .join(", ")}`
-            : null,
-        residentialFloorsFrom || residentialFloorsTo
-            ? `*${tResidentialFloors}*: ${residentialFloorsFrom || "0"} - ${
-                  residentialFloorsTo || ""
-              }`
-            : null,
-        sewageSystem.length
-            ? `*${tSewageSystem}*: ${sewageSystem[0] ? "+" : "-"}`
-            : null,
-        swimmingPool.length
-            ? `*${tSwimmingPool}*: ${swimmingPool[0] ? "+" : "-"}`
-            : null,
-        waterHeating.length
-            ? `*${tWaterHeating.value}*: ${waterHeating
-                  .map((type) => tWaterHeating[type])
-                  .join(", ")}`
-            : null,
-    ]
-        .filter(Boolean)
-        .join("\n");
-
     const filtersText = local(lang).general.filters + ":\n";
 
+    const filters_property = {
+        /**
+         * Конфигурация для конкретной кнопки.
+         * @property {Object} <key> - Динамический ключ, представляющий конфигурацию кнопки.
+         * @property {string} [<key>.text] - Локализованный текст для кнопки.
+         * @property {string | null} [<key>.info] - Дополнительная информация о кнопке. Может быть `null`, если
+         * подробности отсутствуют.
+         */
+        propertyTypes: {
+            text: tPropertyType.value,
+            info: propertyTypes.length
+                ? `*${tPropertyType.value}*: ${propertyTypes
+                      .map((type) => tPropertyType[type])
+                      .join(", ")}`
+                : null,
+        },
+        listingType: {
+            text: tListingType.value,
+            info: listingType
+                ? `*${tListingType.value}*: ${tListingType[listingType]}`
+                : null,
+        },
+        price: {
+            text: tPrice.budget,
+            info:
+                priceFrom || priceTo
+                    ? `*${tPrice.budget}*: ${priceFrom || "0"} - ${
+                          priceTo || ""
+                      }`
+                    : null,
+        },
+        bedrooms: {
+            text: tBedrooms,
+            info: bedrooms.length
+                ? `*${tBedrooms}*: ${bedrooms.join(", ")}`
+                : null,
+        },
+        bathroomNumbers: {
+            text: tBathrooms,
+            info: bathroomNumbers.length
+                ? `*${tBathrooms}*: ${bathroomNumbers.join(", ")}`
+                : null,
+        },
+        location: {
+            text: tLocation,
+            info: location
+                ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
+                : null,
+        },
+        buildingConditions: {
+            text: tBuildingConditions.value,
+            info: buildingConditions.length
+                ? `*${tBuildingConditions.value}*: ${buildingConditions
+                      .map((type) => tBuildingConditions[type])
+                      .join(", ")}`
+                : null,
+        },
+        airConditioning: {
+            text: tAirConditioning.value,
+            info: airConditioning.length
+                ? `*${tAirConditioning.value}*: ${airConditioning
+                      .map((type) => tAirConditioning[type])
+                      .join(", ")}`
+                : null,
+        },
+        alarmSystem: {
+            text: tAlarmSystem,
+            info: alarmSystem.length
+                ? `*${tAlarmSystem}*: ${alarmSystem[0] ? "+" : "-"}`
+                : null,
+        },
+        coverageRatio: {
+            text: tCoverageRatio,
+            info:
+                coverageRatioFrom || coverageRatioTo
+                    ? `*${tCoverageRatio}*: ${coverageRatioFrom || "0"} - ${
+                          coverageRatioTo || ""
+                      }`
+                    : null,
+        },
+        density: {
+            text: tDensity,
+            info:
+                densityFrom || densityTo
+                    ? `*${tDensity}*: ${densityFrom || "0"} - ${
+                          densityTo || ""
+                      }`
+                    : null,
+        },
+        electricity: {
+            text: tElectricity,
+            info: electricity.length
+                ? `*${tElectricity}*: ${electricity[0] ? "+" : "-"}`
+                : null,
+        },
+        floorArea: {
+            text: tArea,
+            info:
+                floorAreaFrom || floorAreaTo
+                    ? `*${tArea}*: ${floorAreaFrom || "0"} - ${
+                          floorAreaTo || ""
+                      }`
+                    : null,
+        },
+        furnishing: {
+            text: tFurnishing.value,
+            info: furnishing.length
+                ? `*${tFurnishing.value}*: ${furnishing
+                      .map((type) => tFurnishing[type])
+                      .join(", ")}`
+                : null,
+        },
+        heating: {
+            text: tHeating.value,
+            info: heating.length
+                ? `*${tHeating.value}*: ${heating
+                      .map((type) => tHeating[type])
+                      .join(", ")}`
+                : null,
+        },
+        infrastructureAmenity: {
+            text: tInfrastructureAmenities.value,
+            info: infrastructureAmenity.length
+                ? `*${tInfrastructureAmenities.value}*: ${infrastructureAmenity
+                      .map((type) => tInfrastructureAmenities[type])
+                      .join(", ")}`
+                : null,
+        },
+        internet: {
+            text: tInternet.value,
+            info: internet.length
+                ? `*${tInternet.value}*: ${internet
+                      .map((type) => tInternet[type])
+                      .join(", ")}`
+                : null,
+        },
+        locationFeatures: {
+            text: tLocationFeatures.value,
+            info: locationFeatures.length
+                ? `*${tLocationFeatures.value}*: ${locationFeatures
+                      .map((type) => tLocationFeatures[type])
+                      .join(", ")}`
+                : null,
+        },
+        parking: {
+            text: tParking,
+            info: parking.length
+                ? `*${tParking}*: ${parking[0] ? "+" : "-"}`
+                : null,
+        },
+        repairAmenity: {
+            text: tRepairAmenities.value,
+            info: repairAmenity.length
+                ? `*${tRepairAmenities.value}*: ${repairAmenity
+                      .map((type) => tRepairAmenities[type])
+                      .join(", ")}`
+                : null,
+        },
+        residentialFloors: {
+            text: tResidentialFloors,
+            info:
+                residentialFloorsFrom || residentialFloorsTo
+                    ? `*${tResidentialFloors}*: ${
+                          residentialFloorsFrom || "0"
+                      } - ${residentialFloorsTo || ""}`
+                    : null,
+        },
+        sewageSystem: {
+            text: tSewageSystem,
+            info: sewageSystem.length
+                ? `*${tSewageSystem}*: ${sewageSystem[0] ? "+" : "-"}`
+                : null,
+        },
+        swimmingPool: {
+            text: tSwimmingPool,
+            info: swimmingPool.length
+                ? `*${tSwimmingPool}*: ${swimmingPool[0] ? "+" : "-"}`
+                : null,
+        },
+        waterHeating: {
+            text: tWaterHeating.value,
+            info: waterHeating.length
+                ? `*${tWaterHeating.value}*: ${waterHeating
+                      .map((type) => tWaterHeating[type])
+                      .join(", ")}`
+                : null,
+        },
+    };
+
+    const filters = Object.entries(filters_property).map(([key, { info }]) => {
+        if (info) return info + "\n";
+    });
+
+    const buttons = Object.entries(filters_property).map(
+        ([key, { text, info }]) => {
+            if (info)
+                return {
+                    key,
+                    text,
+                };
+        }
+    );
+
     response.text(filtersText + filters);
+    buttons.map((value) => {
+        return response.inlineCallback(
+            `${value.text} ❌`,
+            `Clear parament ${value.key}`
+        );
+    });
 };
 
 export function arrayСomparison(arr1, arr2) {
