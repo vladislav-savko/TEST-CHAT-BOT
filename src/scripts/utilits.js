@@ -709,16 +709,15 @@ export const getFiltersInfo = async () => {
         const reply = {
             body: {
                 text: `${filtersText}${filters}`,
+                parse_mode: "Markdown",
                 message_id: $session.filters.messageId,
-                reply_markup: {
-                    ...buttons.map((value) => {
-                        if (value)
-                            return {
-                                text: `${value.text} ❌`,
-                                callback_data: `Clear parament ${value.key}`,
-                            };
-                    }),
-                },
+                reply_markup: buttons.map((value) => {
+                    if (value)
+                        return {
+                            text: `${value.text} ❌`,
+                            callback_data: `Clear parament ${value.key}`,
+                        };
+                }),
             },
             method: "editMessageText",
         };
