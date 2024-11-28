@@ -712,13 +712,17 @@ export const getFiltersInfo = async () => {
                 parse_mode: "Markdown",
                 message_id: $session.filters.messageId,
                 reply_markup: {
-                    inline_keyboard: buttons.map((value) => {
-                        if (value)
-                            return [{
-                                text: `${value.text} ❌`,
-                                callback_data: `Clear parament ${value.key}`,
-                            }];
-                    }),
+                    inline_keyboard: [
+                        buttons.map((value) => {
+                            if (value)
+                                return [
+                                    {
+                                        text: `${value.text} ❌`,
+                                        callback_data: `Clear parament ${value.key}`,
+                                    },
+                                ];
+                        }),
+                    ],
                 },
             },
             method: "editMessageText",
