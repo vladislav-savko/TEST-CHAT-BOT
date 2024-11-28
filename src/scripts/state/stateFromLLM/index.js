@@ -18,8 +18,8 @@ import inputListingTypes from "./input/inputListingTypes.js";
 import inputPropertyTypes from "./input/inputPropertyTypes.js";
 import inputPrice from "./input/inputPrice.js";
 
-import telegraCallback from "./basic/telegramCallback.js";
-
+import telegramCallback from "./baic/telegramCallback.js";
+s
 import preprocess from "./preprocess.js";
 import loader from "./loader.js";
 
@@ -47,5 +47,5 @@ export default {
     inputPrice,
     inputPropertyTypes,
 
-    telegraCallback,
+    telegramCallback,
 };
