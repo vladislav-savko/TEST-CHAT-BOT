@@ -578,7 +578,7 @@ export const getFiltersInfo = async () => {
         },
         location: {
             text: tLocation,
-            info: location
+            info: JSON.stringify(location || {}) !== "{}"
                 ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
                 : null,
         },
