@@ -766,6 +766,7 @@ export const getFiltersInfo = async () => {
                     `Clear parament ${value.key}`
                 );
         });
+        response.text(local(lang).info.continueSearch);
         response.buttons([local(lang).buttons.continueSearch]);
     }
 

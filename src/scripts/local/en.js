@@ -26,6 +26,7 @@ export default {
         showMoreResults: `To see more results, just say \*Show more\*`,
         showMoreResultsAndReset: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
         language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
+        continueSearch: `To continue the search, say \*Continue search\*`
     },
     help: [
         "To switch language write the language in which you want your bot to interact with you. For instance, **Switch to Greek**",
