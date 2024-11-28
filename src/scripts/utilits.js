@@ -320,11 +320,38 @@ export const getFiltersInfo = async () => {
     let isEdit = false;
     if (lastState === "/DisplayResult/FiltersInfo" && $session.filters.param) {
         isEdit = true;
-        $session.data[$session.filters.param] = Array.isArray(
-            await $session.data[$session.filters.param]
-        )
-            ? []
-            : null;
+        let param = await $session.filters.param;
+
+        const clearParam = async (param_) => {
+            $session.data[`${param_}From`] = Array.isArray(
+                await $session.data[`${param_}From`]
+            )
+                ? []
+                : null;
+            $session.data[`${param_}To`] = Array.isArray(
+                await $session.data[`${param_}To`]
+            )
+                ? []
+                : null;
+        };
+
+        if (
+            [
+                "coverageRatio",
+                "density",
+                "floorArea",
+                "plotArea",
+                "price",
+                "residentialFloors",
+                "yearOfConstruction",
+            ].includes(param)
+        ) {
+            await clearParam(param);
+        } else {
+            $session.data[param] = Array.isArray(await $session.data[param])
+                ? []
+                : null;
+        }
     }
 
     const { data, location, lang } = await $session;
@@ -712,14 +739,12 @@ export const getFiltersInfo = async () => {
                 parse_mode: "Markdown",
                 message_id: $session.filters.messageId,
                 reply_markup: {
-                    inline_keyboard: buttons
-                        .filter(Boolean)
-                        .map((value) => [
-                            {
-                                text: `${value.text} ❌`,
-                                callback_data: `Clear parament ${value.key}`,
-                            },
-                        ]),
+                    inline_keyboard: buttons.filter(Boolean).map((value) => [
+                        {
+                            text: `${value.text} ❌`,
+                            callback_data: `Clear parament ${value.key}`,
+                        },
+                    ]),
                 },
             },
             method: "editMessageText",
