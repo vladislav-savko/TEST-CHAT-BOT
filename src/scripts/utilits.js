@@ -578,9 +578,10 @@ export const getFiltersInfo = async () => {
         },
         location: {
             text: tLocation,
-            info: JSON.stringify(location || {}) !== "{}"
-                ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
-                : null,
+            info:
+                JSON.stringify(location || {}) !== "{}"
+                    ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
+                    : null,
         },
         buildingConditions: {
             text: tBuildingConditions.value,
@@ -765,6 +766,7 @@ export const getFiltersInfo = async () => {
                     `Clear parament ${value.key}`
                 );
         });
+        response.buttons(local(lang).buttons.continueSearch);
     }
 
     $session.filters = {

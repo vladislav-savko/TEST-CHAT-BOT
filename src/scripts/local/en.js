@@ -17,6 +17,7 @@ export default {
         showDetails: `Show details`,
         showMore: `Show more`,
         showOnMap: `Show on map`,
+        continueSearch: `Continue search`,
     },
     info: {
         about: `If you would like to learn which filters can be used to find the best option for you, simply say \*Info\*`,

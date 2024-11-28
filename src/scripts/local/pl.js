@@ -17,6 +17,7 @@ export default {
         showDetails: `Pokaż szczegóły`,
         showMore: `Pokaż więcej`,
         showOnMap: `Pokaż na mapie`,
+        continueSearch: `Kontynuuj wyszukiwanie`,
     },
     info: {
         about: `Jeśli chcesz dowiedzieć się, jakich filtrów można użyć, aby znaleźć najlepszą opcję dla siebie, po prostu powiedz \*Info\*`,
