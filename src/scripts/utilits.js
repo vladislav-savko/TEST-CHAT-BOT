@@ -317,7 +317,7 @@ export const getFiltersInfo = async () => {
     const lastTransition = findLastNonSwitchState($session.transitionsHistory);
     const { state: lastState } = lastTransition;
     if (lastState === "/DisplayResult/FiltersInfo") {
-        log($request.rawRequest.callback_query.message);
+        // log($request.rawRequest.callback_query.message);
     }
 
     const { data, location, lang } = $session;
