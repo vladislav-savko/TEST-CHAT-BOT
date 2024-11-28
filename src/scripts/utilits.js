@@ -687,10 +687,11 @@ export const getFiltersInfo = async () => {
 
     response.text(filtersText + filters);
     buttons.map((value) => {
-        return response.inlineCallback(
-            `${value.text} ❌`,
-            `Clear parament ${value.key}`
-        );
+        if (value)
+            return response.inlineCallback(
+                `${value.text} ❌`,
+                `Clear parament ${value.key}`
+            );
     });
 };
 
