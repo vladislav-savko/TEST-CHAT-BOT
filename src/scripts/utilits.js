@@ -671,11 +671,12 @@ export const getFiltersInfo = async () => {
         },
     };
 
-    const filters = Object.entries(filters_property).map(([key, { info }]) => {
-        if (info !== null) {
-            return `${info} "\n"`;
-        }
-    });
+    const filters = Object.entries(filters_property)
+        .map(([key, { info }]) => {
+            return info;
+        })
+        .filter(Boolean)
+        .join("\n");
 
     log(filters);
 
