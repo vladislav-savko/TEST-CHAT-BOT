@@ -124,7 +124,7 @@ bind("preMatch", function ($context) {
 
     var text = $context.request.query;
     if (text[0] === "/") return true;
-    if (text.indexOf("Clear parament")) return true;
+    if (text.indexOf("Clear parament") === 0) return true;
 
     $context.temp.targetState = "/Loader";
 });
