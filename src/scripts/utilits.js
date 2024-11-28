@@ -712,11 +712,12 @@ export const getFiltersInfo = async () => {
                 message_id: $session.filters.messageId,
                 reply_markup: {
                     ...buttons.map((value) => {
-                        return {
-                            text: `${value.text} ❌`,
-                            callback_data: `Clear parament ${value.key}`
-                        }
-                    })
+                        if (value)
+                            return {
+                                text: `${value.text} ❌`,
+                                callback_data: `Clear parament ${value.key}`,
+                            };
+                    }),
                 },
             },
             method: "editMessageText",
