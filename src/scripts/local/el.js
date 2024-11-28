@@ -11,7 +11,7 @@ export default {
     },
     buttons: {
         clearFilters: `Καθαρισμός φίλτρων`,
-        currentFilters: `Φίλτρα`,
+        currentFilters: `Εμφάνιση φίλτρων`,
         openInBrowser: `Άνοιγμα στο πρόγραμμα περιήγησης`,
         sellerContacts: `Επαφές πωλητή`,
         showDetails: `Εμφάνιση λεπτομερειών`,

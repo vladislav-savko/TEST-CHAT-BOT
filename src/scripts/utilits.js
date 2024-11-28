@@ -152,7 +152,7 @@ export const printShowMore = (total, take, skip) => {
         : local(lang).info.noMoreResultsReset;
 
     const telegramButtons = hastNext
-        ? [local(lang).buttons.showMore, local(lang).buttons.clearFilters]
+        ? [local(lang).buttons.showMore, local(lant).buttons.currentFilters, local(lang).buttons.clearFilters]
         : [local(lang).buttons.clearFilters];
 
     if (isTelegram) {

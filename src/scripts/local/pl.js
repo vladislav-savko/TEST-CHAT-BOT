@@ -11,7 +11,7 @@ export default {
     },
     buttons: {
         clearFilters: `Wyczyść filtry`,
-        currentFilters: `Filtry`,
+        currentFilters: `Pokaż filtry`,
         openInBrowser: `Otwórz w przeglądarce`,
         sellerContacts: `Kontakty sprzedawcy`,
         showDetails: `Pokaż szczegóły`,
