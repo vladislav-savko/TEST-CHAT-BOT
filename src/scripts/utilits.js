@@ -68,6 +68,10 @@ export function session() {
 
     $session.location = {};
 
+    $session.filters = {
+        messageId: null,
+    };
+
     $session.params = {};
     $session.state = null;
     $session.seller = null;
@@ -674,13 +678,9 @@ export const getFiltersInfo = async () => {
     };
 
     const filters = Object.entries(filters_property)
-        .map(([key, { info }]) => {
-            return info;
-        })
+        .map(([key, { info }]) => info)
         .filter(Boolean)
         .join("\n");
-
-    log(filters);
 
     const buttons = Object.entries(filters_property).map(
         ([key, { text, info }]) => {
