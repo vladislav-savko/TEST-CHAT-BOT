@@ -8,7 +8,7 @@ export default async () => {
     } else if (value === "Seller Contacts") {
         $reactions.transition("/TelegramCallback/Seller");
     } else if (value.includes("Clear parament")) {
-        log($request.rawRequest.callback_query.message);
-        // $reactions.transition("/DisplayResult/FiltersInfo");
+        $session.filters.messageId = $request.rawRequest.callback_query.message.message_id;
+        $reactions.transition("/DisplayResult/FiltersInfo");
     }
 };
