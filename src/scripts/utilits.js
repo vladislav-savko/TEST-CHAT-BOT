@@ -766,7 +766,7 @@ export const getFiltersInfo = async () => {
                     `Clear parament ${value.key}`
                 );
         });
-        response.buttons(local(lang).buttons.continueSearch);
+        response.buttons([local(lang).buttons.continueSearch]);
     }
 
     $session.filters = {
