@@ -347,6 +347,10 @@ export const getFiltersInfo = async () => {
             ].includes(param)
         ) {
             await clearParam(param);
+        } else if (param === "location") {
+            $session.data.districtId = null;
+            $session.data.cityId = null;
+            $session.data.countryId = null;
         } else {
             $session.data[param] = Array.isArray(await $session.data[param])
                 ? []
