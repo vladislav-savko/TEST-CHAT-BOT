@@ -309,6 +309,7 @@ export const getSeller = async () => {
 };
 
 export const getFiltersInfo = async () => {
+    log($session);
     const { data, location, lang } = $session;
     const {
         airConditioning, //AirConditioningEnum[],
