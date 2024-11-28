@@ -735,6 +735,9 @@ export const getFiltersInfo = async () => {
                 );
         });
     }
+
+    $session.filters.messageId = null;
+    $session.filters.param = null;
 };
 
 export function arrayСomparison(arr1, arr2) {
