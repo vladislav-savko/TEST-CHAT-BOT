@@ -27,7 +27,7 @@ bind("preMatch", function ($context) {
     if (text[0] === "/") return true;
     if (text.indexOf("Clear parament") === 0) return true;
     if (startsWithAny(text, phrases)) {
-        $reactions.transition("/InputData");
+        $context.temp.targetState = "/InputData";
         return true;
     }
 
