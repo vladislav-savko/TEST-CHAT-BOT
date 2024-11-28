@@ -313,7 +313,13 @@ export const getSeller = async () => {
 };
 
 export const getFiltersInfo = async () => {
-    log($session);
+    log($session);  
+    const lastTransition = findLastNonSwitchState($session.transitionsHistory);
+    const { state: lastState } = lastTransition;
+    if (lastState === "/DisplayResult/FiltersInfo") {
+        log($request.rawRequest.callback_query.message);
+    }
+
     const { data, location, lang } = $session;
     const {
         airConditioning, //AirConditioningEnum[],
