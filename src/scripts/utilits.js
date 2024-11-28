@@ -321,13 +321,13 @@ export const getFiltersInfo = async () => {
     if (lastState === "/DisplayResult/FiltersInfo" && $session.filters.param) {
         isEdit = true;
         $session.data[$session.filters.param] = Array.isArray(
-            $session.data[$session.filters.param]
+            await $session.data[$session.filters.param]
         )
             ? []
             : null;
     }
 
-    const { data, location, lang } = $session;
+    const { data, location, lang } = await $session;
     const {
         airConditioning, //AirConditioningEnum[],
         alarmSystem, //boolean[],
