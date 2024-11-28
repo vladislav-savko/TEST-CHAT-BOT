@@ -1,6 +1,6 @@
 import { getFiltersInfo } from "../utilits.js";
 
 export default async () => {
-    log($session);
+    log(await $session);
     await getFiltersInfo();
 };
