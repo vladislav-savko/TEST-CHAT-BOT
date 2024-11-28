@@ -11,6 +11,6 @@ export default async () => {
         log($request.rawRequest.callback_query.message);
         const messageId = await $request.rawRequest.callback_query.message.message_id;
         $session.filters.messageId = messageId;
-        // $reactions.transition("/DisplayResult/FiltersInfo");
+        $reactions.transition("/DisplayResult/FiltersInfo");
     }
 };
