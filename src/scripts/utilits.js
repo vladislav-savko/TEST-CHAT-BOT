@@ -714,10 +714,10 @@ export const getFiltersInfo = async () => {
                 reply_markup: {
                     inline_keyboard: buttons.map((value) => {
                         if (value)
-                            return {
+                            return [{
                                 text: `${value.text} ❌`,
                                 callback_data: `Clear parament ${value.key}`,
-                            };
+                            }];
                     }),
                 },
             },
