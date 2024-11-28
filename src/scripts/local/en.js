@@ -26,7 +26,7 @@ export default {
         showMoreResults: `To see more results, just say \*Show more\*`,
         showMoreResultsAndReset: `To see more results say "\*Show more\*". To clear filters say "\*Reset\*"`,
         language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
-        continueSearch: `To continue the search, say \*Continue search\*`
+        continueSearch: `To continue the search, say \*Continue search\*`,
     },
     help: [
         "To switch language write the language in which you want your bot to interact with you. For instance, **Switch to Greek**",
@@ -76,10 +76,10 @@ export default {
         residentialFloors: `On which floors should residential floors be located?`,
         language: `Which interface language would you like to choose?`,
     },
+    general: {
+        filters: "Applied filters in search",
+    },
     property: {
-        general: {
-            filters: "Applied filters in search",
-        },
         airConditioning: {
             value: "Air conditioning",
             NO: "No",

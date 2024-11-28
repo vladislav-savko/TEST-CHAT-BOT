@@ -26,7 +26,7 @@ export default {
         showMoreResults: `Aby zobaczyć więcej wyników, po prostu powiedz \*Pokaż więcej\*`,
         showMoreResultsAndReset: `Aby zobaczyć więcej wyników powiedz "\*Pokaż więcej\*". Aby wyczyścić filtry powiedz "\*Reset\*"`,
         language: `English language, русский язык, українська мова, ελληνική γλώσσα, język polski`,
-        continueSearch: `Aby kontynuować wyszukiwanie, powiedz \*Kontynuuj wyszukiwanie\*`
+        continueSearch: `Aby kontynuować wyszukiwanie, powiedz \*Kontynuuj wyszukiwanie\*`,
     },
     help: [
         "Aby zmienić język, napisz język, w którym chcesz, aby twój bot się z tobą komunikował. Na przykład, Przełącz na język grecki",
@@ -76,10 +76,10 @@ export default {
         residentialFloors: `Na których piętrach powinny znajdować się piętra mieszkalne?`,
         language: `Jaki język interfejsu chcesz wybrać?`,
     },
+    general: {
+        filters: "Zastosowane filtry w wyszukiwarce",
+    },
     property: {
-        general: {
-            filters: "Zastosowane filtry w wyszukiwarce",
-        },
         airConditioning: {
             value: "Klimatyzacja",
             NO: "Nie",
