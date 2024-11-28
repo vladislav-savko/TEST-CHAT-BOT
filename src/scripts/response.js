@@ -51,12 +51,13 @@ const images = (imageUrlArray) => {
     );
 };
 
-const channel = (method, body) => {
-    $response.replies.push({
-        type: "raw",
-        body,
-        method,
-    });
+const channel = (replies) => {
+    $response.replies.push(...replies.map((value) => {
+        return {
+            type: "raw",
+            ...value,
+        }
+    }));
 };
 
 const asyncResponse = (body) => {

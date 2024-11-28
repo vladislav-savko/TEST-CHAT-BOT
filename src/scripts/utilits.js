@@ -70,6 +70,7 @@ export function session() {
 
     $session.filters = {
         messageId: null,
+        param: null,
     };
 
     $session.params = {};
@@ -313,11 +314,17 @@ export const getSeller = async () => {
 };
 
 export const getFiltersInfo = async () => {
-    log($session);  
+    log($session);
     const lastTransition = findLastNonSwitchState($session.transitionsHistory);
     const { state: lastState } = lastTransition;
-    if (lastState === "/DisplayResult/FiltersInfo") {
-        // log($request.rawRequest.callback_query.message);
+    let isEdit = false;
+    if (lastState === "/DisplayResult/FiltersInfo" && $session.filters.param) {
+        isEdit = true;
+        $session.data[$session.filters.param] = Array.isArray(
+            $session.data[$session.filters.param]
+        )
+            ? []
+            : null;
     }
 
     const { data, location, lang } = $session;
@@ -698,14 +705,34 @@ export const getFiltersInfo = async () => {
         }
     );
 
-    response.text(filtersText + filters);
-    buttons.map((value) => {
-        if (value)
-            return response.inlineCallback(
-                `${value.text} ❌`,
-                `Clear parament ${value.key}`
-            );
-    });
+    if (isEdit) {
+        const reply = {
+            body: {
+                text: `${filtersText}${filters}`,
+                message_id: $session.filters.messageId,
+                reply_markup: {
+                    ...buttons.map((value) => {
+                        return {
+                            text: `${value.text} ❌`,
+                            callback_data: `Clear parament ${value.key}`
+                        }
+                    })
+                },
+            },
+            method: "editMessageText",
+        };
+
+        response.channel([reply]);
+    } else {
+        response.text(`${filtersText}${filters}`);
+        buttons.map((value) => {
+            if (value)
+                return response.inlineCallback(
+                    `${value.text} ❌`,
+                    `Clear parament ${value.key}`
+                );
+        });
+    }
 };
 
 export function arrayСomparison(arr1, arr2) {
