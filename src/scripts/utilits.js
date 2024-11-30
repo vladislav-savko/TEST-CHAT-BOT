@@ -159,7 +159,7 @@ export const printShowMore = (total, take, skip) => {
         response.text(telegramTextMessage);
         response.buttons(telegramButtons);
     } else {
-        response.text(textMessage + (hastNext ? "" : "Command"));
+        response.text(textMessage + hastNext);
     }
 };
 
@@ -536,7 +536,7 @@ export const getFiltersInfo = async () => {
     const filters_property = {
         /**
          * Конфигурация для конкретной кнопки.
-         * @property {Object} <key> - Динамический ключ, представляющий конфигурацию кнопки.
+         * @property {Object} <key>
          * @property {string} [<key>.text] - Локализованный текст для кнопки.
          * @property {string | null} [<key>.info] - Дополнительная информация о кнопке. Может быть `null`, если
          * подробности отсутствуют.

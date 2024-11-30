@@ -6,19 +6,21 @@ export default async () => {
     const isTelegram = $request.channelType === "telegram";
 
     if (isTelegram) {
-        const chat_id = $request.rawRequest.message.from.id;
-        await axios.post(
-            `https://api.telegram.org/bot${TG_TOKEN}/sendChatAction`,
-            {
-                chat_id,
-                action: "typing",
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
+        try {
+            const chat_id = await $request.rawRequest.message.from.id;
+            await axios.post(
+                `https://api.telegram.org/bot${TG_TOKEN}/sendChatAction`,
+                {
+                    chat_id,
+                    action: "typing",
                 },
-            }
-        );
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+        } catch {}
     }
 
     await $reactions.transition("/Preprocess");
