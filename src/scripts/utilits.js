@@ -247,6 +247,7 @@ export const printPost = async (listing) => {
 
     const sendButtons = () => {
         const { buttons } = local(lang);
+
         if ($request.channelType === "telegram") {
             response.inlineURL(
                 buttons.openInBrowser,
@@ -273,9 +274,18 @@ export const printPost = async (listing) => {
             ? "ua"
             : $session.lang || "en";
 
+    log(description);
+
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
     response.text(description, "html");
     sendButtons();
+
+    // response.channel([{
+    //     method: "sendMessage",
+    //     body: {
+            
+    //     }
+    // }])
 };
 
 export const printSellerInfo = (seller) => {

@@ -51,6 +51,15 @@ const images = (imageUrlArray) => {
     );
 };
 
+/**
+ * Добавляет массив ответов в `$response.replies` с дополнительным полем `type: "raw"`.
+ *
+ * @typedef {Object} Reply
+ * @property {string} method - Метод действия, например, "sendMessage" или "editMessageText".
+ * @property {Object} body - Произвольное содержимое тела ответа.
+ * 
+ * @param {Reply[]} replies
+ */
 const channel = (replies) => {
     $response.replies.push(...replies.map((value) => {
         return {
