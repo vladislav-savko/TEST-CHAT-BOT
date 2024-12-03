@@ -73,7 +73,7 @@ export const translate = async (text, sourceLang) => {
     const lang = $session.lang === "gr" ? "el" : $session.lang;
 
     const response = await axios.get(
-        `https://suapi.net/api/text/translate?to=${lang}&text[]=${text}`,
+        `https://suapi.net/api/text/translate?to=${lang}&text[]="${text}"`,
         {
             timeout: 25000,
         }
