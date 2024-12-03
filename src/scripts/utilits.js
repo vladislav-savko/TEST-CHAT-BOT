@@ -237,6 +237,7 @@ export const printPost = async (listing) => {
 
     if (translate_description.code === 200) {
         description = translate_description.data[0].translations[0].text;
+        log(translate_description);
     } else {
         description = translate_description.data.response.translated_text;
     }
