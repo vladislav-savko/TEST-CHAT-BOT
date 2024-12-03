@@ -229,8 +229,8 @@ export const printPost = async (listing) => {
     const images = listing.photos;
     const turndownService = new TurndownService();
 
-    let description = listing.description;
-    description = (await api.getTranslateListing(listing.id, lang)).description;
+    const get_description = await api.getTranslateListing(listing.id, lang);
+    const description = get_description.description;
 
     const sendImages = () => {
         if ($request.channelType === "telegram") {
