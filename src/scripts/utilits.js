@@ -1,4 +1,4 @@
-import api, { translate } from "./api.js";
+import api from "./api.js";
 import TurndownService from "turndown";
 import { VERSION } from "./config.js";
 import local from "./local/local.js";
@@ -276,15 +276,39 @@ export const printPost = async (listing) => {
     sendImages();
 
     response.text(`*${title}*\n*€${listing.price}*`);
-    response.text(description);
-    sendButtons();
+    // response.text(description);
+    // sendButtons();
 
-    // response.channel([{
-    //     method: "sendMessage",
-    //     body: {
-
-    //     }
-    // }])
+    response.channel([
+        {
+            method: "sendMessage",
+            body: {
+                text: description,
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "Открыть в браузере",
+                                url: "https://anisad.com/sale/cyprus/agios-athanasios/accommodation/apartment/39921",
+                            },
+                        ],
+                        [
+                            {
+                                text: "Показать на карте",
+                                web_app: {url: "https://www.google.com/maps?q=34.7030075,33.0590982"},
+                            },
+                        ],
+                        [
+                            {
+                                text: "Контакты продавца",
+                                callback_data: "Seller Contacts",
+                            },
+                        ],
+                    ],
+                },
+            },
+        },
+    ]);
 };
 
 export const printSellerInfo = (seller) => {

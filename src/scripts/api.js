@@ -3,20 +3,11 @@ import axios from "axios";
 import { API__LINK } from "./config.js";
 
 const ENDPOINT = {
-    // get__cities: "cities/search",
     get__cities: "city/search-into-database",
-    //https://anisad.com/api/cities/search?take=10&pattern=nicosia
-    //https://anisad.com/api/city/search-into-database?take=10&pattern=cyprus
-    // post__listing: "listing/search",
     post__listing: "elastic-search/search-extended",
-    // post__listing: "elastic-search/filter-by-elastic",
-    //https://anisad.com/api/listing/search
     get__listing_by_id: "listing",
-    //https://anisad.com/api/listing/6255
     get__seller_by_id: "user/by-listing",
-    //https://anisad.com/api/user/by-listing/6255
     get__translate_listing_by_id: "listing",
-    //https://api-stage.anisad.com/api/v1/listing/39921/ru
 };
 
 export const instance = axios.create({
@@ -85,34 +76,8 @@ const getSellerById = async (id) => {
 const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
 
-    
     const { data } = await instance.get(URL);
     return data.data;
-};
-
-export const translate = async (text, sourceLang) => {
-    const lang = $session.lang === "gr" ? "el" : $session.lang;
-
-    const response = await axios.get(
-        `https://suapi.net/api/text/translate?to=${lang}&text[]="${text}"`,
-        {
-            timeout: 25000,
-        }
-    );
-
-    log(response);
-
-    if (response && response.code === 200) {
-        return response;
-    } else {
-        const fallbackResponse = await axios.get(
-            `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=${lang}`,
-            {
-                timeout: 25000,
-            }
-        );
-        return fallbackResponse;
-    }
 };
 
 export default {
