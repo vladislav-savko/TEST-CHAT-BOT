@@ -232,7 +232,7 @@ export const printPost = async (listing) => {
 
     log(listing.description);
 
-    const translate_description = await translate(description, "en");
+    const translate_description = await translate(listing.description, "en");
 
     if (translate_description.code === 200) {
         description = translate_description.data[0].translations[0].text;
