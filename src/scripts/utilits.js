@@ -231,6 +231,20 @@ export const printPost = async (listing) => {
 
     const get_description = await api.getTranslateListing(listing.id, lang);
 
+    const description = turndownService
+        .turndown(get_description.description)
+        .replaceAll("\\-", "-")
+        .replaceAll("\n\n", "\n");
+
+    const title_lang =
+        $session.lang === "el"
+            ? "cy"
+            : $session.lang === "uk"
+            ? "ua"
+            : $session.lang || "en";
+
+    const title = listing.title[title_lang];
+
     const sendImages = () => {
         if ($request.channelType === "telegram") {
             response.imagesTG(images);
@@ -261,19 +275,7 @@ export const printPost = async (listing) => {
 
     sendImages();
 
-    const title_lang =
-        $session.lang === "el"
-            ? "cy"
-            : $session.lang === "uk"
-            ? "ua"
-            : $session.lang || "en";
-
-    const description = turndownService
-        .turndown(get_description.description)
-        .replaceAll("\\-", "-")
-        .replaceAll("\n\n", "\n");
-
-    response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
+    response.text(`*${title}*\n*€${listing.price}*`);
     response.text(description);
     sendButtons();
 
