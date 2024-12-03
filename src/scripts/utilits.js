@@ -234,13 +234,12 @@ export const printPost = async (listing) => {
     log(description);
 
     const translate_description = await translate(description, "en");
+    log(translate_description);
 
     if (translate_description.code === 200) {
         description = translate_description.data[0].translations[0].text;
-        log(translate_description);
     } else {
         description = translate_description.data.response.translated_text;
-        log(translate_description);
     }
 
     log(description);
@@ -285,7 +284,7 @@ export const printPost = async (listing) => {
     description = turndownService
         .turndown(description)
         .replaceAll("\\-", "-")
-        .replaceAll('\n\n', '\n');
+        .replaceAll("\n\n", "\n");
 
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
     response.text(description);
