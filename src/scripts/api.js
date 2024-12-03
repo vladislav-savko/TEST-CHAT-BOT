@@ -79,6 +79,8 @@ export const translate = async (text, sourceLang) => {
         }
     );
 
+    log(response);
+
     if (response && response.code === 200) {
         return response;
     } else {
