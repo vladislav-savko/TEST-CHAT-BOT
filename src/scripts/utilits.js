@@ -241,6 +241,8 @@ export const printPost = async (listing) => {
         description = translate_description.data.response.translated_text;
     }
 
+    log(description);
+
     const sendImages = () => {
         if ($request.channelType === "telegram") {
             response.imagesTG(images);
