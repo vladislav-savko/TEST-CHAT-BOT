@@ -225,12 +225,11 @@ export const getListings = async (sessionData) => {
 };
 
 export const printPost = async (listing) => {
-    const { lang } = $session;
+    const { lang } = await $session;
     const images = listing.photos;
     const turndownService = new TurndownService();
 
     const get_description = await api.getTranslateListing(listing.id, lang);
-    const description = get_description.description;
 
     const sendImages = () => {
         if ($request.channelType === "telegram") {
@@ -269,8 +268,8 @@ export const printPost = async (listing) => {
             ? "ua"
             : $session.lang || "en";
 
-    description = turndownService
-        .turndown(description)
+    const description = turndownService
+        .turndown(get_description.description)
         .replaceAll("\\-", "-")
         .replaceAll("\n\n", "\n");
 
