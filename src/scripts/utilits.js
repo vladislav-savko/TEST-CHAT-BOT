@@ -229,10 +229,7 @@ export const printPost = async (listing) => {
     const images = listing.photos;
 
     const turndownService = new TurndownService();
-    let description = turndownService
-        .turndown(listing.description)
-        .replaceAll("\\-", "-")
-        .replaceAll("\n", "</>");
+    let description = listing.description;
 
     log(description);
 
@@ -281,8 +278,13 @@ export const printPost = async (listing) => {
             ? "ua"
             : $session.lang || "en";
 
+    description = turndownService
+        .turndown(description)
+        .replaceAll("\\-", "-")
+        .replaceAll('\n\n', '\n');
+
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
-    response.text(description.replaceAll("</>", "\n"), "html");
+    response.text(description);
     sendButtons();
 
     log(description.replaceAll("</>", "\n"));
