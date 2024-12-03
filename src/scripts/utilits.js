@@ -229,6 +229,8 @@ export const printPost = async (listing) => {
         .turndown(listing.description)
         .replaceAll("\\-", "-");
 
+    log(listing.description);
+
     const translate_description = await translate(description, "en");
 
     if (translate_description.code === 200) {
