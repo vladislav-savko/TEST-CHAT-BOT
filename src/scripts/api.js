@@ -85,11 +85,9 @@ const getSellerById = async (id) => {
 const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
 
-    /** @type {{data: TranslateListing}} */
+    
     const { data } = await instance.get(URL);
-    log(data);
-
-    return data;
+    return data.data;
 };
 
 export const translate = async (text, sourceLang) => {
