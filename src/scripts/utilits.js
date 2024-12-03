@@ -152,11 +152,7 @@ export const printShowMore = (total, take, skip) => {
         : local(lang).info.noMoreResultsReset;
 
     const telegramButtons = hastNext
-        ? [
-              local(lang).buttons.showMore,
-              local(lang).buttons.currentFilters,
-              local(lang).buttons.clearFilters,
-          ]
+        ? [local(lang).buttons.showMore, local(lang).buttons.currentFilters, local(lang).buttons.clearFilters]
         : [local(lang).buttons.clearFilters];
 
     if (isTelegram) {
@@ -229,22 +225,21 @@ export const printPost = async (listing) => {
     const images = listing.photos;
 
     const turndownService = new TurndownService();
+    let description = turndownService
+        .turndown(listing.description)
+        .replaceAll("\\-", "-");
+
+    log(description);
 
     log(listing.description);
 
-    const translate_description = await translate(listing.description, "en");
+    const translate_description = await translate(description, "en");
 
     if (translate_description.code === 200) {
         description = translate_description.data[0].translations[0].text;
     } else {
         description = translate_description.data.response.translated_text;
     }
-
-    let description = turndownService
-        .turndown(listing.description)
-        .replaceAll("\\-", "-");
-
-    log(description);
 
     const sendImages = () => {
         if ($request.channelType === "telegram") {
@@ -294,7 +289,7 @@ export const printPost = async (listing) => {
     // response.channel([{
     //     method: "sendMessage",
     //     body: {
-
+            
     //     }
     // }])
 };
