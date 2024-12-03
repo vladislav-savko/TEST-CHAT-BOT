@@ -15,6 +15,8 @@ const ENDPOINT = {
     //https://anisad.com/api/listing/6255
     get__seller_by_id: "user/by-listing",
     //https://anisad.com/api/user/by-listing/6255
+    get__translate_listing_by_id: "listing",
+    //https://api-stage.anisad.com/api/v1/listing/39921/ru
 };
 
 export const instance = axios.create({
@@ -40,7 +42,7 @@ const getCitiesInfo = async (city, country) => {
 const getCountriesInfo = async (country) => {
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
-            pattern: country, // Use country directly
+            pattern: country,
             take: 1,
         },
     });
@@ -49,23 +51,43 @@ const getCountriesInfo = async (country) => {
 };
 
 const getListing = async (info) => {
-    // $reactions.answer(JSON.stringify(info));
     const { data } = await instance.post(ENDPOINT.post__listing, info);
-    // $reactions.answer(JSON.stringify(data));
     return data;
 };
 
 const getListingById = async (id) => {
-    // $reactions.answer(JSON.stringify(id));
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
-    // log(data.data);
     return data;
 };
 
 const getSellerById = async (id) => {
     const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
     const { data } = await instance.get(URL);
+    return data;
+};
+
+/**
+ * @typedef {Object} TranslateListing
+ * @property {string} title - Заголовок записи.
+ * @property {string} description - Описание записи.
+ * @property {string} updatedAt - Дата последнего обновления записи.
+ */
+
+/**
+ * Получает перевод записи по её ID и языковому коду.
+ *
+ * @param {string} id - Уникальный идентификатор записи.
+ * @param {string} lang - Код языка перевода (например, "en", "fr").
+ * @returns {Promise<TranslateListing>} Промис, который разрешается в объект перевода записи.
+ *
+ */
+const getTranslateListing = async (id, lang) => {
+    const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
+
+    /** @type {{data: TranslateListing}} */
+    const { data } = await instance.get();
+
     return data;
 };
 
@@ -100,4 +122,5 @@ export default {
     getListing,
     getListingById,
     getSellerById,
+    getTranslateListing,
 };
