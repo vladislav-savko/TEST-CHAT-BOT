@@ -280,6 +280,8 @@ export const printPost = async (listing) => {
     response.text(description, "html");
     sendButtons();
 
+    log(description);
+
     // response.channel([{
     //     method: "sendMessage",
     //     body: {
