@@ -152,7 +152,11 @@ export const printShowMore = (total, take, skip) => {
         : local(lang).info.noMoreResultsReset;
 
     const telegramButtons = hastNext
-        ? [local(lang).buttons.showMore, local(lang).buttons.currentFilters, local(lang).buttons.clearFilters]
+        ? [
+              local(lang).buttons.showMore,
+              local(lang).buttons.currentFilters,
+              local(lang).buttons.clearFilters,
+          ]
         : [local(lang).buttons.clearFilters];
 
     if (isTelegram) {
@@ -227,11 +231,8 @@ export const printPost = async (listing) => {
     const turndownService = new TurndownService();
     let description = turndownService
         .turndown(listing.description)
-        .replaceAll("\\-", "-");
-
-    log(description);
-
-    log(listing.description);
+        .replaceAll("\\-", "-")
+        .replaceAll("\n", "</>");
 
     const translate_description = await translate(description, "en");
 
@@ -278,18 +279,16 @@ export const printPost = async (listing) => {
             ? "ua"
             : $session.lang || "en";
 
-    log(description);
-
     response.text(`*${listing.title[title_lang]}*\n*€${listing.price}*`);
-    response.text(description, "html");
+    response.text(description.replaceAll("</>", "\n"), "html");
     sendButtons();
 
-    log(description);
+    log(description.replaceAll("</>", "\n"));
 
     // response.channel([{
     //     method: "sendMessage",
     //     body: {
-            
+
     //     }
     // }])
 };
