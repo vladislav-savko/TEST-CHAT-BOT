@@ -87,6 +87,7 @@ const getTranslateListing = async (id, lang) => {
 
     /** @type {{data: TranslateListing}} */
     const { data } = await instance.get(URL);
+    log(data);
 
     return data;
 };
