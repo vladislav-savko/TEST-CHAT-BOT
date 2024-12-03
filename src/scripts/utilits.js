@@ -240,6 +240,7 @@ export const printPost = async (listing) => {
         log(translate_description);
     } else {
         description = translate_description.data.response.translated_text;
+        log(translate_description);
     }
 
     log(description);
