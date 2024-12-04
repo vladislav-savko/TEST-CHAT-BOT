@@ -69,7 +69,7 @@ export default async () => {
 
         switch (state) {
             case "Seller":
-                nextState = "/DisplayResult/ShowByPosition/Seller";
+                nextState = "/DisplayResult/ShowByIndex/Seller";
                 break;
             case "FiltersInfo":
                 nextState = "/DisplayResult/FiltersInfo";
@@ -93,7 +93,7 @@ export default async () => {
             { regex: /^(info|information)$/i, state: "/InfoAbout" },
             {
                 regex: /^(seller contacts|seller)$/i,
-                state: "/DisplayResult/ShowByPosition/Seller",
+                state: "/DisplayResult/ShowByIndex/Seller",
             },
         ];
 

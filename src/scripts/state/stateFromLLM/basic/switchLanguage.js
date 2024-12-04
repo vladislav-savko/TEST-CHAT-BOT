@@ -9,7 +9,7 @@ export default async () => {
 
     log(lngCode);
 
-    if (!lngCode && lngCode === lang) {
+    if (!lngCode || lngCode === lang) {
         response.text(local(lang).getProperty.language);
         response.text(local(lang).info.language);
 
