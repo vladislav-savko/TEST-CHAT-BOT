@@ -133,7 +133,7 @@ export default async () => {
     $context.request.query = t_text;
     log(t_text);
 
-    const llm_ = await llm(t_text);
+    const llm_ = await llm(`${t_text}`.toLowerCase());
     const answerState = llm_.state;
     const answerData = llm_.data;
 
