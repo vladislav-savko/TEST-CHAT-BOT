@@ -298,7 +298,7 @@ export const printPost = async (listing) => {
                             {
                                 text: "Показать на карте",
                                 web_app: {
-                                    url: "https://www.google.com/maps/place/34%C2%B042'10.8%22N+33%C2%B003'32.8%22E/@34.703,33.0591111,15z/data=!4m4!3m3!8m2!3d34.703!4d33.0591111",
+                                    url: "https://google.com/maps/place/34%C2%B042'10.8%22N+33%C2%B003'32.8%22E/@34.703,33.0591111,15z",
                                 },
                             },
                         ],
