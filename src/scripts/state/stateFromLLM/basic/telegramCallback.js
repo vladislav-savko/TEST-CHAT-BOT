@@ -10,7 +10,7 @@ export default async () => {
         }
         await getListingById(id);
     } else if (value === "Seller Contacts") {
-        $reactions.transition("/DisplayResult/Seller");
+        $reactions.transition("/ShowByIndex/Seller");
     } else if (value.includes("Clear parament")) {
         const messageId = await $request.rawRequest.callback_query.message
             .message_id;
