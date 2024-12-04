@@ -2,9 +2,14 @@ import { getListingById } from "../../../utilits.js";
 
 export default async () => {
     const value = await $request.query.replace("by ", "").split(".")[0];
-    if (Number(value)) {
-        const index = parseInt(value);
-        await getListingById(index);
+    if (Number(value) || value.includes("Show details for")) {
+        const id = null;
+        const match = value.match(/\d+/);
+        if (match) {
+            const id = parseInt(match[0], 10);
+            $session.lastData = { id };
+        }
+        await getListingById(id);
     } else if (value === "Seller Contacts") {
         $reactions.transition("/TelegramCallback/Seller");
     } else if (value.includes("Clear parament")) {
@@ -13,13 +18,5 @@ export default async () => {
         $session.filters.messageId = messageId;
         $session.filters.param = value.split("Clear parament ")[1];
         $reactions.transition("/DisplayResult/FiltersInfo");
-    } else if (value.includes("Show details for")) {
-        const match = value.match(/\d+/);
-        if (match) {
-            const id = parseInt(match[0], 10);
-            $session.lastData = { id };
-        }
-
-        $reactions.transition("/ShowByIndex");
     }
 };

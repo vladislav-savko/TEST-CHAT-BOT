@@ -25,7 +25,11 @@ bind("preMatch", function ($context) {
 
     var text = $context.request.query;
     if (text[0] === "/") return true;
-    if (text.indexOf("Clear parament") === 0) return true;
+    if (
+        text.indexOf("Clear parament") === 0 ||
+        text.indexOf("Show details for")
+    )
+        return true;
     if (startsWithAny(text, phrases)) {
         $context.temp.targetState = "/InputData";
         return true;
