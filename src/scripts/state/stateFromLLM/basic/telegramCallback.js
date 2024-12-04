@@ -2,7 +2,7 @@ import { getListingById } from "../../../utilits.js";
 
 export default async () => {
     const value = await $request.query.replace("by ", "").split(".")[0];
-    if (Number(value) || value.includes("Show details for")) {
+    if (value.includes("Show details for")) {
         const id = null;
         const match = value.match(/\d+/);
         if (match) {
