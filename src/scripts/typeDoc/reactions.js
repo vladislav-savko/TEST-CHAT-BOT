@@ -22,6 +22,7 @@
 
 /**
  * Встроенный сервис ответов (документация не точная)
+ * @global
  * @type {{
  *   answer: (text: string) => void,
  *   audio: (audioUrl: string) => void,

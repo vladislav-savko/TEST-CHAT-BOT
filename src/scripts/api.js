@@ -53,6 +53,11 @@ const getListingById = async (id) => {
     return data;
 };
 
+/**
+ * 
+ * @param {number} id 
+ * @returns 
+ */
 const getSellerById = async (id) => {
     const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
     const { data } = await instance.get(URL);
@@ -60,7 +65,7 @@ const getSellerById = async (id) => {
 };
 
 /**
- * @typedef {Object} TranslateListing
+ * @typedef {Object} ListingTranslate
  * @property {string} title - Заголовок записи.
  * @property {string} description - Описание записи.
  * @property {string} updatedAt - Дата последнего обновления записи.
@@ -71,12 +76,12 @@ const getSellerById = async (id) => {
  *
  * @param {string} id - Уникальный идентификатор записи.
  * @param {string} lang - Код языка перевода (например, "en", "pl", ).
- * @returns {Promise<TranslateListing>} Промис, который разрешается в объект перевода записи.
+ * @returns {Promise<ListingTranslate>} Промис, который разрешается в объект перевода записи.
  *
  */
 const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
-    /** @type {Axios.AxiosXHR<{data: TranslateListing}>} */
+    /** @type {Axios.AxiosXHR<{data: ListingTranslate}>} */
     const { data } = await instance.get(URL);
     return data.data;
 };

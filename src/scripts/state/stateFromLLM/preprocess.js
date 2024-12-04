@@ -29,18 +29,14 @@ export default async () => {
                 return response.data;
             } else {
                 const fallbackResponse = await axios.get(
-                    `https://translate.cloudflare.jaxing.cc/?text=${encodeURIComponent(
-                        text
-                    )}&source_lang=${sourceLang}&target_lang=en`,
+                    `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=en`,
                     { timeout: 10000 }
                 );
                 return fallbackResponse.data;
             }
         } catch (error) {
             const fallbackResponse = await axios.get(
-                `https://translate.cloudflare.jaxing.cc/?text=${encodeURIComponent(
-                    text
-                )}&source_lang=${sourceLang}&target_lang=en`,
+                `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=en`,
                 { timeout: 10000 }
             );
             return fallbackResponse.data;
@@ -135,6 +131,7 @@ export default async () => {
     }
 
     $context.request.query = t_text;
+    log(t_text);
 
     const llm_ = await llm(t_text);
     const answerState = llm_.state;

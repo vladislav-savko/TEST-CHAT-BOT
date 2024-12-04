@@ -5,6 +5,7 @@
 
 /**
  * Встроенный сервис запросов пользователя.
+ * @global
  * @type {RequestJAICP}
  */
 var $request;

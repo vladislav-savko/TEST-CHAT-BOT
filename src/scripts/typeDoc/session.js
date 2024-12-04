@@ -69,6 +69,7 @@
 
 /**
  * Встроенный сервис сессии.
+ * @global
  * @type {Session}
  */
 var $session;
