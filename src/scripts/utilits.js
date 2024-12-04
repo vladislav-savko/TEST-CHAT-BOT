@@ -289,13 +289,17 @@ export const printPost = async (listing) => {
                         [
                             {
                                 text: "Открыть в браузере",
-                                url: "https://anisad.com/sale/cyprus/agios-athanasios/accommodation/apartment/39921",
+                                web_app: {
+                                    url: "https://anisad.com/sale/cyprus/agios-athanasios/accommodation/apartment/39921",
+                                },
                             },
                         ],
                         [
                             {
                                 text: "Показать на карте",
-                                web_app: {url: "https://anisad.com/sale/cyprus/all/accommodation/map"},
+                                web_app: {
+                                    url: "https://anisad.com/sale/cyprus/all/accommodation/map",
+                                },
                             },
                         ],
                         [
