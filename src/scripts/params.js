@@ -92,8 +92,8 @@ export const emptyParamsResult = async (params) => {
     const routes = {
         PropertyTypes: "/InputData/InputPropertyTypes",
         Location: "/InputData/InputLocation",
-        Price: "/InputData/InputPrice",
         ListingTypes: "/InputData/InputListingTypes",
+        Price: "/InputData/InputPrice",
     };
 
     for (const param of Object.keys(routes)) {

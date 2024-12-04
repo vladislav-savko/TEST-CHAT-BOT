@@ -228,6 +228,7 @@ export const printPost = async (listing) => {
     const { lang } = await $session;
     const images = listing.photos;
     const turndownService = new TurndownService();
+    const { buttons } = local(lang);
 
     const get_description = await api.getTranslateListing(listing.id, lang);
 
@@ -245,74 +246,58 @@ export const printPost = async (listing) => {
 
     const title = listing.title[title_lang];
 
-    const sendImages = () => {
-        if ($request.channelType === "telegram") {
-            response.imagesTG(images);
-        } else {
-            response.images(images);
-        }
-    };
-
-    const sendButtons = () => {
-        const { buttons } = local(lang);
-
-        if ($request.channelType === "telegram") {
-            response.inlineURL(
-                buttons.openInBrowser,
-                getLinkToBrowserPage(listing)
-            );
-            response.inlineURL(buttons.showOnMap, getLinkToMap(listing));
-            response.inlineCallback(buttons.sellerContacts, "Seller Contacts");
-        } else {
-            const linksText =
-                `[${buttons.openInBrowser}](${getLinkToBrowserPage(
-                    listing
-                )}) \n` + `[${buttons.showOnMap}](${getLinkToMap(listing)})`;
-            response.text(linksText);
-            response.buttons([buttons.sellerContacts]);
-        }
-    };
-
-    sendImages();
+    if ($request.channelType === "telegram") {
+        response.imagesTG(images);
+    } else {
+        response.images(images);
+    }
 
     response.text(`*${title}*\n*€${listing.price}*`);
-    // response.text(description);
-    // sendButtons();
 
-    response.channel([
-        {
-            method: "sendMessage",
-            body: {
-                text: description,
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            {
-                                text: "Открыть в браузере",
-                                web_app: {
-                                    url: "https://anisad.com/sale/cyprus/agios-athanasios/accommodation/apartment/39921",
+    if ($request.channelType === "telegram") {
+        response.channel([
+            {
+                method: "sendMessage",
+                body: {
+                    text: description,
+                    reply_markup: {
+                        inline_keyboard: [
+                            [
+                                {
+                                    text: buttons.openInBrowser,
+                                    web_app: {
+                                        url: getLinkToBrowserPage(listing),
+                                    },
                                 },
-                            },
-                        ],
-                        [
-                            {
-                                text: "Показать на карте",
-                                web_app: {
-                                    url: "https://google.com/maps/place/34%C2%B042'10.8%22N+33%C2%B003'32.8%22E/@34.703,33.0591111,15z",
+                            ],
+                            [
+                                {
+                                    text: buttons.showOnMap,
+                                    // web_app: {
+                                    //     url: "https://google.com/maps/place/34%C2%B042'10.8%22N+33%C2%B003'32.8%22E/@34.703,33.0591111,15z",
+                                    // },
+                                    url: getLinkToMap(listing),
                                 },
-                            },
+                            ],
+                            [
+                                {
+                                    text: buttons.sellerContacts,
+                                    callback_data: "Seller Contacts",
+                                },
+                            ],
                         ],
-                        [
-                            {
-                                text: "Контакты продавца",
-                                callback_data: "Seller Contacts",
-                            },
-                        ],
-                    ],
+                    },
                 },
             },
-        },
-    ]);
+        ]);
+    } else {
+        response.text(description);
+        const linksText =
+            `[${buttons.openInBrowser}](${getLinkToBrowserPage(listing)}) \n` +
+            `[${buttons.showOnMap}](${getLinkToMap(listing)})`;
+        response.text(linksText);
+        response.buttons([buttons.sellerContacts]);
+    }
 };
 
 export const printSellerInfo = (seller) => {
