@@ -6,8 +6,7 @@ export default async () => {
         const id = null;
         const match = value.match(/\d+/);
         if (match) {
-            const id = parseInt(match[0], 10);
-            $session.lastData = { id };
+            id = parseInt(match[0], 10);
         }
         await getListingById(id);
     } else if (value === "Seller Contacts") {
