@@ -1,5 +1,5 @@
+//@ts-check
 import axios from "axios";
-
 import { API__LINK } from "./config.js";
 
 const ENDPOINT = {
@@ -13,13 +13,14 @@ const ENDPOINT = {
 export const instance = axios.create({
     baseURL: `${API__LINK}/api/v1/`,
     timeout: 10000,
-    "Cache-Control": "no-cache",
-    "Content-type": "application/json",
+    headers: {
+        "Cache-Control": "no-cache",
+        "Content-type": "application/json",
+    },
 });
 
 const getCitiesInfo = async (city, country) => {
     const patt = city && country ? `${city}, ${country}` : city || country;
-    log(patt);
     const { data } = await instance.get(ENDPOINT.get__cities, {
         params: {
             pattern: patt,
@@ -69,13 +70,13 @@ const getSellerById = async (id) => {
  * Получает перевод записи по её ID и языковому коду.
  *
  * @param {string} id - Уникальный идентификатор записи.
- * @param {string} lang - Код языка перевода (например, "en", "fr").
+ * @param {string} lang - Код языка перевода (например, "en", "pl", ).
  * @returns {Promise<TranslateListing>} Промис, который разрешается в объект перевода записи.
  *
  */
 const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
-
+    /** @type {Axios.AxiosXHR<{data: TranslateListing}>} */
     const { data } = await instance.get(URL);
     return data.data;
 };

@@ -3,13 +3,13 @@ import local, { available } from "../../../local/local.js";
 import response from "../../../response.js";
 
 export default async () => {
-    const { lang } = $session;
+    const { lang } = await $session;
 
-    const lngCode = $session.lastData?.language;
+    const lngCode = await $session.lastData?.language;
 
     log(lngCode);
 
-    if (!lngCode) {
+    if (!lngCode && lngCode === lang) {
         response.text(local(lang).getProperty.language);
         response.text(local(lang).info.language);
 

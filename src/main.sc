@@ -19,11 +19,12 @@ theme: /
             await stateJs.loader();
 
     state: Preprocess
+        q!: $regex</test_preprocess> 
         scriptEs6:
             await stateJs.preprocess();
 
     state: SwitchInterfaceLanguage
-        q!: $regex</switchLanguage>
+        q!: $regex</test_switch_language>
         scriptEs6:
             await stateJs.switchLanguage();
 
@@ -37,43 +38,47 @@ theme: /
             await stateJs.inputData();
                 
         state: InputLocation
+            q!: $regex</test_input_location>
             scriptEs6:
                 await stateJs.inputLocation();
                     
         state: InputBedrooms
+            q!: $regex</test_input_bedrooms>
             scriptEs6:
                 await stateJs.inputBedrooms();
                     
         state: InputListingTypes
+            q!: $regex</test_input_listing_types>
             scriptEs6:
                 await stateJs.inputListingTypes();
         
         state: InputPropertyTypes
+            q!: $regex</test_input_property_types>
             scriptEs6:
                 await stateJs.inputPropertyTypes();
                     
         state: InputPrice
+            q!: $regex</test_input_price>
             scriptEs6:
                 await stateJs.inputPrice();              
 
     state: DisplayResult
+        q!: $regex</test_display_result>
         scriptEs6:
             await stateJs.displayResults();
 
         state: ShowMore
+            q!: $regex</test_show_more>
             scriptEs6:
                 await stateJs.showMore();
                 
         state: ShowByPosition
+            q!: $regex</test_show_by_position>
             scriptEs6:
                 await stateJs.showByPosition();
-                
-            state: Seller
-                q: $regex</seller>
-                scriptEs6:
-                    await stateJs.seller();
                     
         state: FiltersInfo
+            q!: $regex</test_filters>
             q: $regex</filters>
             scriptEs6:
                 await stateJs.filtersInfo();
@@ -82,13 +87,9 @@ theme: /
         event!: telegramCallbackQuery
         scriptEs6:
             await stateJs.telegramCallback();
-            
-        state: Seller
-            q: $regex</seller>
-            scriptEs6:
-                await stateJs.seller();
                 
     state: ShowByIndex
+        q!: $regex</test_show_by_index>
         scriptEs6:
             await stateJs.showByIndex();
             
@@ -107,10 +108,10 @@ theme: /
         scriptEs6:
             await stateJs.help();
     
-    state: Undo
-        q!: $regex</undo>
-        scriptEs6:
-            await stateJs.undo();
+    # state: Undo
+    #     q!: $regex</undo>
+    #     scriptEs6:
+    #         await stateJs.undo();
             
     state: Bye
         q!: $regex</bye>
