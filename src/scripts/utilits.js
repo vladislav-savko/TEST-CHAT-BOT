@@ -272,10 +272,10 @@ export const printPost = async (listing) => {
                             [
                                 {
                                     text: buttons.showOnMap,
-                                    // web_app: {
-                                    //     url: "https://google.com/maps/place/34%C2%B042'10.8%22N+33%C2%B003'32.8%22E/@34.703,33.0591111,15z",
-                                    // },
-                                    url: getLinkToMap(listing),
+                                    web_app: {
+                                        url: "https://stage.anisad.com/webview/map-single?lat=34.727044&lng=32.5166604&zoom=14&locale=ru-RU&radius=0&price=1000",
+                                    },
+                                    // url: getLinkToMap(listing),
                                 },
                             ],
                             [
