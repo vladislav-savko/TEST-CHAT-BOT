@@ -273,9 +273,8 @@ export const printPost = async (listing) => {
                                 {
                                     text: buttons.showOnMap,
                                     web_app: {
-                                        url: "https://stage.anisad.com/webview/map-single?lat=34.727044&lng=32.5166604&zoom=14&locale=ru-RU&radius=0&price=1000",
+                                        url: getLinkToMap(listing),
                                     },
-                                    // url: getLinkToMap(listing),
                                 },
                             ],
                             [

@@ -97,8 +97,7 @@ export const getPropertyDetails = (listing, listingData) => {
                   .filter(Boolean)
                   .join(", ")}`
             : "",
-        listingData.repairAmenity != null &&
-        listingData.repairAmenity.length
+        listingData.repairAmenity != null && listingData.repairAmenity.length
             ? `*${
                   local(lang).property.repairAmenities.value
               }*: ${listingData.repairAmenity
@@ -154,7 +153,9 @@ export const getLinkToBrowserPage = (data) => {
 };
 
 export const getLinkToMap = (data) => {
-    return `https://www.google.com/maps?q=${data.location?.latitude},${data.location?.longitude}`;
+    const { lang } = $session;
+    const locale = lang === "uk" ? "ua" : lang === "el" ? "cy" : lang;
+    return `${MAIN__LINK}/webview/map-single?lat=${data.location?.latitude}&lng=${data.location?.longitude}&zoom=14&locale=${locale}&radius=${data.location?.radius}&price=${data.price}&mode=compact`;
 };
 
 export const getLocationProperty = (listingLocation) => {
