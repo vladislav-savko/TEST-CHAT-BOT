@@ -105,7 +105,7 @@ export const emptyParamsResult = async (params) => {
     for (const param of Object.keys(routes)) {
         if (params.includes(param)) {
             route = routes[param];
-            return;
+            break;
         }
     }
 
