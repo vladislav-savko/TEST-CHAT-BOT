@@ -90,7 +90,6 @@ export const initSession = () => {
 };
 
 export const getCityInfo = async (city, country = "cyprus") => {
-    log("getCity");
     country = country || "cyprus";
     try {
         const resC = await api.getCitiesInfo(city, country);
@@ -123,9 +122,22 @@ export const getCityInfo = async (city, country = "cyprus") => {
             $session.data.countryId = null;
         }
 
+        log({
+            function: "getCityInfo",
+            input: { city, country },
+            output: { firstCity },
+        });
+
         return firstCity;
     } catch (error) {
         // $reactions.answer("*City* Something's broken, please try again later. Sorry");
+
+        log({
+            function: "getCityInfo",
+            input: { city, country },
+            output: { message: "ERROR" },
+        });
+
         return false;
     }
 };
@@ -175,10 +187,14 @@ export const getListings = async (sessionData) => {
         const res = await api.getListing(sessionData);
         const hasListings = res && res.data.listings.length > 0;
 
+        log({
+            function: "getListings",
+            input: { sessionData },
+            output: { listings: res },
+        });
+
         if (hasListings) {
             $session.ids = getIdsFromListings(res);
-
-            log(res.data.listings);
 
             res.data.listings.forEach((listing) => {
                 const listingData = listing.realtyDetails;
@@ -219,7 +235,12 @@ export const getListings = async (sessionData) => {
             return false;
         }
     } catch (error) {
-        // response.text(local(lang).fetchErrors.listing);
+        log({
+            function: "getListings",
+            input: { sessionData },
+            output: { message: "ERROR" },
+        });
+
         return false;
     }
 };
@@ -252,7 +273,9 @@ export const printPost = async (listing) => {
         response.images(images);
     }
 
-    response.text(`*${title}*\n*€${listing.price}*`);
+    const header = `*${title}*\n*€${listing.price}*`;
+
+    response.text(header);
 
     if ($request.channelType === "telegram") {
         response.channel([
@@ -281,7 +304,7 @@ export const printPost = async (listing) => {
                             [
                                 {
                                     text: buttons.sellerContacts,
-                                    callback_data: "Seller Contacts",
+                                    callback_data: `Seller Contacts ${listing.id}`,
                                 },
                             ],
                         ],
@@ -297,11 +320,98 @@ export const printPost = async (listing) => {
         response.text(linksText);
         response.buttons([buttons.sellerContacts]);
     }
+
+    log({
+        function: "printPost",
+        input: { listing },
+        output: { header, description },
+    });
 };
 
-export const printSellerInfo = (seller) => {
-    const text = `*${seller.firstName} ${seller.lastName}*\n${seller.email}\n${seller.phoneNumber}`;
-    response.text(text);
+export const printSellerInfo = (data) => {
+    const description =
+        `*${data.firstName} ${data.lastName}*` + data.seller.message
+            ? `\n ${data.seller.message}`
+            : "\n";
+
+    log({
+        function: "printSellerInfo",
+        input: { data },
+        output: { description },
+    });
+
+    response.channel([
+        {
+            method: "sendMessage",
+            body: {
+                text: description,
+                reply_markup: {
+                    inline_keyboard: [
+                        ...(data.phoneNumber
+                            ? [
+                                  [
+                                      {
+                                          text: `📞`,
+                                          copy_text: {
+                                              text: `${data.phoneNumber}`,
+                                          },
+                                      },
+                                  ],
+                              ]
+                            : []),
+                        ...(data.email
+                            ? [
+                                  [
+                                      {
+                                          text: `✉️`,
+                                          copy_text: {
+                                              text: `${data.email}`,
+                                          },
+                                      },
+                                  ],
+                              ]
+                            : []),
+                        ...(data.seller.webSite
+                            ? [
+                                  [
+                                      {
+                                          text: `🌐`,
+                                          web_app: {
+                                              url: `${data.seller.webSite}`,
+                                          },
+                                      },
+                                  ],
+                              ]
+                            : []),
+                        ...(data.seller.viber
+                            ? [
+                                  [
+                                      {
+                                          text: `Viber`,
+                                          copy_text: {
+                                              text: `${data.seller.viber}`,
+                                          },
+                                      },
+                                  ],
+                              ]
+                            : []),
+                        ...(data.seller.whatsUp
+                            ? [
+                                  [
+                                      {
+                                          text: `WhatsUp`,
+                                          copy_text: {
+                                              text: `${data.seller.whatsUp}`,
+                                          },
+                                      },
+                                  ],
+                              ]
+                            : []),
+                    ],
+                },
+            },
+        },
+    ]);
 };
 
 export const getListingById = async (id) => {
@@ -313,7 +423,17 @@ export const getListingById = async (id) => {
             await printPost(listing);
             $session.seller = id;
         }
+
+        log({
+            function: "getListingById",
+            input: { id },
+        });
     } catch (error) {
+        log({
+            function: "getListingById",
+            input: { id },
+            output: { message: "ERROR" },
+        });
         response.text(local(lang).fetchErrors.listing);
         return false;
     }
@@ -328,14 +448,26 @@ export const getSeller = async () => {
         if (seller) {
             printSellerInfo(seller);
         }
+
+        log({
+            function: "getSeller",
+            input: { sellerId },
+            output: { seller },
+        });
     } catch (error) {
         response.text(local(lang).fetchErrors.seller);
+
+        log({
+            function: "getSeller",
+            input: { sellerId },
+            output: { message: "ERROR" },
+        });
+
         return false;
     }
 };
 
 export const getFiltersInfo = async () => {
-    log($session);
     const lastTransition = findLastNonSwitchState($session.transitionsHistory);
     const { state: lastState } = lastTransition;
     let isEdit = false;
@@ -790,6 +922,12 @@ export const getFiltersInfo = async () => {
         response.text(local(lang).info.continueSearch);
         response.buttons([local(lang).buttons.continueSearch]);
     }
+
+    log({
+        function: "getFiltersInfo",
+        input: { $session },
+        output: { description: `${filtersText}${filters}` },
+    });
 
     $session.filters = {
         messageId: null,

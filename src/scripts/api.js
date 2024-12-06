@@ -28,7 +28,11 @@ const getCitiesInfo = async (city, country) => {
         },
     });
 
-    log({ function: "getCitiesInfo", inputData: { city, country }, data });
+    log({
+        function: "getCitiesInfo",
+        input: { city, country },
+        output: { data },
+    });
 
     return data.data.length > 1 ? [data.data[0]] : data.data;
 };
@@ -41,7 +45,7 @@ const getCountriesInfo = async (country) => {
         },
     });
 
-    log({ function: "getCountriesInfo", inputData: { country }, data });
+    log({ function: "getCountriesInfo", input: { country }, output: { data } });
 
     return data.data.length > 1 ? [data.data[0]] : data.data;
 };
@@ -49,7 +53,7 @@ const getCountriesInfo = async (country) => {
 const getListing = async (info) => {
     const { data } = await instance.post(ENDPOINT.post__listing, info);
 
-    log({ function: "getListing", inputData: { info }, data });
+    log({ function: "getListing", input: { info }, output: { data } });
 
     return data;
 };
@@ -58,7 +62,7 @@ const getListingById = async (id) => {
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
 
-    log({ function: "getListingById", inputData: { id }, data });
+    log({ function: "getListingById", input: { id }, output: { data } });
 
     return data;
 };
@@ -72,7 +76,7 @@ const getSellerById = async (id) => {
     const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
     const { data } = await instance.get(URL);
 
-    log({ function: "getSellerById", inputData: { id }, data });
+    log({ function: "getSellerById", input: { id }, output: { data } });
 
     return data;
 };
@@ -97,7 +101,11 @@ const getTranslateListing = async (id, lang) => {
     /** @type {Axios.AxiosXHR<{data: ListingTranslate}>} */
     const { data } = await instance.get(URL);
 
-    log({ function: "getTranslateListing", inputData: { id, lang }, data });
+    log({
+        function: "getTranslateListing",
+        input: { id, lang },
+        output: { data },
+    });
 
     return data.data;
 };

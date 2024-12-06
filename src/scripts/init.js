@@ -8,6 +8,7 @@ function startsWithAny(text, phrases) {
 }
 
 bind("preMatch", function ($context) {
+    log({ bind: "preMatch", $context });
     var phrases = [
         "Продолжить поиск", // ru
         "Continue search", // en

@@ -1,4 +1,3 @@
-import response from "./response.js";
 import utl from "./utilits.js";
 
 export const processParams = async () => {
@@ -85,6 +84,12 @@ export const processParams = async () => {
     if (!$session.data.priceTo && !$session.data.priceFrom)
         emptyParams.push("Price");
 
+    log({
+        function: "processParams",
+        input: { newData },
+        output: { emptyParams, newParams },
+    });
+
     return { emptyParams, newParams };
 };
 
@@ -96,50 +101,34 @@ export const emptyParamsResult = async (params) => {
         Price: "/InputData/InputPrice",
     };
 
+    let route = "";
+
     for (const param of Object.keys(routes)) {
         if (params.includes(param)) {
-            $reactions.transition(routes[param]);
+            route = routes[param];
             return;
         }
     }
 
     if (params.length === 0) {
-        return $reactions.transition("/DisplayResult");
+        route = "/DisplayResult";
     }
+
+    log({
+        function: "emptyParamsResult",
+        input: { params },
+        output: { route },
+    });
+
+    $reactions.transition(route);
 };
 
 export const updSessionInfo = async (info, params) => {
     $session.data = { ...info, ...params };
 };
 
-export const checkChangePropertyType = async (data, tree) => {
-    if (
-        JSON.stringify(data.propertyTypes) !=
-        JSON.stringify(getProperty(tree.propertyTypes, "estate"))
-    ) {
-        var listing = data.listingType;
-        //var city = $session.info.location;
-        var from = data.priceFrom;
-        var to = data.priceTo;
-        utl.session();
-        $session.params.listingType = listing;
-        //$session.params.location = city;
-        $session.params.priceFrom = from;
-        $session.params.priceTo = to;
-    }
-};
-
-// export async function updateSessionParamsAndTransition() {
-//     const params = await getAllParamsFromTree($parseTree);
-//     $session.params = { ...$session.params, ...params };
-//     $reactions.transition("/Search/SwitchParams");
-// }
-
 export default {
-    // getAllParamsFromTree,
     processParams,
     emptyParamsResult,
     updSessionInfo,
-    checkChangePropertyType,
-    // updateSessionParamsAndTransition,
 };

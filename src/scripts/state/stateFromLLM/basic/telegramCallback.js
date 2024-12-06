@@ -9,7 +9,13 @@ export default async () => {
             id = parseInt(match[0], 10);
         }
         await getListingById(id);
-    } else if (value === "Seller Contacts") {
+    } else if (value.includes("Seller Contacts")) {
+        let id = null;
+        const match = value.match(/\d+/);
+        if (match) {
+            id = parseInt(match[0], 10);
+            $session.seller = id;
+        }
         $reactions.transition("/ShowByIndex/Seller");
     } else if (value.includes("Clear parament")) {
         const messageId = await $request.rawRequest.callback_query.message

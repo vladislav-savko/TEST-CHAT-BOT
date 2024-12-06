@@ -4,8 +4,6 @@ import local from "./local/local.js";
 export const getPropertyDetails = (listing, listingData) => {
     const lang = $session.lang;
 
-    log($session.data);
-
     const details = [
         listing.price ? `*${listing.price} €*` : "",
         listingData.floorArea || listingData.plotArea
