@@ -28,6 +28,8 @@ const getCitiesInfo = async (city, country) => {
         },
     });
 
+    log({ function: "getCitiesInfo", inputData: { city, country }, data });
+
     return data.data.length > 1 ? [data.data[0]] : data.data;
 };
 
@@ -39,28 +41,39 @@ const getCountriesInfo = async (country) => {
         },
     });
 
+    log({ function: "getCountriesInfo", inputData: { country }, data });
+
     return data.data.length > 1 ? [data.data[0]] : data.data;
 };
 
 const getListing = async (info) => {
     const { data } = await instance.post(ENDPOINT.post__listing, info);
+
+    log({ function: "getListing", inputData: { info }, data });
+
     return data;
 };
 
 const getListingById = async (id) => {
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
+
+    log({ function: "getListingById", inputData: { id }, data });
+
     return data;
 };
 
 /**
- * 
- * @param {number} id 
- * @returns 
+ *
+ * @param {number} id
+ * @returns
  */
 const getSellerById = async (id) => {
     const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
     const { data } = await instance.get(URL);
+
+    log({ function: "getSellerById", inputData: { id }, data });
+
     return data;
 };
 
@@ -83,7 +96,9 @@ const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
     /** @type {Axios.AxiosXHR<{data: ListingTranslate}>} */
     const { data } = await instance.get(URL);
-    log(["getTranslateListing", data]);
+
+    log({ function: "getTranslateListing", inputData: { id, lang }, data });
+
     return data.data;
 };
 
