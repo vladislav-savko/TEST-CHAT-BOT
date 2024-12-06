@@ -282,6 +282,7 @@ export const printPost = async (listing) => {
                 method: "sendMessage",
                 body: {
                     text: description,
+                    parse_mode: "Markdown",
                     reply_markup: {
                         inline_keyboard: [
                             [
@@ -342,6 +343,7 @@ export const printSellerInfo = async (data) => {
             method: "sendMessage",
             body: {
                 text: description,
+                parse_mode: "Markdown",
                 reply_markup: {
                     inline_keyboard: [
                         ...(data.phoneNumber
