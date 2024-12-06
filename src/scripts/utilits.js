@@ -14,6 +14,7 @@ import {
 import "./typeDoc/session.js";
 import "./typeDoc/reactions.js";
 import "./typeDoc/request.js";
+import "./typeDoc/global.js";
 
 export function session() {
     $session.data = {
