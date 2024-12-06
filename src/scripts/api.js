@@ -83,7 +83,7 @@ const getTranslateListing = async (id, lang) => {
     const URL = `${ENDPOINT.get__translate_listing_by_id}/${id}/${lang}`;
     /** @type {Axios.AxiosXHR<{data: ListingTranslate}>} */
     const { data } = await instance.get(URL);
-    log("getTranslateListing", data);
+    log(["getTranslateListing", data]);
     return data.data;
 };
 
