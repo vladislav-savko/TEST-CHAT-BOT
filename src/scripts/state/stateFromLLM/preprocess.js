@@ -15,6 +15,11 @@ export default async () => {
                 },
             }
         );
+        log({
+            function: "language",
+            input: { text },
+            output: { response },
+        });
         return response.data;
     };
 
@@ -26,12 +31,22 @@ export default async () => {
             );
 
             if (response.status === 200) {
+                log({
+                    function: "translate",
+                    input: { text, sourceLang },
+                    output: { response },
+                });
                 return response.data;
             } else {
                 const fallbackResponse = await axios.get(
                     `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=en`,
                     { timeout: 10000 }
                 );
+                log({
+                    function: "translate",
+                    input: { text, sourceLang },
+                    output: { fallbackResponse },
+                });
                 return fallbackResponse.data;
             }
         } catch (error) {
@@ -39,6 +54,11 @@ export default async () => {
                 `https://translate.cloudflare.jaxing.cc/?text=${text}&source_lang=${sourceLang}&target_lang=en`,
                 { timeout: 10000 }
             );
+            log({
+                function: "translate",
+                input: { text, sourceLang },
+                output: { fallbackResponse },
+            });
             return fallbackResponse.data;
         }
     };
@@ -57,6 +77,11 @@ export default async () => {
                 timeout: 25000,
             }
         );
+        log({
+            function: "llm",
+            input: { input },
+            output: { response },
+        });
         return response.data;
     };
 
