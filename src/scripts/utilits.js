@@ -93,7 +93,6 @@ export const getCityInfo = async (city, country = "cyprus") => {
     country = country || "cyprus";
     try {
         const resC = await api.getCitiesInfo(city, country);
-        log(resC);
         // if (!resC) return false;
         const filteredCities = resC.filter(
             (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()

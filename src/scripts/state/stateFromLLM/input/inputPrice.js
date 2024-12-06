@@ -5,7 +5,6 @@ import response from "../../../response.js";
 export default async () => {
     if (!$parseTree.price) {
         const { lang } = $session;
-        log($session);
         response.text(local(lang).getProperty.budget);
     } else {
         // await updateSessionParamsAndTransition();

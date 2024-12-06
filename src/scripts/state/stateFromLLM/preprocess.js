@@ -156,14 +156,11 @@ export default async () => {
     }
 
     $context.request.query = t_text;
-    log(t_text);
 
     const llm_ = await llm(t_text);
     const answerState = llm_.state;
     const answerData = llm_.data;
-
-    log(llm_);
-
+    
     $session.lastData = JSON.parse(answerData || "{}");
     $reactions.transition(getState(answerState, t_text));
 };

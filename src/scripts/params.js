@@ -76,7 +76,6 @@ export const processParams = async () => {
             !newData.city &&
             !newData.country)
     ) {
-        log($session.location);
         emptyParams.push("Location");
     }
     if (!$session.data.listingType) emptyParams.push("ListingTypes");
