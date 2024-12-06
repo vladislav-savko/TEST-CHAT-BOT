@@ -343,7 +343,7 @@ export const printSellerInfo = async (data) => {
             method: "sendMessage",
             body: {
                 text: description,
-                parse_mode: "Markdown",
+                parse_mode: "Markdown", 
                 reply_markup: {
                     inline_keyboard: [
                         ...(data.phoneNumber
