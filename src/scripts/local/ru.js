@@ -80,6 +80,11 @@ export default {
     general: {
         filters: "Применённые фильтра при поиске",
     },
+    seller: {
+        phone: "Номер телефона",
+        email: "Почта",
+        site: "Сайт",
+    },
     property: {
         airConditioning: {
             value: `Кондиционер`,

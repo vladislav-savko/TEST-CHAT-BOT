@@ -79,6 +79,11 @@ export default {
     general: {
         filters: "Zastosowane filtry w wyszukiwarce",
     },
+    seller: {
+        phone: "Numer telefonu",
+        email: "E-mail",
+        site: "Strona internetowa",
+    },
     property: {
         airConditioning: {
             value: "Klimatyzacja",

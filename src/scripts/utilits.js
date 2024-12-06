@@ -327,11 +327,9 @@ export const printPost = async (listing) => {
     });
 };
 
-export const printSellerInfo = (data) => {
-    const description =
-        `*${data.firstName} ${data.lastName}*` + data.seller.message
-            ? `\n ${data.seller.message}`
-            : "\n";
+export const printSellerInfo = async (data) => {
+    const { lang } = await $session;
+    const description = `*${data.firstName} ${data.lastName}*`;
 
     log({
         function: "printSellerInfo",
@@ -350,7 +348,7 @@ export const printSellerInfo = (data) => {
                             ? [
                                   [
                                       {
-                                          text: `📞`,
+                                          text: `📞 ${local(lang).seller.phone}`,
                                           copy_text: {
                                               text: `${data.phoneNumber}`,
                                           },
@@ -362,7 +360,7 @@ export const printSellerInfo = (data) => {
                             ? [
                                   [
                                       {
-                                          text: `✉️`,
+                                          text: `✉️ ${local(lang).seller.email}`,
                                           copy_text: {
                                               text: `${data.email}`,
                                           },
@@ -374,7 +372,7 @@ export const printSellerInfo = (data) => {
                             ? [
                                   [
                                       {
-                                          text: `🌐`,
+                                          text: `🌐 ${local(lang).seller.site}`,
                                           web_app: {
                                               url: `${data.seller.webSite}`,
                                           },
@@ -445,7 +443,7 @@ export const getSeller = async () => {
         const { data: seller } = await api.getSellerById(sellerId);
 
         if (seller) {
-            printSellerInfo(seller);
+            await printSellerInfo(seller);
         }
 
         log({

@@ -79,6 +79,11 @@ export default {
     general: {
         filters: "Застосовані фільтри під час пошуку",
     },
+    seller: {
+        phone: "Номер телефону",
+        email: "Електронна пошта",
+        site: "Сайт",
+    },
     property: {
         airConditioning: {
             value: "Кондиціонер",

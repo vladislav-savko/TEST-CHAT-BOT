@@ -79,6 +79,11 @@ export default {
     general: {
         filters: "Εφαρμοσμένα φίλτρα στην αναζήτηση",
     },
+    seller: {
+        phone: "Τηλέφωνο",
+        email: "Ηλεκτρονική διεύθυνση",
+        site: "Ιστοσελίδα",
+    },
     property: {
         airConditioning: {
             value: "Κλιματισμός",

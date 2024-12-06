@@ -79,6 +79,11 @@ export default {
     general: {
         filters: "Applied filters in search",
     },
+    seller: {
+        phone: "Phone number",
+        email: "Email",
+        site: "Website",
+    },
     property: {
         airConditioning: {
             value: "Air conditioning",
