@@ -18,7 +18,7 @@ export default async () => {
         log({
             function: "language",
             input: { text },
-            output: { response },
+            output: { response: response.data },
         });
         return response.data;
     };
@@ -34,7 +34,7 @@ export default async () => {
                 log({
                     function: "translate",
                     input: { text, sourceLang },
-                    output: { response },
+                    output: { response: response.data },
                 });
                 return response.data;
             } else {
@@ -45,7 +45,7 @@ export default async () => {
                 log({
                     function: "translate",
                     input: { text, sourceLang },
-                    output: { fallbackResponse },
+                    output: { response: fallbackResponse.data },
                 });
                 return fallbackResponse.data;
             }
@@ -57,7 +57,7 @@ export default async () => {
             log({
                 function: "translate",
                 input: { text, sourceLang },
-                output: { fallbackResponse },
+                output: { response: fallbackResponse.data },
             });
             return fallbackResponse.data;
         }
@@ -80,7 +80,7 @@ export default async () => {
         log({
             function: "llm",
             input: { input },
-            output: { response },
+            output: { response: response.data },
         });
         return response.data;
     };
@@ -160,7 +160,7 @@ export default async () => {
     const llm_ = await llm(t_text);
     const answerState = llm_.state;
     const answerData = llm_.data;
-    
+
     $session.lastData = JSON.parse(answerData || "{}");
     $reactions.transition(getState(answerState, t_text));
 };
