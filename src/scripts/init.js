@@ -39,3 +39,11 @@ bind("preMatch", function ($context) {
 
     $context.temp.targetState = "/Loader";
 });
+
+bind("preProcess", function($context) {
+    log('preprocess');
+});
+
+bind("postProcess", function($context) {
+    log('preprocess');
+});
