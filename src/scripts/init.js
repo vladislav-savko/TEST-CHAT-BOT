@@ -45,5 +45,5 @@ bind("preProcess", function($context) {
 });
 
 bind("postProcess", function($context) {
-    log('preprocess');
+    log('postProcess');
 });
