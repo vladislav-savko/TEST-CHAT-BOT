@@ -24,7 +24,7 @@ bind("preMatch", function ($context) {
         body: { action: "typing" },
     });
 
-    var text = $context.request.query;
+    var text = $context.rawRequest.text;
 
     if (
         text.indexOf("Clear parament") === 0 ||
