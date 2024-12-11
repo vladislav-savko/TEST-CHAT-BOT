@@ -22,6 +22,9 @@ export default async () => {
             );
         } catch {}
     }
-
-    await $reactions.transition("/Preprocess");
+    $reactions.timeout({
+        interval: "3 seconds",
+        targetState: '/Preprocess',
+    });
+    // await $reactions.transition("/Preprocess");
 };
