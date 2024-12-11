@@ -8,7 +8,6 @@ function startsWithAny(text, phrases) {
 }
 
 bind("preMatch", function ($context) {
-    log('preMatch');
     log({ bind: "preMatch", input: $context });
     var phrases = [
         "Продолжить поиск", // ru
@@ -39,12 +38,4 @@ bind("preMatch", function ($context) {
     }
 
     $context.temp.targetState = "/Loader";
-});
-
-bind("preProcess", function($context) {
-    log('preprocess');
-});
-
-bind("postProcess", function($context) {
-    log('postProcess');
 });
