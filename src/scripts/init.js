@@ -9,6 +9,11 @@ function startsWithAny(text, phrases) {
 
 bind("preMatch", function ($context) {
     log({ bind: "preMatch", input: $context });
+
+    if ($context.request.requestType === "timeout") {
+        return true;
+    }
+
     var phrases = [
         "Продолжить поиск", // ru
         "Continue search", // en
@@ -24,7 +29,7 @@ bind("preMatch", function ($context) {
         body: { action: "typing" },
     });
 
-    var text = $context.rawRequest.text;
+    var text = $context.request.query;
 
     if (
         text.indexOf("Clear parament") === 0 ||
