@@ -23,15 +23,14 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
-    
+
     var text = $context.request.query;
-    log(text);
-    
-    if (text[0] === "/") return true;
+
     if (
         text.indexOf("Clear parament") === 0 ||
         text.indexOf("Show details for") === 0 ||
-        text.indexOf("Seller Contacts") === 0
+        text.indexOf("Seller Contacts") === 0 ||
+        text.indexOf("/") === 0
     )
         return true;
     if (startsWithAny(text, phrases)) {
