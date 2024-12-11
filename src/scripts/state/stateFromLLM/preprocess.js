@@ -162,5 +162,5 @@ export default async () => {
     const answerData = llm_.data;
 
     $session.lastData = JSON.parse(answerData || "{}");
-    // $reactions.transition(getState(answerState, t_text));
+    $reactions.transition(getState(answerState, t_text));
 };
