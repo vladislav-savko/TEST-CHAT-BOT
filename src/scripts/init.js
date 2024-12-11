@@ -23,8 +23,10 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
-    log(text);
+    
     var text = $context.request.query;
+    log(text);
+    
     if (text[0] === "/") return true;
     if (
         text.indexOf("Clear parament") === 0 ||
