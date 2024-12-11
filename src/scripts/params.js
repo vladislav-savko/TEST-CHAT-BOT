@@ -120,7 +120,7 @@ export const emptyParamsResult = async (params) => {
     });
 
     $reactions.timeout({
-        interval: "0.5 seconds",
+        interval: 0.5,
         targetState: route,
     });
     // $reactions.transition(route);
