@@ -119,7 +119,11 @@ export const emptyParamsResult = async (params) => {
         output: { route },
     });
 
-    $reactions.transition(route);
+    $reactions.timeout({
+        interval: "0.5 seconds",
+        targetState: route,
+    });
+    // $reactions.transition(route);
 };
 
 export const updSessionInfo = async (info, params) => {
