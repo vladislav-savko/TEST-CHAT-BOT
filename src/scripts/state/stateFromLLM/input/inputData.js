@@ -15,6 +15,5 @@ export default async () => {
     ]);
     const data = $session.data;
     await updSessionInfo(data, params);
-    // // $reactions.answer(JSON.stringify($session.data));
     await emptyParamsResult(emptyParams);
 };
