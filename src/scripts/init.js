@@ -23,7 +23,7 @@ bind("preMatch", function ($context) {
         method: "sendChatAction",
         body: { action: "typing" },
     });
-
+    log(text);
     var text = $context.request.query;
     if (text[0] === "/") return true;
     if (
