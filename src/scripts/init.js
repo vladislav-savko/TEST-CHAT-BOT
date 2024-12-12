@@ -36,7 +36,7 @@ function ga($context) {
 }
 
 bind("preMatch", function ($context) {
-    log({ bind: "preMatch", input: $context });
+    log({ bind: "preMatch", input: $context }); 
 
     if ($context.request.requestType === "timeout") {
         return true;
