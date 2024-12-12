@@ -1,5 +1,3 @@
-var ga = require("./api/ga.js");
-
 function startsWithAny(text, phrases) {
     for (var i = 0; i < phrases.length; i++) {
         if (text.indexOf(phrases[i]) === 0) {
@@ -12,12 +10,31 @@ function startsWithAny(text, phrases) {
 bind("preMatch", function ($context) {
     log({ bind: "preMatch", input: $context });
 
-    ga.ga($context.request.data.chatId, $context.request.event || "message", {
-        channel_type: $context.request.channelType,
-        message: $context.request.query,
-        session_id: $context.request.channelBotId,
-        engagement_time_msec: "100",
-    });
+    var measurement_id = $env.get("GA_MEASUREMENT_ID", "ERROR");
+    var api_secret = $env.get("GA_API_SECRET", "ERROR");
+
+    $http.query(
+        "https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}",
+        {
+            method: "POST",
+            query: { measurement_id, api_secret },
+            body: {
+                client_id: $context.request.data.chatId,
+                events: [
+                    {
+                        name: $context.request.event || "message",
+                        params: {
+                            channel_type: $context.request.channelType,
+                            message: $context.request.query,
+                            session_id: $context.request.channelBotId,
+                            engagement_time_msec: "100",
+                        },
+                    },
+                ],
+            },
+            timeout: 5000,
+        }
+    );
 
     if ($context.request.requestType === "timeout") {
         return true;
