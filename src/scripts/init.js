@@ -7,7 +7,7 @@ function startsWithAny(text, phrases) {
     return false;
 }
 
-import ga from "./api/ga";
+import ga from "./api/ga.js";
 
 // function ga($context) {
 //     var measurement_id = $env.get("GA_MEASUREMENT_ID", "ERROR");
