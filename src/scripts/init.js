@@ -7,40 +7,42 @@ function startsWithAny(text, phrases) {
     return false;
 }
 
-function ga($context) {
-    var measurement_id = $env.get("GA_MEASUREMENT_ID", "ERROR");
-    var api_secret = $env.get("GA_API_SECRET", "ERROR");
+import ga from "./api/ga";
 
-    // return $http.query(
-    //     "https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}",
-    //     {
-    //         method: "POST",
-    //         query: { measurement_id: measurement_id, api_secret: api_secret },
-    //         body: {
-    //             client_id: $context.request.data.chatId,
-    //             events: [
-    //                 {
-    //                     name: $context.request.event || "message",
-    //                     params: {
-    //                         channel_type: $context.request.channelType,
-    //                         message: $context.request.query,
-    //                         session_id: $context.request.channelBotId,
-    //                         engagement_time_msec: "100",
-    //                     },
-    //                 },
-    //             ],
-    //         },
-    //         timeout: 5000,
-    //     }
-    // );
+// function ga($context) {
+//     var measurement_id = $env.get("GA_MEASUREMENT_ID", "ERROR");
+//     var api_secret = $env.get("GA_API_SECRET", "ERROR");
 
-    return $http.get(
-        'https://suapi.net/api/text/translate?to=en&text[]="' + "Привет" + '"',
-        {
-            timeout: 10000,
-        }
-    );
-}
+//     // return $http.query(
+//     //     "https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}",
+//     //     {
+//     //         method: "POST",
+//     //         query: { measurement_id: measurement_id, api_secret: api_secret },
+//     //         body: {
+//     //             client_id: $context.request.data.chatId,
+//     //             events: [
+//     //                 {
+//     //                     name: $context.request.event || "message",
+//     //                     params: {
+//     //                         channel_type: $context.request.channelType,
+//     //                         message: $context.request.query,
+//     //                         session_id: $context.request.channelBotId,
+//     //                         engagement_time_msec: "100",
+//     //                     },
+//     //                 },
+//     //             ],
+//     //         },
+//     //         timeout: 5000,
+//     //     }
+//     // );
+
+//     return $http.get(
+//         'https://suapi.net/api/text/translate?to=en&text[]="' + 'Привет' + '"',
+//         {
+//             timeout: 10000,
+//         }
+//     );
+// }
 
 // bind("preMatch", function ($context) {
 //     log({ bind: "preMatch", input: $context });
@@ -83,6 +85,17 @@ function ga($context) {
 //     $context.temp.targetState = "/Loader";
 // });
 
-bind("preMatch", ($context) => {
+bind("preMatch", async function ($context) {
     log({ bind: "preMatch", input: $context });
+
+    await ga.ga(
+        $context.request.data.chatId,
+        $context.request.event || "message",
+        {
+            channel_type: $context.request.channelType,
+            message: $context.request.query,
+            session_id: $context.request.channelBotId,
+            engagement_time_msec: "100",
+        }
+    );
 });
