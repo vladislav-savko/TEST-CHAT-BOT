@@ -7,13 +7,11 @@ function startsWithAny(text, phrases) {
     return false;
 }
 
-bind("preMatch", function ($context) {
-    log({ bind: "preMatch", input: $context });
-
+function ga($context) {
     var measurement_id = $env.get("GA_MEASUREMENT_ID", "ERROR");
     var api_secret = $env.get("GA_API_SECRET", "ERROR");
 
-    $http.query(
+    return $http.query(
         "https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}",
         {
             method: "POST",
@@ -35,10 +33,16 @@ bind("preMatch", function ($context) {
             timeout: 5000,
         }
     );
+}
+
+bind("preMatch", function ($context) {
+    log({ bind: "preMatch", input: $context });
 
     if ($context.request.requestType === "timeout") {
         return true;
     }
+
+    ga($context);
 
     var phrases = [
         "Продолжить поиск", // ru
