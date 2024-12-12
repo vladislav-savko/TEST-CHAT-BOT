@@ -15,4 +15,3 @@ nlp:
 scriptRuntime:
   requirementsFile: package.json
   npmRcFile: .npmrc
-  forceEs6: true
