@@ -17,7 +17,7 @@ bind("preMatch", function ($context) {
         "https://www.google-analytics.com/mp/collect?measurement_id=${measurement_id}&api_secret=${api_secret}",
         {
             method: "POST",
-            query: { measurement_id, api_secret },
+            query: { measurement_id: measurement_id, api_secret: api_secret },
             body: {
                 client_id: $context.request.data.chatId,
                 events: [
