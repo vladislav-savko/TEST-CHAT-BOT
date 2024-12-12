@@ -1,6 +1,6 @@
 //@ts-check
 import axios from "axios";
-import { API__LINK } from "./config.js";
+import { API__LINK } from "../config.js";
 
 const ENDPOINT = {
     get__cities: "city/search-into-database",

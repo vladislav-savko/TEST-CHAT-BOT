@@ -1,4 +1,4 @@
-import api from "./api.js";
+import anisad from "./api/anisad.js";
 import TurndownService from "turndown";
 import { VERSION } from "./config.js";
 import local from "./local/local.js";
@@ -92,7 +92,7 @@ export const initSession = () => {
 export const getCityInfo = async (city, country = "cyprus") => {
     country = country || "cyprus";
     try {
-        const resC = await api.getCitiesInfo(city, country);
+        const resC = await anisad.getCitiesInfo(city, country);
         // if (!resC) return false;
         const filteredCities = resC.filter(
             (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
@@ -183,7 +183,7 @@ export const getListings = async (sessionData) => {
     sessionData.take = 3;
 
     try {
-        const res = await api.getListing(sessionData);
+        const res = await anisad.getListing(sessionData);
         const hasListings = res && res.data.listings.length > 0;
 
         log({
@@ -250,7 +250,7 @@ export const printPost = async (listing) => {
     const turndownService = new TurndownService();
     const { buttons } = local(lang);
 
-    const get_description = await api.getTranslateListing(listing.id, lang);
+    const get_description = await anisad.getTranslateListing(listing.id, lang);
 
     const description = turndownService
         .turndown(get_description.description)
@@ -416,7 +416,7 @@ export const printSellerInfo = async (data) => {
 export const getListingById = async (id) => {
     const { lang } = $session;
     try {
-        const { data: listing } = await api.getListingById(id);
+        const { data: listing } = await anisad.getListingById(id);
 
         if (listing) {
             await printPost(listing);
@@ -442,7 +442,7 @@ export const getSeller = async () => {
     const { lang, seller: sellerId } = $session;
 
     try {
-        const { data: seller } = await api.getSellerById(sellerId);
+        const { data: seller } = await anisad.getSellerById(sellerId);
 
         if (seller) {
             await printSellerInfo(seller);
