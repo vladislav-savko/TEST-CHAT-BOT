@@ -3,7 +3,7 @@ import axios from "axios";
 import { TG_TOKEN } from "../../config.js";
 
 export default async () => {
-    const isTelegram = $request.channelType === "telegram";
+    const isTelegram = await $request.channelType === "telegram";
 
     if (isTelegram) {
         try {

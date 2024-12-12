@@ -1,3 +1,5 @@
+var ga = require("./api/ga.js");
+
 function startsWithAny(text, phrases) {
     for (var i = 0; i < phrases.length; i++) {
         if (text.indexOf(phrases[i]) === 0) {
@@ -9,6 +11,13 @@ function startsWithAny(text, phrases) {
 
 bind("preMatch", function ($context) {
     log({ bind: "preMatch", input: $context });
+
+    ga.ga($context.request.data.chatId, $context.request.event || "message", {
+        channel_type: $context.request.channelType,
+        message: $context.request.query,
+        session_id: $context.request.channelBotId,
+        engagement_time_msec: "100",
+    });
 
     if ($context.request.requestType === "timeout") {
         return true;
