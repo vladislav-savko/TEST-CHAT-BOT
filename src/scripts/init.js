@@ -46,6 +46,6 @@
 //     $context.temp.targetState = "/Loader";
 // });
 
-bind("preMatch", ($context) => {
+export default bind("preMatch", ($context) => {
     log($context);
 });
