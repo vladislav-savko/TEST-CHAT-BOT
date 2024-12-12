@@ -6,8 +6,6 @@ require: scripts/state/stateFromLLM/index.js
     name = stateJs
     
 require: scripts/init.js
-    type = scriptEs6
-    name = initJs
     
 theme: /
     
