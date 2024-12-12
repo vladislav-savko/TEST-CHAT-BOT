@@ -16,7 +16,7 @@ function ga($context) {
         {
             method: "POST",
             query: { measurement_id: measurement_id, api_secret: api_secret },
-            body: {
+            body: JSON.stringify({
                 client_id: $context.request.data.chatId,
                 events: [
                     {
@@ -29,14 +29,14 @@ function ga($context) {
                         },
                     },
                 ],
-            },
+            }),
             timeout: 5000,
         }
     );
 }
 
 bind("preMatch", function ($context) {
-    log({ bind: "preMatch", input: $context }); 
+    log({ bind: "preMatch", input: $context });
 
     if ($context.request.requestType === "timeout") {
         return true;
