@@ -29,13 +29,38 @@ export default {
         continueSearch: `Aby kontynuować wyszukiwanie, powiedz \*Kontynuuj wyszukiwanie\*`,
     },
     help: [
-        "Aby zmienić język, napisz język, w którym chcesz, aby twój bot się z tobą komunikował. Na przykład, Przełącz na język grecki",
+        "Aby zmienić język, napisz język, w którym chcesz, aby bot się z tobą komunikował. Na przykład 'Przełącz na polski'",
         "Bot może mówić w 5 językach: \n - Angielski \n - Grecki \n - Rosyjski \n - Ukraiński \n - Polski",
-        "Aby rozpocząć wyszukiwanie, musisz podać lokalizację, typ nieruchomości (dom, willa, mieszkanie, handel, działka), typ oferty (wynajem lub kupno) i budżet. Na przykład, *Chcę kupić dom w Limassol z budżetem powyżej 10 tys. dolarów*",
-        "Oto lista udogodnień, które możesz wpisać: \n - System alarmowy \n - Klimatyzacja *(Wszędzie, Tylko w sypialniach, Brak)* \n - Balkon \n - Stan budynku *(Gotowe do zamieszkania, W budowie)* \n - Stan *(Nowe, Dobrze utrzymane, Wymaga remontu)* \n - Kuchnia \n - Parking \n - Gaz ziemny \n - Elektryczność \n - Internet *(Brak, Wi-Fi, Kablowy, Mobilny)* \n - Ogrzewanie *(Brak, Centralne, Gazowe, Elektryczne, Paliwo ciekłe)* \n - Ogrzewanie wody *(Brak, Centralne, Bojler, System słoneczny, System fotowoltaiczny)* \n - Udogodnienia *(Blisko szkoły, Blisko parku, Spokojna okolica, W centrum, Miejsce parkingowe, Piękny widok, Sauna, Widok na morze, Ochrona, Magazyn, Blisko metra, Blisko przedszkola, Blisko morza, Blisko jeziora, Z ogrodem, Z garażem)*",
-        "Jeśli podczas dodawania parametrów do zapytania napotkasz brak wyników wyszukiwania, możesz cofnąć ostatnią wprowadzaną wartość za pomocą komendy *Cofnij*.",
-        `Aby uzyskać więcej szczegółów na temat konkretnej nieruchomości, wpisz "*pokaż wg* _id nieruchomości_". Możesz także użyć komend "*szczegóły dla* _pierwsza|ostatnia_ *jedna*" po wyświetleniu listy.`,
-        "Jeśli chcesz zresetować rozmowę i wyczyścić wszystkie poprzednie informacje, po prostu powiedz *Reset*",
+        "Aby rozpocząć wyszukiwanie, musisz podać lokalizację, typ nieruchomości (dom, willa, mieszkanie, komercyjna, działka), typ ogłoszenia (wynajem lub zakup) oraz budżet. Na przykład *Chcę kupić dom w Limassol, mój budżet to ponad 100 tysięcy euro*",
+        "Oto lista udogodnień, które możesz podać: \n" +
+        "- Typ nieruchomości *(Mieszkanie, Willa, Dom wolnostojący, Szeregowiec, Biuro, Hotel, Produkcja, Lokal użytkowy, Restauracja, Magazyn, Parking, Sklep, Inna nieruchomość komercyjna, Działka komercyjna, Działka budowlana, Działka rolna)* _Chcę mieszkanie_\n" +
+        "- Typ ogłoszenia *(Wynajem, Wynajem krótkoterminowy, Sprzedaż)* _Interesuje mnie zakup_\n" +
+        "- Cena\n" +
+        "- Wyposażenie *(Brak, Częściowo, Pełne)* _Częściowo umeblowane_\n" +
+        "- Status nieruchomości *(Nowe, Z drugiej ręki)* _Nowa nieruchomość_\n" +
+        "- Stan *(Nowe, Dobry stan, Wymaga remontu)* _Dobry stan_\n" +
+        "- System alarmowy\n" +
+        "- Klimatyzacja *(Wszędzie, Tylko w sypialniach, Brak)* _Brak klimatyzacji_\n" +
+        "- Ogrzewanie *(Brak, Centralne, Gazowe, Elektryczne, Paliwo płynne)* _Ogrzewanie gazowe_\n" +
+        "- Podgrzewacz wody *(Brak, Centralny, Bojler, System słoneczny, System fotowoltaiczny)\n" +
+        "- Balkon\n" +
+        "- Rok budowy\n" +
+        "- Stan budynku *(Gotowy do zamieszkania, W trakcie budowy)\n" +
+        "- Stan *(Nowe, Dobrze utrzymane, Wymaga remontu)\n" +
+        "- Kuchnia\n" +
+        "- Parking\n" +
+        "- Powierzchnia\n" +
+        "- Liczba pokoi\n" +
+        "- Liczba łazienek\n" +
+        "- Dozwolone zwierzęta\n" +
+        "- Elektryczność\n" +
+        "- Internet *(Brak, Wi-Fi, Kablowy, Mobilny)\n" +
+        "- Cechy lokalizacji *(Blisko jeziora, Blisko morza, Blisko stoku, Blisko szkoły, Piękny widok, Blisko lotniska, Blisko rzeki, Blisko lasu, Blisko gór, Blisko przedszkola, Blisko metra, Blisko parku, Centrum miasta, Widok na morze, Cicha okolica, Prestigjowa okolica, Blisko supermarketu)* _Blisko morza_\n" +
+        "- Udogodnienia infrastrukturalne *(Ochrona, Prywatne wejście, Strefa do grillowania, Golf, Parking podziemny, Kort tenisowy, Plac zabaw, Monitoring, Siłownia, Winda, Zadaszony basen, Recepcja, Ogrodzone wejście, Ogrzewanie podłogowe, Taras, Zrównoważony design, Panele słoneczne, Izolacja cieplna, Piwnica, Taras na dachu, Ogród, Garaż, Działka, Magazyn, Sauna)* _Blisko siłowni_\n" +
+        "- Udogodnienia remontowe *(Duży balkon, Nowoczesny design, Duża kuchnia, Okna panoramiczne, Łazienka z wanną, Słoneczny podgrzewacz wody, Panele podłogowe w sypialniach)* _Nowoczesny design_\n" +
+        "- Dodatkowe udogodnienia *(Najlepsza cena, Do uzgodnienia, Bez VAT, Dokumenty własnościowe)* _Pokaż z najlepszą ceną_",
+        "Aby uzyskać więcej informacji o konkretnej nieruchomości, wpisz '*pokaż po* _id nieruchomości_'. Możesz również użyć polecenia '*szczegóły dla* _pierwszego|ostatniego_ *ogłoszenia*' po wyświetleniu listy.",
+        "Jeśli chcesz zresetować rozmowę i usunąć wszystkie poprzednie informacje, po prostu powiedz *Reset*",
     ],
     hello: [
         `Cześć! Jestem twoim asystentem ds. nieruchomości. Czy chcesz wynająć czy kupić nieruchomość?`,

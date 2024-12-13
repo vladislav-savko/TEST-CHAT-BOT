@@ -29,13 +29,38 @@ export default {
         continueSearch: `To continue the search, say \*Continue search\*`,
     },
     help: [
-        "To switch language write the language in which you want your bot to interact with you. For instance, **Switch to Greek**",
-        "Bot can speak 5 languages: \n - English \n - Greek \n - Russian \n - Ukrainian \n - Polish",
-        "To start the search, you need to state the location, property type(house, villa, apartment, commerce, plot), listing type (rent or buy) and budget. For example, *I want to buy a house in Limassol with the budget above 10k$*",
-        "Here is the list of benefits you can type: \n - Alarm system \n - Air conditioning *(Everywhere, Only bedrooms, No)* \n - Balcony \n - Building condition *(Ready To move in , Under construction)* \n - Condition *(New , Well maintaned, Needs renovation)* \n - Kitchen \n - Parking \n - Natural gas \n - Electricity \n - Internet *(No, Wi-Fi, Cable, Mobile)* \n - Heating *(No, Central, Gas, Elctric, Liquid fuel)* \n - Water heating *(No, Central, Boiler, Solar system, Photovoltaic system)* \n - Amenities *(Near the school, Near the park, Calm district, In the center, Parking place, Beautiful view, Sauna, Sea view, Security, Storage, Near the subway, Near the kindergarten, Near the sea, Near the lake, With garden, With garage)*",
-        "If, when adding parameters to a query, at some point you encounter a lack of search results, you can cancel the last entered value using the *Undo* command.",
-        `To get more details on a specific property, enter "*show by* _id property_". You can also use the "*details for* _first|last_ *one*" commands after the listing is displayed.`,
-        "If you would like to restart the conversation and clear all previous information, simply say *Reset*",
+        "To change the language, type the language you want the bot to interact with. For example, 'Switch to Polish'",
+        "The bot can speak 5 languages: \n - English \n - Greek \n - Russian \n - Ukrainian \n - Polish",
+        "To start your search, you need to specify the location, property type (house, villa, apartment, commercial property, land), ad type (rent or buy), and budget. For example, *I want to buy a house in Limassol, my budget is over 100 thousand euros*",
+        "Here is a list of amenities you can enter: \n" +
+        "- Property type *(Apartment, Villa, Detached house, Semi-detached house, Office, Hotel, Manufacturing, Retail, Restaurant, Warehouse, Parking, Shop, Restaurant, Other commercial property, Commercial land, Residential land, Agricultural land)* _I want an apartment_\n" +
+        "- Ad type *(Rent, Short-term rental, Sale)* _Interested in buying_\n" +
+        "- Price\n" +
+        "- Furnishing *(None, Partially, Fully)* _Partially furnished_\n" +
+        "- Property status *(New, Resale)* _New property_\n" +
+        "- Condition *(New, Good condition, Needs renovation)* _Good condition_\n" +
+        "- Security system\n" +
+        "- Air conditioning *(Everywhere, Only in bedrooms, None)* _No air conditioning_\n" +
+        "- Heating *(None, Central, Gas, Electric, Liquid fuel)* _Gas heating_\n" +
+        "- Water heater *(None, Central, Boiler, Solar system, Photovoltaic system)\n" +
+        "- Balcony\n" +
+        "- Year built\n" +
+        "- Building condition *(Ready to move in, Under construction)\n" +
+        "- Condition *(New, Well-maintained, Needs repair)\n" +
+        "- Kitchen\n" +
+        "- Parking\n" +
+        "- Floor area\n" +
+        "- Number of rooms\n" +
+        "- Number of bathrooms\n" +
+        "- Pets allowed\n" +
+        "- Electricity\n" +
+        "- Internet *(None, Wi-Fi, Cable, Mobile)\n" +
+        "- Location features *(By a lake, By the sea, By a slope, Near a school, Beautiful view, Near an airport, Near a river, Near a forest, By the mountains, Near a kindergarten, Near a metro, Near a park, City center, Sea view, Quiet area, Prestigious area, Near a supermarket)* _By the sea_\n" +
+        "- Infrastructure features *(Security, Separate entrance, BBQ area, Golf, Underground parking, Tennis court, Playground, CCTV, Gym, Elevator, Indoor pool, Reception, Gated entrance, Underfloor heating, Terrace, Sustainable design, Solar panels, Thermal insulation, With a basement, Roof terrace, With a garden, With a garage, With land, Warehouse, Sauna)* _Near the gym_\n" +
+        "- Renovation features *(Large balcony, Modern design, Big kitchen, Panoramic windows, Bathroom with a bathtub, Solar water heater, Laminate in all bedrooms)* _With modern design_\n" +
+        "- Additional amenities *(Best price, Negotiable, No VAT, Ownership documents)* _Show best price_",
+        "To get more details about a specific property, enter '*show by* _property id_'. You can also use the commands '*details for* _first|last_ *ad*' after the list is displayed.",
+        "If you want to restart the conversation and clear all previous information, just say *Clear filters*",
     ],
     hello: [
         `Hello! I am your real estate assistant. Are you looking to rent or buy a property?`,
