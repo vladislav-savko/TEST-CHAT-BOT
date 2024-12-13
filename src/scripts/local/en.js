@@ -29,39 +29,40 @@ export default {
         continueSearch: `To continue the search, say \*Continue search\*`,
     },
     help: [
-        "To change the language, type the language you want the bot to interact with. For example, 'Switch to Polish'",
+        "To change the language, specify the language in which you want the bot to interact with you. For example, Switch to Polish.",
         "The bot can speak 5 languages: \n - English \n - Greek \n - Russian \n - Ukrainian \n - Polish",
-        "To start your search, you need to specify the location, property type (house, villa, apartment, commercial property, land), ad type (rent or buy), and budget. For example, *I want to buy a house in Limassol, my budget is over 100 thousand euros*",
-        "Here is a list of amenities you can enter: \n" +
-        "- Property type *(Apartment, Villa, Detached house, Semi-detached house, Office, Hotel, Manufacturing, Retail, Restaurant, Warehouse, Parking, Shop, Restaurant, Other commercial property, Commercial land, Residential land, Agricultural land)* _I want an apartment_\n" +
-        "- Ad type *(Rent, Short-term rental, Sale)* _Interested in buying_\n" +
-        "- Price\n" +
-        "- Furnishing *(None, Partially, Fully)* _Partially furnished_\n" +
-        "- Property status *(New, Resale)* _New property_\n" +
-        "- Condition *(New, Good condition, Needs renovation)* _Good condition_\n" +
-        "- Security system\n" +
-        "- Air conditioning *(Everywhere, Only in bedrooms, None)* _No air conditioning_\n" +
-        "- Heating *(None, Central, Gas, Electric, Liquid fuel)* _Gas heating_\n" +
-        "- Water heater *(None, Central, Boiler, Solar system, Photovoltaic system)\n" +
-        "- Balcony\n" +
-        "- Year built\n" +
-        "- Building condition *(Ready to move in, Under construction)\n" +
-        "- Condition *(New, Well-maintained, Needs repair)\n" +
-        "- Kitchen\n" +
-        "- Parking\n" +
-        "- Floor area\n" +
-        "- Number of rooms\n" +
-        "- Number of bathrooms\n" +
-        "- Pets allowed\n" +
-        "- Electricity\n" +
-        "- Internet *(None, Wi-Fi, Cable, Mobile)\n" +
-        "- Location features *(By a lake, By the sea, By a slope, Near a school, Beautiful view, Near an airport, Near a river, Near a forest, By the mountains, Near a kindergarten, Near a metro, Near a park, City center, Sea view, Quiet area, Prestigious area, Near a supermarket)* _By the sea_\n" +
-        "- Infrastructure features *(Security, Separate entrance, BBQ area, Golf, Underground parking, Tennis court, Playground, CCTV, Gym, Elevator, Indoor pool, Reception, Gated entrance, Underfloor heating, Terrace, Sustainable design, Solar panels, Thermal insulation, With a basement, Roof terrace, With a garden, With a garage, With land, Warehouse, Sauna)* _Near the gym_\n" +
-        "- Renovation features *(Large balcony, Modern design, Big kitchen, Panoramic windows, Bathroom with a bathtub, Solar water heater, Laminate in all bedrooms)* _With modern design_\n" +
-        "- Additional amenities *(Best price, Negotiable, No VAT, Ownership documents)* _Show best price_",
-        "To get more details about a specific property, enter '*show by* _property id_'. You can also use the commands '*details for* _first|last_ *ad*' after the list is displayed.",
-        "If you want to restart the conversation and clear all previous information, just say *Clear filters*",
+        "To start a search, you need to specify the location, type of property (house, villa, apartment, commercial property, plot), type of listing (rent or purchase), and budget. For example, *I want to buy a house in Limassol, my budget is over 100 thousand euros*",
+        "Here’s a list of filters you can input: \n" +
+            `🔘 *Property type* \nApartment, Villa, Detached House, Semi-detached House, Office, Hotel, Manufacturing, Commercial Space, Catering Facility, Warehouse, Parking, Shop, Restaurant, Other Commercial Real Estate, Commercial Plot, Residential Plot, Agricultural Plot \n💬 _"Looking for an apartment"_\n\n` +
+            `🔘 *Listing type* \nRent, Short-term Rent, Sale \n💬 _"Want to buy"_\n\n` +
+            `🔘 *Price* \n💬 _"Budget from 150k to 200k euros"_\n\n` +
+            `🔘 *Furnishing* \nNone, Partially, Fully \n💬 _"Partially furnished"_\n\n` +
+            `🔘 *Property status* \nNew, Resale \n💬 _"New property"_\n\n` +
+            `🔘 *Condition* \nNew, Good Condition, Needs Renovation \n💬 _"In good condition"_\n\n` +
+            `🔘 *Security Alarm System* \n💬 _"With a security system"_\n\n` +
+            `🔘 *Air Conditioning* \nEverywhere, Only in Bedrooms, None \n💬 _"Without air conditioning"_\n\n` +
+            `🔘 *Heating* \nNone, Central, Gas, Electric, Liquid Fuel \n💬 _"With gas heating"_\n\n` +
+            `🔘 *Water Heating* \nNone, Central, Boiler, Solar System, Photovoltaic System \n💬 _"With central water supply"_\n\n` +
+            `🔘 *Balcony* \n💬 _"With a balcony"_\n\n` +
+            `🔘 *Year Built* \n💬 _"Built in 2024"_\n\n` +
+            `🔘 *Building Condition* \nReady to Move In, Under Construction \n💬 _"The building is under construction"_\n\n` +
+            `🔘 *Condition* \nNew, Well-maintained, Needs Repairs \n💬 _"Well-maintained apartment"_\n\n` +
+            `🔘 *Kitchen* \n💬 _"With a kitchen"_\n\n` +
+            `🔘 *Parking* \n💬 _"With parking"_\n\n` +
+            `🔘 *Floor Area* \n💬 _"90 square meters"_\n\n` +
+            `🔘 *Number of Rooms* \n💬 _"2-3 rooms"_\n\n` +
+            `🔘 *Number of Bathrooms* \n💬 _"Two bathrooms"_\n\n` +
+            `🔘 *Pet-friendly* \n💬 _"Pets allowed"_\n\n` +
+            `🔘 *Electricity* \n💬 _"With electricity connection"_\n\n` +
+            `🔘 *Internet* \nNone, Wi-Fi, Cable, Mobile \n💬 _"Need cable internet"_\n\n` +
+            `🔘 *Location Features* \nNear a Lake, Near the Sea, Near a Slope, Near a School, Scenic View, Near the Airport, Near a River, Near a Forest, Near the Mountains, Near a Kindergarten, Near the Metro, Near a Park, City Center, Sea View, Quiet Area, Prestigious Area, Near a Supermarket \n💬 _"Near the sea"_\n\n` +
+            `🔘 *Infrastructure Facilities* \nSecurity, Separate Entrance, Barbecue Area, Golf, Underground Parking, Tennis Court, Playground, Video Surveillance, Gym, Elevator, Indoor Pool, Reception, Gated Entrance, Underfloor Heating, Terrace, Sustainable Design, Solar Panels, Thermal Insulation, Basement, Roof Terrace, Garden, Garage, Plot, Storage, Sauna \n💬 _"Near a gym"_\n\n` +
+            `🔘 *Renovation Features* \nLarge Balcony, Modern Design, Large Kitchen, Panoramic Windows, Bathroom with Bathtub, Solar Water Heater, Laminate in All Bedrooms \n💬 _"With modern design"_ \n\n` +
+            `🔘 *Additional Features* \nBest Price, Negotiable, No VAT, Title Deeds \n💬 _"Show with the best price"_\n\n`,
+        `To get more details about a specific property, enter "*show by* _property ID_". You can also use commands "*details for* _first|last_ *listing*" after displaying the list.`,
+        `If you want to restart the conversation and clear all previous information, simply say *Reset*`,
     ],
+    
     hello: [
         `Hello! I am your real estate assistant. Are you looking to rent or buy a property?`,
         `Hi! I’m here to help you find the perfect home. Are you planning to rent or buy?`,

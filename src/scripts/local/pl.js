@@ -29,39 +29,39 @@ export default {
         continueSearch: `Aby kontynuować wyszukiwanie, powiedz \*Kontynuuj wyszukiwanie\*`,
     },
     help: [
-        "Aby zmienić język, napisz język, w którym chcesz, aby bot się z tobą komunikował. Na przykład 'Przełącz na polski'",
-        "Bot może mówić w 5 językach: \n - Angielski \n - Grecki \n - Rosyjski \n - Ukraiński \n - Polski",
-        "Aby rozpocząć wyszukiwanie, musisz podać lokalizację, typ nieruchomości (dom, willa, mieszkanie, komercyjna, działka), typ ogłoszenia (wynajem lub zakup) oraz budżet. Na przykład *Chcę kupić dom w Limassol, mój budżet to ponad 100 tysięcy euro*",
-        "Oto lista udogodnień, które możesz podać: \n" +
-        "- Typ nieruchomości *(Mieszkanie, Willa, Dom wolnostojący, Szeregowiec, Biuro, Hotel, Produkcja, Lokal użytkowy, Restauracja, Magazyn, Parking, Sklep, Inna nieruchomość komercyjna, Działka komercyjna, Działka budowlana, Działka rolna)* _Chcę mieszkanie_\n" +
-        "- Typ ogłoszenia *(Wynajem, Wynajem krótkoterminowy, Sprzedaż)* _Interesuje mnie zakup_\n" +
-        "- Cena\n" +
-        "- Wyposażenie *(Brak, Częściowo, Pełne)* _Częściowo umeblowane_\n" +
-        "- Status nieruchomości *(Nowe, Z drugiej ręki)* _Nowa nieruchomość_\n" +
-        "- Stan *(Nowe, Dobry stan, Wymaga remontu)* _Dobry stan_\n" +
-        "- System alarmowy\n" +
-        "- Klimatyzacja *(Wszędzie, Tylko w sypialniach, Brak)* _Brak klimatyzacji_\n" +
-        "- Ogrzewanie *(Brak, Centralne, Gazowe, Elektryczne, Paliwo płynne)* _Ogrzewanie gazowe_\n" +
-        "- Podgrzewacz wody *(Brak, Centralny, Bojler, System słoneczny, System fotowoltaiczny)\n" +
-        "- Balkon\n" +
-        "- Rok budowy\n" +
-        "- Stan budynku *(Gotowy do zamieszkania, W trakcie budowy)\n" +
-        "- Stan *(Nowe, Dobrze utrzymane, Wymaga remontu)\n" +
-        "- Kuchnia\n" +
-        "- Parking\n" +
-        "- Powierzchnia\n" +
-        "- Liczba pokoi\n" +
-        "- Liczba łazienek\n" +
-        "- Dozwolone zwierzęta\n" +
-        "- Elektryczność\n" +
-        "- Internet *(Brak, Wi-Fi, Kablowy, Mobilny)\n" +
-        "- Cechy lokalizacji *(Blisko jeziora, Blisko morza, Blisko stoku, Blisko szkoły, Piękny widok, Blisko lotniska, Blisko rzeki, Blisko lasu, Blisko gór, Blisko przedszkola, Blisko metra, Blisko parku, Centrum miasta, Widok na morze, Cicha okolica, Prestigjowa okolica, Blisko supermarketu)* _Blisko morza_\n" +
-        "- Udogodnienia infrastrukturalne *(Ochrona, Prywatne wejście, Strefa do grillowania, Golf, Parking podziemny, Kort tenisowy, Plac zabaw, Monitoring, Siłownia, Winda, Zadaszony basen, Recepcja, Ogrodzone wejście, Ogrzewanie podłogowe, Taras, Zrównoważony design, Panele słoneczne, Izolacja cieplna, Piwnica, Taras na dachu, Ogród, Garaż, Działka, Magazyn, Sauna)* _Blisko siłowni_\n" +
-        "- Udogodnienia remontowe *(Duży balkon, Nowoczesny design, Duża kuchnia, Okna panoramiczne, Łazienka z wanną, Słoneczny podgrzewacz wody, Panele podłogowe w sypialniach)* _Nowoczesny design_\n" +
-        "- Dodatkowe udogodnienia *(Najlepsza cena, Do uzgodnienia, Bez VAT, Dokumenty własnościowe)* _Pokaż z najlepszą ceną_",
-        "Aby uzyskać więcej informacji o konkretnej nieruchomości, wpisz '*pokaż po* _id nieruchomości_'. Możesz również użyć polecenia '*szczegóły dla* _pierwszego|ostatniego_ *ogłoszenia*' po wyświetleniu listy.",
-        "Jeśli chcesz zresetować rozmowę i usunąć wszystkie poprzednie informacje, po prostu powiedz *Reset*",
-    ],
+        "Aby zmienić język, podaj język, w którym chcesz, aby bot się z Tobą komunikował. Na przykład, Przełącz na polski.",
+        "Bot obsługuje 5 języków: \n - Angielski \n - Grecki \n - Rosyjski \n - Ukraiński \n - Polski",
+        "Aby rozpocząć wyszukiwanie, należy określić lokalizację, rodzaj nieruchomości (dom, willa, mieszkanie, lokal użytkowy, działka), typ ogłoszenia (wynajem lub kupno) oraz budżet. Na przykład, *Chcę kupić dom w Limassol, mój budżet to ponad 100 tysięcy euro*",
+        "Oto lista filtrów, które możesz wprowadzić: \n" +
+            `🔘 *Rodzaj nieruchomości* \nMieszkanie, Willa, Dom wolnostojący, Dom bliźniaczy, Biuro, Hotel, Przemysłowy, Lokal handlowy, Obiekt gastronomiczny, Magazyn, Parking, Sklep, Restauracja, Inna nieruchomość komercyjna, Działka komercyjna, Działka mieszkaniowa, Działka rolna \n💬 _"Szukam mieszkania"_\n\n` +
+            `🔘 *Rodzaj ogłoszenia* \nWynajem, Wynajem krótkoterminowy, Sprzedaż \n💬 _"Chcę kupić"_\n\n` +
+            `🔘 *Cena* \n💬 _"Budżet od 150k do 200k euro"_\n\n` +
+            `🔘 *Umeblowanie* \nBrak, Częściowe, Pełne \n💬 _"Częściowo umeblowane"_\n\n` +
+            `🔘 *Status nieruchomości* \nNowa, Na rynku wtórnym \n💬 _"Nowa nieruchomość"_\n\n` +
+            `🔘 *Stan* \nNowy, W dobrym stanie, Wymaga remontu \n💬 _"W dobrym stanie"_\n\n` +
+            `🔘 *System alarmowy* \n💬 _"Z systemem alarmowym"_\n\n` +
+            `🔘 *Klimatyzacja* \nWszędzie, Tylko w sypialniach, Brak \n💬 _"Bez klimatyzacji"_\n\n` +
+            `🔘 *Ogrzewanie* \nBrak, Centralne, Gazowe, Elektryczne, Paliwo ciekłe \n💬 _"Z ogrzewaniem gazowym"_\n\n` +
+            `🔘 *Podgrzewanie wody* \nBrak, Centralne, Bojler, System solarny, System fotowoltaiczny \n💬 _"Z centralnym podgrzewaniem wody"_\n\n` +
+            `🔘 *Balkon* \n💬 _"Z balkonem"_\n\n` +
+            `🔘 *Rok budowy* \n💬 _"Zbudowany w 2024 roku"_\n\n` +
+            `🔘 *Stan budynku* \nGotowy do zamieszkania, W budowie \n💬 _"Budynek w budowie"_\n\n` +
+            `🔘 *Stan* \nNowy, Dobrze utrzymany, Wymaga napraw \n💬 _"Dobrze utrzymane mieszkanie"_\n\n` +
+            `🔘 *Kuchnia* \n💬 _"Z kuchnią"_\n\n` +
+            `🔘 *Parking* \n💬 _"Z parkingiem"_\n\n` +
+            `🔘 *Powierzchnia* \n💬 _"90 metrów kwadratowych"_\n\n` +
+            `🔘 *Liczba pokoi* \n💬 _"2-3 pokoje"_\n\n` +
+            `🔘 *Liczba łazienek* \n💬 _"Dwie łazienki"_\n\n` +
+            `🔘 *Zwierzęta* \n💬 _"Dozwolone zwierzęta"_\n\n` +
+            `🔘 *Prąd* \n💬 _"Z dostępem do prądu"_\n\n` +
+            `🔘 *Internet* \nBrak, Wi-Fi, Kablowy, Mobilny \n💬 _"Potrzebuję internetu kablowego"_\n\n` +
+            `🔘 *Cechy lokalizacji* \nBlisko jeziora, Blisko morza, Blisko stoku, Blisko szkoły, Piękny widok, Blisko lotniska, Blisko rzeki, Blisko lasu, Blisko gór, Blisko przedszkola, Blisko metra, Blisko parku, Centrum miasta, Widok na morze, Spokojna okolica, Prestiżowa okolica, Blisko supermarketu \n💬 _"Blisko morza"_\n\n` +
+            `🔘 *Udogodnienia* \nOchrona, Osobne wejście, Strefa na grilla, Golf, Podziemny parking, Kort tenisowy, Plac zabaw, Monitoring, Siłownia, Winda, Kryty basen, Recepcja, Ogrodzone wejście, Ogrzewanie podłogowe, Taras, Projekt ekologiczny, Panele słoneczne, Izolacja termiczna, Piwnica, Taras na dachu, Ogród, Garaż, Działka, Magazyn, Sauna \n💬 _"Blisko siłowni"_\n\n` +
+            `🔘 *Remonty* \nDuży balkon, Nowoczesny design, Duża kuchnia, Okna panoramiczne, Łazienka z wanną, Solarny podgrzewacz wody, Panele w sypialniach \n💬 _"Z nowoczesnym designem"_ \n\n` +
+            `🔘 *Dodatkowe cechy* \nNajlepsza cena, Do negocjacji, Bez VAT, Tytuły własności \n💬 _"Pokaż najlepszą cenę"_\n\n`,
+        `Aby uzyskać szczegółowe informacje o konkretnej nieruchomości, wpisz "*pokaż według* _ID nieruchomości_". Możesz także użyć poleceń "*szczegóły dla* _pierwszej|ostatniej_ *oferty*" po wyświetleniu listy.`,
+        `Jeśli chcesz zrestartować rozmowę i wyczyścić wszystkie wcześniejsze informacje, po prostu powiedz *Reset*`,
+    ],    
     hello: [
         `Cześć! Jestem twoim asystentem ds. nieruchomości. Czy chcesz wynająć czy kupić nieruchomość?`,
         `Witaj! Jestem tutaj, aby pomóc ci znaleźć idealny dom. Czy planujesz wynająć czy kupić?`,
