@@ -68,6 +68,14 @@ export const processParams = async () => {
             $session.data.swimmingPool = [true];
     }
 
+    if (newData.floorArea) {
+        $session.data.floorAreaFrom = Number(newData.floorArea);
+    }
+
+    if (newData.bathrooms || newData.bathrooms?.length) {
+        $session.data.bathroomNumbers = Array.isArray(newData.bathrooms) ? newData.bathrooms : [newData.bathrooms]
+    }
+
     if (
         !$session.location ||
         (!$session.data.districtId &&

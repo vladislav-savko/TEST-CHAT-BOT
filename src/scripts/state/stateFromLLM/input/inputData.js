@@ -1,5 +1,9 @@
 import { copyObjectWithoutFields } from "../../../utilits.js";
-import { processParams, updSessionInfo, emptyParamsResult } from "../../../params.js";
+import {
+    processParams,
+    updSessionInfo,
+    emptyParamsResult,
+} from "../../../params.js";
 
 export default async () => {
     $session.state = "SwitchSearch";
@@ -12,6 +16,8 @@ export default async () => {
         "propertyType",
         "priceFrom",
         "priceTo",
+        "floorArea",
+        "bathrooms",
     ]);
     const data = $session.data;
     await updSessionInfo(data, params);

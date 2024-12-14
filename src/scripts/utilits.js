@@ -785,8 +785,8 @@ export const getFiltersInfo = async () => {
             text: tArea,
             info:
                 floorAreaFrom || floorAreaTo
-                    ? `*${tArea}*: ${floorAreaFrom || "0"} - ${
-                          floorAreaTo || ""
+                    ? `*${tArea}*: ${floorAreaFrom || "0"} ${
+                          `- ${floorAreaTo}` || ""
                       }`
                     : null,
         },
