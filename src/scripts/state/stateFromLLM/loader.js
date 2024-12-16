@@ -2,7 +2,8 @@ import response from "../../response.js";
 import axios from "axios";
 
 export default async () => {
-    const isTelegram = (await $request.channelType) === "telegram";
+    const chanel = await $request.channelType;
+    const isTelegram = chanel === "telegram";
 
     if (isTelegram) {
         try {

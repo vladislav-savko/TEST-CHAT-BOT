@@ -52,12 +52,14 @@ bind("preMatch", function ($context) {
         "Kontynuuj wyszukiwanie", // pl
     ];
 
-    $context.response.replies = $context.response.replies || [];
-    $context.response.replies.push({
-        type: "raw",
-        method: "sendChatAction",
-        body: { action: "typing" },
-    });
+    if ($context.request.channelType === "telegram") {
+        $context.response.replies = $context.response.replies || [];
+        $context.response.replies.push({
+            type: "raw",
+            method: "sendChatAction",
+            body: { action: "typing" },
+        });
+    }
 
     var text = $context.request.query;
 
@@ -66,8 +68,10 @@ bind("preMatch", function ($context) {
         text.indexOf("Show details for") === 0 ||
         text.indexOf("Seller Contacts") === 0 ||
         text.indexOf("/") === 0
-    )
+    ) {
         return true;
+    }
+    
     if (startsWithAny(text, phrases)) {
         $context.temp.targetState = "/InputData";
         return true;
