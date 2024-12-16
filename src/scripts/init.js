@@ -44,14 +44,6 @@ bind("preMatch", function ($context) {
 
     ga($context);
 
-    var phrases = [
-        "Продолжить поиск", // ru
-        "Continue search", // en
-        "Συνέχεια αναζήτησης", // el
-        "Продовжити пошук", // uk
-        "Kontynuuj wyszukiwanie", // pl
-    ];
-
     if ($context.request.channelType === "telegram") {
         $context.response.replies = $context.response.replies || [];
         $context.response.replies.push({
@@ -63,6 +55,14 @@ bind("preMatch", function ($context) {
 
     var text = $context.request.query;
 
+    var phrases = [
+        "Продолжить поиск", // ru
+        "Continue search", // en
+        "Συνέχεια αναζήτησης", // el
+        "Продовжити пошук", // uk
+        "Kontynuuj wyszukiwanie", // pl
+    ];
+
     if (
         text.indexOf("Clear parament") === 0 ||
         text.indexOf("Show details for") === 0 ||
@@ -71,7 +71,7 @@ bind("preMatch", function ($context) {
     ) {
         return true;
     }
-    
+
     if (startsWithAny(text, phrases)) {
         $context.temp.targetState = "/InputData";
         return true;
