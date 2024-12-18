@@ -11,11 +11,16 @@ export default async () => {
     if (!lang) {
         $reactions.transition("/SwitchInterfaceLanguage");
     } else {
-        response.randomText(local(lang).hello);
-        response.text(local(lang).info.about);
+        if ($request.channelType !== "yandex") {
+            response.randomText(local(lang).hello);
+            response.text(local(lang).info.about);
+        } else {
+            $reactions.answer(local(lang).hello[0]);
+            $reactions.answer(local(lang).info.about);
+        }
 
         if ($request.channelType === "telegram") {
-            response.buttons(['/info']);
+            response.buttons(["/info"]);
         }
     }
 };

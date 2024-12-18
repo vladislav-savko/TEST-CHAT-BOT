@@ -8,8 +8,13 @@ export default async () => {
     const lngCode = await $session.lastData?.language;
 
     if (!lngCode || (lngCode && lngCode === lang)) {
-        response.text(local(lang).getProperty.language);
-        response.text(local(lang).info.language);
+        if ($request.channelType !== "yandex") {
+            response.text(local(lang).getProperty.language);
+            response.text(local(lang).info.language);
+        } else {
+            $reactions.answer(local(lang).getProperty.language);
+            $reactions.answer(local(lang).info.language);
+        }
 
         if ($request.channelType === "telegram") {
             response.buttons([
