@@ -72,6 +72,10 @@ export const processParams = async () => {
         $session.data.floorAreaFrom = Number(newData.floorArea);
     }
 
+    if (newData.furnishing || newData.furnishing?.length) {
+        $session.data.furnishing = Array.isArray(newData.furnishing) ? newData.furnishing : [newData.furnishing]
+    }
+
     if (newData.bathrooms || newData.bathrooms?.length) {
         $session.data.bathroomNumbers = Array.isArray(newData.bathrooms) ? newData.bathrooms : [newData.bathrooms]
     }

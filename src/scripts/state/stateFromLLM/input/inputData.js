@@ -18,6 +18,7 @@ export default async () => {
         "priceTo",
         "floorArea",
         "bathrooms",
+        "furnishing",
     ]);
     const data = $session.data;
     await updSessionInfo(data, params);
