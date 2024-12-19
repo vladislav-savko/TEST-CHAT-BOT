@@ -131,6 +131,12 @@ export default {
             RENOVATED: `Ανακαινισμένο`,
         },
         coverageRatio: `Συντελεστής κάλυψης`,
+        propertyStatus: {
+            value: "Κατάσταση ακινήτου",
+            NEW: "Νέο",
+            RESALE: "Μεταπώληση",
+        },
+        yearOfConstruction: "Έτος κατασκευής",
         density: `Πυκνότητα`,
         electricity: `Ηλεκτρισμός`,
         floorArea: `Επιφάνεια δαπέδου`,

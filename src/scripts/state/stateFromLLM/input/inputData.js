@@ -19,6 +19,14 @@ export default async () => {
         "floorArea",
         "bathrooms",
         "furnishing",
+        "condition",
+        "electricity",
+        "parking",
+        "floorArea",
+        "residentialFloors",
+        "yearOfConstruction",
+        "propertyStatus",
+        ""
     ]);
     const data = $session.data;
     await updSessionInfo(data, params);

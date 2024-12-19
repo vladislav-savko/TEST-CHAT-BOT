@@ -132,6 +132,12 @@ export default {
             RENOVATED: `Отремонтировано`,
         },
         coverageRatio: `Коэффициент застройки`,
+        propertyStatus: {
+            value: "Статус недвижимости",
+            NEW: "Новая",
+            RESALE: "Перепродажа",
+        },
+        yearOfConstruction: "Год постройки",
         density: `Плотность застройки`,
         electricity: `Электричество`,
         floorArea: `Площадь этажа`,

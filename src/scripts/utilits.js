@@ -94,6 +94,7 @@ export const getCityInfo = async (city, country = "cyprus") => {
     try {
         const resC = await anisad.getCitiesInfo(city, country);
         // if (!resC) return false;
+
         const filteredCities = resC.filter(
             (city) => city.countryNameEn.toLowerCase() === country.toLowerCase()
         );
@@ -106,7 +107,13 @@ export const getCityInfo = async (city, country = "cyprus") => {
             return false;
         }
 
-        const firstCity = filteredCities[0];
+        let firstCity = null;
+        if (filteredCities[0].cityNameEn === "paralimni") {
+            firstCity = filteredCities[1];
+        } else {
+            firstCity = filteredCities[0];
+        }
+
         if (!firstCity.districtName && !firstCity.cityName) {
             $session.data.countryId = firstCity.countryId;
             $session.data.cityId = null;
@@ -343,14 +350,16 @@ export const printSellerInfo = async (data) => {
             method: "sendMessage",
             body: {
                 text: description,
-                parse_mode: "Markdown", 
+                parse_mode: "Markdown",
                 reply_markup: {
                     inline_keyboard: [
                         ...(data.phoneNumber
                             ? [
                                   [
                                       {
-                                          text: `📞 ${local(lang).seller.phone}`,
+                                          text: `📞 ${
+                                              local(lang).seller.phone
+                                          }`,
                                           copy_text: {
                                               text: `${data.phoneNumber}`,
                                           },
@@ -362,7 +371,9 @@ export const printSellerInfo = async (data) => {
                             ? [
                                   [
                                       {
-                                          text: `✉️ ${local(lang).seller.email}`,
+                                          text: `✉️ ${
+                                              local(lang).seller.email
+                                          }`,
                                           copy_text: {
                                               text: `${data.email}`,
                                           },
@@ -681,6 +692,8 @@ export const getFiltersInfo = async () => {
         price: tPrice, //value
         listingType: tListingType, //value
         propertyType: tPropertyType, //value
+        propertyStatus: tPropertyStatus, //value
+        yearOfConstruction: tYearOfConstruction,
     } = local(lang).property;
 
     const filtersText = local(lang).general.filters + ":\n";
@@ -728,11 +741,19 @@ export const getFiltersInfo = async () => {
                 ? `*${tBathrooms}*: ${bathroomNumbers.join(", ")}`
                 : null,
         },
+        yearOfConstruction: {
+            text: tYearOfConstruction,
+            info: yearOfConstructionFrom
+                ? `*${tYearOfConstruction}*: ${yearOfConstructionFrom}`
+                : null,
+        },
         location: {
             text: tLocation,
             info:
                 JSON.stringify(location || {}) !== "{}"
-                    ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
+                    ? location.cityNameEn
+                        ? `*${tLocation}*: ${location.cityNameEn}, ${location.countryNameEn}`
+                        : `*${tLocation}*: ${location.countryNameEn}`
                     : null,
         },
         buildingConditions: {
@@ -740,6 +761,14 @@ export const getFiltersInfo = async () => {
             info: buildingConditions.length
                 ? `*${tBuildingConditions.value}*: ${buildingConditions
                       .map((type) => tBuildingConditions[type])
+                      .join(", ")}`
+                : null,
+        },
+        propertyStatus: {
+            text: tPropertyStatus.value,
+            info: propertyStatus.length
+                ? `*${tPropertyStatus.value}*: ${propertyStatus
+                      .map((type) => tPropertyStatus[type])
                       .join(", ")}`
                 : null,
         },

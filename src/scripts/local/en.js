@@ -132,6 +132,12 @@ export default {
             RENOVATED: `Renovated`,
         },
         coverageRatio: `Coverage ratio`,
+        propertyStatus: {
+            value: "Property Status",
+            NEW: "New",
+            RESALE: "Resale",
+        },
+        yearOfConstruction: "Year of Construction",
         density: `Density`,
         electricity: `Electricity`,
         floorArea: `Floor area`,

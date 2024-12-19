@@ -72,12 +72,50 @@ export const processParams = async () => {
         $session.data.floorAreaFrom = Number(newData.floorArea);
     }
 
+    if (newData.residentialFloors) {
+        $session.data.residentialFloorsFrom = Number(newData.residentialFloors);
+        $session.data.residentialFloorsTo = Number(newData.residentialFloors);
+    }
+
+    if (newData.yearOfConstruction) {
+        $session.data.yearOfConstructionFrom = Number(newData.yearOfConstruction);
+        $session.data.yearOfConstructionTo = Number(newData.yearOfConstruction);
+    }
+
     if (newData.furnishing || newData.furnishing?.length) {
-        $session.data.furnishing = Array.isArray(newData.furnishing) ? newData.furnishing : [newData.furnishing]
+        $session.data.furnishing = Array.isArray(newData.furnishing)
+            ? newData.furnishing
+            : [newData.furnishing];
     }
 
     if (newData.bathrooms || newData.bathrooms?.length) {
-        $session.data.bathroomNumbers = Array.isArray(newData.bathrooms) ? newData.bathrooms : [newData.bathrooms]
+        $session.data.bathroomNumbers = Array.isArray(newData.bathrooms)
+            ? newData.bathrooms
+            : [newData.bathrooms];
+    }
+
+    if (newData.condition || newData.condition?.length) {
+        $session.data.buildingConditions = Array.isArray(newData.condition)
+            ? newData.condition
+            : [newData.condition];
+    }
+
+    if (newData.electricity || newData.electricity?.length) {
+        $session.data.electricity = Array.isArray(newData.electricity)
+            ? newData.electricity
+            : [newData.electricity];
+    }
+
+    if (newData.parking || newData.parking?.length) {
+        $session.data.parking = Array.isArray(newData.parking)
+            ? newData.parking
+            : [newData.parking];
+    }
+
+    if (newData.propertyStatus || newData.parking?.propertyStatus) {
+        $session.data.propertyStatus = Array.isArray(newData.propertyStatus)
+            ? newData.propertyStatus
+            : [newData.propertyStatus];
     }
 
     if (

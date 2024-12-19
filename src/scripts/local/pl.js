@@ -61,7 +61,7 @@ export default {
             `🔘 *Dodatkowe cechy* \nNajlepsza cena, Do negocjacji, Bez VAT, Tytuły własności \n💬 _"Pokaż najlepszą cenę"_\n\n`,
         `Aby uzyskać szczegółowe informacje o konkretnej nieruchomości, wpisz "*pokaż według* _ID nieruchomości_". Możesz także użyć poleceń "*szczegóły dla* _pierwszej|ostatniej_ *oferty*" po wyświetleniu listy.`,
         `Jeśli chcesz zrestartować rozmowę i wyczyścić wszystkie wcześniejsze informacje, po prostu powiedz *Reset*`,
-    ],    
+    ],
     hello: [
         `Cześć! Jestem twoim asystentem ds. nieruchomości. Czy chcesz wynająć czy kupić nieruchomość?`,
         `Witaj! Jestem tutaj, aby pomóc ci znaleźć idealny dom. Czy planujesz wynająć czy kupić?`,
@@ -131,6 +131,12 @@ export default {
             RENOVATED: `Wyremontowany`,
         },
         coverageRatio: `Współczynnik zabudowy`,
+        propertyStatus: {
+            value: "Status nieruchomości",
+            NEW: "Nowa",
+            RESALE: "Odsprzedaż",
+        },
+        yearOfConstruction: "Rok budowy",
         density: `Gęstość zabudowy`,
         electricity: `Elektryczność`,
         floorArea: `Powierzchnia piętra`,
