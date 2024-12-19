@@ -15,9 +15,10 @@ export const getPropertyDetails = (listing, listingData) => {
             ? `🛏 ${local(lang).property.bedrooms}: ${listingData.bedrooms}`
             : "",
         listingData.furnishing != null && $session.data.furnishing
-            ? `🛋 ${local(lang).property.furnishing.value}: *${
-                  local(lang).property.furnishing[listingData.furnishing]
-              }*`
+            ? `🛋 ${local(lang).property.furnishing.value}: ${listingData.furnishing
+                  .map((value) => local(lang).property.furnishing[value])
+                  .filter(Boolean)
+                  .join(", ")}`
             : "",
         listingData.balcony != null
             ? `${local(lang).property.balcony}: ${
