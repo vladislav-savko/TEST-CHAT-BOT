@@ -253,7 +253,11 @@ export const getListings = async (sessionData) => {
 
 export const printPost = async (listing) => {
     const { lang } = await $session;
-    const images = listing.photos;
+    const images = listing.photos?.map((link) =>
+        link?.startsWith("http://")
+            ? link?.replace("http://", "https://")
+            : link
+    );
     const turndownService = new TurndownService();
     const { buttons } = local(lang);
 
