@@ -253,7 +253,7 @@ export const getListings = async (sessionData) => {
 
 export const printPost = async (listing) => {
     const { lang } = await $session;
-    const images = listing.photos.slice(0, 5);
+    const images = listing.photos.slice(0, 7);
     const turndownService = new TurndownService();
     const { buttons } = local(lang);
 
