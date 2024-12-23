@@ -156,6 +156,7 @@ export default async () => {
     }
 
     $context.request.query = t_text;
+    log($context);
 
     const llm_ = await llm(t_text);
     const answerState = llm_.state;

@@ -52,7 +52,10 @@ export const processParams = async () => {
         newParams.push("PropertyTypes");
     }
 
-    if (newData.priceFrom || newData.priceTo) {
+    if (
+        (newData.priceFrom !== null && newData.priceFrom !== undefined) ||
+        (newData.priceTo !== null && newData.priceTo !== undefined)
+    ) {
         if (
             newData.priceFrom !== $session.data.priceFrom ||
             newData.priceTo !== $session.data.priceTo
@@ -78,7 +81,9 @@ export const processParams = async () => {
     }
 
     if (newData.yearOfConstruction) {
-        $session.data.yearOfConstructionFrom = Number(newData.yearOfConstruction);
+        $session.data.yearOfConstructionFrom = Number(
+            newData.yearOfConstruction
+        );
         $session.data.yearOfConstructionTo = Number(newData.yearOfConstruction);
     }
 
