@@ -253,7 +253,7 @@ export const getListings = async (sessionData) => {
 
 export const printPost = async (listing) => {
     const { lang } = await $session;
-    const images = ['https://res.cloudinary.com/dayesqawu/image/upload/v1692982332/578A7420_1_gkmlbf.jpg'];
+    const images = ['https://res.cloudinary.com/dayesqawu/image/upload/e_improve,w_300,h_600,c_thumb,g_auto/v1692982332/578A7420_1_gkmlbf.jpg'];
     const turndownService = new TurndownService();
     const { buttons } = local(lang);
 
