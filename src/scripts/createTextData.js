@@ -121,7 +121,7 @@ export const getPropertyDetails = (listing, listingData) => {
 export const getPreviewImage = (listing) => {
     const defaultImage =
         "https://dummyimage.com/600x400/000/ffffff&text=without+photo";
-    return listing.photos?.[0] ?? defaultImage;
+    return listing.photos?.[0].replace("upload", "upload/c_limit,h_3000,w_1920/q_auto") ?? defaultImage;
 };
 
 export const getDescription = (listing, propertyDetails, lang) => {
