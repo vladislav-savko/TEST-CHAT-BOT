@@ -253,7 +253,9 @@ export const getListings = async (sessionData) => {
 
 export const printPost = async (listing) => {
     const { lang } = await $session;
-    const images = listing.photos;
+    const images = listing.photos?.map((url) =>
+        url?.replace("upload", "upload/c_limit,h_3000,w_1920/q_auto")
+    );
     const turndownService = new TurndownService();
     const { buttons } = local(lang);
 
