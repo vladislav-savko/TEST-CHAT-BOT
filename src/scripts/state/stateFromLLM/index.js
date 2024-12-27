@@ -23,10 +23,12 @@ import telegramCallback from "./basic/telegramCallback.js";
 import preprocess from "./preprocess.js";
 import loader from "./loader.js";
 
+import newNotification from "../notification/newNotification.js";
+
 export default {
     preprocess,
     loader,
-    
+
     start,
     switchLanguage,
     getLanguage,
@@ -48,4 +50,6 @@ export default {
     inputPropertyTypes,
 
     telegramCallback,
+
+    newNotification,
 };

@@ -118,6 +118,12 @@ theme: /
         scriptEs6:
             await stateJs.bye();
 
+    state: NewNotification || noContext = true
+        event!: newNotification
+        scriptEs6:
+            await stateJs.newNotification();
+
+
     state: NoMatch
         event!: noMatch
         scriptEs6:

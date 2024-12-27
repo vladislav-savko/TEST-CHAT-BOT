@@ -35,6 +35,66 @@ function ga($context) {
     );
 }
 
+function signinUser($context) {
+    var pushback = $pushgate.createPushback(
+        $context.request.channelType,
+        $context.request.botId,
+        $context.request.channelUserId,
+        "newNotification",
+        {}
+    );
+
+    return $http.query("https://api-stage.anisad.com/api/v1/bot/register", {
+        method: "POST",
+        body: {
+            chanelType: $context.request.channelType,
+            purchaseLink: pushback.link,
+            userId: $context.request.channelUserId,
+        },
+        timeout: 2000,
+    });
+}
+
+function pushHistory($context) {
+    return $http.query(
+        "https://api-stage.anisad.com/api/v1/bot/users/" +
+            $context.request.channelUserId +
+            "/history",
+        {
+            method: "POST",
+            // body: {
+            //     chanelType: $context.request.channelType,
+            //     purchaseLink: pushback.link,
+            //     userId: $context.request.channelUserId,
+            // },
+            timeout: 2000,
+        }
+    );
+}
+
+function createHistory($context) {
+    try {
+        if (
+            $context?.session?.isNewUser === undefined ||
+            $context?.session?.isNewUser === true
+        ) {
+            signinUser($context).then(function (response) {
+                if (!response) {
+                    return false;
+                } else {
+                    $context.session.isNewUser = false;
+                    log({ function: "newUser", output: response });
+                    // pushHistory($context);
+                }
+            });
+        } else {
+            // pushHistory($context);
+        }
+    } catch (error) {
+        log({ function: "createHistory", output: error });
+    }
+}
+
 bind("preMatch", function ($context) {
     log({ bind: "preMatch", input: $context });
 
@@ -43,6 +103,7 @@ bind("preMatch", function ($context) {
     }
 
     ga($context);
+    createHistory($context);
 
     if ($context.request.channelType === "telegram") {
         $context.response.replies = $context.response.replies || [];
