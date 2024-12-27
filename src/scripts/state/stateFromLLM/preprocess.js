@@ -142,12 +142,6 @@ export default async () => {
             text
         );
     const hasKeywords = /(up|down|from|to)/i.test(text);
-    if ($context.session.contextPath === '/InputData/InputPrice') {
-        const words = ['Any', 'Unlimited'];
-        if (words.includes(text.toLowerCase())) {
-            text = `Budget ${text}`
-        }
-    }
 
     if (isNumberOnly && !hasKeywords) {
         t_text = `budget to ${text}`;
@@ -159,10 +153,15 @@ export default async () => {
         } else {
             t_text = translate_.response.translated_text;
         }
+
+        t_text = t_text.replace(/"/g, "");
+
+        if ($context.session.contextPath === "/InputData/InputPrice") {
+            t_text = 'Budget. ' + t_text;
+        }
     }
 
     $context.request.query = t_text;
-    log($context);
 
     const llm_ = await llm(t_text);
     const answerState = llm_.state;
