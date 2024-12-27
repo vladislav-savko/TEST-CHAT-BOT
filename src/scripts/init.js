@@ -75,8 +75,8 @@ function pushHistory($context) {
 function createHistory($context) {
     try {
         if (
-            $context?.session?.isNewUser === undefined ||
-            $context?.session?.isNewUser === true
+            $context.session.isNewUser === undefined ||
+            $context.session.isNewUser === true
         ) {
             signinUser($context).then(function (response) {
                 if (!response) {
