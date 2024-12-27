@@ -102,6 +102,10 @@ bind("preMatch", function ($context) {
         return true;
     }
 
+    if ($context.request.event === "newNotification") {
+        return true;
+    }
+
     ga($context);
     createHistory($context);
 
