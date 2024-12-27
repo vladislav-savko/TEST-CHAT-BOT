@@ -1,5 +1,9 @@
 import utl from "./utilits.js";
 
+function isNumber(str) {
+    return str.trim() !== "" && !isNaN(Number(str));
+}
+
 export const processParams = async () => {
     let emptyParams = [];
     let newParams = [];
@@ -135,7 +139,10 @@ export const processParams = async () => {
     }
     if (!$session.data.listingType) emptyParams.push("ListingTypes");
     if (!$session.data.propertyTypes.length) emptyParams.push("PropertyTypes");
-    if (!$session.data.priceTo && !$session.data.priceFrom)
+    if (
+        !isNumber(`${$session.data.priceTo}`) &&
+        !isNumber(`${$session.data.priceFrom}`)
+    )
         emptyParams.push("Price");
 
     log({
