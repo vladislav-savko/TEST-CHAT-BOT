@@ -26,16 +26,16 @@ export default async () => {
 
     switch (value) {
         case "APARTMENT":
-            await applyType({ propertyTypes: TYPES.APARTMENT });
+            await applyType({ propertyType: TYPES.APARTMENT });
             break;
         case "HOUSE":
-            await applyType({ propertyTypes: TYPES.HOUSE });
+            await applyType({ propertyType: TYPES.HOUSE });
             break;
         case "PLOT":
-            await applyType({ propertyTypes: TYPES.PLOT });
+            await applyType({ propertyType: TYPES.PLOT });
             break;
         case "COMMERCIAL":
-            await applyType({ propertyTypes: TYPES.COMMERCIAL });
+            await applyType({ propertyType: TYPES.COMMERCIAL });
             break;
     }
 };
