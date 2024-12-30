@@ -97,7 +97,7 @@ export default async () => {
             : property.SALE;
     };
 
-    _price = getPrice(listingType);
+    const _price = getPrice(listingType);
 
     response.text(local(lang).getProperty.budget);
     response.inlineCallback(
