@@ -26,7 +26,6 @@ export default async () => {
         "residentialFloors",
         "yearOfConstruction",
         "propertyStatus",
-        ""
     ]);
     const data = $session.data;
     await updSessionInfo(data, params);

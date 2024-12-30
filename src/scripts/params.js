@@ -121,7 +121,7 @@ export const processParams = async () => {
             : [newData.parking];
     }
 
-    if (newData.propertyStatus || newData.parking?.propertyStatus) {
+    if (newData.propertyStatus || newData?.propertyStatus) {
         $session.data.propertyStatus = Array.isArray(newData.propertyStatus)
             ? newData.propertyStatus
             : [newData.propertyStatus];
