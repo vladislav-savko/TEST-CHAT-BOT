@@ -106,7 +106,7 @@ bind("preMatch", function ($context) {
         return true;
     }
 
-    if ($context.request.event === "evtelegramCallbackQueryent") {
+    if ($context.request.event === "telegramCallbackQuery") {
         return true;
     }
 
