@@ -29,7 +29,7 @@ const getCitiesInfo = async (city, country) => {
     });
 
     log({
-        function: "getCitiesInfo",
+        function: "getCitiesInfo_API",
         input: { city, country },
         output: { data },
     });
@@ -53,7 +53,7 @@ const getCountriesInfo = async (country) => {
 const getListing = async (info) => {
     const { data } = await instance.post(ENDPOINT.post__listing, info);
 
-    log({ function: "getListing", input: { info }, output: { data } });
+    log({ function: "getListings_API", input: { info }, output: { data } });
 
     return data;
 };
@@ -62,7 +62,7 @@ const getListingById = async (id) => {
     const URL = `${ENDPOINT.get__listing_by_id}/${id}`;
     const { data } = await instance.get(URL);
 
-    log({ function: "getListingById", input: { id }, output: { data } });
+    log({ function: "getListingById_API", input: { id }, output: { data } });
 
     return data;
 };
@@ -76,7 +76,7 @@ const getSellerById = async (id) => {
     const URL = `${ENDPOINT.get__seller_by_id}/${id}`;
     const { data } = await instance.get(URL);
 
-    log({ function: "getSellerById", input: { id }, output: { data } });
+    log({ function: "getSellerById_API", input: { id }, output: { data } });
 
     return data;
 };
@@ -102,7 +102,7 @@ const getTranslateListing = async (id, lang) => {
     const { data } = await instance.get(URL);
 
     log({
-        function: "getTranslateListing",
+        function: "getTranslateListing_API",
         input: { id, lang },
         output: { data },
     });
