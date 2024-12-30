@@ -6,15 +6,15 @@ export default async () => {
     response.text(local(lang).getProperty.propertyType);
     response.inlineCallback(
         local(lang).getProperty.propertyTypes.APARTMENT,
-        "APARTMENT"
+        "GET_PROPERTY_APARTMENT"
     );
     response.inlineCallback(
         local(lang).getProperty.propertyTypes.HOUSE,
-        "HOUSE"
+        "GET_PROPERTY_HOUSE"
     );
     response.inlineCallback(
         local(lang).getProperty.propertyTypes.COMMERCE,
-        "COMMERCE"
+        "GET_PROPERTY_COMMERCE"
     );
-    response.inlineCallback(local(lang).getProperty.propertyTypes.PLOT, "PLOT");
+    response.inlineCallback(local(lang).getProperty.propertyTypes.PLOT, "GET_PROPERTY_PLOT");
 };

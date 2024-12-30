@@ -22,7 +22,7 @@ export default async () => {
         $reactions.transition("/InputData");
     };
 
-    const value = await $request.query;
+    const value = await $request.query.split('GET_PROPERTY_')[1];
 
     switch (value) {
         case "APARTMENT":

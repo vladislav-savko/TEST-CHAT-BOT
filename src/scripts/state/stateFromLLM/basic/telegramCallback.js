@@ -1,4 +1,7 @@
 import { getListingById } from "../../../utilits.js";
+import getListingTypes from "../input/InlineButtons/getListingTypes.js";
+import getPropertyTypes from "../input/InlineButtons/getPropertyTypes.js";
+import getPrice from "../input/InlineButtons/getPrice.js";
 
 export default async () => {
     const value = await $request.query.replace("by ", "").split(".")[0];
@@ -23,5 +26,11 @@ export default async () => {
         $session.filters.messageId = messageId;
         $session.filters.param = value.split("Clear parament ")[1];
         $reactions.transition("/DisplayResult/FiltersInfo");
+    } else if (value.includes("GET_PROPERTY")) {
+        await getPropertyTypes();
+    } else if (value.includes("GET_LISTING")) {
+        await getListingTypes();
+    } else if (value.includes("GET_PRICE")) {
+        await getPrice();
     }
 };

@@ -4,7 +4,7 @@ export default async () => {
         $reactions.transition("/InputData");
     };
 
-    const value = await $request.query;
+    const value = await $request.query.split('GET_PRICE')[1];
 
     const parsedRange = value.split("-").map(Number);
 

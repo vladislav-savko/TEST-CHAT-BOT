@@ -10,7 +10,7 @@ export default async () => {
         $reactions.transition("/InputData");
     };
 
-    const value = await $request.query;
+    const value = await $request.query.split('GET_LISTING_')[1];
 
     switch (value) {
         case "RENT":

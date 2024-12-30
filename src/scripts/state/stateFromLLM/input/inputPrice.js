@@ -102,15 +102,15 @@ export default async () => {
     response.text(local(lang).getProperty.budget);
     response.inlineCallback(
         `<=${_price.lowCost[1]}€`,
-        _price.lowCost.join("-")
+        `GET_PRICE_${_price.lowCost.join("-")}`
     );
     response.inlineCallback(
         `${_price.midRange[0]}-${_price.midRange[1]}€`,
-        _price.midRange.join("-")
+        `GET_PRICE_${_price.midRange.join("-")}`
     );
     response.inlineCallback(
         `${_price.premium[0]}-${_price.premium[1]}€`,
-        _price.premium.join("-")
+        `GET_PRICE_${_price.premium.join("-")}`
     );
-    response.inlineCallback(`=>${_price.luxury[0]}€`, _price.luxury.join("-"));
+    response.inlineCallback(`=>${_price.luxury[0]}€`, `GET_PRICE_${_price.luxury.join("-")}`);
 };

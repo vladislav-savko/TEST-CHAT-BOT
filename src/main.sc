@@ -51,31 +51,16 @@ theme: /
             q!: $regex</test_input_listing_types>
             scriptEs6:
                 await stateJs.inputListingTypes();
-
-            state: GetListingTypes
-                event!: telegramCallbackQuery
-                scriptEs6:
-                    await stateJs.getListingTypes();
         
         state: InputPropertyTypes
             q!: $regex</test_input_property_types>
             scriptEs6:
                 await stateJs.inputPropertyTypes();
-
-            state: GetPropertyTypes
-                event!: telegramCallbackQuery
-                scriptEs6:
-                    await stateJs.getPropertyTypes();
                     
         state: InputPrice
             q!: $regex</test_input_price>
             scriptEs6:
-                await stateJs.inputPrice();     
-
-            state: GetPrice
-                event!: telegramCallbackQuery
-                scriptEs6:
-                    await stateJs.getPrice();         
+                await stateJs.inputPrice();           
 
     state: DisplayResult
         q!: $regex</test_display_result>
