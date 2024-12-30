@@ -25,7 +25,9 @@ import loader from "./loader.js";
 
 import newNotification from "../notification/newNotification.js";
 
-import getPropertyTypes from "./input/InlineButtons.js/getPropertyTypes.js";
+import getPropertyTypes from "./input/InlineButtons/getPropertyTypes.js";
+import getListingTypes from "./input/InlineButtons/getListingTypes.js";
+import getPrice from "./input/InlineButtons/getPrice.js";
 
 export default {
     preprocess,
@@ -56,4 +58,6 @@ export default {
     newNotification,
 
     getPropertyTypes,
+    getListingTypes,
+    getPrice,
 };
