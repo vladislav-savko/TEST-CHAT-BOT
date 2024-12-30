@@ -53,7 +53,7 @@ theme: /
                 await stateJs.inputListingTypes();
 
             state: GetListingTypes
-                q: telegramCallbackQuery
+                event: telegramCallbackQuery
                 scriptEs6:
                     await stateJs.getListingTypes();
         
@@ -63,7 +63,7 @@ theme: /
                 await stateJs.inputPropertyTypes();
 
             state: GetPropertyTypes
-                q: telegramCallbackQuery
+                event: telegramCallbackQuery
                 scriptEs6:
                     await stateJs.getPropertyTypes();
                     
@@ -73,7 +73,7 @@ theme: /
                 await stateJs.inputPrice();     
 
             state: GetPrice
-                q: telegramCallbackQuery
+                event: telegramCallbackQuery
                 scriptEs6:
                     await stateJs.getPrice();         
 
