@@ -62,7 +62,7 @@ export default {
         `To get more details about a specific property, enter "*show by* _property ID_". You can also use commands "*details for* _first|last_ *listing*" after displaying the list.`,
         `If you want to restart the conversation and clear all previous information, simply say *Reset*`,
     ],
-    
+
     hello: [
         `Hello! I am your real estate assistant. Are you looking to rent or buy a property?`,
         `Hi! I’m here to help you find the perfect home. Are you planning to rent or buy?`,
@@ -99,6 +99,12 @@ export default {
         listingType: `What type of property ownership are you interested in: buying or renting?`,
         location: `In which city or country would you like to view the property?`,
         propertyType: `What type of property are you interested in: apartment, house, villa, commerce, plot?`,
+        propertyTypes: {
+            APARTMENT: "Apartment",
+            HOUSE: "House",
+            COMMERCE: "Commerce",
+            PLOT: "Plot",
+        },
         residentialFloors: `On which floors should residential floors be located?`,
         language: `Which interface language would you like to choose?`,
     },

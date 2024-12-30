@@ -98,6 +98,12 @@ export default {
         listingType: `Jaki rodzaj własności nieruchomości cię interesuje: kupno czy wynajem?`,
         location: `W jakim mieście chcesz obejrzeć nieruchomość?`,
         propertyType: `Jakim rodzajem nieruchomości jesteś zainteresowany: mieszkanie, dom, willa, handel, działka?`,
+        propertyTypes: {
+            APARTMENT: "Mieszkanie",
+            HOUSE: "Dom",
+            COMMERCE: "Komercja",
+            PLOT: "Działka",
+        },
         residentialFloors: `Na których piętrach powinny znajdować się piętra mieszkalne?`,
         language: `Jaki język interfejsu chcesz wybrać?`,
     },

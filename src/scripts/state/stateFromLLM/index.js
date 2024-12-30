@@ -25,6 +25,8 @@ import loader from "./loader.js";
 
 import newNotification from "../notification/newNotification.js";
 
+import getPropertyTypes from "./input/InlineButtons.js/getPropertyTypes.js";
+
 export default {
     preprocess,
     loader,
@@ -52,4 +54,6 @@ export default {
     telegramCallback,
 
     newNotification,
+
+    getPropertyTypes,
 };
