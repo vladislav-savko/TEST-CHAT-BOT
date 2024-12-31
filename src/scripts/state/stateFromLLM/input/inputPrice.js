@@ -101,7 +101,7 @@ export default async () => {
 
     response.text(local(lang).getProperty.budget);
     response.inlineCallback(
-        `${local(lang).property.price.to}${_price.lowCost[1]}€`,
+        `${local(lang).property.price.to} ${_price.lowCost[1]}€`,
         `GET_PRICE_${_price.lowCost.join("-")}`
     );
     response.inlineCallback(
@@ -112,6 +112,6 @@ export default async () => {
         `${_price.premium[0]}-${_price.premium[1]}€`,
         `GET_PRICE_${_price.premium.join("-")}`
     );
-    response.inlineCallback(`${local(lang).property.price.from}${_price.luxury[0]}€`, `GET_PRICE_${_price.luxury.join("-")}`);
+    response.inlineCallback(`${local(lang).property.price.from} ${_price.luxury[0]}€`, `GET_PRICE_${_price.luxury.join("-")}`);
     response.inlineCallback(`${local(lang).property.price.any}`, `GET_PRICE_ANY`);
 };
