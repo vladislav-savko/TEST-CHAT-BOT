@@ -168,11 +168,6 @@
 /**
  * @typedef {Object} Price
  * @property {string} value - Цена
- * @property {string} per_month - В месяц
- * @property {string} per_night - За ночь
- * @property {string} per_square_meter - За квадратный метр
- * @property {string} one_time - Единовременно
- * @property {string} negotiable - Договорная
  */
 
 /**

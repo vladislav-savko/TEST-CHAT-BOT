@@ -250,6 +250,9 @@ export default {
         price: {
             value: `Цена`,
             budget: `Бюджет`,
+            any: `Неважно 💶`,
+            to: `До`,
+            from: `Более`,
         },
         listingType: {
             value: `Тип владения`,

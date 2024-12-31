@@ -4,14 +4,21 @@ export default async () => {
         $reactions.transition("/InputData");
     };
 
-    const value = await $request.query.split('GET_PRICE_')[1];
+    const value = await $request.query.split("GET_PRICE_")[1];
 
-    const parsedRange = value.split("-").map(Number);
+    if (value !== "ANY") {
+        const parsedRange = value.split("-").map(Number);
 
-    if (parsedRange?.length) {
+        if (parsedRange?.length) {
+            applyType({
+                priceFrom: parsedRange[0],
+                priceTo: parsedRange[1],
+            });
+        }
+    } else {
         applyType({
-            priceFrom: parsedRange[0],
-            priceTo: parsedRange[1],
+            priceFrom: 0,
+            priceTo: null,
         });
     }
 };

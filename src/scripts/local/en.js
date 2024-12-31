@@ -251,6 +251,9 @@ export default {
         price: {
             value: `Price`,
             budget: `Budget`,
+            any: `Doesn't matter 💶`,
+            to: `Up to`,
+            from: `Above`,
         },
         listingType: {
             value: `Ownership type`,

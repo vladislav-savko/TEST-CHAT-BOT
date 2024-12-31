@@ -249,6 +249,9 @@ export default {
         price: {
             value: `Τιμή`,
             budget: `Προϋπολογισμός`,
+            any: `Δεν έχει σημασία 💶`,
+            to: `Έως`,
+            from: `Πάνω από`,
         },
         listingType: {
             value: `Τύπος ιδιοκτησίας`,
