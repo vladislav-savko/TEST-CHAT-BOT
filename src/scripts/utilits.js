@@ -436,10 +436,10 @@ export const getListingById = async (id) => {
     try {
         const { data: listing } = await anisad.getListingById(id);
 
-        // await anisad.postHistory(`${$request.channelUserId}`, {
-        //     type: "LISTING",
-        //     value: `${id}`,
-        // });
+        await anisad.postHistory(`${$request.channelUserId}`, {
+            type: "LISTING",
+            value: `${id}`,
+        });
 
         if (listing) {
             await printPost(listing);
