@@ -31,9 +31,9 @@ export default async () => {
 
     const reply = {
         body: {
-            text: `${await $request.rawRequest.callback_query.message.text}\n✅ ${local(lang).getProperty.propertyTypes[value]}`,
+            text: `${$request.rawRequest.callback_query.message.text}\n\n✅ *${local(lang).getProperty.propertyTypes[value]}*`,
             parse_mode: "Markdown",
-            message_id: await $request.rawRequest.callback_query.message.message_id,
+            message_id: $request.rawRequest.callback_query.message.message_id,
         },
         method: "editMessageText",
     };
