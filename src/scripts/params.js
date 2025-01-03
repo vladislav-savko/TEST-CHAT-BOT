@@ -121,10 +121,16 @@ export const processParams = async () => {
             : [newData.parking];
     }
 
-    if (newData.propertyStatus || newData?.propertyStatus) {
+    if (newData.propertyStatus || newData?.propertyStatus?.length) {
         $session.data.propertyStatus = Array.isArray(newData.propertyStatus)
             ? newData.propertyStatus
             : [newData.propertyStatus];
+    }
+
+    if (newData.petFriendly || newData.petFriendly?.length) {
+        $session.data.petFriendly = Array.isArray(newData.petFriendly)
+            ? newData.petFriendly
+            : [newData.petFriendly];
     }
 
     if (
@@ -138,7 +144,7 @@ export const processParams = async () => {
         emptyParams.push("Location");
     }
     if (!$session.data.listingType) emptyParams.push("ListingTypes");
-    if (!$session.data.propertyTypes.length) emptyParams.push("PropertyTypes");
+    if (!$session.data.propertyTypes?.length) emptyParams.push("PropertyTypes");
     if (
         !isNumber(`${$session.data.priceTo}`) &&
         !isNumber(`${$session.data.priceFrom}`)

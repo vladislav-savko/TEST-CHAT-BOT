@@ -24,6 +24,8 @@ export default async () => {
 
     const value = await $request.query.split('GET_PROPERTY_')[1];
 
+    log($context);
+
     switch (value) {
         case "APARTMENT":
             await applyType({ propertyType: TYPES.APARTMENT });
