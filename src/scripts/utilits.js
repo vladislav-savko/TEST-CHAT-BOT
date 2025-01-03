@@ -80,14 +80,16 @@ export function session() {
 
     $session.lastParams = {};
 
-    $session.isNewUser = true;
-
     $session.version = VERSION;
 }
 
 export const initSession = () => {
     if (!$session.data || $session.version !== VERSION) {
         session();
+    }
+
+    if ($session.version !== VERSION) {
+        $session.isNewUser = true;
     }
 };
 

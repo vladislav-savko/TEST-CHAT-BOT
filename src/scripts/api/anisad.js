@@ -1,7 +1,6 @@
 //@ts-check
 import axios from "axios";
 import { API__LINK } from "../config.js";
-import response from "../response.js";
 
 const ENDPOINT = {
     get__cities: "city/search-into-database",
@@ -125,11 +124,7 @@ const getTranslateListing = async (id, lang) => {
 const postHistory = async (userId, body) => {
     const URL = ENDPOINT.post__history(userId);
 
-    try {
-        await instance.post(URL, body);
-    } catch (error) {
-        log(error);
-    }
+    await instance.post(URL, body);
 };
 
 export default {
