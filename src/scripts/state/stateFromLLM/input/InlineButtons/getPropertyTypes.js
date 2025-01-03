@@ -1,6 +1,8 @@
 import local from "../../../../local/local";
 
 export default async () => {
+    const { lang } = await $session;
+    
     const TYPES = {
         APARTMENT: ["APARTMENT"],
         HOUSE: ["VILLA", "DETACHED_HOUSE", "SEMIDETACHED_HOUSE"],
