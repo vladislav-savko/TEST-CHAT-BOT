@@ -432,11 +432,11 @@ export const printSellerInfo = async (data) => {
 };
 
 export const getListingById = async (id) => {
-    const { lang } = $session;
+    const { lang } = await $session;
     try {
         const { data: listing } = await anisad.getListingById(id);
 
-        await anisad.postHistory(`${$request.channelUserId}`, {
+        await anisad.postHistory(`${await $request.channelUserId}`, {
             type: "LISTING",
             value: `${id}`,
         });
