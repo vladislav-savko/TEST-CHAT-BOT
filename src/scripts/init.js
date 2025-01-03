@@ -62,11 +62,10 @@ function pushHistory($context) {
             "/history",
         {
             method: "POST",
-            // body: {
-            //     chanelType: $context.request.channelType,
-            //     purchaseLink: pushback.link,
-            //     userId: $context.request.channelUserId,
-            // },
+            body: {
+                type: "MESSAGE",
+                value: $context.request.query + "",
+            },
             timeout: 2000,
         }
     );
@@ -84,11 +83,11 @@ function createHistory($context) {
                 } else {
                     $context.session.isNewUser = false;
                     log({ function: "newUser", output: response });
-                    // pushHistory($context);
+                    pushHistory($context);
                 }
             });
         } else {
-            // pushHistory($context);
+            pushHistory($context);
         }
     } catch (error) {
         log({ function: "createHistory", output: error });

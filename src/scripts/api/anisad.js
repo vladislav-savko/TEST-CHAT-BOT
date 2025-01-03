@@ -8,6 +8,7 @@ const ENDPOINT = {
     get__listing_by_id: "listing",
     get__seller_by_id: "user/by-listing",
     get__translate_listing_by_id: "listing",
+    post__history: (userId) => `bot/users/${userId}/history`,
 };
 
 export const instance = axios.create({
@@ -110,6 +111,22 @@ const getTranslateListing = async (id, lang) => {
     return data.data;
 };
 
+/**
+ * Постит историю пользователя.
+ *
+ * @param {string} userId - Уникальный идентификатор пользователя.
+ * @param {Object} body - Тело запроса.
+ * @param {string} body.type - Тип записи в истории.
+ * @param {string} body.value - ListingId или massage
+ * @param {Object} body.filters - Фильтра для поиска
+ * @returns {Promise<void>} - Промис, который выполняется, когда запрос завершён.
+ */
+const postHistory = async (userId, body) => {
+    const URL = ENDPOINT.post__history(userId);
+
+    await instance.post(URL, body);
+};
+
 export default {
     getCitiesInfo,
     getCountriesInfo,
@@ -117,4 +134,5 @@ export default {
     getListingById,
     getSellerById,
     getTranslateListing,
+    postHistory,
 };
