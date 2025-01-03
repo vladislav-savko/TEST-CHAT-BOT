@@ -1,3 +1,5 @@
+import local from "../../../../local/local";
+
 export default async () => {
     const TYPES = {
         APARTMENT: ["APARTMENT"],
