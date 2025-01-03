@@ -43,7 +43,7 @@ export default async () => {
             );
         }
     } else {
-        price = local(lang).property.price[value];
+        price = local(lang).property.price.any;
         applyType(
             {
                 priceFrom: 0,
