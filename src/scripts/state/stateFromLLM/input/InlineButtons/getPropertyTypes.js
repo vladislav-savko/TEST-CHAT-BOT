@@ -1,4 +1,5 @@
 import local from "../../../../local/local.js";
+import response from "../../../../response.js";
 
 export default async () => {
     const { lang } = await $session;
@@ -28,26 +29,16 @@ export default async () => {
 
     const value = await $request.query.split('GET_PROPERTY_')[1];
 
-    log($request.rawRequest.callback_query.message.text + '\n✅ ' + local(lang).getProperty.propertyTypes[value]);
+    const reply = {
+        body: {
+            text: `${$request.rawRequest.callback_query.message.text}\n✅ ${local(lang).getProperty.propertyTypes[value]}`,
+            parse_mode: "Markdown",
+            message_id: $request.rawRequest.message.messageId,
+        },
+        method: "editMessageText",
+    };
 
-    // const reply = {
-    //     body: {
-    //         text: `${filtersText}${filters}`,
-    //         parse_mode: "Markdown",
-    //         message_id: $session.filters.messageId,
-    //         reply_markup: {
-    //             inline_keyboard: buttons.filter(Boolean).map((value) => [
-    //                 {
-    //                     text: `${value.text} ❌`,
-    //                     callback_data: `Clear parament ${value.key}`,
-    //                 },
-    //             ]),
-    //         },
-    //     },
-    //     method: "editMessageText",
-    // };
-
-    // response.channel([reply]);
+    response.channel([reply]);
 
     switch (value) {
         case "APARTMENT":
