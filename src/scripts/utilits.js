@@ -189,7 +189,7 @@ export const getListings = async (sessionData) => {
     const { lang } = await $session;
     sessionData.take = 3;
 
-    anisad.postHistory(`${$context.request.channelUserId}`, {
+    await anisad.postHistory(`${$request.channelUserId}`, {
         type: "FILTER",
         filters: sessionData,
     });
@@ -436,7 +436,7 @@ export const getListingById = async (id) => {
     try {
         const { data: listing } = await anisad.getListingById(id);
 
-        anisad.postHistory(`${$context.request.channelUserId}`, {
+        await anisad.postHistory(`${$request.channelUserId}`, {
             type: "LISTING",
             value: `${id}`,
         });
