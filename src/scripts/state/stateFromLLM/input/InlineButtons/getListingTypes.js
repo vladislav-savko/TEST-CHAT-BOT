@@ -3,7 +3,7 @@ import response from "../../../../response.js";
 
 export default async () => {
     const { lang } = await $session;
-    
+
     const TYPES = {
         RENT: "RENT",
         SHORT_RENT: "SHORT_RENT",
@@ -19,7 +19,7 @@ export default async () => {
 
     const reply = {
         body: {
-            text: `${$request.rawRequest.callback_query.message.text}\n\n✅ *${local(lang).getProperty.listingType[value]}*`,
+            text: `${$request.rawRequest.callback_query.message.text}\n\n✅ *${local(lang).property.listingType[value]}*`,
             parse_mode: "Markdown",
             message_id: $request.rawRequest.callback_query.message.message_id,
         },

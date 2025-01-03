@@ -3,7 +3,7 @@ import response from "../../../../response.js";
 
 export default async () => {
     const { lang } = await $session;
-    
+
     const applyType = async (value, text) => {
         const reply = {
             body: {
@@ -28,10 +28,10 @@ export default async () => {
     if (value !== "ANY") {
         const parsedRange = value.split("-").map(Number);
         price = parsedRange[1]
-            ? `${local(lang).getProperty.price.from} ${parsedRange[0]} ${
-                  local(lang).getProperty.price.to
+            ? `${local(lang).property.price.from} ${parsedRange[0]} ${
+                  local(lang).property.price.to
               } ${parsedRange[1]}`
-            : `${local(lang).getProperty.price.from} ${parsedRange[0]}`;
+            : `${local(lang).property.price.from} ${parsedRange[0]}`;
 
         if (parsedRange?.length) {
             applyType(
@@ -43,7 +43,7 @@ export default async () => {
             );
         }
     } else {
-        price = local(lang).getProperty.price[value];
+        price = local(lang).property.price[value];
         applyType(
             {
                 priceFrom: 0,
