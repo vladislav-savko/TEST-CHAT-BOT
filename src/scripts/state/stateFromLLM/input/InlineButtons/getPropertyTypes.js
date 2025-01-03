@@ -24,7 +24,7 @@ export default async () => {
 
     const value = await $request.query.split('GET_PROPERTY_')[1];
 
-    log($request);
+    log($request.rawRequest.callback_query.message.text + '\n✅ ' + local(lang).getProperty.propertyTypes[value]);
 
     // const reply = {
     //     body: {
