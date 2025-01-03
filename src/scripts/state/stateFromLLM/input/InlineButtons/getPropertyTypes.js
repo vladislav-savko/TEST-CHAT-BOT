@@ -38,6 +38,8 @@ export default async () => {
         method: "editMessageText",
     };
 
+    log($request.rawRequest);
+
     response.channel([reply]);
 
     switch (value) {
