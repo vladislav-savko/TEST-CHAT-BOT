@@ -51,10 +51,10 @@ const getCountriesInfo = async (country) => {
     return data.data.length > 1 ? [data.data[0]] : data.data;
 };
 
-const getListing = async (info) => {
-    const { data } = await instance.post(ENDPOINT.post__listing, info);
+const getListing = async (filters) => {
+    const { data } = await instance.post(ENDPOINT.post__listing, filters);
 
-    log({ function: "getListings_API", input: { info }, output: { data } });
+    log({ function: "getListings_API", input: { filters }, output: { data } });
 
     return data;
 };
