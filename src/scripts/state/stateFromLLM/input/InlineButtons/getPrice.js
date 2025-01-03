@@ -28,10 +28,10 @@ export default async () => {
     if (value !== "ANY") {
         const parsedRange = value.split("-").map(Number);
         price = parsedRange[1]
-            ? `${local(lang).property.price.from} ${parsedRange[0]} ${
+            ? `${local(lang).property.price.from} ${parsedRange[0]}€ ${
                   local(lang).property.price.to
-              } ${parsedRange[1]}`
-            : `${local(lang).property.price.from} ${parsedRange[0]}`;
+              } ${parsedRange[1]}€`
+            : `${local(lang).property.price.from} ${parsedRange[0]}€`;
 
         if (parsedRange?.length) {
             applyType(
