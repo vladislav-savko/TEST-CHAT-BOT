@@ -126,7 +126,7 @@ const postHistory = async (userId, body) => {
     const URL = ENDPOINT.post__history(userId);
 
     try {
-        await instance.post(URL, JSON.stringify(body));
+        await instance.post(URL, body);
     } catch (error) {
         log(error);
     }
