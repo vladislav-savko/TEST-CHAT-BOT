@@ -127,7 +127,7 @@ const postHistory = async (userId, body) => {
 
     try {
         await instance
-            .post(URL, body)
+            .post(URL, JSON.stringify(body))
             .then((response) => log(response))
             .catch((error) => log(error));
     } catch (error) {
