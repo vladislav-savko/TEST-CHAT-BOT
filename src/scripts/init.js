@@ -44,7 +44,7 @@ function signinUser($context) {
         {}
     );
 
-    return $http.query("https://api-stage.anisad.com/api/v1/bot/register", {
+    return $http.query("https://api.anisad.com/api/v1/bot/register", {
         method: "POST",
         body: {
             chanelType: $context.request.channelType,
@@ -57,7 +57,7 @@ function signinUser($context) {
 
 function pushHistory($context) {
     return $http.query(
-        "https://api-stage.anisad.com/api/v1/bot/users/" +
+        "https://api.anisad.com/api/v1/bot/users/" +
             $context.request.channelUserId +
             "/history",
         {

@@ -80,6 +80,8 @@ export function session() {
 
     $session.lastParams = {};
 
+    $session.isNewUser = true;
+
     $session.version = VERSION;
 }
 
