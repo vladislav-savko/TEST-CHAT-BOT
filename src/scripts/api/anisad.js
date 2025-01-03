@@ -124,7 +124,8 @@ const getTranslateListing = async (id, lang) => {
 const postHistory = async (userId, body) => {
     const URL = ENDPOINT.post__history(userId);
 
-    await instance.post(URL, body);
+    const { data } = await instance.post(URL, body);
+    log(data);
 };
 
 export default {
