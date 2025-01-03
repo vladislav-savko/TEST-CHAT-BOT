@@ -24,7 +24,26 @@ export default async () => {
 
     const value = await $request.query.split('GET_PROPERTY_')[1];
 
-    log($context);
+    log($request);
+
+    // const reply = {
+    //     body: {
+    //         text: `${filtersText}${filters}`,
+    //         parse_mode: "Markdown",
+    //         message_id: $session.filters.messageId,
+    //         reply_markup: {
+    //             inline_keyboard: buttons.filter(Boolean).map((value) => [
+    //                 {
+    //                     text: `${value.text} ❌`,
+    //                     callback_data: `Clear parament ${value.key}`,
+    //                 },
+    //             ]),
+    //         },
+    //     },
+    //     method: "editMessageText",
+    // };
+
+    // response.channel([reply]);
 
     switch (value) {
         case "APARTMENT":
